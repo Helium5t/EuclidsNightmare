@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9027053812724623625}
   - component: {fileID: 9027053812724623624}
   m_Layer: 0
-  m_Name: PortalBInCamera
+  m_Name: PortalBCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9027053814628043475}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &9027053812724623625
 Camera:
@@ -640,96 +640,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &9027053813569802489
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9027053813569802492}
-  - component: {fileID: 9027053813569802495}
-  - component: {fileID: 9027053813569802494}
-  m_Layer: 0
-  m_Name: PortalBOutCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9027053813569802492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9027053813569802489}
-  m_LocalRotation: {x: -0, y: 0.7071069, z: -0, w: 0.70710665}
-  m_LocalPosition: {x: -11.339999, y: 2.3709998, z: 7.6799974}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9027053814628043475}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &9027053813569802495
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9027053813569802489}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.01
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 311
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!114 &9027053813569802494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9027053813569802489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab459d9b65456eb428d6b404088d63aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  entryPortal: {fileID: 9027053814534788047}
-  exitPortal: {fileID: 9027053813740763207}
 --- !u!1 &9027053813614158704
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,7 +753,7 @@ Transform:
   - {fileID: 9027053814681999709}
   - {fileID: 9027053813184897111}
   m_Father: {fileID: 9027053814628043475}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &9027053813824868873
 GameObject:
@@ -1263,96 +1173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endPoint: {fileID: 9027053813463500808}
   movedPlayer: {fileID: 0}
---- !u!1 &9027053814222531478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9027053814222531477}
-  - component: {fileID: 9027053814222531476}
-  - component: {fileID: 9027053814222531482}
-  m_Layer: 0
-  m_Name: PortalAOutCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9027053814222531477
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9027053814222531478}
-  m_LocalRotation: {x: -0, y: 0.7071069, z: -0, w: 0.70710665}
-  m_LocalPosition: {x: 3.079999, y: 2.3709998, z: 61.48}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9027053814628043475}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &9027053814222531476
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9027053814222531478}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.01
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 311
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!114 &9027053814222531482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9027053814222531478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab459d9b65456eb428d6b404088d63aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  entryPortal: {fileID: 9027053813740763207}
-  exitPortal: {fileID: 9027053814534788047}
 --- !u!1 &9027053814229565999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,7 +1185,7 @@ GameObject:
   - component: {fileID: 9027053814229565997}
   - component: {fileID: 9027053814229565996}
   m_Layer: 0
-  m_Name: 'PortalAInCamera '
+  m_Name: 'PortalACamera '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1581,15 +1401,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameras:
-  - {fileID: 9027053814222531476}
   - {fileID: 9027053814229565997}
   - {fileID: 9027053812724623625}
-  - {fileID: 9027053813569802495}
-  materials:
-  - {fileID: 2100000, guid: 9fd76fa4b05eba740ab823ceddb18d92, type: 2}
-  - {fileID: 0}
-  - {fileID: 2100000, guid: 4603f398bbb0c1f4f965606a1c288950, type: 2}
-  - {fileID: 2100000, guid: 3a9b02539fdb6a343b3ba67cbeade308, type: 2}
+  portals:
+  - {fileID: 9027053813740763206}
+  - {fileID: 9027053814534788046}
 --- !u!1 &9027053814534788046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,7 +1439,7 @@ Transform:
   - {fileID: 9027053814297075128}
   - {fileID: 9027053813964987490}
   m_Father: {fileID: 9027053814628043475}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9027053814628043474
 GameObject:
@@ -1654,9 +1470,7 @@ Transform:
   m_Children:
   - {fileID: 9027053814318741177}
   - {fileID: 9027053814229566002}
-  - {fileID: 9027053814222531477}
   - {fileID: 9027053812724623630}
-  - {fileID: 9027053813569802492}
   - {fileID: 9027053813740763207}
   - {fileID: 9027053814534788047}
   m_Father: {fileID: 0}

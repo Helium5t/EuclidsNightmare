@@ -12,12 +12,11 @@ public class Teleporter : MonoBehaviour
     private void Start() {
         playerController = movedPlayer.GetComponent<CharacterController>();
         teleportOffset = endPoint.position - gameObject.transform.position;
-        Debug.Log(endPoint.localPosition.x * endPoint.up);
     }
 
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log(other.name + " started touching " + gameObject.name.Substring(13) + " of " + transform.parent.parent.name);
+        //Debug.Log(other.name + " started touching " + gameObject.name.Substring(13) + " of " + transform.parent.parent.name);
     }
     private void OnTriggerExit(Collider other) {
         //Debug.Log(other.name + " stopped touching " + gameObject.name.Substring(13) + " of " + transform.parent.parent.name);
@@ -25,7 +24,7 @@ public class Teleporter : MonoBehaviour
             Vector3 toPlayer = movedPlayer.position - transform.position;
             Vector3 playerDirection = movedPlayer.gameObject.GetComponent<PlayerMover>().GetMovementDirection();
             if(Vector3.Dot(transform.up, playerDirection) < 0f){
-                Debug.Log("Triggered " + gameObject.name.Substring(13) + " of " +transform.parent.parent.name.Substring(6));
+                //Debug.Log("Triggered " + gameObject.name.Substring(13) + " of " +transform.parent.parent.name.Substring(6));
                 playerController.enabled = false;
                 //movedPlayer.position += teleportOffset;
                 other.transform.position = other.transform.position + teleportOffset;

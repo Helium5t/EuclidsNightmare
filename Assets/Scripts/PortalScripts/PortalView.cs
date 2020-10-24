@@ -25,14 +25,13 @@ public class PortalView : MonoBehaviour
         rotationDifference =180f+Quaternion.Angle(exitPortal.rotation,entryPortal.rotation);
         playerCamera = player.Find("Camera");
         if(!playerCamera){
-            Debug.Log("No Player attached Camera");
+            Debug.LogError("No Player attached Camera");
             playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
         }
         if(!playerCamera){
             Debug.LogError("NO CAMERA FOUND");
         }
         portalOffset = exitPortal.Find("RenderPlaneIn").position -entryPortal.Find("RenderPlaneIn").position ;
-        Debug.Log(gameObject.name + "  " + portalOffset);
     }
 
     // Update is called once per frame
