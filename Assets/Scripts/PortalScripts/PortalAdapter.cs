@@ -6,16 +6,19 @@ using UnityEngine;
 public class PortalAdapter : MonoBehaviour
 {
 
-    [SerializeField] private Camera portalCamera;
-    [SerializeField] private Material portalMaterial;
+    [SerializeField] List<Camera> cameras;
+    [SerializeField] List<Material> materials;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(portalCamera.targetTexture!=null){
-            portalCamera.targetTexture.Release();
+        for(int i = 0; i<cameras.Capacity; i++){
+            Camera c = cameras[i];
+            if(c.targetTexture!=null){
+                c.targetTexture.Release();
+            }
+            c.targetTexture = new RenderTexture(Screen.width,Screen.height,24);
+            materials[i].mainTexture = c.targetTexture;
         }
-        portalCamera.targetTexture = new RenderTexture(Screen.width,Screen.height,24);
-        portalMaterial.mainTexture = portalCamera.targetTexture;
-        
     }
 }

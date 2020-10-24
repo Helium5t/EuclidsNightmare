@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[ExecuteInEditMode]
 
 public class PortalView : MonoBehaviour
 {
     [SerializeField] private Transform player;
     private Transform playerCamera;
-    [SerializeField] private Transform endPortal;
-    [SerializeField] private Transform startPortal;
+    [SerializeField] private Transform entryPortal;
+    [SerializeField] private Transform exitPortal;
     private float rotationDifference;
     private Vector3 portalOffset;
 
@@ -15,18 +16,23 @@ public class PortalView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(!endPortal){
-            endPortal = GameObject.FindGameObjectWithTag("Orange").transform; 
+        if(!entryPortal){
+            entryPortal = GameObject.FindGameObjectWithTag("Orange").transform; 
         }
-        if(!startPortal){
-            startPortal = GameObject.FindGameObjectWithTag("Blue").transform;
+        if(!exitPortal){
+            exitPortal = GameObject.FindGameObjectWithTag("Blue").transform;
         }
-        rotationDifference = 180f + Quaternion.Angle(startPortal.rotation,endPortal.rotation);
+        rotationDifference =180f+Quaternion.Angle(exitPortal.rotation,entryPortal.rotation);
         playerCamera = player.Find("Camera");
         if(!playerCamera){
-            GameObject.FindGameObjectWithTag("MainCamera");
+            Debug.Log("No Player attached Camera");
+            playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
         }
-        portalOffset = startPortal.position - endPortal.position;
+        if(!playerCamera){
+            Debug.LogError("NO CAMERA FOUND");
+        }
+        portalOffset = exitPortal.Find("RenderPlaneIn").position -entryPortal.Find("RenderPlaneIn").position ;
+        Debug.Log(gameObject.name + "  " + portalOffset);
     }
 
     // Update is called once per frame

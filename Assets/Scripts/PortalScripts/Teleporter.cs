@@ -10,20 +10,29 @@ public class Teleporter : MonoBehaviour
     private Vector3 teleportOffset;
 
     private void Start() {
-        Debug.Log(gameObject.name+" "+ gameObject.transform.forward * -1f);
-
         playerController = movedPlayer.GetComponent<CharacterController>();
         teleportOffset = endPoint.position - gameObject.transform.position;
+        Debug.Log(endPoint.localPosition.x * endPoint.up);
     }
 
+
     private void OnTriggerEnter(Collider other) {
+        Debug.Log(other.name + " started touching " + gameObject.name.Substring(13) + " of " + transform.parent.parent.name);
+    }
+    private void OnTriggerExit(Collider other) {
+        //Debug.Log(other.name + " stopped touching " + gameObject.name.Substring(13) + " of " + transform.parent.parent.name);
         if(other.CompareTag("Player")){
             Vector3 toPlayer = movedPlayer.position - transform.position;
-            if(Vector3.Dot(transform.up, toPlayer) >0f){
-                Debug.Log("I am " + gameObject.name + " and i am teleporting");
+            Vector3 playerDirection = movedPlayer.gameObject.GetComponent<PlayerMover>().GetMovementDirection();
+            if(Vector3.Dot(transform.up, playerDirection) < 0f){
+                Debug.Log("Triggered " + gameObject.name.Substring(13) + " of " +transform.parent.parent.name.Substring(6));
                 playerController.enabled = false;
-                movedPlayer.position += teleportOffset;
+                //movedPlayer.position += teleportOffset;
+                other.transform.position = other.transform.position + teleportOffset;
                 playerController.enabled = true;
+            }
+            else{
+                Debug.Log(gameObject.name.Substring(13) + " of " + transform.parent.parent.name.Substring(6) +" :Wrong Direction");
             }
         }
     }
