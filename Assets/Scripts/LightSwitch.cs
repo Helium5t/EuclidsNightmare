@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LightSwitch : MonoBehaviour
 {
@@ -18,25 +17,18 @@ public class LightSwitch : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (lightsOn)
-        {
-            interrupterMaterial.SetColor(Color, UnityEngine.Color.black);
-            foreach (GameObject lightObject in lights)
-            {
-                lightObject.SetActive(false);
-            }
+        ToggleLights(lightsOn ? UnityEngine.Color.black : UnityEngine.Color.yellow);
+    }
 
-            lightsOn = false;
-        }
-        else
-        {
-            interrupterMaterial.SetColor(Color, UnityEngine.Color.yellow);
-            foreach (GameObject lightObject in lights)
-            {
-                lightObject.SetActive(true);
-            }
 
-            lightsOn = true;
+    private void ToggleLights(Color colorToAssign)
+    {
+        interrupterMaterial.SetColor(Color, colorToAssign);
+        foreach (GameObject lightObject in lights)
+        {
+            lightObject.SetActive(!lightObject.activeInHierarchy);
         }
+
+        lightsOn = !lightsOn;
     }
 }
