@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 // This Script is responsible for handling player movement
@@ -20,7 +18,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Awake()
     {
-         // Check if the controller exists, if not create it (avoids dumb bugs and makes life easier for attaching scripts)
+        // Check if the controller exists, if not create it (avoids dumb bugs and makes life easier for attaching scripts)
         bool controllerCheck = gameObject.TryGetComponent<CharacterController>(out controller);
         if (!controllerCheck)
         {
@@ -28,35 +26,40 @@ public class PlayerMover : MonoBehaviour
         }
 
         controller = gameObject.GetComponent<CharacterController>();
-     }
+    }
 
     private void Update()
     {
         // ground check for when the player touches the ground, no double jump for now.
-        if(controller.isGrounded & !canJump)
+        if (controller.isGrounded & !canJump)
         {
             canJump = true;
         }
 
         float sideMovement = Input.GetAxisRaw("Horizontal") * speed;
         float forwardMovement = Input.GetAxisRaw("Vertical") * speed;
-        if(Input.GetButton("Fire1")){
+        if (Input.GetButton("Fire1"))
+        {
             // If left click is held, walk slower
-            sideMovement = sideMovement/2.0f;
-            forwardMovement = forwardMovement/2.0f;
+            sideMovement /= 2.0f;
+            forwardMovement /= 2.0f;
         }
-        if(Input.GetButton("Fire2")){
-            sideMovement = sideMovement*2.0f;
-            forwardMovement = forwardMovement*2.0f;
+
+        if (Input.GetButton("Fire2"))
+        {
+            sideMovement *= 2.0f;
+            forwardMovement *= 2.0f;
         }
+
         bool jumpButtonPressed = Input.GetButton("Jump");
-        
-        movementDirection = new Vector3(sideMovement,0,forwardMovement);
+
+        movementDirection = new Vector3(sideMovement, 0, forwardMovement);
         movementDirection = transform.TransformDirection(movementDirection);
-        
+
         // Jumping
-        if(jumpButtonPressed & canJump){
-          verticalMovement = jumpForce;
+        if (jumpButtonPressed & canJump)
+        {
+            verticalMovement = jumpForce;
             canJump = false;
         }
 
@@ -72,7 +75,7 @@ public class PlayerMover : MonoBehaviour
             movementDirection.y = 0;
         }
 
-        controller.Move(movementDirection * Time.deltaTime);        
+        controller.Move(movementDirection * Time.deltaTime);
     }
 
     private void OnTriggerStay(Collider other)
@@ -84,10 +87,8 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-    public Vector3 GetMovementDirection(){
+    public Vector3 GetMovementDirection()
+    {
         return Vector3.Normalize(movementDirection);
-
-
     }
-
 }
