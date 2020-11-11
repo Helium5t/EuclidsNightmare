@@ -37,18 +37,23 @@ public class PerspectiveManager : MonoBehaviour {
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState =  CursorLockMode.Locked;       
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         targetForTakenObjects = GameObject.Find("targetForTakenObjects").transform;
         pointer = GameObject.Find("Pointer");
-        pointer.transform.position = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, (Screen.height / 2) + (Screen.height / 10), 1));
+        pointer.transform.position = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, (Screen.height / 2), 1));
         pointer.transform.parent = mainCamera.transform;
     }
 
     void Update()
     {
-        ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, (Screen.height / 2) + (Screen.height / 10), 0));
+        if(Input.GetKeyDown(KeyCode.Q)){
+            Cursor.visible = false;
+            Cursor.lockState =  CursorLockMode.Locked;     
+        }
+        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 200, Color.yellow);
-
         if (Physics.Raycast(ray, out hit, rayMaxRange, layerMask))
         {
             if (hit.transform.tag == "Getable")
@@ -69,6 +74,7 @@ public class PerspectiveManager : MonoBehaviour {
         }
         else
         {
+            // Put takenObject onto the hit point of the raycast
             targetForTakenObjects.position = hit.point;
         }
 
@@ -76,8 +82,10 @@ public class PerspectiveManager : MonoBehaviour {
         {
             if (hit.transform.tag == "Getable")
             {
+                // take object
                 takenObject = hit.transform.gameObject;
-
+                
+                // Save distance for multiplication, save scale and rotation for later
                 distanceMultiplier = Vector3.Distance(mainCamera.transform.position, takenObject.transform.position);
                 scaleMultiplier = takenObject.transform.localScale;
                 lastRotation = takenObject.transform.rotation.eulerAngles;
@@ -94,7 +102,7 @@ public class PerspectiveManager : MonoBehaviour {
                 {
                     col.isTrigger = true;
                 }
-
+                // Disable shadows, colliders and physics for taken objects and children
                 if (takenObject.GetComponent<MeshRenderer>() != null)
                 {
                     takenObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
@@ -108,6 +116,7 @@ public class PerspectiveManager : MonoBehaviour {
                     child.gameObject.layer = 8;
                 }
 
+                // Check which coordinate has the biggest size and set that as reference size
                 takenObjSize = takenObject.GetComponent<Collider>().bounds.size.y;
                 takenObjSizeIndex = 1;
                 if (takenObject.GetComponent<Collider>().bounds.size.x > takenObjSize)
@@ -123,19 +132,24 @@ public class PerspectiveManager : MonoBehaviour {
             }
         }
 
+
         if (Input.GetKey(KeyCode.E) || Input.GetMouseButton(0))
         {
             if (takenObject != null)
             {
+                Debug.Log(takenObject.GetComponent<MeshRenderer>().bounds.center);
                 // recenter the object to the center of the mesh regardless  real pivot point
                 if (takenObject.GetComponent<MeshRenderer>() != null)
                 {
                     centerCorrection = takenObject.transform.position - takenObject.GetComponent<MeshRenderer>().bounds.center;
                 }
 
+                // Change position of the object to the target position and keep object only rotated on Y
+                // Also interpolate over time
                 takenObject.transform.position = Vector3.Lerp(takenObject.transform.position, targetForTakenObjects.position + centerCorrection, Time.deltaTime * 5);
                 takenObject.transform.rotation = Quaternion.Lerp(takenObject.transform.rotation, Quaternion.Euler(new Vector3(0, lastRotationY + mainCamera.transform.eulerAngles.y, 0)), Time.deltaTime * 5);
                 
+                // 
                 cosine = Vector3.Dot(ray.direction, hit.normal);
                 cameraHeight = Mathf.Abs(hit.distance * cosine);
                 
@@ -156,10 +170,11 @@ public class PerspectiveManager : MonoBehaviour {
                 {
                     lastHitPoint = mainCamera.transform.position + ray.direction * rayMaxRange;
                 }
-                
+                // Move object form last position to new position
                 targetForTakenObjects.position = Vector3.Lerp(targetForTakenObjects.position, lastHitPoint
                         - (ray.direction * lastPositionCalculation), Time.deltaTime * 10);
-                
+                // Addition by Elio
+                // End of additions
                 takenObject.transform.localScale = scaleMultiplier * (Vector3.Distance(mainCamera.transform.position, takenObject.transform.position) / distanceMultiplier);
             }
         }
