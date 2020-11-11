@@ -3266,7 +3266,7 @@ GameObject:
   - component: {fileID: 1606973587}
   - component: {fileID: 1606973593}
   m_Layer: 8
-  m_Name: Euclid
+  m_Name: Euclid_OLD
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
