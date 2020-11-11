@@ -37,12 +37,12 @@ public class PerspectiveObject : MonoBehaviour
         }
 
         pickupRay = playerCamera.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(pickupRay.origin,pickupRay.direction*200,Color.cyan);
+        Debug.DrawRay(pickupRay.origin,pickupRay.direction *200f,Color.black);
         bool pickupRayIsHitting = Physics.Raycast(pickupRay,out pickupHit,200f,layerMask);
         float startDistance = 0f;
-        Vector2 bounds;
+        Vector2 boundsVec;
         Vector2 boundsIndex;
-        bounds = new Vector2(0,0);
+        boundsVec = new Vector2(0,0);
         boundsIndex = new Vector2(0,0);
         // Picking object up and setting base values for scaling
         if((Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && pickupRayIsHitting){
@@ -50,20 +50,25 @@ public class PerspectiveObject : MonoBehaviour
                 // Take object
                 heldObject = pickupHit.transform.gameObject;
 
+                if (heldObject.GetComponent<MeshRenderer>() != null)
+                {
+                    heldObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                    heldObject.GetComponent<MeshRenderer>().receiveShadows = false;
+                }
                 // Save Distance for multiplication
                 startDistance = Vector3.Distance(playerCamera.transform.position,heldObject.transform.position);
                 viewAngle = Mathf.Atan(heldObject.GetComponent<MeshRenderer>().bounds.extents.y / startDistance);
                 Vector3 scaleMultiplier = heldObject.transform.localScale;
                 // if rotation is bad it's because you used transform.eulerangles instead of transform.rotation.eulerangles
                 startYRotation = heldObject.transform.eulerAngles.y - playerCamera.transform.eulerAngles.y; 
-                bounds = new Vector2(Mathf.Max(heldObject.GetComponent<MeshRenderer>().bounds.size.x,heldObject.GetComponent<MeshRenderer>().bounds.size.y),heldObject.GetComponent<MeshRenderer>().bounds.size.y);
+                boundsVec = new Vector2(Mathf.Max(heldObject.GetComponent<MeshRenderer>().bounds.size.x,heldObject.GetComponent<MeshRenderer>().bounds.size.y),heldObject.GetComponent<MeshRenderer>().bounds.size.y);
                 if(!heldObject.TryGetComponent<Rigidbody>(out Rigidbody rigidbody)){
                     heldObject.AddComponent<Rigidbody>();
                 }
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;
                 if(!heldObject.TryGetComponent<BoxCollider>(out BoxCollider boxCollider)){
                     heldObject.AddComponent<BoxCollider>();
-                    heldObject.GetComponent<BoxCollider>().size = new Vector3(bounds.x,bounds.y,bounds.x);
+                    heldObject.GetComponent<BoxCollider>().size = new Vector3(boundsVec.x,boundsVec.y,boundsVec.x);
                     addedCollider = true;
                 }
                 foreach(Collider col in heldObject.GetComponents<Collider>()){
@@ -86,42 +91,95 @@ public class PerspectiveObject : MonoBehaviour
         RaycastHit perspectiveHit;
         // Moving and scaling object
         if((Input.GetKey(KeyCode.E) || Input.GetMouseButton(0)) && pickupRayIsHitting){
-            RaycastHit vertUpHit,vertDownHit,leftHit,rightHit,forwardHit;
+            Collider boxReference = heldObject.GetComponent<BoxCollider>();
+            //Debug.Log(heldObject.GetComponents<BoxCollider>().GetLength(0));
+            RaycastHit upHit,downHit,leftHit,rightHit,forwardHit;
             bool hitUp,hitDown,hitForward,hitLeft,hitRight;
             bool perspectiveRayIsHitting = Physics.Raycast(pickupRay,out perspectiveHit,200f,layerMask);
             if(heldObject != null){
                 BoxCollider sizeBox = heldObject.GetComponent<BoxCollider>();
-                Vector3 objectCenter = heldObject.GetComponent<MeshRenderer>().bounds.center;
-                hitUp = Physics.Raycast(objectCenter,Vector3.up,out vertUpHit,bounds.y,layerMask);
-                hitDown = Physics.Raycast(objectCenter,Vector3.down,out vertDownHit,bounds.y,layerMask);
-                Debug.DrawRay(objectCenter,Vector3.up * bounds.y,Color.green);
-                Debug.DrawRay(objectCenter,Vector3.down * bounds.y,Color.green);
+                Vector3 objectCenter = boxReference.bounds.center;
+                //Debug.Log(boxReference.bounds);
+                Vector3 centerCorrection = new Vector3(0f,0f,0f);
+                if (boxReference != null)
+                {
+                    centerCorrection = heldObject.transform.position - boxReference.bounds.center;
+                }
+                Debug.Log(centerCorrection);
+                
+                DrawBoundingBox(boxReference);
+                
+                float scalingFactor = Mathf.Tan(viewAngle) * Vector3.Distance(playerCamera.transform.position,perspectiveHit.point);
+                scalingFactor = scalingFactor / boxReference.bounds.extents.y;
+                heldObject.transform.rotation = Quaternion.Lerp(heldObject.transform.rotation,Quaternion.AngleAxis(startYRotation+ playerCamera.transform.eulerAngles.y,Vector3.up),Time.deltaTime*10);
+                heldObject.transform.localScale = Vector3.Lerp(heldObject.transform.localScale, heldObject.transform.localScale * scalingFactor,Time.deltaTime * 10);
+                heldObject.transform.position = Vector3.Lerp(heldObject.transform.position, perspectiveHit.point + centerCorrection - 0.01f*pickupRay.direction,Time.deltaTime* 10);
+                // - new Vector3(boxReference.bounds.size.x * pickupRay.direction.x/2,boxReference.bounds.size.y * pickupRay.direction.y/2,boxReference.bounds.size.z * pickupRay.direction.z/2);
+                boundsVec = new Vector2(1f,1f);
+                hitUp = Physics.Raycast(objectCenter,Vector3.up,out upHit,100f,layerMask);
+                hitDown = Physics.Raycast(objectCenter,Vector3.down,out downHit,100f,layerMask);
+                Debug.DrawRay(objectCenter,Vector3.up * 100f,Color.green);
+                Debug.DrawRay(objectCenter,Vector3.down * 100f,Color.green);
                 Vector3 forwardVec = new Vector3(pickupRay.direction.x,0,pickupRay.direction.z);
-                hitForward = Physics.Raycast(objectCenter,forwardVec,out forwardHit,bounds.x,layerMask);
+                hitForward = Physics.Raycast(objectCenter,forwardVec,out forwardHit,100f,layerMask);
                 Vector3 leftVec = Quaternion.AngleAxis(90,Vector3.up)*forwardVec;
-                hitLeft = Physics.Raycast(objectCenter,leftVec,out leftHit,bounds.x,layerMask);
-                Debug.DrawRay(objectCenter,leftVec,Color.blue);
+                hitLeft = Physics.Raycast(objectCenter,leftVec,out leftHit,100f,layerMask);
+                Debug.DrawRay(objectCenter,leftVec*100f,Color.blue);
                 Vector3 rightVec = Quaternion.AngleAxis(-90,Vector3.up)*forwardVec;
-                hitRight = Physics.Raycast(objectCenter,rightVec,out rightHit,bounds.x,layerMask);
-                Debug.DrawRay(objectCenter,rightVec,Color.red);
-
+                hitRight = Physics.Raycast(objectCenter,rightVec,out rightHit,100f,layerMask);
+                Debug.DrawRay(objectCenter,rightVec*100f,Color.red);
+                //Debug.Log(rightVec*boundsVec.x);
+                bool needAdjustment = true;
+                int limit = 30;
+                if(needAdjustment && limit>0){
+                    limit = limit -1;
+                    float xAdjustment=0f;
+                    float zAdjustment=0f;
+                    float yAdjustment=0f;
+                    needAdjustment = false;
+                    if(hitForward && boxReference.ClosestPoint(forwardHit.point)== forwardHit.point){
+                        xAdjustment += forwardVec.x * boundsVec.x;
+                        zAdjustment += forwardVec.z * boundsVec.x;
+                        needAdjustment = true;
+                    }
+                    if(hitLeft && boxReference.ClosestPoint(leftHit.point) == leftHit.point){
+                        xAdjustment += leftVec.x * boundsVec.x;
+                        zAdjustment += leftVec.z * boundsVec.x;
+                        needAdjustment = true;
+                        
+                    }
+                    if(hitRight && boxReference.ClosestPoint(rightHit.point) == rightHit.point){
+                        xAdjustment += rightVec.x * boundsVec.x;
+                        zAdjustment += rightVec.z * boundsVec.x;
+                        needAdjustment = true;
+                    }
+                    if(hitUp && boxReference.ClosestPoint(upHit.point) == upHit.point){
+                        yAdjustment += boundsVec.y;
+                        needAdjustment = true;
+                    }                              
+                    if(hitDown && boxReference.ClosestPoint(downHit.point) == downHit.point){
+                        yAdjustment += boundsVec.y;
+                        needAdjustment = true;
+                    }
+                    Vector3 adjustmentVector = new Vector3(xAdjustment,yAdjustment,zAdjustment);
+                    if(needAdjustment){
+                        Debug.Log("Adjusting");
+                        heldObject.transform.position = Vector3.Lerp(heldObject.transform.position, perspectiveHit.point + centerCorrection - adjustmentVector,Time.deltaTime* 10);
+                        scalingFactor = Mathf.Tan(viewAngle) * Vector3.Distance(playerCamera.transform.position,perspectiveHit.point - adjustmentVector);
+                        scalingFactor = scalingFactor / boxReference.bounds.extents.y;
+                        heldObject.transform.localScale = Vector3.Lerp(heldObject.transform.localScale, heldObject.transform.localScale * scalingFactor,Time.deltaTime * 10);
+                    }
+                }
+                Debug.Log("Adjusted");
+                
+                /*
                 if(!(hitUp || hitDown || hitForward || hitLeft || hitRight)){
                     heldObject.transform.position = Vector3.Lerp(heldObject.transform.position,perspectiveHit.point,Time.deltaTime);
                     heldObject.transform.rotation = (Quaternion.AngleAxis(startYRotation+ playerCamera.transform.eulerAngles.y,Vector3.up));
                 }
                 else{
                     Debug.Log("RayCast Limited");
-                }
-                if (heldObject.GetComponent<MeshRenderer>() != null)
-                {
-                    Vector3 centerCorrection = heldObject.transform.position - heldObject.GetComponent<MeshRenderer>().bounds.center;
-                }
-                
-                float scalingFactor = Mathf.Tan(viewAngle) * Vector3.Distance(playerCamera.transform.position,heldObject.transform.position);
-                scalingFactor = scalingFactor / heldObject.GetComponent<MeshRenderer>().bounds.extents.y;
-                Debug.Log(scalingFactor );
-                heldObject.transform.localScale = heldObject.transform.localScale * scalingFactor;
-                heldObject.transform.position = perspectiveHit.point - new Vector3(heldObject.GetComponent<MeshRenderer>().bounds.size.x * pickupRay.direction.x,heldObject.GetComponent<MeshRenderer>().bounds.size.y * pickupRay.direction.y,heldObject.GetComponent<MeshRenderer>().bounds.size.z * pickupRay.direction.z);
+                }*/
 
             }
         }
@@ -162,5 +220,19 @@ public class PerspectiveObject : MonoBehaviour
 
 
 
+    }
+    private void DrawBoundingBox(Collider boxReference){
+        Vector3 boxExtents = boxReference.bounds.extents;
+        Debug.DrawLine(boxReference.bounds.center + boxExtents,boxReference.bounds.center + new Vector3(boxExtents.x,boxExtents.y,-boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + boxExtents,boxReference.bounds.center + new Vector3(boxExtents.x,-boxExtents.y,boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + boxExtents,boxReference.bounds.center + new Vector3(-boxExtents.x,boxExtents.y,boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + boxExtents*-1f,boxReference.bounds.center + new Vector3(-boxExtents.x,-boxExtents.y,boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + boxExtents*-1f,boxReference.bounds.center + new Vector3(-boxExtents.x,boxExtents.y,-boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + boxExtents*-1f,boxReference.bounds.center + new Vector3(boxExtents.x,-boxExtents.y,-boxExtents.z),Color.red);
+
+        Debug.DrawLine(boxReference.bounds.center + new Vector3(boxExtents.x, boxExtents.y,-boxExtents.z),boxReference.bounds.center + new Vector3(-boxExtents.x,boxExtents.y,-boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + new Vector3(boxExtents.x, boxExtents.y,-boxExtents.z),boxReference.bounds.center + new Vector3(boxExtents.x,-boxExtents.y,-boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + new Vector3(-boxExtents.x,-boxExtents.y,boxExtents.z),boxReference.bounds.center + new Vector3(boxExtents.x,-boxExtents.y,boxExtents.z),Color.red);
+        Debug.DrawLine(boxReference.bounds.center + new Vector3(-boxExtents.x,-boxExtents.y,boxExtents.z),boxReference.bounds.center + new Vector3(-boxExtents.x,boxExtents.y,boxExtents.z),Color.red);
     }
 }
