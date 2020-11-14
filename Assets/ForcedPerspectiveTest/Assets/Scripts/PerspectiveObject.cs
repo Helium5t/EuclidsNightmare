@@ -13,10 +13,13 @@ public class PerspectiveObject : MonoBehaviour
     private bool addedCollider = false;
     private LayerMask layerMask = ~(1 << 8);
 
+    private string TODO = "Fix collision and position adjustment on angles of the room. Plus the object sometimes breaks and gets smaller check it out";
+
     private float startYRotation=0f;
     // Start is called before the first frame update
     void Start()
     {
+        Debug.LogError(TODO);
         if(playerCamera == null){
             playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         }
