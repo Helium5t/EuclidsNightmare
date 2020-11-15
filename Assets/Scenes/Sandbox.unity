@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseFollowSpeed: 5
+  maxPickUpDistance: 30
 --- !u!65 &802584371
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1062,7 +1063,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802584367}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.98, z: 5.4}
+  m_LocalPosition: {x: 0.5, y: 0.98, z: 90.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2050962331}
@@ -1395,7 +1396,7 @@ GameObject:
   - component: {fileID: 963194226}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2795,6 +2796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseFollowSpeed: 5
+  maxPickUpDistance: 30
 --- !u!1 &1621414147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3877,6 +3879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseFollowSpeed: 5
+  maxPickUpDistance: 30
 --- !u!33 &862433981146079504
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4647,13 +4650,27 @@ GameObject:
   - component: {fileID: 250968216720607904}
   - component: {fileID: 1611302711812263581}
   - component: {fileID: 637829530509265364}
-  m_Layer: 0
+  - component: {fileID: 7377861978232534687}
+  m_Layer: 10
   m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &7377861978232534687
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377861978232534686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.0299606, y: 2.7683196, z: 0.9996017}
+  m_Center: {x: -0.00000023841858, y: 1.3851209, z: -0.00067365187}
 --- !u!1 &7377861979181662512
 GameObject:
   m_ObjectHideFlags: 0
@@ -4665,13 +4682,27 @@ GameObject:
   - component: {fileID: 250968215505173774}
   - component: {fileID: 1611302713027688755}
   - component: {fileID: 637829531726560890}
-  m_Layer: 0
+  - component: {fileID: 7377861979181662513}
+  m_Layer: 10
   m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &7377861979181662513
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377861979181662512}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.0299606, y: 2.7683196, z: 0.9996017}
+  m_Center: {x: -0.00000023841858, y: 1.3851209, z: -0.0006583931}
 --- !u!1001 &7828039917993341510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4882,7 +4913,7 @@ PrefabInstance:
     - target: {fileID: 7166369394848896150, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 87.35
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896150, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
@@ -4923,6 +4954,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369395430997818, guid: b18a43dee9d0ee84c84c32dd92a472f3,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
