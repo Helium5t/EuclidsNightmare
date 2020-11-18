@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
+  - Wall
+  - Floor
+  - Getable
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - Trigger
   - Portal
   - TakenObject
-  - 
+  - Hidden
   - 
   - 
   - 

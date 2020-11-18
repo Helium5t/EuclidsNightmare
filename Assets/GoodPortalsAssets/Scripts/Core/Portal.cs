@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Portal : MonoBehaviour {
+
+    enum Side {Negative,Either,Positive};
     [Header ("Main Settings")]
     public Portal linkedPortal;
+
+    [SerializeField]private Side teleportingSide = Side.Either;
     public MeshRenderer screen;
     public int recursionLimit = 5;
 
@@ -44,7 +48,7 @@ public class Portal : MonoBehaviour {
             int portalSide = System.Math.Sign (Vector3.Dot (offsetFromPortal, transform.forward));
             int portalSideOld = System.Math.Sign (Vector3.Dot (traveller.previousOffsetFromPortal, transform.forward));
             // Teleport the traveller if it has crossed from one side of the portal to the other
-            if (portalSide != portalSideOld) {
+            if (checkSide(portalSideOld,portalSide)) {
                 var positionOld = travellerT.position;
                 var rotOld = travellerT.rotation;
                 traveller.Teleport (transform, linkedPortal.transform, m.GetColumn (3), m.rotation);
@@ -316,5 +320,19 @@ public class Portal : MonoBehaviour {
         if (linkedPortal != null) {
             linkedPortal.linkedPortal = this;
         }
+    }
+
+    bool checkSide(int oldSide, int newSide){
+        if(teleportingSide == Side.Either){
+            return oldSide!=newSide;
+        }
+        if(teleportingSide == Side.Negative){
+            return oldSide!=newSide && oldSide <0;
+        }
+        if(teleportingSide == Side.Positive){
+            return oldSide!=newSide && oldSide >0;
+        }
+        return false;
+       
     }
 }
