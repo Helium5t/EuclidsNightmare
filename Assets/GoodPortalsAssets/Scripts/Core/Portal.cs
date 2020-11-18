@@ -323,16 +323,6 @@ public class Portal : MonoBehaviour {
     }
 
     bool checkSide(int oldSide, int newSide){
-        if(teleportingSide == Side.Either){
-            return oldSide!=newSide;
-        }
-        if(teleportingSide == Side.Negative){
-            return oldSide!=newSide && oldSide <0;
-        }
-        if(teleportingSide == Side.Positive){
-            return oldSide!=newSide && oldSide >0;
-        }
-        return false;
-       
+        return (teleportingSide == Side.Either && oldSide!=newSide) || (teleportingSide == Side.Negative && oldSide!=newSide && oldSide <0) || (teleportingSide == Side.Positive && oldSide!=newSide && oldSide >0);
     }
 }
