@@ -507,21 +507,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8809813410843888157, guid: 424ab3d0b64a5cc498d748f9c7a763f1,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8809813410843888157, guid: 424ab3d0b64a5cc498d748f9c7a763f1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8809813410843888158, guid: 424ab3d0b64a5cc498d748f9c7a763f1,
-        type: 3}
-      propertyPath: scaling
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8809813410843888160, guid: 424ab3d0b64a5cc498d748f9c7a763f1,
         type: 3}
       propertyPath: m_Name
@@ -3996,6 +3981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 1485712967140073615}
+  teleportingSide: 1
   screen: {fileID: 637829531726560890}
   recursionLimit: 10
   nearClipOffset: 0.05
@@ -4202,6 +4188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 1485712965922559777}
+  teleportingSide: 1
   screen: {fileID: 637829530509265364}
   recursionLimit: 10
   nearClipOffset: 0.05

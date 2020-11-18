@@ -4,7 +4,7 @@ public class ResizingTunnel : MonoBehaviour
     {
 
     [SerializeField]
-    private GameObject rr, ll, up, dw, entrance, exit;
+    private GameObject rightWall, leftWall, topWall, bottomWall, entrance, exit;
 
     [SerializeField]
     public float scaling = .5f;
