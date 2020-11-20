@@ -75,3 +75,6 @@ crashlytics-build.properties
 # JetBrains Rider editor folder and cache
 .idea/
 Assets/Plugins/Editor/JetBrains*
+
+#Custom Ignore Because Elio has a stupid Unity Plugin
+Plugins/GitHub*
