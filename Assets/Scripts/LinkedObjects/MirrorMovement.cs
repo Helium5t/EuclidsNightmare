@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mirrorMovement : MonoBehaviour
+public class MirrorMovement : MonoBehaviour
 {
 
     [SerializeField] private Transform toFollow;
