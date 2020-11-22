@@ -1,4 +1,4 @@
-﻿Shader "Unlit/PortalShader"
+﻿Shader "Unlit/MirrorShader"
 {
     Properties
     {

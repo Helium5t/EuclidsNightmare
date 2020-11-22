@@ -17,7 +17,7 @@ public class MirrorCamera : MonoBehaviour
     private void Start() {
         mirror = transform.parent;
         mirrorCamera = GetComponent<Camera>();
-        Material mirrorMaterial = new Material(mirror.GetComponent<MeshRenderer>().material);
+        Material mirrorMaterial = new Material(Shader.Find("Unlit/MirrorShader"));
         mirrorCamera.targetTexture =  new RenderTexture(Screen.width,Screen.height,24);
         mirrorMaterial.mainTexture = mirrorCamera.targetTexture;
         mirror.GetComponent<MeshRenderer>().material = mirrorMaterial;
