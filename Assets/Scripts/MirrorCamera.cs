@@ -4,29 +4,49 @@ using UnityEngine;
 
 public class MirrorCamera : MonoBehaviour
 {
+
+    enum Orientation {Horizontal,Vertical,Auto};
     [SerializeField] private Camera trackedCamera;
     private Camera mirrorCamera;
     [SerializeField] private Transform mirror;
 
-    
+    [SerializeField] private Orientation orientation = Orientation.Auto;
     [SerializeField] private float nearClipOffset = 0.05f;
     [SerializeField] private float nearClipLimit = 0.2f;
 
     
     // Start is called before the first frame update
     private void Start() {
-        mirror = transform.parent;
+        if(!trackedCamera){
+            trackedCamera = Camera.main;
+        }
+        if(!mirror){
+            mirror = transform.parent;
+        }
         mirrorCamera = GetComponent<Camera>();
         Material mirrorMaterial = new Material(Shader.Find("Unlit/MirrorShader"));
+        
         mirrorCamera.targetTexture =  new RenderTexture(Screen.width,Screen.height,24);
         mirrorMaterial.mainTexture = mirrorCamera.targetTexture;
         mirror.GetComponent<MeshRenderer>().material = mirrorMaterial;
+        if(orientation == Orientation.Auto){
+            if(IsVertical()){
+                orientation = Orientation.Vertical;
+            }
+            else{
+                orientation = Orientation.Horizontal;
+            }
+        }
+        if(orientation == Orientation.Horizontal){
+            mirrorMaterial.SetInt("_FlippedAxis",0);
+        }
+        else{
+            mirrorMaterial.SetInt("_FlippedAxis",1);
+        }
+
+        // extra shit
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void OnPreRender(){
         if (!CameraUtility.VisibleFromCamera (mirror.GetComponent<MeshRenderer>(), trackedCamera) ) {
@@ -86,5 +106,15 @@ public class MirrorCamera : MonoBehaviour
                 factor * nz + dz);
         }
 
+    bool IsVertical(){
+        float closestVerticalAngle = Mathf.Min(Vector3.Angle(Vector3.up,mirror.up),Vector3.Angle(Vector3.down,mirror.up));
+        float closestHorizontalAngle = Mathf.Min(Vector3.Angle(Vector3.right,mirror.up),Vector3.Angle(Vector3.left,mirror.up));
+        if(closestHorizontalAngle<closestVerticalAngle){
+            Debug.Log("Horizontal Smaller");
+        }
+        Debug.Log(closestHorizontalAngle);
+        Debug.Log(closestVerticalAngle);
+        return closestVerticalAngle < closestHorizontalAngle;
+    }
 
 }

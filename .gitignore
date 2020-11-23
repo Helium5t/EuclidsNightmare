@@ -77,4 +77,6 @@ crashlytics-build.properties
 Assets/Plugins/Editor/JetBrains*
 
 #Custom Ignore Because Elio has a stupid Unity Plugin
-Plugins/GitHub*
+[Aa]ssets/Plugins/GitHub*
+[Aa]ssets/Plugins/GitHub/
+Assets/Plugins/GitHub/

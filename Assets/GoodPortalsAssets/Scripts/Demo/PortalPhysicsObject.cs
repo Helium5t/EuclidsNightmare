@@ -13,7 +13,9 @@ public class PortalPhysicsObject : PortalTraveller {
     void Awake () {
         i = 0;
         rigidbody = GetComponent<Rigidbody> ();
-        graphicsObject.GetComponent<MeshRenderer> ().material.color = colors[i];
+        if(colors.Length>0){
+            graphicsObject.GetComponent<MeshRenderer> ().material.color = colors[i];
+        }
         i++;
         if (i > colors.Length - 1) {
             i = 0;

@@ -3,11 +3,15 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        // Setting Flipped Axis to 0 means flipping X axis, 1 means flipping Y axis 
+        _FlippedAxis ("Flipped Axis", int) = 0
+        
+
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
-        LOD 100
+        LOD 200
 
         Pass
         {
@@ -34,6 +38,7 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            int _FlippedAxis;
 
             v2f vert (appdata v)
             {
@@ -45,8 +50,9 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 uv = float2(1-i.screenPos.x/ i.screenPos.w,i.screenPos.y/ i.screenPos.w) ;
-                fixed4 col = tex2D(_MainTex, uv);
+                float2 flippedXuv = float2(1-i.screenPos.x/ i.screenPos.w,i.screenPos.y/ i.screenPos.w) ;
+                float2 flippedYuv = float2(i.screenPos.x/ i.screenPos.w,1-i.screenPos.y/ i.screenPos.w) ;
+                fixed4 col = tex2D(_MainTex, flippedXuv *(1- _FlippedAxis) + flippedYuv *_FlippedAxis);
                 return col;
             }
             ENDCG
