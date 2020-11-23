@@ -1,4 +1,4 @@
-﻿Shader "Unlit/PortalShader"
+﻿Shader "Unlit/MirrorShader"
 {
     Properties
     {
@@ -22,7 +22,6 @@
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
             };
 
             struct v2f
@@ -40,20 +39,14 @@
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                // uv not needed
-                //o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.screenPos = ComputeScreenPos(o.vertex);
-                //UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                i.screenPos /= i.screenPos.w;
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, float2(i.screenPos.x,i.screenPos.y));
-                // do not apply fog
-                //UNITY_APPLY_FOG(i.fogCoord, col);
+                float2 uv = float2(1-i.screenPos.x/ i.screenPos.w,i.screenPos.y/ i.screenPos.w) ;
+                fixed4 col = tex2D(_MainTex, uv);
                 return col;
             }
             ENDCG
