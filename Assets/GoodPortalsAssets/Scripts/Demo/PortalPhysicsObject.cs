@@ -7,18 +7,18 @@ public class PortalPhysicsObject : PortalTraveller {
 
     public float force = 10;
     new Rigidbody rigidbody;
-    public Color[] colors;
     static int i;
 
-    void Awake () {
-        i = 0;
+    protected virtual void Awake () {
         rigidbody = GetComponent<Rigidbody> ();
-        if(colors.Length>0){
-            graphicsObject.GetComponent<MeshRenderer> ().material.color = colors[i];
+        if(!graphicsObject){
+            graphicsObject = gameObject;
         }
-        i++;
-        if (i > colors.Length - 1) {
-            i = 0;
+        if(!TryGetComponent<MeshRenderer>(out MeshRenderer renderedmesh)){
+            renderedmesh = GetComponentInChildren<MeshRenderer>();
+        }
+        if(renderedmesh.material.shader != Shader.Find("Custom/Slice")){
+            renderedmesh.material = new Material(Shader.Find("Custom/Slice"));
         }
     }
 

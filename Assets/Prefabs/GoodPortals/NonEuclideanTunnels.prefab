@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 671217004296951452}
   m_Layer: 0
   m_Name: PortalLongIn
-  m_TagString: Untagged
+  m_TagString: Compressed Space
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 671217005512139058}
   m_Layer: 0
   m_Name: PortalShortIn
-  m_TagString: Untagged
+  m_TagString: Expanded Space
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 5072667550933211122}
   m_Layer: 0
   m_Name: PortalShortOut
-  m_TagString: Untagged
+  m_TagString: Expanded Space
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1061,7 +1061,7 @@ GameObject:
   - component: {fileID: 5072667550954439482}
   m_Layer: 0
   m_Name: PortalLongOut
-  m_TagString: Untagged
+  m_TagString: Compressed Space
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Floor
   - Getable
+  - Compressed Space
+  - Expanded Space
   layers:
   - Default
   - TransparentFX

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class LinkedObject : MonoBehaviour
 {
     [SerializeField] private LinkedObject mirror;
 
     private Vector3 offset;
     private Rigidbody mirrorPhysics;
-    private Vector3 previousPos;
-    private Quaternion previousRot;
 
     private List<Vector3> collisionImpulses;
 
+    private float movementScale=1f;
     private bool isMaster = false ;
     private bool isDragged = false;
 
@@ -24,16 +24,18 @@ public class LinkedObject : MonoBehaviour
     [SerializeField][Range(0.000f,0.5f)] private float keepAngleThreshold = 0.5f;
 
     private void Awake() {
-        offset = transform.position - mirror.transform.position;
-        targetOffset = transform.position - mirror.transform.position;
+        if(!mirror){
+            Debug.LogError(gameObject.name + " has no mirror set for it, disabling component.");
+            this.enabled = false;
+        }
+        else{
+            targetOffset = transform.position - mirror.transform.position;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         collisionImpulses = new List<Vector3>();
-        if(!gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb)){
-                gameObject.AddComponent<Rigidbody>();
-        }
         mirrorPhysics = mirror.gameObject.GetComponent<Rigidbody>();
         masterBid = Random.Range(0f,10f);
     }
@@ -132,6 +134,15 @@ public class LinkedObject : MonoBehaviour
             mirror.keepAngleThreshold = keepAngleThreshold;
         }
     }
+
+    public LinkedObject getMirror(){
+        return mirror;
+    }
+
+    public void scaleReflectedMovement(float newScale){
+        movementScale = newScale;
+    }
+
     /*
     bool OffsetIsKept(){
         return transform.position == mirror.transform.position + offset;
