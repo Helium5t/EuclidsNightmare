@@ -80,3 +80,6 @@ Assets/Plugins/Editor/JetBrains*
 [Aa]ssets/Plugins/GitHub*
 [Aa]ssets/Plugins/GitHub/
 Assets/Plugins/GitHub/
+
+#Custom Ignore for Elio's Local Testing
+Assets/Shaders/CustomShaders/TestingShader/

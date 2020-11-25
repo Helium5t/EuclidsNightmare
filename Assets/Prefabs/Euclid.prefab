@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 7166369394848896150}
   - component: {fileID: 7166369394848896151}
   - component: {fileID: 7166369394848896169}
+  - component: {fileID: 7351225737228979885}
   m_Layer: 10
   m_Name: Euclid
   m_TagString: Player
@@ -329,6 +330,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7351225737228979885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166369394848896148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d0dcfc32ad70541adb37d6fe300713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseFollowSpeed: 5
+  maxPickUpDistance: 30
 --- !u!1 &7166369395430997816
 GameObject:
   m_ObjectHideFlags: 0

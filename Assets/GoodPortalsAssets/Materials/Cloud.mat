@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cloud
-  m_Shader: {fileID: 4800000, guid: 5b1d8ad970ce8451f975014d4c22547f, type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -75,4 +75,4 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}
-    - _EmissionColor: {r: 1.0519568, g: 1.0519568, b: 1.0519568, a: 0}
+    - _EmissionColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}

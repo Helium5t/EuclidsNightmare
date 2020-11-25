@@ -27,8 +27,11 @@ public class DragObject : MonoBehaviour
                 if (Physics.Raycast(screenPointToRay, out hit,maxPickUpDistance) && hit.rigidbody)
                 {
                     draggedObj = hit.transform;
-                    distanceFromMousePointer = hit.distance;
+                    distanceFromMousePointer = hit.distance + DistanceCorrection(draggedObj,screenPointToRay);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
+                    if(draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
+                        linkedObject.startDrag();
+                    }
                 }
             }
             else
@@ -58,7 +61,7 @@ public class DragObject : MonoBehaviour
                 }
                 // Calculate needed speed
                 Vector3 vel = ( targetPos - draggedObj.position) * mouseFollowSpeed;
-
+                draggedObj.GetComponentInChildren<MeshRenderer>().transform.rotation =  Quaternion.Lerp(draggedObj.GetComponentInChildren<MeshRenderer>().transform.rotation,Quaternion.Euler(0f,0f,0f),Time.deltaTime*10f);
                 if (vel.magnitude > maxObjectSpeed) vel *= maxObjectSpeed / vel.magnitude;
                 draggedObjectRb.velocity = vel;
             }
@@ -66,7 +69,36 @@ public class DragObject : MonoBehaviour
         }
         else
         {
+            if(draggedObj!= null && draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
+                        linkedObject.stopDrag();
+            }
             draggedObj = null;
+        }
+    }
+
+    float DistanceCorrection(Transform draggedTransform,Ray pickupRay){
+        Vector3 rayDirection = pickupRay.direction * -1f;
+        float minForward = Mathf.Min(Vector3.Angle(rayDirection,draggedTransform.forward),Vector3.Angle(rayDirection,draggedTransform.up));
+        float minRight = Mathf.Min(Vector3.Angle(rayDirection,draggedTransform.right),Vector3.Angle(rayDirection,draggedTransform.right*-1f));
+        float minUp = Mathf.Min(Vector3.Angle(rayDirection,draggedTransform.forward),Vector3.Angle(rayDirection,draggedTransform.up));
+        if(minForward<minRight){
+            if(minForward<minUp){
+                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.z;
+            }
+            else{
+                //minUp
+                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.y;
+            }
+        }
+        else{
+            if(minRight<minUp){
+                //minright
+                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.x;
+            }
+            else{
+                //minup
+                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.y;
+            }
         }
     }
 }
