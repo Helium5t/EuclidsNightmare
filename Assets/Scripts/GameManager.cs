@@ -1,29 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using Utility;
 
 public class GameManager : Singleton<GameManager>
 {
     public static bool GameIsPaused;
-    [SerializeField] private GameObject pauseMenuUI;
+    private GameObject pauseMenuUI;
 
-    /*private void Update()
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused) ResumeGame();
             else PauseGame();
         }
-    }*/
+    }
+
 
     public void QuitGame() => Application.Quit();
 
-    public void StartGame()
+    public void LoadLevel(string levelToLoad)
     {
         /*
          * TODO: this is a placeHolder, later I'll call smth like LevelManager.startLevel(FirstLevel)
          */
-        SceneManager.LoadScene("GrowingApart");
+        SceneManager.LoadScene(levelToLoad);
     }
 
     public void PauseGame()
@@ -44,5 +48,17 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void UpdateUI(GameObject newUI)
+    {
+        Debug.Log("UpdateUI triggered with param: " + newUI.name);
+        pauseMenuUI = newUI;
+    }
+
+    public void UpdateUI()
+    {
+        Debug.Log("UpdateUI triggered without param");
+        pauseMenuUI = GameObject.FindGameObjectWithTag("Player").transform.Find("pauseMenuUI").gameObject;
     }
 }
