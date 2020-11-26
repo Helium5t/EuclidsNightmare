@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3887506777505144772}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4275844790645386015}
@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 1180278919967626599}
   - component: {fileID: 1535362997435121179}
   - component: {fileID: 5430411440427057289}
+  - component: {fileID: 6691411444464956585}
   m_Layer: 0
   m_Name: IonicPillar
   m_TagString: Untagged
@@ -190,6 +191,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1210927717447174185, guid: 947ae1be9d6b6264993d135b2dd14ede, type: 3}
+--- !u!136 &6691411444464956585
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553311637773519525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.18171275
+  m_Height: 2.24
+  m_Direction: 1
+  m_Center: {x: 0.3840444, y: -1.1898999, z: 0.000069350004}
 --- !u!1 &7003650310096054293
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Animator))]
 public class TimerDoorTrigger : MonoBehaviour,TriggerInterface
 {
-    private Vector3 targetPos;
-    private Vector3 startPos;
+    private Animator doorAnimator;
 
     private float animationSpeed = 5f;
     private float movementAmount = 10f;
@@ -13,16 +13,11 @@ public class TimerDoorTrigger : MonoBehaviour,TriggerInterface
     
     public bool triggered = false;
 
+    public bool open = false;
+
     private void Start() {
-        startPos = transform.position;
-        targetPos = transform.position;   
-    }
-    private void Update() {
-        if(transform.position != targetPos){
-            transform.position = Vector3.Lerp(transform.position,targetPos,Time.deltaTime*animationSpeed);
-        }
-        if(Vector3.Distance(startPos,transform.position)< Mathf.Epsilon && triggered){
-            triggered = false;
+        if(!doorAnimator){
+            doorAnimator = GetComponent<Animator>();
         }
     }
 
@@ -37,11 +32,11 @@ public class TimerDoorTrigger : MonoBehaviour,TriggerInterface
     }
 
     public IEnumerator OpenAndClose(float timeToWait){
-        Vector3 startingPos = transform.position;
-        targetPos = transform.position + Vector3.up * movementAmount;
+        doorAnimator.SetBool("open",true);
         yield return new WaitForSeconds(timeToWait);
-        targetPos = startingPos;
-        yield return new WaitForSeconds(Time.deltaTime*animationSpeed);
+        doorAnimator.SetBool("open",false);
+        AnimatorClipInfo[] animInfo =  doorAnimator.GetCurrentAnimatorClipInfo(0);
+        yield return new WaitForSeconds(animInfo[0].clip.length);
         triggered = false;
         yield return null;
     }

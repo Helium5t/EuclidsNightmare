@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2270861991555197307}
   - component: {fileID: 6738905701818432318}
   - component: {fileID: 1241664650528791760}
+  - component: {fileID: 7524188178805283474}
   m_Layer: 0
   m_Name: CorinthianPillar
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &7524188178805283474
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7855382801192416304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.21
+  m_Height: 2.85
+  m_Direction: 1
+  m_Center: {x: -0.05801644, y: -0.9469454, z: -0.001269646}

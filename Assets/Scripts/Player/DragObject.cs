@@ -26,7 +26,9 @@ public class DragObject : MonoBehaviour
             {
                 if (Physics.Raycast(screenPointToRay, out hit,maxPickUpDistance) && hit.rigidbody)
                 {
-                    draggedObj = hit.transform;
+                    if(!hit.transform.TryGetComponent<Portal>(out Portal portal)){
+                        draggedObj = hit.transform;
+                    }
                     distanceFromMousePointer = hit.distance + DistanceCorrection(draggedObj,screenPointToRay);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
                     if(draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
@@ -83,21 +85,21 @@ public class DragObject : MonoBehaviour
         float minUp = Mathf.Min(Vector3.Angle(rayDirection,draggedTransform.forward),Vector3.Angle(rayDirection,draggedTransform.up));
         if(minForward<minRight){
             if(minForward<minUp){
-                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.z;
+                return draggedTransform.GetComponentInChildren<MeshRenderer>().bounds.extents.z;
             }
             else{
                 //minUp
-                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.y;
+                return draggedTransform.GetComponentInChildren<MeshRenderer>().bounds.extents.y;
             }
         }
         else{
             if(minRight<minUp){
                 //minright
-                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.x;
+                return draggedTransform.GetComponentInChildren<MeshRenderer>().bounds.extents.x;
             }
             else{
                 //minup
-                return draggedTransform.GetComponent<MeshRenderer>().bounds.extents.y;
+                return draggedTransform.GetComponentInChildren<MeshRenderer>().bounds.extents.y;
             }
         }
     }
