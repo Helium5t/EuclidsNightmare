@@ -20,19 +20,19 @@ public class NonEuclideanTunnels : MonoBehaviour
         
     }
 
-    float expandLength(float scaledValue){
+    public float expandLength(float scaledValue){
         return scaledValue * lengthScalingFactor;
     }
 
-    Vector3 expandVector(Vector3 scaledVector){
+    public Vector3 expandVector(Vector3 scaledVector){
         return scaledVector * lengthScalingFactor;
     }
 
-    float collapseLength(float scaledValue){
+    public float collapseLength(float scaledValue){
         return scaledValue / lengthScalingFactor;
     }
 
-    Vector3 collapseVector(Vector3 scaledVector){
+    public Vector3 collapseVector(Vector3 scaledVector){
         return scaledVector / lengthScalingFactor;
     }
 }

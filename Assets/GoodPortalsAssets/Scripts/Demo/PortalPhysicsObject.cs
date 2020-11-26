@@ -5,14 +5,22 @@ using UnityEngine;
 [RequireComponent (typeof (Rigidbody))]
 public class PortalPhysicsObject : PortalTraveller {
 
-    public float force = 10;
     new Rigidbody rigidbody;
     static int i;
 
     protected virtual void Awake () {
         rigidbody = GetComponent<Rigidbody> ();
         if(!graphicsObject){
-            graphicsObject = gameObject;
+            GameObject selfGraphics =  new GameObject(gameObject.name + " (Graphics)");
+            selfGraphics.AddComponent<MeshFilter>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
+            selfGraphics.AddComponent<MeshRenderer>();
+            selfGraphics.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
+            GameObject instantiatedGraphics = Instantiate<GameObject>(selfGraphics);
+            instantiatedGraphics.transform.parent = transform;
+            instantiatedGraphics.transform.localPosition = Vector3.zero;
+            instantiatedGraphics.transform.localRotation = Quaternion.Euler(0f,0f,0f);
+            instantiatedGraphics.SetActive(false);
+            graphicsObject = instantiatedGraphics;
         }
         if(!TryGetComponent<MeshRenderer>(out MeshRenderer renderedmesh)){
             renderedmesh = GetComponentInChildren<MeshRenderer>();

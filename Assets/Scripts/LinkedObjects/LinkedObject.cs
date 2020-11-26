@@ -5,14 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class LinkedObject : MonoBehaviour
 {
-    [SerializeField] private LinkedObject mirror;
+    [SerializeField] public LinkedObject mirror;
 
     private Vector3 offset;
     private Rigidbody mirrorPhysics;
 
     private List<Vector3> collisionImpulses;
 
-    private float movementScale=1f;
+    [Range(1f,1f)]public float movementScale=1f;
     private bool isMaster = false ;
     private bool isDragged = false;
 
@@ -36,6 +36,7 @@ public class LinkedObject : MonoBehaviour
     void Start()
     {
         collisionImpulses = new List<Vector3>();
+        movementScale = 1f;
         mirrorPhysics = mirror.gameObject.GetComponent<Rigidbody>();
         masterBid = Random.Range(0f,10f);
     }
@@ -60,19 +61,31 @@ public class LinkedObject : MonoBehaviour
         if(!isMaster){
             if(mirror.isMaster){
                 myRb.useGravity = false;
-                if(Vector3.Distance(transform.position,mirror.transform.position + targetOffset)>stillnessThreshold){
-                    myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*20f;
+                if(movementScale != 1f){
+                    Vector3 nextTargetPosition = transform.position + mirrorPhysics.velocity*movementScale;
+                    nextTargetPosition.y = mirror.transform.position.y + targetOffset.y;
+                    if(Vector3.Distance(transform.position,nextTargetPosition)>stillnessThreshold){
+                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*20f;
+                    }
+                    else{
+                        myRb.AddForce(new Vector3(mirrorPhysics.velocity.x,0f,mirrorPhysics.velocity.z),ForceMode.VelocityChange);
+                    }                 
                 }
                 else{
-                    /*
-                    Old script for adding collisions but seems to be okay once moved to fixedUpdate
-                    foreach(Vector3 i in collisionImpulses){
-                        Debug.Log("Adding Impulse");
-                        myRb.AddForce(i,ForceMode.Impulse);
+                    if(Vector3.Distance(transform.position,mirror.transform.position + targetOffset)>stillnessThreshold){
+                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*20f;
                     }
-                    */
-                    collisionImpulses = new List<Vector3>();
-                    myRb.velocity = myRb.velocity + mirrorPhysics.velocity;
+                    else{
+                        /*
+                        Old script for adding collisions but seems to be okay once moved to fixedUpdate
+                        foreach(Vector3 i in collisionImpulses){
+                            Debug.Log("Adding Impulse");
+                            myRb.AddForce(i,ForceMode.Impulse);
+                        }
+                        */
+                        collisionImpulses = new List<Vector3>();
+                        myRb.velocity = myRb.velocity + mirrorPhysics.velocity;
+                    }
                 }
                 //transform.rotation = Quaternion.Lerp(transform.rotation,mirror.transform.rotation,Time.deltaTime*10f);
                 transform.rotation = mirror.transform.rotation;
@@ -138,9 +151,12 @@ public class LinkedObject : MonoBehaviour
     public LinkedObject getMirror(){
         return mirror;
     }
-
-    public void scaleReflectedMovement(float newScale){
-        movementScale = newScale;
+    public void resetOffset(){
+        targetOffset = transform.position - mirror.transform.position;
+        mirror.syncOffset();
+    }
+    public void syncOffset(){
+        targetOffset = transform.position - mirror.transform.position;
     }
 
     /*
