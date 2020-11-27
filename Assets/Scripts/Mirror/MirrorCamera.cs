@@ -112,8 +112,6 @@ public class MirrorCamera : MonoBehaviour
         if(closestHorizontalAngle<closestVerticalAngle){
             Debug.Log("Horizontal Smaller");
         }
-        Debug.Log(closestHorizontalAngle);
-        Debug.Log(closestVerticalAngle);
         return closestVerticalAngle < closestHorizontalAngle;
     }
 
