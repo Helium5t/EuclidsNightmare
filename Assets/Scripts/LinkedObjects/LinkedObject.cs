@@ -65,7 +65,7 @@ public class LinkedObject : MonoBehaviour
                     Vector3 nextTargetPosition = transform.position + mirrorPhysics.velocity*movementScale;
                     nextTargetPosition.y = mirror.transform.position.y + targetOffset.y;
                     if(Vector3.Distance(transform.position,nextTargetPosition)>stillnessThreshold){
-                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*20f;
+                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*10f;
                     }
                     else{
                         myRb.AddForce(new Vector3(mirrorPhysics.velocity.x,0f,mirrorPhysics.velocity.z),ForceMode.VelocityChange);
@@ -73,7 +73,7 @@ public class LinkedObject : MonoBehaviour
                 }
                 else{
                     if(Vector3.Distance(transform.position,mirror.transform.position + targetOffset)>stillnessThreshold){
-                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*20f;
+                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*10f;
                     }
                     else{
                         /*
