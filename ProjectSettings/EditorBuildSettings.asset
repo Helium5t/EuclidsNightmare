@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes: 
+  - enabled: 1
+    path: Assets/Scenes/GrowingApart.unity
+    guid: 1c9557b8d49ef874db9f78d446b5c60c
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0266d6e13301920439f5c7bcb047d9e0
   m_configObjects: {}
