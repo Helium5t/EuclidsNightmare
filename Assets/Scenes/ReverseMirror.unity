@@ -6216,7 +6216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vanishLayer: 13
   vanished: 0
-  startVanished: 1
+  startVanished: 0
 --- !u!65 &4553311637019078395
 BoxCollider:
   m_ObjectHideFlags: 0
