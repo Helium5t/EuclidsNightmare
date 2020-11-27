@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
 
@@ -55,6 +53,8 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("UpdateUI triggered with param: " + newUI.name);
         pauseMenuUI = newUI;
     }
+
+    public void RestartCurrentLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     public void UpdateUI()
     {

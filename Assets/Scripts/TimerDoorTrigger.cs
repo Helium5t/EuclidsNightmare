@@ -1,44 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
-public class TimerDoorTrigger : MonoBehaviour,TriggerInterface
+public class TimerDoorTrigger : MonoBehaviour, TriggerInterface
 {
+    // private float animationSpeed = 5f;
+    // private float movementAmount = 10f;
+
+    [SerializeField] private float timeToWait;
+
     private Animator doorAnimator;
+    private static readonly int Open = Animator.StringToHash("open");
 
-    private float animationSpeed = 5f;
-    private float movementAmount = 10f;
-
-    [SerializeField] private float timeToWait = 10f;
-    
     public bool triggered = false;
-
     public bool open = false;
 
-    private void Start() {
-        if(!doorAnimator){
-            doorAnimator = GetComponent<Animator>();
-        }
+    private void Start()
+    {
+        if (!doorAnimator) doorAnimator = GetComponent<Animator>();
     }
 
-    public void Trigger(){
-        if(!triggered){
-            triggered = true;
-            StartCoroutine(OpenAndClose(timeToWait));
-        }
-        else{
-            Debug.Log("I'm already triggered");
-        }
+    public void ToggleTriggeredState()
+    {
+        triggered = !triggered;
+        Debug.Log("Triggered state: " + triggered);
     }
 
-    public IEnumerator OpenAndClose(float timeToWait){
-        doorAnimator.SetBool("open",true);
+    private void SetDoorAnimationBool(bool value) => doorAnimator.SetBool(Open, value);
+
+    public void Trigger()
+    {
+        if (triggered == false)
+        {
+            ToggleTriggeredState();
+            SetDoorAnimationBool(true);
+            StartCoroutine(AnimationHelper());
+        }
+        else Debug.Log("I'm already triggered");
+    }
+
+    private IEnumerator AnimationHelper()
+    {
         yield return new WaitForSeconds(timeToWait);
-        doorAnimator.SetBool("open",false);
-        AnimatorClipInfo[] animInfo =  doorAnimator.GetCurrentAnimatorClipInfo(0);
-        yield return new WaitForSeconds(animInfo[0].clip.length);
-        triggered = false;
+        SetDoorAnimationBool(false);
         yield return null;
     }
-
 }
