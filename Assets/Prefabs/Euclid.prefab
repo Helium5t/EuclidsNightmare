@@ -385,7 +385,7 @@ MonoBehaviour:
   walkSpeed: 4
   runSpeed: 8
   smoothMoveTime: 0.15
-  jumpForce: 8
+  jumpForce: 6
   gravity: 18
   lockCursor: 1
   mouseSensitivity: 3

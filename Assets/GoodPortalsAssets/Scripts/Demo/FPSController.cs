@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class FPSController : PortalTraveller
 {
     public float walkSpeed = 3;
@@ -94,8 +95,7 @@ public class FPSController : PortalTraveller
 
         Vector3 targetVelocity = worldInputDir * ((Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed);
         velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
-
-        verticalVelocity -= gravity * Time.deltaTime;
+        verticalVelocity -= gravity * Time.fixedDeltaTime;
         velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
         var flags = controller.Move(velocity * Time.deltaTime);
@@ -157,6 +157,7 @@ public class FPSController : PortalTraveller
         yaw += delta;
         transform.eulerAngles = Vector3.up * yaw;
         velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
+        verticalVelocity = velocity.y;
         Physics.SyncTransforms();
     }
 }

@@ -31,9 +31,8 @@ public class DragObject : MonoBehaviour
                     }
                     distanceFromMousePointer = hit.distance + DistanceCorrection(draggedObj,screenPointToRay);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
-                    if(draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
-                        linkedObject.startDrag();
-                    }
+                    notifyDraggedObject();
+                    
                 }
             }
             else
@@ -101,6 +100,15 @@ public class DragObject : MonoBehaviour
                 //minup
                 return draggedTransform.GetComponentInChildren<MeshRenderer>().bounds.extents.y;
             }
+        }
+    }
+
+    void notifyDraggedObject(){
+        if(draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
+            linkedObject.startDrag();
+        }
+        if(draggedObj.TryGetComponent<RunnerObject>(out RunnerObject runner)){
+            runner.isCaught = true;
         }
     }
 }

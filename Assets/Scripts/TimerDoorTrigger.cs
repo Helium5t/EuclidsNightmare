@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
-public class TimerDoorTrigger : MonoBehaviour, TriggerInterface
+public class TimerDoorTrigger : Executor
 {
     // private float animationSpeed = 5f;
     // private float movementAmount = 10f;
@@ -28,21 +28,23 @@ public class TimerDoorTrigger : MonoBehaviour, TriggerInterface
 
     private void SetDoorAnimationBool(bool value) => doorAnimator.SetBool(Open, value);
 
-    public void Trigger()
+    public override void activate()
     {
         if (triggered == false)
         {
-            ToggleTriggeredState();
-            SetDoorAnimationBool(true);
+            ToggleTriggeredState(); //local bool
+            SetDoorAnimationBool(true); //animator
             StartCoroutine(AnimationHelper());
         }
         else Debug.Log("I'm already triggered");
     }
 
+    public override void deactivate() => SetDoorAnimationBool(false);
+
     private IEnumerator AnimationHelper()
     {
         yield return new WaitForSeconds(timeToWait);
-        SetDoorAnimationBool(false);
+        deactivate();
         yield return null;
     }
 }
