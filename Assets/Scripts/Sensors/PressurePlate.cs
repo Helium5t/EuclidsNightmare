@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : Trigger
 {
     [SerializeField] private bool useRigidbody = false;
     [SerializeField] private float triggerWeight = 2f;
     [SerializeField] private Transform plateMesh;
 
     // 0 = x 1 = y 2 = z
-    [SerializeField][Range(0,2)] private int movingAxis = 1;
+    enum Direction{x,y,z}
+    [SerializeField] private Direction movingAxis = Direction.y;
     [SerializeField] private float movingAmount = 0.29f;
 
-    [SerializeField] GameObject triggeredObject;
-    private TriggerInterface trigger;
 
     private Vector3 targetPos;
     private Vector3 startPos;
@@ -28,7 +27,6 @@ public class PressurePlate : MonoBehaviour
         startPos = plateMesh.position;
         Collider plateCollider = GetComponent<Collider>();
         plateCollider.isTrigger = true;
-        trigger = triggeredObject.GetComponent<TriggerInterface>();
     }
 
     private void Update() {
@@ -47,13 +45,13 @@ public class PressurePlate : MonoBehaviour
             if(other.TryGetComponent<Rigidbody>(out touchingObject)){
                 if(touchingObject.mass > triggerWeight){
                     MovePlate();
-                    trigger.Trigger();
+                    activate();
                 }
             }
         }
         else{
             MovePlate();
-            trigger.Trigger();
+            activate();
         }
     }
 
@@ -62,22 +60,45 @@ public class PressurePlate : MonoBehaviour
             if(other.gameObject == triggeringObject){
                 targetPos = startPos;
                 triggeringObject = null;
+                deactivate();
             }
         }
     }
 
     private void MovePlate(){
         Vector3 moveVector = Vector3.zero;
-        if(movingAxis == 0){
+        if(getAxis() == 0){
             moveVector = new Vector3(movingAmount,0,0);
         }
-        if(movingAxis == 1){
+        if(getAxis() == 1){
             moveVector = new Vector3(0,movingAmount,0);
         }
-        if(movingAxis == 2){
+        if(getAxis() == 2){
             moveVector = new Vector3(0,0,movingAmount);
         }
         targetPos = plateMesh.position  - moveVector;
         
     }
+
+    private int getAxis(){
+        if(movingAxis == Direction.x){
+            return 0;
+        }
+        if(movingAxis == Direction.y){
+            return 1;
+        }
+        if(movingAxis == Direction.z){
+            return 2;
+        }
+        return 1;
+    }
+
+    
+    public override void firstEnter(){
+        return;
+    }
+    public override void lastLeave(){
+        return;
+    }
+
 }

@@ -78,7 +78,7 @@ public class Portal : MonoBehaviour {
     public void Render () {
 
         // Skip rendering the view from this portal if player is not looking at the linked portal
-        if (!CameraUtility.VisibleFromCamera (linkedPortal.screen, playerCam) ) {
+        if (Time.timeScale == 0f || !CameraUtility.VisibleFromCamera (linkedPortal.screen, playerCam)) {
             return;
         }
 
