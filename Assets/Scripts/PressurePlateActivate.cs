@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class corridor : MonoBehaviour
+public class PressurePlateActivate : MonoBehaviour
 {
+ 
     [SerializeField]
     GameObject takeUp;
-    bool IsOpened = false;
+    public bool IsOpened = false;
 
 
     void OnTriggerEnter(Collider col)
@@ -18,9 +19,11 @@ public class corridor : MonoBehaviour
             takeUp.transform.position += new Vector3(0, -100, 0);
 
             IsOpened = true;
-           
+
 
         }
-        
+
     }
 }
+
+
