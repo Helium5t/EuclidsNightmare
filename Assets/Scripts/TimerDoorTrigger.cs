@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 public class TimerDoorTrigger : MonoBehaviour, TriggerInterface

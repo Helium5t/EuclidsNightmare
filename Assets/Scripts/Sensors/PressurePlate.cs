@@ -1,88 +1,133 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PressurePlate : MonoBehaviour
+namespace Sensors
 {
-    [SerializeField] private bool useRigidbody = false;
-    [SerializeField] private float triggerWeight = 2f;
-    [SerializeField] private Transform plateMesh;
-
-    // 0 = x 1 = y 2 = z
-    [SerializeField] [Range(0, 2)] private int movingAxis = 1;
-    [SerializeField] private float movingAmount = 0.29f;
-
-    [SerializeField] GameObject triggeredObject;
-    private TriggerInterface trigger;
-
-    private Vector3 targetPos;
-    private Vector3 startPos;
-    private GameObject triggeringObject;
-
-    // Start is called before the first frame update
-    private void Start()
+    public class PressurePlate : MonoBehaviour
     {
-        if (!plateMesh) plateMesh = gameObject.transform.parent.Find("Plate").transform;
+        [SerializeField] private bool useRigidbody = false;
+        [SerializeField] private float triggerWeight = 2f;
+        [SerializeField] private Transform plateMesh;
 
-        targetPos = plateMesh.position;
-        startPos = plateMesh.position;
-        Collider plateCollider = GetComponent<Collider>();
-        plateCollider.isTrigger = true;
-        trigger = triggeredObject.GetComponent<TriggerInterface>();
-    }
+        // 0 = x 1 = y 2 = z
+        [SerializeField] [Range(0, 2)] private int movingAxis = 1;
+        [SerializeField] private float movingAmount = 0.29f;
 
-    private void Update()
-    {
-        if (targetPos != plateMesh.position)
+        [SerializeField] GameObject triggeredObject;
+        private TriggerInterface trigger;
+
+        private Vector3 targetPos;
+        private Vector3 startPos;
+        private GameObject triggeringObject;
+
+        [HideInInspector] public bool isTriggered;
+
+        private void Start()
         {
-            plateMesh.position = Vector3.Lerp(plateMesh.position, targetPos, Time.deltaTime * 2);
+            if (!plateMesh) plateMesh = gameObject.transform.parent.Find("Plate").transform;
+
+            targetPos = startPos = plateMesh.position;
+            Collider plateCollider = GetComponent<Collider>();
+            plateCollider.isTrigger = true;
+
+            trigger = triggeredObject.GetComponent<TriggerInterface>();
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (triggeringObject != null) return;
-
-        triggeringObject = other.gameObject;
-        if (useRigidbody)
+        private void Update()
         {
-            Rigidbody touchingObject;
-            if (other.TryGetComponent<Rigidbody>(out touchingObject))
+            if (targetPos != plateMesh.position)
             {
-                if (touchingObject.mass > triggerWeight)
+                plateMesh.position = Vector3.Lerp(plateMesh.position, targetPos, Time.deltaTime * 2);
+            }
+        }
+
+        /*
+         * Understand if I have to Animate the pressure plate or not.
+         */
+        private void OnTriggerEnter(Collider other)
+        {
+            if (SceneManager.GetActiveScene().name == "GrowingApart")
+            {
+                GrowingApartLevelLogic(other);
+            }
+            else
+            {
+                DefaultLevelLogic(other);
+            }
+        }
+
+        private void DefaultLevelLogic(Collider other)
+        {
+            if (triggeringObject != null) return;
+
+            triggeringObject = other.gameObject;
+            if (useRigidbody)
+            {
+                if (other.TryGetComponent<Rigidbody>(out var touchingObject))
                 {
-                    MovePlate();
-                    trigger.Trigger();
+                    if (touchingObject.mass > triggerWeight)
+                    {
+                        isTriggered = true;
+                        MovePlate();
+                        trigger.Trigger();
+                    }
+                }
+            }
+            else
+            {
+                isTriggered = true;
+                MovePlate();
+                trigger.Trigger();
+            }
+        }
+
+        private void GrowingApartLevelLogic(Collider other)
+        {
+            if (triggeringObject != null) return;
+
+            triggeringObject = other.gameObject;
+            if (useRigidbody)
+            {
+                if (other.TryGetComponent<Rigidbody>(out var touchingObject))
+                {
+                    if (touchingObject.mass > triggerWeight)
+                    {
+                        isTriggered = true;
+                        MovePlate();
+                    }
+                }
+            }
+            else
+            {
+                isTriggered = true;
+                MovePlate();
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (triggeringObject != null)
+            {
+                if (other.gameObject == triggeringObject)
+                {
+                    targetPos = startPos;
+                    triggeringObject = null;
+                    isTriggered = false;
                 }
             }
         }
-        else
+
+        private void MovePlate()
         {
-            MovePlate();
-            trigger.Trigger();
+            Vector3 moveVector = Vector3.zero;
+
+            if (movingAxis == 0) moveVector = new Vector3(movingAmount, 0, 0);
+
+            if (movingAxis == 1) moveVector = new Vector3(0, movingAmount, 0);
+
+            if (movingAxis == 2) moveVector = new Vector3(0, 0, movingAmount);
+
+            targetPos = plateMesh.position - moveVector;
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (triggeringObject != null)
-        {
-            if (other.gameObject == triggeringObject)
-            {
-                targetPos = startPos;
-                triggeringObject = null;
-            }
-        }
-    }
-
-    private void MovePlate()
-    {
-        Vector3 moveVector = Vector3.zero;
-        
-        if (movingAxis == 0) moveVector = new Vector3(movingAmount, 0, 0);
-
-        if (movingAxis == 1) moveVector = new Vector3(0, movingAmount, 0);
-
-        if (movingAxis == 2) moveVector = new Vector3(0, 0, movingAmount);
-
-        targetPos = plateMesh.position - moveVector;
     }
 }

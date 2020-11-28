@@ -7,7 +7,6 @@ public class GameManager : Singleton<GameManager>
     public static bool GameIsPaused;
     private GameObject pauseMenuUI;
 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -16,7 +15,6 @@ public class GameManager : Singleton<GameManager>
             else PauseGame();
         }
     }
-
 
     public void QuitGame() => Application.Quit();
 
@@ -60,5 +58,10 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log("UpdateUI triggered without param");
         pauseMenuUI = GameObject.FindGameObjectWithTag("Player").transform.Find("pauseMenuUI").gameObject;
+    }
+
+    public void LevelCompleted()
+    {
+        LevelChanger.Instance.FadeToNextLevel();
     }
 }
