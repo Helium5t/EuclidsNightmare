@@ -5,14 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class LinkedObject : MonoBehaviour
 {
+
+    enum Direction{x,y,z,None}
+
+    [SerializeField] private Direction keepAxis = Direction.None;
     [SerializeField] public LinkedObject mirror;
+
 
     private Vector3 offset;
     private Rigidbody mirrorPhysics;
 
     private List<Vector3> collisionImpulses;
 
-    [Range(1f,1f)]public float movementScale=1f;
+    [HideInInspector]public float movementScale=1f;
     private bool isMaster = false ;
     private bool isDragged = false;
 
@@ -146,17 +151,52 @@ public class LinkedObject : MonoBehaviour
             mirror.stillnessThreshold = stillnessThreshold;
             mirror.keepAngleThreshold = keepAngleThreshold;
         }
+        else{
+            return;
+        }
+        masterBid = Random.Range(0f,10f);
+        if(mirror.masterBid == masterBid){
+            masterBid = Random.Range(0f,10f);
+        }
+        if(mirror.keepAxis != keepAxis && keepAxis!=Direction.None && mirror.keepAxis!=Direction.None){
+            if(masterBid>mirror.masterBid){
+                mirror.keepAxis = keepAxis;
+            }
+        }
     }
 
     public LinkedObject getMirror(){
         return mirror;
     }
     public void resetOffset(){
-        targetOffset = transform.position - mirror.transform.position;
+        Vector3 newTargetOffset = transform.position - mirror.transform.position;
+        if(keepAxis != Direction.None){
+            if(keepAxis == Direction.x){
+                newTargetOffset.x = targetOffset.x;
+            }
+            if(keepAxis == Direction.y){
+                newTargetOffset.y = targetOffset.y;
+            }
+            if(keepAxis == Direction.z){
+                newTargetOffset.z = targetOffset.z;
+            }
+        }
+        targetOffset = newTargetOffset;
         mirror.syncOffset();
     }
     public void syncOffset(){
-        targetOffset = transform.position - mirror.transform.position;
+        targetOffset = -mirror.targetOffset;
+    }
+
+    private int getDirection(Direction dir){
+        if(dir == Direction.x){
+            return 0;
+        }if(dir == Direction.y){
+            return 1;
+        }if(dir == Direction.z){
+            return 2;
+        }
+        return -1;
     }
 
     /*
