@@ -5049,7 +5049,7 @@ PrefabInstance:
     - target: {fileID: 7166369394848896150, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.27
+      value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896150, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
@@ -5749,12 +5749,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0240ce7a7a78e47b7af85b9098089e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 794976515}
+  ignorePlayer: 0
   useRigidbody: 0
   triggerWeight: 2
   plateMesh: {fileID: 1113970063}
   movingAxis: 1
   movingAmount: 0.3
-  triggeredObject: {fileID: 794976515}
 --- !u!65 &1759856590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7446,7 +7447,7 @@ PrefabInstance:
     - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.92
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
@@ -7487,6 +7488,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 646318462, guid: 18cd0707ebc9e4144abf56c10f7f28cf, type: 3}

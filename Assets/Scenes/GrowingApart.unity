@@ -6054,7 +6054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c883519cd6303548a52db103d2a2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepAxis: 3
   mirror: {fileID: 2128271123}
   movementScale: 1
   stillnessThreshold: 0.5
@@ -6556,7 +6555,7 @@ PrefabInstance:
     - target: {fileID: 5405303791578093017, guid: 84a7735457c218043a54143d40cbb666,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5405303791578093022, guid: 84a7735457c218043a54143d40cbb666,
         type: 3}
@@ -11377,7 +11376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c883519cd6303548a52db103d2a2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepAxis: 3
   mirror: {fileID: 1011551843}
   movementScale: 1
   stillnessThreshold: 0.5
