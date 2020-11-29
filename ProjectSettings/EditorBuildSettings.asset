@@ -4,11 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: 
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0266d6e13301920439f5c7bcb047d9e0
+  - enabled: 1
+    path: Assets/Scenes/UpdatedScenes/BinTheCube.unity
+    guid: 79e8eb63a37f43e48a9353145caa8c6f
   - enabled: 1
     path: Assets/Scenes/GrowingApart.unity
     guid: 1c9557b8d49ef874db9f78d446b5c60c
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 0266d6e13301920439f5c7bcb047d9e0
+    path: Assets/Scenes/ReverseMirror.unity
+    guid: 9b79fca631eebd24ba93d4b3dec83f8c
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/TunnelSample.unity
+    guid: d7a8771f3328bc3428180ad64c8ec5ca
+  - enabled: 1
+    path: Assets/Scenes/UpIsDownBlockOut.unity
+    guid: 67ec4851e5b29134984a3797aaabeda2
   m_configObjects: {}

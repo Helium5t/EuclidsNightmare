@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UIUpdater : MonoBehaviour
 {
@@ -12,5 +11,5 @@ public class UIUpdater : MonoBehaviour
     public void ResumeGame() => GameManager.Instance.ResumeGame();
     public void QuitGame() => GameManager.Instance.QuitGame();
     public void LoadMainMenu() => GameManager.Instance.LoadMainMenu();
-
+    public void RestartCurrentLevel() => GameManager.Instance.RestartCurrentLevel();
 }

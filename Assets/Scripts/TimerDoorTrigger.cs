@@ -4,51 +4,47 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 public class TimerDoorTrigger : Executor
 {
+    // private float animationSpeed = 5f;
+    // private float movementAmount = 10f;
+
+    [SerializeField] private float timeToWait;
+
     private Animator doorAnimator;
+    private static readonly int Open = Animator.StringToHash("open");
 
-    private float animationSpeed = 5f;
-    private float movementAmount = 10f;
-
-    [SerializeField] private float timeToWait = 10f;
-    
     public bool triggered = false;
-
     public bool open = false;
 
-    private void Start() {
-        if(!doorAnimator){
-            doorAnimator = GetComponent<Animator>();
-        }
+    private void Start()
+    {
+        if (!doorAnimator) doorAnimator = GetComponent<Animator>();
     }
 
-    public override void deactivate()
-    {   
-        StartCoroutine(Close());
+    public void ToggleTriggeredState()
+    {
+        triggered = !triggered;
+        Debug.Log("Triggered state: " + triggered);
     }
 
-    public override void activate(){
-        if(!triggered){
-            triggered = true;
-            StartCoroutine(Open(timeToWait));
+    private void SetDoorAnimationBool(bool value) => doorAnimator.SetBool(Open, value);
+
+    public override void activate()
+    {
+        if (triggered == false)
+        {
+            ToggleTriggeredState(); //local bool
+            SetDoorAnimationBool(true); //animator
+            StartCoroutine(AnimationHelper());
         }
-        else{
-            Debug.Log("I'm already triggered");
-        }
+        else Debug.Log("I'm already triggered");
     }
 
-    public IEnumerator Open(float timeToWait){
-        doorAnimator.SetBool("open",true);
+    public override void deactivate() => SetDoorAnimationBool(false);
+
+    private IEnumerator AnimationHelper()
+    {
         yield return new WaitForSeconds(timeToWait);
         deactivate();
         yield return null;
     }
-
-    public IEnumerator Close(){
-        doorAnimator.SetBool("open",false);
-        AnimatorClipInfo[] animInfo =  doorAnimator.GetCurrentAnimatorClipInfo(0);
-        yield return new WaitForSeconds(animInfo[0].clip.length);
-        triggered = false;
-        yield return null;
-    }
-
 }

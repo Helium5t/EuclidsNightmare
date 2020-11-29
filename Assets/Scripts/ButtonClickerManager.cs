@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 public class ButtonClickerManager : MonoBehaviour
 {
     [SerializeField] private Button[] _buttons;
-    [SerializeField] private string levelToLoad;
+    [SerializeField] private Levels levelToLoad;
 
     private void OnEnable()
     {
@@ -16,7 +17,7 @@ public class ButtonClickerManager : MonoBehaviour
         if (pressedButton == _buttons[0])
         {
             Debug.Log("Clicked " + _buttons[0].name);
-            GameManager.Instance.LoadLevel(levelToLoad);
+            GameManager.Instance.LoadLevel(levelToLoad.ToString());
         }
 
         if (pressedButton == _buttons[1])

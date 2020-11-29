@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
 
@@ -8,7 +6,6 @@ public class GameManager : Singleton<GameManager>
 {
     public static bool GameIsPaused;
     private GameObject pauseMenuUI;
-
 
     private void Update()
     {
@@ -18,7 +15,6 @@ public class GameManager : Singleton<GameManager>
             else PauseGame();
         }
     }
-
 
     public void QuitGame() => Application.Quit();
 
@@ -56,9 +52,16 @@ public class GameManager : Singleton<GameManager>
         pauseMenuUI = newUI;
     }
 
+    public void RestartCurrentLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     public void UpdateUI()
     {
         Debug.Log("UpdateUI triggered without param");
         pauseMenuUI = GameObject.FindGameObjectWithTag("Player").transform.Find("pauseMenuUI").gameObject;
+    }
+
+    public void LevelCompleted()
+    {
+        LevelChanger.Instance.FadeToNextLevel();
     }
 }
