@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 
@@ -11,6 +10,8 @@ public class FPSController : PortalTraveller
     public float smoothMoveTime = 0.1f;
     public float jumpForce = 8;
     public float gravity = 18;
+
+    [SerializeField][Range(0.1f,5f)] private float maxFallSpeed = 1.5f;
 
     public bool lockCursor;
     public float mouseSensitivity = 3;
@@ -95,6 +96,9 @@ public class FPSController : PortalTraveller
         Vector3 targetVelocity = worldInputDir * ((Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed);
         velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
         verticalVelocity -= gravity * Time.fixedDeltaTime;
+        if(verticalVelocity <0f){
+            verticalVelocity = Mathf.Min(verticalVelocity,-maxFallSpeed);
+        }
         velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
         var flags = controller.Move(velocity * Time.deltaTime);

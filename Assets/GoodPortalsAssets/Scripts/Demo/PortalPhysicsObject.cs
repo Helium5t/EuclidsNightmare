@@ -15,7 +15,7 @@ public class PortalPhysicsObject : PortalTraveller {
             selfGraphics.AddComponent<MeshFilter>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
             selfGraphics.AddComponent<MeshRenderer>();
             selfGraphics.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
-            GameObject instantiatedGraphics = Instantiate<GameObject>(selfGraphics);
+            GameObject instantiatedGraphics = selfGraphics;
             instantiatedGraphics.transform.parent = transform;
             instantiatedGraphics.transform.localPosition = Vector3.zero;
             instantiatedGraphics.transform.localRotation = Quaternion.Euler(0f,0f,0f);
