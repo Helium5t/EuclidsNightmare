@@ -16,6 +16,8 @@ public class DoorTrigger : Executor
     private bool triggered = false;
     public bool startOpen = false;
 
+    public bool stayOpen = false;
+
     private void Start() {
         if(!doorAnimator){
             doorAnimator = GetComponentInChildren<Animator>();
@@ -25,7 +27,9 @@ public class DoorTrigger : Executor
 
     public override void deactivate()
     {   
-        StartCoroutine(Close());
+        if(!stayOpen){
+            StartCoroutine(Close());
+        }
     }
 
     public override void activate(){

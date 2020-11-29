@@ -96,7 +96,7 @@ public class FPSController : PortalTraveller
 
         Vector3 targetVelocity = worldInputDir * ((Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed);
         velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
-        verticalVelocity -= gravity * Time.fixedDeltaTime;
+        verticalVelocity -= gravity * Time.deltaTime;
         if(verticalVelocity <0f){
             verticalVelocity = Mathf.Min(verticalVelocity,-maxFallSpeed);
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PressurePlate : Trigger
 {
+    [SerializeField] private bool ignorePlayer = false;
     [SerializeField] private bool useRigidbody = false;
     [SerializeField] private float triggerWeight = 2f;
     [SerializeField] private Transform plateMesh;
@@ -12,6 +13,7 @@ public class PressurePlate : Trigger
     enum Direction{x,y,z}
     [SerializeField] private Direction movingAxis = Direction.y;
     [SerializeField] private float movingAmount = 0.29f;
+
 
 
     private Vector3 targetPos;
@@ -36,7 +38,7 @@ public class PressurePlate : Trigger
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(triggeringObject!=null){
+        if(triggeringObject!=null  || (ignorePlayer && other.CompareTag("Player")) ){
             return;
         }
         triggeringObject = other.gameObject;

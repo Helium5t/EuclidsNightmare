@@ -1372,6 +1372,16 @@ PrefabInstance:
       propertyPath: pitchBounds.y
       value: 89.9
       objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896151, guid: b18a43dee9d0ee84c84c32dd92a472f3,
+        type: 3}
+      propertyPath: gravity
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896151, guid: b18a43dee9d0ee84c84c32dd92a472f3,
+        type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7166369395430997816, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_IsActive
