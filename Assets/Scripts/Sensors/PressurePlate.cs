@@ -10,56 +10,76 @@ public class PressurePlate : Trigger
     [SerializeField] private Transform plateMesh;
 
     // 0 = x 1 = y 2 = z
-    enum Direction{x,y,z}
+    enum Direction
+    {
+        x = 0,
+        y = 1,
+        z = 2
+    }
+
     [SerializeField] private Direction movingAxis = Direction.y;
     [SerializeField] private float movingAmount = 0.29f;
 
-
-
     private Vector3 targetPos;
     private Vector3 startPos;
+
     private GameObject triggeringObject;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(!plateMesh){
-            plateMesh =  gameObject.transform.parent.Find("Plate").transform;
+        if (!plateMesh)
+        {
+            plateMesh = gameObject.transform.parent.Find("Plate").transform;
         }
-        targetPos= plateMesh.position;
+
+        targetPos = plateMesh.position;
         startPos = plateMesh.position;
         Collider plateCollider = GetComponent<Collider>();
         plateCollider.isTrigger = true;
     }
 
-    private void Update() {
-        if(targetPos != plateMesh.position){
-            plateMesh.position = Vector3.Lerp(plateMesh.position, targetPos,Time.deltaTime*2);
+    private void Update()
+    {
+        if (targetPos != plateMesh.position)
+        {
+            plateMesh.position = Vector3.Lerp(plateMesh.position, targetPos, Time.deltaTime * 2);
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(triggeringObject!=null  || (ignorePlayer && other.CompareTag("Player")) ){
+    private void OnTriggerEnter(Collider other)
+    {
+        if (triggeringObject != null || (ignorePlayer && other.CompareTag("Player")))
+        {
             return;
         }
+
         triggeringObject = other.gameObject;
-        if(useRigidbody){
+        if (useRigidbody)
+        {
             Rigidbody touchingObject;
-            if(other.TryGetComponent<Rigidbody>(out touchingObject)){
-                if(touchingObject.mass > triggerWeight){
+            if (other.TryGetComponent<Rigidbody>(out touchingObject))
+            {
+                if (touchingObject.mass > triggerWeight)
+                {
                     MovePlate();
                     activate();
                 }
             }
         }
-        else{
+        else
+        {
             MovePlate();
             activate();
         }
     }
 
-    private void OnTriggerExit(Collider other) {
-        if(triggeringObject != null){
-            if(other.gameObject == triggeringObject){
+    private void OnTriggerExit(Collider other)
+    {
+        if (triggeringObject != null)
+        {
+            if (other.gameObject == triggeringObject)
+            {
                 targetPos = startPos;
                 triggeringObject = null;
                 deactivate();
@@ -67,40 +87,55 @@ public class PressurePlate : Trigger
         }
     }
 
-    private void MovePlate(){
+    private void MovePlate()
+    {
         Vector3 moveVector = Vector3.zero;
-        if(getAxis() == 0){
-            moveVector = new Vector3(movingAmount,0,0);
+        if (getAxis() == 0)
+        {
+            moveVector = new Vector3(movingAmount, 0, 0);
         }
-        if(getAxis() == 1){
-            moveVector = new Vector3(0,movingAmount,0);
+
+        if (getAxis() == 1)
+        {
+            moveVector = new Vector3(0, movingAmount, 0);
         }
-        if(getAxis() == 2){
-            moveVector = new Vector3(0,0,movingAmount);
+
+        if (getAxis() == 2)
+        {
+            moveVector = new Vector3(0, 0, movingAmount);
         }
-        targetPos = plateMesh.position  - moveVector;
-        
+
+        targetPos = plateMesh.position - moveVector;
     }
 
-    private int getAxis(){
-        if(movingAxis == Direction.x){
+    private int getAxis()
+    {
+        if (movingAxis == Direction.x)
+        {
             return 0;
         }
-        if(movingAxis == Direction.y){
+
+        if (movingAxis == Direction.y)
+        {
             return 1;
         }
-        if(movingAxis == Direction.z){
+
+        if (movingAxis == Direction.z)
+        {
             return 2;
         }
+
         return 1;
     }
 
-    
-    public override void firstEnter(){
-        return;
-    }
-    public override void lastLeave(){
+
+    public override void firstEnter()
+    {
         return;
     }
 
+    public override void lastLeave()
+    {
+        return;
+    }
 }
