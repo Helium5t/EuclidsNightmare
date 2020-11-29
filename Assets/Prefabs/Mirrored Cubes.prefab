@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8300804993989205748}
   - component: {fileID: 8300804993989205746}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: LeftCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c883519cd6303548a52db103d2a2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keepAxis: 1
   mirror: {fileID: 8300804995237269330}
   movementScale: 1
   stillnessThreshold: 0.009
@@ -157,7 +158,7 @@ GameObject:
   - component: {fileID: 8300804995237269330}
   - component: {fileID: 8300804995237269337}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: RightCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c883519cd6303548a52db103d2a2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keepAxis: 3
   mirror: {fileID: 8300804993989205748}
   movementScale: 1
   stillnessThreshold: 0.009
