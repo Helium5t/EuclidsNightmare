@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class RunAwayManager : MonoBehaviour
 {
+
     [SerializeField] private Transform chaser;
     [SerializeField] private List<GameObject> checkpoints;
     [SerializeField] private RunnerObject runner;
 
     [SerializeField][Range(0.0001f,0.2f)] private float keepCheckpointThreshold = 0.05f;
     private bool isRunning = false;
+
+    private float timeElapsed = 0f;
+    [SerializeField] private float makeEasierFactor = 1.2f;
+    [SerializeField] private float runnerSlowdownFactor = 0.01f;
 
     private void Awake() {
         if(checkpoints.Capacity == 0){
@@ -38,23 +43,49 @@ public class RunAwayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(checkpoints[getClosestCheckpoint(chaser.transform)].transform.position,chaser.transform.position - checkpoints[getClosestCheckpoint(chaser.transform)].transform.position,Color.green);
+        RunnerCheckPoint currentCheckpoint = runner.targetCheckpoint.gameObject.GetComponent<RunnerCheckPoint>();
         if(!isRunning  || runner.isCaught){
             return;
         }
-        RunnerCheckPoint currentCheckpoint = runner.targetCheckpoint.gameObject.GetComponent<RunnerCheckPoint>();
-        Debug.DrawRay(currentCheckpoint.transform.position,chaser.transform.position - currentCheckpoint.transform.position ,Color.blue);
-        Debug.DrawRay(currentCheckpoint.transform.position,runner.transform.position - currentCheckpoint.transform.position ,Color.red);
+        timeElapsed += Time.deltaTime;
+        if(timeElapsed > 10f){
+            timeElapsed = 0f;
+            FindObjectOfType<DragObject>().expandPickUpDistance(makeEasierFactor);
+            runner.runSpeed -= runnerSlowdownFactor;
+            runner.runSpeed = Mathf.Max(8.5f,runner.runSpeed);
+        }
         if(currentCheckpoint.isReached){
             currentCheckpoint.isReached = false;
-            Debug.Log("Moving Runner");
             int currentIndex = currentCheckpoint.checkPointNumber - 1;
-            int escapeCheckpoint = getClosestCheckpoint(chaser);
-            runner.targetCheckpoint = getNextCheckpoint(currentIndex,escapeCheckpoint);
+            //int escapeCheckpoint = getClosestCheckpoint(chaser);
+            //runner.targetCheckpoint = getNextCheckpoint(currentIndex,escapeCheckpoint);
+            int positiveClosest = getProgressiveClosest(chaser,currentIndex,true);
+            int negativeClosest = getProgressiveClosest(chaser,currentIndex,false);
+            int positiveDelta = getCheckPointDistance(currentIndex,positiveClosest);
+            int negativeDelta = getCheckPointDistance(currentIndex,negativeClosest);
+            //Debug.DrawRay(checkpoints[positiveClosest].transform.position,chaser.transform.position - checkpoints[positiveClosest].transform.position ,Color.cyan,0.3f);
+            //Debug.DrawRay(checkpoints[negativeClosest].transform.position,chaser.transform.position - checkpoints[negativeClosest].transform.position ,Color.blue,0.3f);
+            if(Vector3.Distance(checkpoints[positiveClosest].transform.position,chaser.position) >Vector3.Distance(checkpoints[negativeClosest].transform.position,chaser.position) ){
+                runner.targetCheckpoint = checkpoints[(currentIndex +1)%checkpoints.Capacity].transform;
+            }
+            else{
+                if(Vector3.Distance(checkpoints[positiveClosest].transform.position,chaser.position) <Vector3.Distance(checkpoints[negativeClosest].transform.position,chaser.position)){
+                    runner.targetCheckpoint = checkpoints[(checkpoints.Capacity + currentIndex - 1)%checkpoints.Capacity].transform;
+                }
+            }
+            
         }
         
     }
 
+    private int getCheckPointDistance(int checkA,int checkB){
+        if(checkA>checkB){
+            return Mathf.Min(checkA-checkB,checkpoints.Capacity - checkA + checkB);
+        }
+        else{
+            return Mathf.Min(checkB-checkA,checkpoints.Capacity + checkA - checkB);
+        }
+    }
     private Transform getNextCheckpoint(int currentCheckpoint, int escapeCheckpoint){
         Transform prevCheckpoint = checkpoints[(checkpoints.Capacity + currentCheckpoint-1)%checkpoints.Capacity].transform;
         Transform nextCheckpoint = checkpoints[(currentCheckpoint+1)%checkpoints.Capacity].transform;
@@ -76,7 +107,6 @@ public class RunAwayManager : MonoBehaviour
             }
         }
         /*
-        my version
         if(Vector3.Distance(nextCheckpoint.position,chaser.position) >= Vector3.Distance(prevCheckpoint.position,chaser.position)){
             return nextCheckpoint;
         }
@@ -98,9 +128,38 @@ public class RunAwayManager : MonoBehaviour
         return closestIndex;
     }
 
+    private int getProgressiveClosest(Transform referenceObject,int referenceCheckpoint,bool positiveDirection){
+        float distance = -1f;
+        int closestIndex = -1;
+        if(positiveDirection){
+            for(int i =(referenceCheckpoint +1)%checkpoints.Capacity; i!=referenceCheckpoint;i = (i+1)%checkpoints.Capacity){
+                GameObject c = checkpoints[i];
+                if(Vector3.Distance(c.transform.position,referenceObject.position) < distance || distance == -1f){
+                    distance = Vector3.Distance(c.transform.position,referenceObject.position);
+                    closestIndex = i;
+                }else{
+                    return closestIndex;
+                }
+            }
+        }
+        else{
+            for(int i = (checkpoints.Capacity + referenceCheckpoint -1)%checkpoints.Capacity; i!=referenceCheckpoint;i = (checkpoints.Capacity + i-1)%checkpoints.Capacity){
+                GameObject c = checkpoints[i];
+                if(Vector3.Distance(c.transform.position,referenceObject.position) < distance || distance == -1f){
+                    distance = Vector3.Distance(c.transform.position,referenceObject.position);
+                    closestIndex = i;
+                }else{
+                    return closestIndex;
+                }
+            }
+        }
+        return referenceCheckpoint;
+    }
+
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")){
             isRunning = true;
         }
     }
+
 }

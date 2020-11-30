@@ -43,7 +43,12 @@ public class RunnerObject : MonoBehaviour
             //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(0f,transform.rotation.y,0f),Time.deltaTime*5f);
             ownRigidbody.angularVelocity = new Vector3(0f,rotationSpeed,0f);
         }
-        ownRigidbody.velocity = Vector3.Normalize(targetCheckpoint.position - transform.position)*runSpeed;
+        if(Vector3.Magnitude(targetCheckpoint.position - transform.position)>=1f){
+            ownRigidbody.velocity = Vector3.Normalize(targetCheckpoint.position - transform.position)*runSpeed;
+        }
+        else{
+            ownRigidbody.velocity = targetCheckpoint.position - transform.position;
+        }
         //ownRigidbody.velocity  = Vector3.up *2f;
         //transform.position = Vector3.Lerp(transform.position,targetCheckpoint.position,Time.deltaTime);
     }

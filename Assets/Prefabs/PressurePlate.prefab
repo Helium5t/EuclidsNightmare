@@ -153,7 +153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e1d36c4bbd37d54f9ea183e4f5fd656, type: 2}
+  - {fileID: 2100000, guid: b82178d42410f8949bb01189ef7bcbbe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -199,11 +199,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0240ce7a7a78e47b7af85b9098089e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  ignorePlayer: 0
   useRigidbody: 0
   triggerWeight: 2
+  plateMesh: {fileID: 0}
   movingAxis: 1
   movingAmount: 0.3
-  triggeredObject: {fileID: 0}
 --- !u!1 &6749510447967908970
 GameObject:
   m_ObjectHideFlags: 0

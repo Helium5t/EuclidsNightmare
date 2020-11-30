@@ -28,4 +28,10 @@ public class RunnerCheckPoint : MonoBehaviour
             isReached = false;
         }
     }
+
+    private void OnTriggerStay(Collider other) {
+        if(other.GetComponent<RunnerObject>() && !isReached){
+            isReached = true;
+        }
+    }
 }

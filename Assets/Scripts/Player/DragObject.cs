@@ -12,13 +12,16 @@ public class DragObject : MonoBehaviour
 
     private RaycastHit hit;
     private float distanceFromMousePointer;
-    [SerializeField][Range(20f,500f)] private float maxPickUpDistance = 30f;
+    [SerializeField][Range(5f,500f)] private float maxPickUpDistance = 10f;
+    [SerializeField][Range(2f,10f)] private float minHoldingDistance = 3f;
+
+    [SerializeField][Range(0.001f,0.6f)] private float ignoredObstacleMaximumSize = 0.01f;
 
     private Rigidbody draggedObjectRb;
 
     private void LateUpdate()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && Time.timeScale!=0f)
         {
             Ray screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(screenPointToRay.origin,screenPointToRay.direction * maxPickUpDistance,Color.red);
@@ -29,7 +32,7 @@ public class DragObject : MonoBehaviour
                     if(!hit.transform.TryGetComponent<Portal>(out Portal portal)){
                         draggedObj = hit.transform;
                     }
-                    distanceFromMousePointer = hit.distance + DistanceCorrection(draggedObj,screenPointToRay);
+                    distanceFromMousePointer = Mathf.Max(hit.distance + DistanceCorrection(draggedObj,screenPointToRay),minHoldingDistance);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
                     notifyDraggedObject();
                     
@@ -37,6 +40,18 @@ public class DragObject : MonoBehaviour
             }
             else
             {   
+                /*
+                Vector3 cameraPos = GetComponentInChildren<Camera>().transform.position;
+                
+                //Breaks dragging
+                if(Physics.Raycast(cameraPos,draggedObj.position - cameraPos,out RaycastHit obstacle,distanceFromMousePointer,~LayerMask.GetMask("Portal"))){
+                    if(!obstacle.transform.GetComponentInChildren<Portal>() && obstacle.transform != draggedObj){
+                        if(obstacle.transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size.x > ignoredObstacleMaximumSize){
+                            draggedObj = null;
+                            return;
+                        }
+                    }
+                }*/
                 Vector3 targetPos  = Vector3.zero;
                 if(Physics.Raycast(screenPointToRay,out hit,maxPickUpDistance,LayerMask.GetMask("Portal"))){
                     //MeshRenderer portalScreen = hitPortal.transform.Find("Screen").GetComponent<MeshRenderer>();
@@ -110,5 +125,9 @@ public class DragObject : MonoBehaviour
         if(draggedObj.TryGetComponent<RunnerObject>(out RunnerObject runner)){
             runner.isCaught = true;
         }
+    }
+
+    public void expandPickUpDistance(float factor){
+        maxPickUpDistance = maxPickUpDistance * factor;
     }
 }
