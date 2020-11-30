@@ -41,7 +41,7 @@ public class LinkedObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        collisionImpulses = new List<Vector3>();
+        //collisionImpulses = new List<Vector3>();
         movementScale = 1f;
         mirrorPhysics = mirror.gameObject.GetComponent<Rigidbody>();
         masterBid = Random.Range(0f,10f);
@@ -88,8 +88,8 @@ public class LinkedObject : MonoBehaviour
                             Debug.Log("Adding Impulse");
                             myRb.AddForce(i,ForceMode.Impulse);
                         }
-                        */
                         collisionImpulses = new List<Vector3>();
+                        */
                         myRb.velocity = myRb.velocity + mirrorPhysics.velocity;
                     }
                 }
@@ -103,7 +103,7 @@ public class LinkedObject : MonoBehaviour
         if(isMaster){
             Debug.DrawRay(transform.position,Vector3.up*5f,Color.blue);
             myRb.useGravity = true;
-            collisionImpulses = new List<Vector3>();
+            //collisionImpulses = new List<Vector3>();
         }
     }
 
@@ -114,12 +114,13 @@ public class LinkedObject : MonoBehaviour
         isDragged =  false;
     }
 
+/*
     private void OnCollisionEnter(Collision other) {
         if(isMaster){
             mirror.addCollisionImpulse(other.impulse);
         }
     }
-
+*/
     [System.Obsolete("Not used anymore")]
     private void addCollisionImpulse(Vector3 impulse){
         if(!isMaster){
