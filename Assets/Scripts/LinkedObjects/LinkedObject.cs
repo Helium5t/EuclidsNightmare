@@ -6,24 +6,25 @@ using UnityEngine;
 public class LinkedObject : MonoBehaviour
 {
 
-    enum Direction{x,y,z,None}
+    public enum Direction{x,y,z,None}
 
-    [SerializeField] private Direction keepAxis = Direction.None;
     [SerializeField] public LinkedObject mirror;
 
 
     private Vector3 offset;
     private Rigidbody mirrorPhysics;
 
+    [System.Obsolete("Not used anymore, can mirror movement without it")]
     private List<Vector3> collisionImpulses;
 
     [HideInInspector]public float movementScale=1f;
     private bool isMaster = false ;
     private bool isDragged = false;
 
-    private float masterBid;
-
-    private Vector3 targetOffset;
+    [HideInInspector]   
+    public float masterBid;
+    [HideInInspector]   
+    public Vector3 targetOffset;
 
     [SerializeField][Range(0.0001f,0.9f)] private float stillnessThreshold = 0.5f;
     [SerializeField][Range(0.000f,0.5f)] private float keepAngleThreshold = 0.5f;
@@ -120,9 +121,9 @@ public class LinkedObject : MonoBehaviour
         }
     }
 
+    [System.Obsolete("Not used anymore")]
     private void addCollisionImpulse(Vector3 impulse){
         if(!isMaster){
-            Debug.Log("Added Collision!");
             collisionImpulses.Add(impulse);
         }
 
@@ -158,11 +159,6 @@ public class LinkedObject : MonoBehaviour
         if(mirror.masterBid == masterBid){
             masterBid = Random.Range(0f,10f);
         }
-        if(mirror.keepAxis != keepAxis && keepAxis!=Direction.None && mirror.keepAxis!=Direction.None){
-            if(masterBid>mirror.masterBid){
-                mirror.keepAxis = keepAxis;
-            }
-        }
     }
 
     public LinkedObject getMirror(){
@@ -170,20 +166,27 @@ public class LinkedObject : MonoBehaviour
     }
     public void resetOffset(){
         Vector3 newTargetOffset = transform.position - mirror.transform.position;
-        if(keepAxis != Direction.None){
-            if(keepAxis == Direction.x){
+        targetOffset = newTargetOffset;
+        mirror.syncOffset();
+    }
+
+    public void resetOffset(Direction keptAxis, float offset){
+        Vector3 newTargetOffset = transform.position - mirror.transform.position;
+        if(keptAxis != Direction.None && false){
+            if(keptAxis == Direction.x){
                 newTargetOffset.x = targetOffset.x;
             }
-            if(keepAxis == Direction.y){
+            if(keptAxis == Direction.y){
                 newTargetOffset.y = targetOffset.y;
             }
-            if(keepAxis == Direction.z){
+            if(keptAxis == Direction.z){
                 newTargetOffset.z = targetOffset.z;
             }
         }
         targetOffset = newTargetOffset;
         mirror.syncOffset();
     }
+
     public void syncOffset(){
         targetOffset = -mirror.targetOffset;
     }
@@ -197,6 +200,17 @@ public class LinkedObject : MonoBehaviour
             return 2;
         }
         return -1;
+    }
+
+    public float getAxisOffset(Direction dir){
+        if(dir == Direction.x){
+            return targetOffset.x;
+        }if(dir == Direction.y){
+            return  targetOffset.y;
+        }if(dir == Direction.z){
+            return  targetOffset.z;
+        }
+        return 0f;
     }
 
     /*

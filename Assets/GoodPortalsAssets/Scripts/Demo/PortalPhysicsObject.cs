@@ -32,7 +32,6 @@ public class PortalPhysicsObject : PortalTraveller {
 
     public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
         base.Teleport (fromPortal, toPortal, pos, rot);
-        Debug.Log("Teleporting to " + pos );
         rigidbody.velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (rigidbody.velocity));
         rigidbody.angularVelocity = toPortal.TransformVector (fromPortal.InverseTransformVector (rigidbody.angularVelocity));
     }
