@@ -5749,7 +5749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0240ce7a7a78e47b7af85b9098089e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 794976515}
+  targetObject: {fileID: 2118635524}
   ignorePlayer: 0
   useRigidbody: 0
   triggerWeight: 2
@@ -6817,6 +6817,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071762873}
   m_CullTransparentMesh: 0
+--- !u!1 &2118635524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 4879121211257600978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2139014017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7506,6 +7512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 646318462, guid: 18cd0707ebc9e4144abf56c10f7f28cf, type: 3}
+    - {fileID: 8778361835495645443, guid: 18cd0707ebc9e4144abf56c10f7f28cf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 18cd0707ebc9e4144abf56c10f7f28cf, type: 3}
 --- !u!33 &5125367981408153145
 MeshFilter:
