@@ -13,12 +13,12 @@ public class DragObject : MonoBehaviour
     private RaycastHit hit;
     private float distanceFromMousePointer;
     [SerializeField][Range(5f,500f)] private float maxPickUpDistance = 10f;
-    [SerializeField][Range(2f,10f)] private float minHoldingDistance = 3f;
+    [SerializeField][Range(0.1f,10f)] private float minHoldingDistance = 3f;
 
     [SerializeField][Range(0.001f,0.6f)] private float ignoredObstacleMaximumSize = 0.01f;
 
     private Rigidbody draggedObjectRb;
-
+    
     private void LateUpdate()
     {
         if (Input.GetMouseButton(0) && Time.timeScale!=0f)
@@ -75,9 +75,19 @@ public class DragObject : MonoBehaviour
                 else{
                     targetPos = screenPointToRay.GetPoint(distanceFromMousePointer);
                 }
+
+                Debug.Log(distanceFromMousePointer);
+                //draggedObj.transform.rotation =  Quaternion.Slerp(draggedObj.transform.rotation,Quaternion.Euler(0f,transform.rotation.y,0f),Time.deltaTime*6f);
                 // Calculate needed speed
+                draggedObjectRb.angularVelocity = Vector3.zero;
+                //Debug.Log(transform.rotation.y*Mathf.Rad2Deg);
+                Quaternion currentRotation = draggedObj.rotation;
+                Quaternion targetRotation = new Quaternion(0f,transform.rotation.y,0f,transform.rotation.w);
+                //Debug.Log(targetRotation);
+                Quaternion nextRotation = Quaternion.Lerp(currentRotation,targetRotation,Time.deltaTime*10f);
+                draggedObj.transform.rotation = nextRotation;
+                //draggedObj.transform.rotation.eulerAngles = Vector3.Lerp(draggedObj.transform.rotation.eulerAngles,Vector3.zero,Time.fixedDeltaTime);
                 Vector3 vel = ( targetPos - draggedObj.position) * mouseFollowSpeed;
-                draggedObj.GetComponentInChildren<MeshRenderer>().transform.rotation =  Quaternion.Lerp(draggedObj.GetComponentInChildren<MeshRenderer>().transform.rotation,Quaternion.Euler(0f,0f,0f),Time.deltaTime*10f);
                 if (vel.magnitude > maxObjectSpeed) vel *= maxObjectSpeed / vel.magnitude;
                 draggedObjectRb.velocity = vel;
             }
@@ -89,6 +99,9 @@ public class DragObject : MonoBehaviour
                         linkedObject.stopDrag();
             }
             draggedObj = null;
+            if(draggedObjectRb){
+                draggedObjectRb = null;
+            }
         }
     }
 
