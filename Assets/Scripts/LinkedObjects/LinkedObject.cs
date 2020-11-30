@@ -104,7 +104,6 @@ public class LinkedObject : MonoBehaviour
             Debug.DrawRay(transform.position,Vector3.up*5f,Color.blue);
             myRb.useGravity = true;
             collisionImpulses = new List<Vector3>();
-            transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(transform.rotation.x,0,transform.rotation.z),Time.deltaTime*10f);
         }
     }
 

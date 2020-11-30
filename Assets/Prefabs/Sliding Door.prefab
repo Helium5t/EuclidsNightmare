@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7898132508668131187}
   - component: {fileID: 5018468452038536420}
   - component: {fileID: 6404236765693691783}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EndLevelCollider
   m_TagString: Door
   m_Icon: {fileID: 0}

@@ -12559,21 +12559,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7351225737228979885, guid: b18a43dee9d0ee84c84c32dd92a472f3,
-        type: 3}
-      propertyPath: minHoldingDistance
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7351225737228979885, guid: b18a43dee9d0ee84c84c32dd92a472f3,
-        type: 3}
-      propertyPath: mouseFollowSpeed
-      value: 8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7351225737228979885, guid: b18a43dee9d0ee84c84c32dd92a472f3,
-        type: 3}
-      propertyPath: maxPickUpDistance
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
 --- !u!4 &2003149804 stripped

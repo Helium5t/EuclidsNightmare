@@ -32,9 +32,12 @@ public class DoorTrigger : Executor
 
     public override void activate()
     {
-        if (!triggered)
+        if(doorAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "IdleAnimation"){
+            triggered = false;
+        }
+        if (!triggered )
         {
-            ToggleTriggeredState();
+            ToggleUpTriggeredState();
             SetDoorAnimationBool(triggered);
             if(closeAutomatically){
                 StartCoroutine(AnimationHelper());
@@ -53,10 +56,18 @@ public class DoorTrigger : Executor
         yield return null;
     }
 
-    public void ToggleTriggeredState()
+    public void ToggleDownTriggeredState()
     {
-        triggered = !triggered;
+        if(triggered){
+            triggered = false;
+        }
         Debug.Log("Triggered state: " + triggered);
+    }
+
+    public void ToggleUpTriggeredState(){
+        if(!triggered){
+            triggered = true;
+        }
     }
 
     private void SetDoorAnimationBool(bool value) => doorAnimator.SetBool(Open, value);

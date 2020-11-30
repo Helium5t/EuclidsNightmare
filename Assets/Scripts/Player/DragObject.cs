@@ -4,6 +4,8 @@
  * mouseFollowSpeed = speed factor which controls how fast the rigidbody will follow the mouse pointer.
  * maxObjectSpeed = avoid object to pass through thin objects
  */
+
+[RequireComponent(typeof(FPSController))]
 public class DragObject : MonoBehaviour
 {
     [SerializeField] private float mouseFollowSpeed = 5.0f;
@@ -18,7 +20,17 @@ public class DragObject : MonoBehaviour
     [SerializeField][Range(0.001f,0.6f)] private float ignoredObstacleMaximumSize = 0.01f;
 
     private Rigidbody draggedObjectRb;
-    
+
+    private void FixedUpdate() {
+        if(draggedObj){
+            Ray downwardRay = new Ray(transform.position,Vector3.down);
+            if(Physics.Raycast(downwardRay,out RaycastHit downHit,4f) && downHit.rigidbody){
+                if(downHit.rigidbody == draggedObjectRb){
+                    draggedObjectRb.velocity = draggedObjectRb.velocity + Vector3.down*GetComponent<FPSController>().gravity;
+                }
+            }
+        }
+    }
     private void LateUpdate()
     {
         if (Input.GetMouseButton(0) && Time.timeScale!=0f)
@@ -76,14 +88,11 @@ public class DragObject : MonoBehaviour
                     targetPos = screenPointToRay.GetPoint(distanceFromMousePointer);
                 }
 
-                Debug.Log(distanceFromMousePointer);
                 //draggedObj.transform.rotation =  Quaternion.Slerp(draggedObj.transform.rotation,Quaternion.Euler(0f,transform.rotation.y,0f),Time.deltaTime*6f);
                 // Calculate needed speed
                 draggedObjectRb.angularVelocity = Vector3.zero;
-                //Debug.Log(transform.rotation.y*Mathf.Rad2Deg);
                 Quaternion currentRotation = draggedObj.rotation;
                 Quaternion targetRotation = new Quaternion(0f,transform.rotation.y,0f,transform.rotation.w);
-                //Debug.Log(targetRotation);
                 Quaternion nextRotation = Quaternion.Lerp(currentRotation,targetRotation,Time.deltaTime*10f);
                 draggedObj.transform.rotation = nextRotation;
                 //draggedObj.transform.rotation.eulerAngles = Vector3.Lerp(draggedObj.transform.rotation.eulerAngles,Vector3.zero,Time.fixedDeltaTime);
