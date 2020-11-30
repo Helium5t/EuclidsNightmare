@@ -170,7 +170,8 @@ AnimationClip:
   - time: 1
     functionName: ToggleTriggeredState
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

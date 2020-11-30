@@ -4,11 +4,9 @@ using System.Collections;
 public class DoorTrigger : Executor
 {
     private Animator doorAnimator;
+    private static readonly int Open = Animator.StringToHash("open");
 
     [SerializeField] private bool closeAutomatically = false;
-
-    private float animationSpeed = 5f;
-    private float movementAmount = 10f;
 
     [SerializeField] private float timeToWait = 10f;
 
@@ -24,20 +22,23 @@ public class DoorTrigger : Executor
             doorAnimator = GetComponentInChildren<Animator>();
         }
 
-        doorAnimator.SetBool("open", startOpen);
+        SetDoorAnimationBool(startOpen);
     }
 
     public override void deactivate()
     {
-        if (!stayOpen) StartCoroutine(Close());
+        if (!stayOpen) SetDoorAnimationBool(false);
     }
 
     public override void activate()
     {
         if (!triggered)
         {
-            triggered = true;
-            StartCoroutine(Open(timeToWait));
+            ToggleTriggeredState();
+            SetDoorAnimationBool(triggered);
+            if(closeAutomatically){
+                StartCoroutine(AnimationHelper());
+            }
         }
         else
         {
@@ -45,27 +46,19 @@ public class DoorTrigger : Executor
         }
     }
 
-    public IEnumerator Open(float timeToWait)
+    private IEnumerator AnimationHelper()
     {
-        doorAnimator.SetBool("open", true);
-        if (closeAutomatically)
-        {
-            yield return new WaitForSeconds(timeToWait);
-            deactivate();
-            yield return null;
-        }
-        else
-        {
-            yield return null;
-        }
-    }
-
-    public IEnumerator Close()
-    {
-        doorAnimator.SetBool("open", false);
-        AnimatorClipInfo[] animInfo = doorAnimator.GetCurrentAnimatorClipInfo(0);
-        yield return new WaitForSeconds(animInfo[0].clip.length);
-        triggered = false;
+        yield return new WaitForSeconds(timeToWait);
+        deactivate();
         yield return null;
     }
+
+    public void ToggleTriggeredState()
+    {
+        triggered = !triggered;
+        Debug.Log("Triggered state: " + triggered);
+    }
+
+    private void SetDoorAnimationBool(bool value) => doorAnimator.SetBool(Open, value);
+
 }

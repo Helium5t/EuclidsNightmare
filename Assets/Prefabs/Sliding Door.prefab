@@ -227,8 +227,6 @@ GameObject:
   - component: {fileID: 6997873360776879167}
   - component: {fileID: 2874738044080342446}
   - component: {fileID: 2898168734445595737}
-  - component: {fileID: 8778361835495645443}
-  - component: {fileID: 794976517}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -312,40 +310,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0211, y: 0.018775268, z: 0.018775262}
   m_Center: {x: 0, y: 0, z: -4.656612e-10}
---- !u!95 &8778361835495645443
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3786131294777026479}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0087771f3fe1fae4b8d54f99b3307cc4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &794976517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3786131294777026479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2532a7c5ba06414f9180dbaf3d149f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToWait: 1.5
-  triggered: 0
-  open: 0
 --- !u!1 &4076288797227689562
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +416,7 @@ GameObject:
   - component: {fileID: 5465048474234290260}
   - component: {fileID: 1483107346069906967}
   - component: {fileID: 5869584908561905673}
+  - component: {fileID: 9095619888425205503}
   m_Layer: 0
   m_Name: Sliding Door
   m_TagString: Untagged
@@ -505,6 +470,25 @@ MonoBehaviour:
   timeToWait: 10
   startOpen: 0
   stayOpen: 0
+--- !u!95 &9095619888425205503
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655613763917372142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 322c7a9db04283849b47bf52e086951f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7744497476019522782
 GameObject:
   m_ObjectHideFlags: 0
