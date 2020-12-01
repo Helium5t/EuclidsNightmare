@@ -75,7 +75,6 @@ public class LinkedObject : MonoBehaviour
                     if(Vector3.Distance(transform.position,nextTargetPosition)>stillnessThreshold){
                         Debug.DrawRay(transform.position,mirror.transform.position + targetOffset-transform.position,Color.red,0.1f);
                         myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*recoverySpeed;
-                        Debug.Log(gameObject.name + " is adding recovery speed");
                     }
                     else{
                         myRb.AddForce(new Vector3(mirrorPhysics.velocity.x,0f,mirrorPhysics.velocity.z),ForceMode.VelocityChange);
@@ -85,7 +84,6 @@ public class LinkedObject : MonoBehaviour
                     if(Vector3.Distance(transform.position,mirror.transform.position + targetOffset)>stillnessThreshold){
                         Debug.DrawRay(transform.position,mirror.transform.position + targetOffset-transform.position,Color.red,0.1f);
                         myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*recoverySpeed;
-                        Debug.Log(gameObject.name + " is adding recovery speed");
                     }
                     else{
                         /*
@@ -96,7 +94,10 @@ public class LinkedObject : MonoBehaviour
                         }
                         collisionImpulses = new List<Vector3>();
                         */
-                        myRb.velocity = myRb.velocity + mirrorPhysics.velocity;
+                        //Debug.Log("Master Velocity is "+ mirrorPhysics.velocity);
+                        //Debug.Log("My Velocity is "+ myRb.velocity);
+                        Vector3 finalVelocity =myRb.velocity+  mirrorPhysics.velocity;
+                        myRb.velocity = finalVelocity;
                     }
                 }
                 //transform.rotation = Quaternion.Lerp(transform.rotation,mirror.transform.rotation,Time.deltaTime*10f);

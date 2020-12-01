@@ -19,6 +19,9 @@ public class DragObject : MonoBehaviour
 
     [SerializeField][Range(0.001f,0.6f)] private float ignoredObstacleMaximumSize = 0.01f;
 
+    // Distance at which the object slows down towards its target (when its close enough to where it should be)
+    [SerializeField][Range(0.001f,1f)] private float slowdownThreshold = 0.5f;
+
     private Rigidbody draggedObjectRb;
 
     private void FixedUpdate() {
@@ -64,6 +67,9 @@ public class DragObject : MonoBehaviour
                         }
                     }
                 }*/
+                if(draggedObjectRb.useGravity){
+                    draggedObjectRb.useGravity = false;
+                }
                 Vector3 targetPos  = Vector3.zero;
                 if(Physics.Raycast(screenPointToRay,out hit,maxPickUpDistance,LayerMask.GetMask("Portal"))){
                     //MeshRenderer portalScreen = hitPortal.transform.Find("Screen").GetComponent<MeshRenderer>();
@@ -96,20 +102,28 @@ public class DragObject : MonoBehaviour
                 Quaternion nextRotation = Quaternion.Lerp(currentRotation,targetRotation,Time.deltaTime*10f);
                 draggedObj.transform.rotation = nextRotation;
                 //draggedObj.transform.rotation.eulerAngles = Vector3.Lerp(draggedObj.transform.rotation.eulerAngles,Vector3.zero,Time.fixedDeltaTime);
-                Vector3 vel = ( targetPos - draggedObj.position) * mouseFollowSpeed;
-                if (vel.magnitude > maxObjectSpeed) vel *= maxObjectSpeed / vel.magnitude;
+                Vector3 movementToTarget = targetPos - draggedObj.position;
+                Vector3 vel;
+                if(movementToTarget.sqrMagnitude < Mathf.Pow(slowdownThreshold,2)){
+                    vel = movementToTarget;
+                }
+                else { vel =movementToTarget * mouseFollowSpeed; }
+                if (vel.magnitude > maxObjectSpeed) vel = Vector3.Normalize(vel)*maxObjectSpeed;
                 draggedObjectRb.velocity = vel;
             }
             
         }
         else
         {
-            if(draggedObj!= null && draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
-                        linkedObject.stopDrag();
-            }
-            draggedObj = null;
-            if(draggedObjectRb){
-                draggedObjectRb = null;
+            if(draggedObj){
+                if(draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
+                            linkedObject.stopDrag();
+                }
+                draggedObj = null;
+                if(draggedObjectRb){
+                    draggedObjectRb.useGravity = true;
+                    draggedObjectRb = null;
+                }
             }
         }
     }
