@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (Rigidbody))]
-[RequireComponent (typeof (LinkedObject))]
-public class LinkedPortalObject : PortalPhysicsObject {
-    enum SpaceState{Compressed,Normal,Expanded}
-    
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(LinkedObject))]
+public class LinkedPortalObject : PortalPhysicsObject
+{
+    enum SpaceState
+    {
+        Compressed,
+        Normal,
+        Expanded
+    }
+
     [SerializeField] private LinkedObject.Direction keepAxis = LinkedObject.Direction.None;
 
     private float keptAxisOffset = 0f;
@@ -14,27 +20,35 @@ public class LinkedPortalObject : PortalPhysicsObject {
 
     private LinkedObject objectLink;
 
-    protected override void Awake () {
+    protected override void Awake()
+    {
         base.Awake();
         spaceState = SpaceState.Normal;
         objectLink = GetComponent<LinkedObject>();
     }
 
-    private void Start() {
-        if(objectLink.enabled == false){
+    private void Start()
+    {
+        if (objectLink.enabled == false)
+        {
             Debug.Log(gameObject.name + " linked script is disabled, disabling");
             this.enabled = false;
         }
-        if(!objectLink.mirror.TryGetComponent<LinkedPortalObject>(out LinkedPortalObject lpo)){
+
+        if (!objectLink.mirror.TryGetComponent<LinkedPortalObject>(out LinkedPortalObject lpo))
+        {
             Debug.LogError("Mirror has no Linked Portal Object script attached!");
             this.enabled = false;
-        }else{
+        }
+        else
+        {
             keptAxisOffset = getAxisOffset();
         }
     }
 
 
-    private void Update() {
+    private void Update()
+    {
     }
 
 // General behaviour
@@ -44,88 +58,123 @@ public class LinkedPortalObject : PortalPhysicsObject {
     Example: if object A enters an expanded tunnel (short outside long inside) it will switch to expanded space, its movementScale will be mulitplied by *. 
                 object B, instead (mirroring A) will DIVIDE its own movementScale by f, it won't switch to compressed space as it is not the one in the tunnel.
 */
-    public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
-        base.Teleport (fromPortal, toPortal, pos, rot);
-        if(fromPortal.GetComponentInParent<NonEuclideanTunnels>()!=null){
+    public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
+    {
+        base.Teleport(fromPortal, toPortal, pos, rot);
+        if (fromPortal.GetComponentInParent<NonEuclideanTunnels>() != null)
+        {
             NonEuclideanTunnels deformedSpace = fromPortal.GetComponentInParent<NonEuclideanTunnels>();
-            if(fromPortal.CompareTag("Expanded Space")){
+            if (fromPortal.CompareTag("Expanded Space"))
+            {
                 spaceState = deformSpace(SpaceState.Expanded);
-                if(spaceState == SpaceState.Normal){
-                        objectLink.resetOffset(keepAxis,keptAxisOffset);
-                    }
-                else{
-                        objectLink.resetOffset();
+                if (spaceState == SpaceState.Normal)
+                {
+                    objectLink.resetOffset(keepAxis, keptAxisOffset);
                 }
+                else
+                {
+                    objectLink.resetOffset();
+                }
+
                 objectLink.movementScale = deformedSpace.expandLength(objectLink.movementScale);
                 objectLink.mirror.movementScale = deformedSpace.collapseLength(objectLink.mirror.movementScale);
             }
-            else{
-                if(fromPortal.CompareTag("Compressed Space")){
+            else
+            {
+                if (fromPortal.CompareTag("Compressed Space"))
+                {
                     spaceState = deformSpace(SpaceState.Compressed);
-                    if(spaceState == SpaceState.Normal){
-                        objectLink.resetOffset(keepAxis,keptAxisOffset);
+                    if (spaceState == SpaceState.Normal)
+                    {
+                        objectLink.resetOffset(keepAxis, keptAxisOffset);
                     }
-                    else{
+                    else
+                    {
                         objectLink.resetOffset();
                     }
+
                     objectLink.movementScale = deformedSpace.collapseLength(objectLink.movementScale);
                     objectLink.mirror.movementScale = deformedSpace.expandLength(objectLink.mirror.movementScale);
                 }
             }
         }
-        else{
+        else
+        {
             objectLink.resetOffset();
         }
-        
-        //linkedJoint.maxDistance = Vector3.Distance(linkedJoint.gameObject.transform.position, linkedJoint.connectedBody.transform.position)*1.5f;
 
+        //linkedJoint.maxDistance = Vector3.Distance(linkedJoint.gameObject.transform.position, linkedJoint.connectedBody.transform.position)*1.5f;
     }
 
-    private SpaceState deformSpace(SpaceState spaceDeformation){
-        if(spaceState == SpaceState.Compressed){
-            if(spaceDeformation == SpaceState.Expanded){
+    private SpaceState deformSpace(SpaceState spaceDeformation)
+    {
+        if (spaceState == SpaceState.Compressed)
+        {
+            if (spaceDeformation == SpaceState.Expanded)
+            {
                 return SpaceState.Normal;
             }
-            else{
+            else
+            {
                 return SpaceState.Compressed;
             }
         }
-        if(spaceState == SpaceState.Expanded){
-            if(spaceDeformation == SpaceState.Compressed){
+
+        if (spaceState == SpaceState.Expanded)
+        {
+            if (spaceDeformation == SpaceState.Compressed)
+            {
                 return SpaceState.Normal;
             }
-            else{
+            else
+            {
                 return SpaceState.Expanded;
             }
         }
+
         return spaceDeformation;
     }
 
-    private void OnValidate() 
+    private void OnValidate()
     {
         objectLink = GetComponent<LinkedObject>();
-        if(objectLink!=null &&  !objectLink.mirror.TryGetComponent<LinkedPortalObject>(out LinkedPortalObject lpo)){
+        if (objectLink != null && !objectLink.mirror.TryGetComponent<LinkedPortalObject>(out LinkedPortalObject lpo))
+        {
             lpo = objectLink.mirror.gameObject.AddComponent<LinkedPortalObject>();
             lpo.keepAxis = this.keepAxis;
             Debug.LogError("Mirror has no linked Portal Object script attached!");
         }
+
         LinkedPortalObject mirror = objectLink.mirror.GetComponent<LinkedPortalObject>();
-        if(mirror.keepAxis != keepAxis && keepAxis!=LinkedObject.Direction.None && mirror.keepAxis!=LinkedObject.Direction.None){
-            if(objectLink.masterBid>mirror.objectLink.masterBid){
+        if (mirror.keepAxis != keepAxis && keepAxis != LinkedObject.Direction.None &&
+            mirror.keepAxis != LinkedObject.Direction.None)
+        {
+            if (objectLink.masterBid > mirror.objectLink.masterBid)
+            {
                 mirror.keepAxis = keepAxis;
             }
         }
     }
 
-    private float getAxisOffset(){
-        if(keptAxis == Direction.None){
+    private float getAxisOffset()
+    {
+        if (keepAxis == LinkedObject.Direction.None)
+        {
             return 0f;
-        }else if(keptAxis == Direction.x){
+        }
+        else if (keepAxis == LinkedObject.Direction.x)
+        {
             return objectLink.targetOffset.x;
-        }else if(keptAxis == Direction.y){
+        }
+        else if (keepAxis == LinkedObject.Direction.y)
+        {
             return objectLink.targetOffset.y;
-        }else if(keptAxis == Direction.z){
+        }
+        else if (keepAxis == LinkedObject.Direction.z)
+        {
             return objectLink.targetOffset.z;
         }
+
+        return -Mathf.PI; //Just here as a default return value.
     }
 }

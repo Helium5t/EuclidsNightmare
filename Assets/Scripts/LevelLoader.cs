@@ -20,6 +20,7 @@ public class LevelLoader : MonoBehaviour
 
     private IEnumerator LoadLevelRoutine(int levelBuildIndex)
     {
+        Time.timeScale = 1f; //Just to be sure that everything is flowing as it should be
         animator.SetTrigger(Start);
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelBuildIndex);
