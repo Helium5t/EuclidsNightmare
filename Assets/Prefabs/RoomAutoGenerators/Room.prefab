@@ -48,4 +48,5 @@ MonoBehaviour:
   amountX: 0
   amountZ: 0
   updateButton: 0
-  generatorWall4Prefab: {fileID: 0}
+  generatorWall4Prefab: {fileID: 8737120412167731368, guid: 4aab2e2bce41b2a4fbd64bd69313be0d,
+    type: 3}
