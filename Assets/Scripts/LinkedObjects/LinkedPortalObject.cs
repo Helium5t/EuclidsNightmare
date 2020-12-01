@@ -118,14 +118,14 @@ public class LinkedPortalObject : PortalPhysicsObject {
     }
 
     private float getAxisOffset(){
-        if(keptAxis == Direction.None){
-            return 0f;
-        }else if(keptAxis == Direction.x){
+        if(keepAxis == LinkedObject.Direction.x){
             return objectLink.targetOffset.x;
-        }else if(keptAxis == Direction.y){
+        }else if(keepAxis == LinkedObject.Direction.y){
             return objectLink.targetOffset.y;
-        }else if(keptAxis == Direction.z){
+        }else if(keepAxis == LinkedObject.Direction.z){
             return objectLink.targetOffset.z;
+        }else{
+            return 0f;
         }
     }
 }
