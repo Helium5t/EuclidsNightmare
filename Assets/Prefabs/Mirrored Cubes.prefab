@@ -124,9 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c883519cd6303548a52db103d2a2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepAxis: 1
   mirror: {fileID: 8300804995237269330}
   movementScale: 1
+  masterBid: 5.719704
+  targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0
 --- !u!114 &8300804993989205746
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 0}
+  keepAxis: 3
 --- !u!1 &8300804995237269328
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,9 +268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c883519cd6303548a52db103d2a2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepAxis: 3
   mirror: {fileID: 8300804993989205748}
   movementScale: 1
+  masterBid: 7.234466
+  targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0
 --- !u!114 &8300804995237269337
@@ -284,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 0}
+  keepAxis: 3
 --- !u!1 &8300804995641538322
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8300804995641538322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.9, y: 3.4451847, z: 89.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8300804993989205744}
