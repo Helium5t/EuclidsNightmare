@@ -10,7 +10,6 @@ public class EndLevel : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log(SceneManager.GetActiveScene().name + " COMPLETED!");
-            // LevelChanger.Instance.FadeToNextLevel();
             levelLoader.GetComponent<LevelLoader>().LoadNextLevel();
         }
         else Debug.Log(SceneManager.GetActiveScene().name + " NOT completed");
