@@ -72,6 +72,7 @@ public class LinkedObject : MonoBehaviour
                 if(movementScale != 1f){
                     Vector3 nextTargetPosition = transform.position + mirrorPhysics.velocity*movementScale;
                     nextTargetPosition.y = mirror.transform.position.y + targetOffset.y;
+                    if(isMaster)  Debug.Log( Vector3.Distance(transform.position,nextTargetPosition));
                     if(Vector3.Distance(transform.position,nextTargetPosition)>stillnessThreshold){
                         Debug.DrawRay(transform.position,mirror.transform.position + targetOffset-transform.position,Color.red,0.1f);
                         myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*recoverySpeed;
@@ -192,6 +193,7 @@ public class LinkedObject : MonoBehaviour
         }
         targetOffset = newTargetOffset;
         mirror.syncOffset();
+        Debug.Log("Reset the offset, master is "+ (isMaster? gameObject.name:mirror.name));
     }
 
     public void syncOffset(){

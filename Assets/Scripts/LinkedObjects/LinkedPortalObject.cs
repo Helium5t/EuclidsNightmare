@@ -17,6 +17,7 @@ public class LinkedPortalObject : PortalPhysicsObject {
     protected override void Awake () {
         base.Awake();
         spaceState = SpaceState.Normal;
+        objectLink = GetComponent<LinkedObject>();
     }
 
     private void Start() {
@@ -28,7 +29,7 @@ public class LinkedPortalObject : PortalPhysicsObject {
             Debug.LogError("Mirror has no Linked Portal Object script attached!");
             this.enabled = false;
         }else{
-            keptAxisOffset = objectLink.targetOffset.y;
+            keptAxisOffset = getAxisOffset();
         }
     }
 
@@ -113,6 +114,18 @@ public class LinkedPortalObject : PortalPhysicsObject {
             if(objectLink.masterBid>mirror.objectLink.masterBid){
                 mirror.keepAxis = keepAxis;
             }
+        }
+    }
+
+    private float getAxisOffset(){
+        if(keptAxis == Direction.None){
+            return 0f;
+        }else if(keptAxis == Direction.x){
+            return objectLink.targetOffset.x;
+        }else if(keptAxis == Direction.y){
+            return objectLink.targetOffset.y;
+        }else if(keptAxis == Direction.z){
+            return objectLink.targetOffset.z;
         }
     }
 }

@@ -4505,6 +4505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftCube
       objectReference: {fileID: 0}
+    - target: {fileID: 8300804993989205750, guid: 6dad7c575ccab3146a6b27df0f47b154,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8300804995237269328, guid: 6dad7c575ccab3146a6b27df0f47b154,
         type: 3}
       propertyPath: m_Name
