@@ -29,6 +29,8 @@ public class LinkedObject : MonoBehaviour
     [SerializeField][Range(0.0001f,0.9f)] private float stillnessThreshold = 0.5f;
     [SerializeField][Range(0.000f,0.5f)] private float keepAngleThreshold = 0.5f;
 
+    [SerializeField][Range(1f,20f)] private float recoverySpeed = 10f;
+
     private void Awake() {
         if(!mirror){
             Debug.LogError(gameObject.name + " has no mirror set for it, disabling component.");
@@ -71,7 +73,9 @@ public class LinkedObject : MonoBehaviour
                     Vector3 nextTargetPosition = transform.position + mirrorPhysics.velocity*movementScale;
                     nextTargetPosition.y = mirror.transform.position.y + targetOffset.y;
                     if(Vector3.Distance(transform.position,nextTargetPosition)>stillnessThreshold){
-                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*10f;
+                        Debug.DrawRay(transform.position,mirror.transform.position + targetOffset-transform.position,Color.red,0.1f);
+                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*recoverySpeed;
+                        Debug.Log(gameObject.name + " is adding recovery speed");
                     }
                     else{
                         myRb.AddForce(new Vector3(mirrorPhysics.velocity.x,0f,mirrorPhysics.velocity.z),ForceMode.VelocityChange);
@@ -79,7 +83,9 @@ public class LinkedObject : MonoBehaviour
                 }
                 else{
                     if(Vector3.Distance(transform.position,mirror.transform.position + targetOffset)>stillnessThreshold){
-                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*10f;
+                        Debug.DrawRay(transform.position,mirror.transform.position + targetOffset-transform.position,Color.red,0.1f);
+                        myRb.velocity = (mirror.transform.position + targetOffset - transform.position )*recoverySpeed;
+                        Debug.Log(gameObject.name + " is adding recovery speed");
                     }
                     else{
                         /*

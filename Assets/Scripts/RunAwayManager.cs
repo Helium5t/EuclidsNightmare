@@ -10,6 +10,8 @@ public class RunAwayManager : MonoBehaviour
     [SerializeField] private RunnerObject runner;
 
     [SerializeField][Range(0.0001f,0.2f)] private float keepCheckpointThreshold = 0.05f;
+
+    [SerializeField] List<GameObject> vanishingObjectsOnCatch;
     private bool isRunning = false;
 
     private float timeElapsed = 0f;
@@ -44,7 +46,14 @@ public class RunAwayManager : MonoBehaviour
     void Update()
     {
         RunnerCheckPoint currentCheckpoint = runner.targetCheckpoint.gameObject.GetComponent<RunnerCheckPoint>();
-        if(!isRunning  || runner.isCaught){
+        if(!isRunning){
+            return;
+        }
+        if(runner.isCaught){
+            isRunning = false;
+            foreach(GameObject g in vanishingObjectsOnCatch){
+                g.SetActive(false);
+            }
             return;
         }
         timeElapsed += Time.deltaTime;

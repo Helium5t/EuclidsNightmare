@@ -40,7 +40,7 @@ public class Laser : MonoBehaviour
         alphaKeys[1].alpha = alpha;
         alphaKeys[0].time = 0f;
         alphaKeys[1].time = 1f;
-
+        lr.material.color = Color.red;
         lr.colorGradient.SetKeys(colorKeys, alphaKeys);
         }
     private void OnDestroy() { GameObject.Destroy(lrObject); }
@@ -82,7 +82,7 @@ public class Laser : MonoBehaviour
             Ray ray = new Ray(position, direction);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100, 1))
+            if (Physics.Raycast(ray, out hit, 100, ~LayerMask.GetMask("Glass")))
                 {
                 GameObject obj = hit.collider.gameObject;
                 objectsHit.Add(obj);

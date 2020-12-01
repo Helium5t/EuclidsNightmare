@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 2043468692869093493}
   - component: {fileID: 2043468692869093495}
   - component: {fileID: 2043468692869093492}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 7166369394848896169}
   - component: {fileID: 7351225737228979885}
   - component: {fileID: 1244787683}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Euclid
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 7166369395430997818}
   - component: {fileID: 7166369395430997819}
   - component: {fileID: 2043468693407046491}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 57143
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
