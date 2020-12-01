@@ -18,31 +18,24 @@ public class GameManager : Singleton<GameManager>
 
     public void QuitGame() => Application.Quit();
 
-    public void LoadLevel(string levelToLoad)
-    {
-        /*
-         * TODO: this is a placeHolder, later I'll call smth like LevelManager.startLevel(FirstLevel)
-         */
-        SceneManager.LoadScene(levelToLoad);
-    }
-
     public void PauseGame()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         GameIsPaused = true;
         pauseMenuUI.SetActive(true);
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         GameIsPaused = false;
         pauseMenuUI.SetActive(false);
     }
 
+    // TODO: this could be modified with a LevelLoader.loadLevel(0) call...
     public void LoadMainMenu()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -51,8 +44,6 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("UpdateUI triggered with param: " + newUI.name);
         pauseMenuUI = newUI;
     }
-
-    public void RestartCurrentLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     public void UpdateUI()
     {

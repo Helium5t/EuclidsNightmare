@@ -12,11 +12,13 @@ public class LevelLoader : MonoBehaviour
 
     private static readonly int Start = Animator.StringToHash("Start");
 
-    public void LoadNextLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    public void LoadLevel(int levelBuildIndex) => StartCoroutine(LoadLevelRoutine(levelBuildIndex));
 
-    private void RestartCurrentLevel() => StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    public void LoadNextLevel() => StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex + 1));
 
-    private IEnumerator LoadLevel(int levelBuildIndex)
+    public void RestartCurrentLevel() => StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex));
+
+    private IEnumerator LoadLevelRoutine(int levelBuildIndex)
     {
         animator.SetTrigger(Start);
         yield return new WaitForSeconds(transitionTime);

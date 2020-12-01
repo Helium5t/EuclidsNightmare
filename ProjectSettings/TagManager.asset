@@ -11,6 +11,7 @@ TagManager:
   - Compressed Space
   - Expanded Space
   - Mirror
+  - LevelLoader
   layers:
   - Default
   - TransparentFX
