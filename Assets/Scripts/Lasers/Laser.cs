@@ -97,10 +97,13 @@ public class Laser : MonoBehaviour
                     position = hit.point;
                     direction = Vector3.Reflect(direction, hit.normal);
                     }
-                else if (obj.tag == "Glass")
+                /*
+                    //Now Deprecated since we use layers
+                    else if (obj.tag == "Glass")
                     {
                     position = hit.point;
                     }
+                */
                 else { break; }
                 }
             else { points.Add(position + direction * 100); break; }

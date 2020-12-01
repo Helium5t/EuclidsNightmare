@@ -10,6 +10,7 @@ TagManager:
   - Getable
   - Compressed Space
   - Expanded Space
+  - Mirror
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Hidden
   - MirrorOnly
   - Wall
-  - 
+  - Glass
   - 
   - 
   - 
