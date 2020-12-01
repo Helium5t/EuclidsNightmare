@@ -5,7 +5,11 @@ using Utility;
 public class ButtonClickerManager : MonoBehaviour
 {
     [SerializeField] private Button[] _buttons;
-
+    
+    [Header("Level Loader Game Object")]
+    [Space] [SerializeField] private GameObject levelLoaderGO;
+    
+    [Header("Here if you want to load a specific level")]
     [Space] [SerializeField] private bool loadSpecificLevel;
     [SerializeField] private Levels levelToLoad;
 
@@ -21,7 +25,7 @@ public class ButtonClickerManager : MonoBehaviour
             Debug.Log("Clicked " + _buttons[0].name);
 
             if (loadSpecificLevel) GameManager.Instance.LoadLevel(levelToLoad.ToString());
-            else LevelChanger.Instance.FadeToNextLevel();
+            else levelLoaderGO.GetComponent<LevelLoader>().LoadNextLevel();
         }
 
         if (pressedButton == _buttons[1])
