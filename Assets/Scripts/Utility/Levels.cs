@@ -3,8 +3,13 @@
     public enum Levels
     {
         MainMenu,
+        Level0,
         BinTheCube,
         GrowingApart,
-        UpIsDown
+        UpIsDown,
+        ReverseMirror,
+        CatchTheKey,
+        ParallelObjects,
+        
     }
 }
