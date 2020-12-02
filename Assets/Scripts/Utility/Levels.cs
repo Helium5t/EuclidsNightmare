@@ -10,6 +10,6 @@
         ReverseMirror,
         CatchTheKey,
         ParallelObjects,
-        
+        EndDemoRoom
     }
 }

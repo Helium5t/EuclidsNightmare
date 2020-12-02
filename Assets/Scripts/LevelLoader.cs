@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Utility;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -35,6 +37,7 @@ public class LevelLoader : MonoBehaviour
 
     public void DisplayLevelName()
     {
+        if (_sceneName == Levels.MainMenu.ToString() || _sceneName == Levels.EndDemoRoom.ToString()) return;
         _levelNameText.text = _sceneBuildIndex + ") " + _sceneName;
         StartCoroutine(LevelNameFade());
     }
