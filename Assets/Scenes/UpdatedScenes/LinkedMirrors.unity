@@ -3782,7 +3782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 2015117788}
   movementScale: 1
-  masterBid: 5.9957833
+  masterBid: 0.59598565
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -20431,7 +20431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 310815538}
   movementScale: 1
-  masterBid: 6.099014
+  masterBid: 7.482175
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -21711,6 +21711,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.475
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.475
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.475
       objectReference: {fileID: 0}
     - target: {fileID: 6404236765693691783, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
