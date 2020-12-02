@@ -33,7 +33,7 @@ public class TimerDoorTrigger : Executor
         if (triggered == false)
         {
             ToggleTriggeredState(); //local bool
-            SetDoorAnimationBool(true); //animator
+            SetDoorAnimationBool(true); //sceneTransitionAnimator
             StartCoroutine(AnimationHelper());
         }
         else Debug.Log("I'm already triggered");

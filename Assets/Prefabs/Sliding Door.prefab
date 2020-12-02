@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closeAutomatically: 1
-  timeToWait: 1.5
+  timeToWait: 4
   startOpen: 0
   stayOpen: 0
 --- !u!95 &9095619888425205503
