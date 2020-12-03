@@ -13,6 +13,8 @@ public class Laser : MonoBehaviour
     [SerializeField]
     private float alpha = .8f;
 
+    [SerializeField]
+    private Material laserMaterial;
     private Transform oldTransform = null; //to only update when transform changes
     private HashSet<LaserSensor> sensorsHit = new HashSet<LaserSensor>(); //to enter-leave sensors
     private List<Vector3> points = new List<Vector3>(); //to change line renderer coordinates
@@ -25,7 +27,12 @@ public class Laser : MonoBehaviour
         lrObject.AddComponent<LineRenderer>();
 
         lr = lrObject.GetComponent<LineRenderer>();
-        lr.material = Resources.Load<Material>("Materials/Laser");
+        if(!laserMaterial){
+            lr.material = Resources.Load<Material>("Materials/Laser");
+        }
+        else{
+            lr.material = laserMaterial;
+        }
         
         lr.startWidth = thickness;
         lr.endWidth = thickness;

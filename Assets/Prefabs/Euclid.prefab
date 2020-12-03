@@ -416,7 +416,7 @@ MonoBehaviour:
   maxPickUpDistance: 5
   minHoldingDistance: 1.2
   ignoredObstacleMaximumSize: 0.01
-  slowdownThreshold: 0.5
+  slowdownThreshold: 0.1
 --- !u!114 &1244787683
 MonoBehaviour:
   m_ObjectHideFlags: 0
