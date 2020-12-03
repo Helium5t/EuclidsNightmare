@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
-
 public class NonEuclideanTunnels : MonoBehaviour
 {
 
@@ -9,10 +9,19 @@ public class NonEuclideanTunnels : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Transform shortEntry = transform.Find("TunnelShort").Find("PortalShortIn");
-        Transform longEntry = transform.Find("TunnelLong").Find("PortalLongIn");
-        Transform shortExit = transform.Find("TunnelShort").Find("PortalShortOut");
-        Transform longExit = transform.Find("TunnelLong").Find("PortalLongOut");
+        Transform shortEntry,longEntry,shortExit,longExit;
+        try{
+        shortEntry = transform.Find("TunnelShort").Find("PortalShortIn");
+        longEntry = transform.Find("TunnelLong").Find("PortalLongIn");
+        shortExit = transform.Find("TunnelShort").Find("PortalShortOut");
+        longExit = transform.Find("TunnelLong").Find("PortalLongOut");
+        }
+        catch(NullReferenceException e){
+            shortEntry = transform.Find("Ring").Find("RingIn");
+            longEntry = transform.Find("RingDestination").Find("DestinationIn");
+            shortExit = transform.Find("Ring").Find("RingOut");
+            longExit = transform.Find("RingDestination").Find("DestinationOut");
+        }
 
         float shortLength = Vector3.Distance(shortEntry.position,shortExit.position);
         float longLength = Vector3.Distance(longEntry.position,longExit.position);

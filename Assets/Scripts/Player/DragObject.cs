@@ -14,6 +14,8 @@ public class DragObject : MonoBehaviour
 
     private RaycastHit hit;
     private float distanceFromMousePointer;
+
+    private float distanceCorrection =0f;
     [SerializeField][Range(5f,500f)] private float maxPickUpDistance = 10f;
     [SerializeField][Range(0.1f,10f)] private float minHoldingDistance = 3f;
 
@@ -47,7 +49,8 @@ public class DragObject : MonoBehaviour
                     if(!hit.transform.TryGetComponent<Portal>(out Portal portal)){
                         draggedObj = hit.transform;
                     }
-                    distanceFromMousePointer = Mathf.Max(hit.distance + DistanceCorrection(draggedObj,screenPointToRay),minHoldingDistance);
+                    distanceCorrection = ComputeDistanceCorrection(draggedObj,screenPointToRay);
+                    distanceFromMousePointer = Mathf.Max(hit.distance + distanceCorrection ,minHoldingDistance);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
                     notifyDraggedObject();
                     
@@ -77,13 +80,13 @@ public class DragObject : MonoBehaviour
                     if(hit.distance < distanceFromMousePointer){
                         Vector3 portalRayOrigin = (hit.point - hitPortal.transform.position) + hitPortal.linkedPortal.transform.position;
                         Vector3 portalRayDirection = screenPointToRay.direction;
-                        Debug.DrawRay(portalRayOrigin,portalRayDirection*50f,Color.green);
+                        
                         Ray portalRay = new Ray(portalRayOrigin,portalRayDirection);
                         if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
                             targetPos = portalRay.GetPoint(distanceFromMousePointer - hit.distance);
                         }
                         else{
-                            targetPos = hit.point + 0.2f*screenPointToRay.direction;
+                            targetPos = hit.point + (0.5f - distanceCorrection) *screenPointToRay.direction;
                         }
                     }
                     else{
@@ -93,6 +96,7 @@ public class DragObject : MonoBehaviour
                 else{
                     targetPos = screenPointToRay.GetPoint(distanceFromMousePointer);
                 }
+                Debug.DrawRay(draggedObj.position,targetPos- draggedObj.position,Color.green);
 
                 //draggedObj.transform.rotation =  Quaternion.Slerp(draggedObj.transform.rotation,Quaternion.Euler(0f,transform.rotation.y,0f),Time.deltaTime*6f);
                 // Calculate needed speed
@@ -120,6 +124,7 @@ public class DragObject : MonoBehaviour
                             linkedObject.stopDrag();
                 }
                 draggedObj = null;
+                distanceCorrection = 0f;
                 if(draggedObjectRb){
                     draggedObjectRb.useGravity = true;
                     draggedObjectRb = null;
@@ -128,7 +133,7 @@ public class DragObject : MonoBehaviour
         }
     }
 
-    float DistanceCorrection(Transform draggedTransform,Ray pickupRay){
+    float ComputeDistanceCorrection(Transform draggedTransform,Ray pickupRay){
         Vector3 rayDirection = pickupRay.direction * -1f;
         float minForward = Mathf.Min(Vector3.Angle(rayDirection,draggedTransform.forward),Vector3.Angle(rayDirection,draggedTransform.up));
         float minRight = Mathf.Min(Vector3.Angle(rayDirection,draggedTransform.right),Vector3.Angle(rayDirection,draggedTransform.right*-1f));
