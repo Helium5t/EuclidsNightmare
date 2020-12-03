@@ -57,5 +57,6 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(sceneTransitionTime);
         SceneManager.LoadScene(levelBuildIndex);
         yield return null;
+        
     }
 }
