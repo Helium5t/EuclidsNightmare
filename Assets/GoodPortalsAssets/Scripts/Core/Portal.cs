@@ -78,11 +78,13 @@ public class Portal : MonoBehaviour {
     public void Render () {
 
         // Skip rendering the view from this portal if player is not looking at the linked portal
-        if (Time.timeScale == 0f || !CameraUtility.VisibleFromCamera (linkedPortal.screen, playerCam)) {
+        if (!CameraUtility.VisibleFromCamera (linkedPortal.screen, playerCam)) {
             linkedPortal.screen.material.SetInt ("displayMask", 0);
             return;
         }
-
+        if(Time.timeScale == 0f){
+            return;
+        }
         CreateViewTexture ();
 
         var localToWorldMatrix = playerCam.transform.localToWorldMatrix;
