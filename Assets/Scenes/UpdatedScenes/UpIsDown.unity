@@ -14435,9 +14435,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1727169999}
-  - {fileID: 2127039927}
+  m_Children: [{fileID: 1727169999}, {fileID: 2127039927}]
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17182,6 +17180,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 346961041017989572, guid: 209fcd550b4190b4c8266cddb370e01b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 346961041017989574, guid: 209fcd550b4190b4c8266cddb370e01b,
         type: 3}

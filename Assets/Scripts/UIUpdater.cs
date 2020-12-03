@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UIUpdater : MonoBehaviour
 {
+
+    [SerializeField] private Text hintTextArea;
+    
     private GameObject levelLoaderGameObject;
+
+    [TextArea]
+    [SerializeField] private string hintText;
+    
     
     private void Awake()
     {
@@ -13,6 +21,7 @@ public class UIUpdater : MonoBehaviour
     private void UpdateUI()
     {
         GameManager.Instance.UpdateUI(gameObject);
+        hintTextArea.text = hintText;
         gameObject.SetActive(false);
     }
 

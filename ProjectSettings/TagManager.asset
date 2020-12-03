@@ -12,6 +12,7 @@ TagManager:
   - Expanded Space
   - Mirror
   - LevelLoader
+  - LevelNameText
   layers:
   - Default
   - TransparentFX
