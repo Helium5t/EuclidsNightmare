@@ -329,10 +329,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7166369394848896150}
-  - component: {fileID: 7166369394848896151}
   - component: {fileID: 7166369394848896169}
+  - component: {fileID: 7166369394848896151}
   - component: {fileID: 7351225737228979885}
-  - component: {fileID: 1244787683}
   - component: {fileID: 3625801120937994416}
   m_Layer: 0
   m_Name: Euclid
@@ -358,6 +357,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &7166369394848896169
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166369394848896148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.8
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7166369394848896151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,24 +410,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 957fa5678293f8342be8e2b68b162c2f, type: 3}
   jumpSound: {fileID: 8300000, guid: 5d57b0d6218c938479df33497848ade4, type: 3}
   landSound: {fileID: 8300000, guid: 415f7c10187155a4d906611b53fa720e, type: 3}
---- !u!143 &7166369394848896169
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166369394848896148}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.8
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7351225737228979885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,26 +424,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseFollowSpeed: 8.5
   maxPickUpDistance: 5
-  minHoldingDistance: 1.2
+  minHoldingDistance: 2.5
   ignoredObstacleMaximumSize: 0.01
   slowdownThreshold: 0.1
   pickupClip: {fileID: 0}
-  disableAudio: 1
---- !u!114 &1244787683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166369394848896148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081a854c34b19e649a0b8536b3e0748a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelLoader: {fileID: 0}
-  audioSource: {fileID: 3625801120937994416}
-  endLevelClip: {fileID: 0}
   disableAudio: 1
 --- !u!82 &3625801120937994416
 AudioSource:
@@ -645,12 +628,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1528129689}
     m_Modifications:
-    - target: {fileID: 533168064, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
-      propertyPath: m_Text
-      value: '<: PLACEHOLDERHINTTEXT :>
-
-'
-      objectReference: {fileID: 0}
     - target: {fileID: 558477986, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: hintText
       value: '<: HINT :>
@@ -660,20 +637,6 @@ PrefabInstance:
     - target: {fileID: 603104919, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1441
-      objectReference: {fileID: 0}
-    - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -618
-      objectReference: {fileID: 0}
-    - target: {fileID: 3437397898938538962, guid: f2283ddb218ec0a45b5346745b7a8cf0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -618
-      objectReference: {fileID: 0}
-    - target: {fileID: 7052272767812726645, guid: f2283ddb218ec0a45b5346745b7a8cf0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -617.99994
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
@@ -784,16 +747,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 7052272768476596293, guid: f2283ddb218ec0a45b5346745b7a8cf0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -618
-      objectReference: {fileID: 0}
-    - target: {fileID: 7052272768689503545, guid: f2283ddb218ec0a45b5346745b7a8cf0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -618
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 603104921, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}

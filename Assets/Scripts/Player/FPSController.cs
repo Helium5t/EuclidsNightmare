@@ -141,8 +141,6 @@ public class FPSController : PortalTraveller
                 PlayLandingSound();
             }
             else if(Mathf.Abs(velocity.x)>stopStepCycleThreshould || Mathf.Abs(velocity.z)>stopStepCycleThreshould){
-                Debug.Log(velocity.x);
-                Debug.Log(velocity.z);
                 timeToNextStep -= Time.deltaTime;
                 if(timeToNextStep <= 0f){
                     PlayStepSound();

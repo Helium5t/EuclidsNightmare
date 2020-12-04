@@ -7,14 +7,14 @@ public class Target : MonoBehaviour
 
     private Executor executor = null;
 
+    private bool on = false;
+    private uint count = 0;
     private void Awake()
     {
         //gameObject.GetComponent<Renderer>().material.color = Color.red;
         executor = GetComponent<Executor>();
     }
 
-    private bool on = false;
-    private uint count = 0;
 
     public void activate()
     {

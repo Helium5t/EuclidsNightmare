@@ -25,27 +25,28 @@ public class DoorTrigger : Executor
 
 
     private void OnValidate() {
-        audioSource = GetComponent<AudioSource>();
-        if(!openDoorClip || !closeDoorClip){
+        disableAudio = !TryGetComponent<AudioSource>(out audioSource);
+        if(!disableAudio && (!openDoorClip || !closeDoorClip)){
             disableAudio =  true;
             Debug.LogError("No clips set for "+ gameObject.name + ", disabling audio");
-        }
-        if(audioSource.playOnAwake){
+            if(audioSource.playOnAwake){
             audioSource.playOnAwake = false;
         }
+        }
+        
     }
 
     private void Start()
     {
-        if(audioSource.loop || audioSource.mute){
+        disableAudio = !TryGetComponent<AudioSource>(out audioSource);
+        if(!disableAudio && (audioSource.loop || audioSource.mute)){
             audioSource.loop = false;
             audioSource.mute = false;
         }
-        if (!doorAnimator)
+        if (!doorAnimator && !TryGetComponent<Animator>(out doorAnimator))
         {
             doorAnimator = GetComponentInChildren<Animator>();
         }
-
         SetDoorAnimationBool(startOpen);
     }
 

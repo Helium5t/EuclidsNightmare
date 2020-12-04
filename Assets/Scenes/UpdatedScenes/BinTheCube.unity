@@ -4933,7 +4933,10 @@ PrefabInstance:
       propertyPath: hintText
       value: '<: HINT :>
 
-        Actually, bin the cube!'
+        Some spaces are longer than they look!
+
+        Try
+        jumping in the "bin" on top of the platform and use that to your advantage!'
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}

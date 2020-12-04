@@ -8370,6 +8370,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 10.495
       objectReference: {fileID: 0}
+    - target: {fileID: 5018997349500718830, guid: 07e51bfae07bbaa48a84e3b92f50e580,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 5275870172048368218, guid: 07e51bfae07bbaa48a84e3b92f50e580,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -8378,7 +8383,12 @@ PrefabInstance:
     - target: {fileID: 5275870172048368218, guid: 07e51bfae07bbaa48a84e3b92f50e580,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.16
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275870172048368218, guid: 07e51bfae07bbaa48a84e3b92f50e580,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.8
       objectReference: {fileID: 0}
     - target: {fileID: 7065966937874638411, guid: 07e51bfae07bbaa48a84e3b92f50e580,
         type: 3}
@@ -8464,6 +8474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: teleportingSide
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971358107544943952, guid: 07e51bfae07bbaa48a84e3b92f50e580,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 7971358107544943958, guid: 07e51bfae07bbaa48a84e3b92f50e580,
         type: 3}
@@ -13467,6 +13482,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7052272766877875487, guid: b18a43dee9d0ee84c84c32dd92a472f3,
+        type: 3}
+      propertyPath: hintText
+      value: '<: HINT :>
+
+        Just go through the tunnels! But watch out they''re
+        bigger on the inside.... or was it smaller?'
+      objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_Name
@@ -14064,6 +14087,63 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 771051288}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &772950378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 772950381}
+  - component: {fileID: 772950380}
+  - component: {fileID: 772950379}
+  m_Layer: 0
+  m_Name: ForcedRestart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &772950379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772950378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1229e04dfc284cc41895a6dc403bab38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &772950380
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772950378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &772950381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772950378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.3948097, y: 53.1, z: 6.039112}
+  m_LocalScale: {x: 200, y: 22.92, z: 200}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &774347017
 PrefabInstance:
   m_ObjectHideFlags: 0
