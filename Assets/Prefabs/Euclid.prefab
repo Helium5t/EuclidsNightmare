@@ -645,6 +645,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1528129689}
     m_Modifications:
+    - target: {fileID: 533168064, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_Text
+      value: '<: PLACEHOLDERHINTTEXT :>
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 558477986, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: hintText
       value: '<: HINT :>

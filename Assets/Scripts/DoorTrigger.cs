@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
@@ -33,6 +34,7 @@ public class DoorTrigger : Executor
             audioSource.playOnAwake = false;
         }
     }
+
     private void Start()
     {
         if(audioSource.loop || audioSource.mute){
