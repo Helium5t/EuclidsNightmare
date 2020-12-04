@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/UpdatedScenes/MainMenu.unity
     guid: 0266d6e13301920439f5c7bcb047d9e0
   - enabled: 1
     path: Assets/Scenes/UpdatedScenes/Level0.unity
@@ -36,6 +36,6 @@ EditorBuildSettings:
     path: Assets/Scenes/UpdatedScenes/CatchTheKey.unity
     guid: 8e6b09564338a0644a406e7771a615f8
   - enabled: 1
-    path: Assets/Scenes/FeedbackMenuScene/FeedbackMenu.unity
+    path: Assets/Scenes/UpdatedScenes/FeedbackMenuScene/FeedbackMenu.unity
     guid: fc92b164cb7f18a40977d66e9ce74da7
   m_configObjects: {}
