@@ -22539,7 +22539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 6371473537658080481}
-  teleportingSide: 0
+  teleportingSide: 2
   screen: {fileID: 4911267661602263572}
   recursionLimit: 10
   nearClipOffset: 0.05
@@ -23049,7 +23049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 8022877158335439502}
-  teleportingSide: 1
+  teleportingSide: 0
   screen: {fileID: 8291877617337777275}
   recursionLimit: 10
   nearClipOffset: 0.05
