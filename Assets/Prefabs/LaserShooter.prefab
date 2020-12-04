@@ -203,6 +203,7 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0, a: 1}
   thickness: 0.8
   alpha: 0.95
+  laserMaterial: {fileID: 2100000, guid: 5843a1bd4331be54fab86f1aecb10361, type: 2}
   objectsHit: []
 --- !u!1 &1928910390561847949
 GameObject:

@@ -3782,7 +3782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 2015117788}
   movementScale: 1
-  masterBid: 7.6523232
+  masterBid: 6.0413737
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -20436,7 +20436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 310815538}
   movementScale: 1
-  masterBid: 8.3404455
+  masterBid: 4.6195097
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -21835,11 +21835,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1928910390260646474, guid: dfbfb70baed5f564a9b3fb71b33657a5,
-        type: 3}
-      propertyPath: laserMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 5843a1bd4331be54fab86f1aecb10361, type: 2}
     - target: {fileID: 1928910390561847946, guid: dfbfb70baed5f564a9b3fb71b33657a5,
         type: 3}
       propertyPath: m_LocalPosition.x
