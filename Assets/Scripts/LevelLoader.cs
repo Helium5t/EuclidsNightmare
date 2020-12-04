@@ -37,8 +37,9 @@ public class LevelLoader : MonoBehaviour
 
     public void DisplayLevelName()
     {
-        if (_sceneName == Levels.MainMenu.ToString() || _sceneName == Levels.EndDemoRoom.ToString()) return;
-        _levelNameText.text = _sceneBuildIndex + ") " + _sceneName;
+        if (_sceneName == Levels.MainMenu.ToString() || _sceneName == Levels.FeedbackMenu.ToString()) return;
+        //_levelNameText.text = _sceneBuildIndex + ") " + _sceneName;
+        _levelNameText.text = "<: " + _sceneName + " :>";
         StartCoroutine(LevelNameFade());
     }
 

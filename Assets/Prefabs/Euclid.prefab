@@ -140,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1200}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -533,6 +533,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1528129689}
     m_Modifications:
+    - target: {fileID: 558477986, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: hintText
+      value: '<: HINT :>
+
+        Welcome to the game!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 603104919, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1441
+      objectReference: {fileID: 0}
+    - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -618
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437397898938538962, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -618
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052272767812726645, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -617.99994
+      objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -591,7 +615,7 @@ PrefabInstance:
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
@@ -601,12 +625,12 @@ PrefabInstance:
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
@@ -616,17 +640,17 @@ PrefabInstance:
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
@@ -643,7 +667,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7052272768476596293, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -618
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052272768689503545, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -618
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 603104921, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
 --- !u!224 &1906457953 stripped
 RectTransform:
