@@ -6,6 +6,7 @@
  */
 
 [RequireComponent(typeof(FPSController))]
+[RequireComponent(typeof(AudioSource))]
 public class DragObject : MonoBehaviour
 {
     [SerializeField] private float mouseFollowSpeed = 5.0f;
@@ -24,7 +25,34 @@ public class DragObject : MonoBehaviour
     // Distance at which the object slows down towards its target (when its close enough to where it should be)
     [SerializeField][Range(0.001f,1f)] private float slowdownThreshold = 0.5f;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip pickupClip;
+    [SerializeField] private bool disableAudio;
+    private AudioSource audioSource;
+
+
     private Rigidbody draggedObjectRb;
+
+    private void OnValidate() {
+        if(!pickupClip){
+            disableAudio = true;
+            Debug.LogError("No audio clips set for "+ gameObject.name + ", disabling audio");
+        }
+        audioSource = GetComponent<AudioSource>();
+        if(audioSource.mute || audioSource.loop || audioSource.playOnAwake){
+            audioSource.mute = false;
+            audioSource.loop  =false;
+            audioSource.playOnAwake = false;
+        }
+    }
+    
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+        if(audioSource.mute || audioSource.loop){
+            audioSource.mute = false;
+            audioSource.loop  =false;
+        }
+    }
 
     private void FixedUpdate() {
         if(draggedObj){
@@ -52,6 +80,7 @@ public class DragObject : MonoBehaviour
                     distanceCorrection = ComputeDistanceCorrection(draggedObj,screenPointToRay);
                     distanceFromMousePointer = Mathf.Max(hit.distance + distanceCorrection ,minHoldingDistance);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
+                    PlayPickupClip();
                     notifyDraggedObject();
                     
                 }
@@ -170,5 +199,12 @@ public class DragObject : MonoBehaviour
 
     public void expandPickUpDistance(float factor){
         maxPickUpDistance = maxPickUpDistance * factor;
+    }
+
+    private void PlayPickupClip(){
+        if(disableAudio) return;
+        
+        audioSource.clip = pickupClip;
+        audioSource.Play();
     }
 }

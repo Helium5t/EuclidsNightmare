@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class DoorTrigger : Executor
 {
     private Animator doorAnimator;
@@ -15,8 +16,29 @@ public class DoorTrigger : Executor
 
     public bool stayOpen = false;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip openDoorClip;
+    [SerializeField] private AudioClip closeDoorClip;
+    [SerializeField] private bool disableAudio;
+    private AudioSource audioSource;
+
+
+    private void OnValidate() {
+        audioSource = GetComponent<AudioSource>();
+        if(!openDoorClip || !closeDoorClip){
+            disableAudio =  true;
+            Debug.LogError("No clips set for "+ gameObject.name + ", disabling audio");
+        }
+        if(audioSource.playOnAwake){
+            audioSource.playOnAwake = false;
+        }
+    }
     private void Start()
     {
+        if(audioSource.loop || audioSource.mute){
+            audioSource.loop = false;
+            audioSource.mute = false;
+        }
         if (!doorAnimator)
         {
             doorAnimator = GetComponentInChildren<Animator>();
@@ -68,6 +90,19 @@ public class DoorTrigger : Executor
         if(!triggered){
             triggered = true;
         }
+    }
+
+    public void PlayOpenSound(){
+        if(disableAudio) return;
+        audioSource.clip = openDoorClip;
+        audioSource.Play();
+    }
+
+    public void PlayCloseSound(){
+        if(disableAudio) return;
+        audioSource.clip = closeDoorClip;
+        audioSource.Play();
+
     }
 
     private void SetDoorAnimationBool(bool value) => doorAnimator.SetBool(Open, value);
