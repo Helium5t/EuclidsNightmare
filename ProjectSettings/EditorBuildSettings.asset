@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/UpdatedScenes/UpIsDown.unity
     guid: 5de85c3700d65694f9c71fdff04ddff6
   - enabled: 1
+    path: Assets/Scenes/UpdatedScenes/Lasers.unity
+    guid: dbd181ac9430fa84c8c9b4bea68ef1b8
+  - enabled: 1
     path: Assets/Scenes/UpdatedScenes/LinkedMirrors.unity
     guid: 64da675a2d183c94ab0f9d7a31ee258a
   - enabled: 1
