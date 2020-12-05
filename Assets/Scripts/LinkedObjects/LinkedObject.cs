@@ -180,21 +180,23 @@ public class LinkedObject : MonoBehaviour
 
     public void resetOffset(Direction keptAxis, float offset){
         Vector3 newTargetOffset = transform.position - mirror.transform.position;
-        if(keptAxis != Direction.None && false){
+        if(keptAxis != Direction.None){
             if(keptAxis == Direction.x){
-                newTargetOffset.x = targetOffset.x;
+                newTargetOffset.x = offset;
             }
             if(keptAxis == Direction.y){
-                newTargetOffset.y = targetOffset.y;
+                newTargetOffset.y = offset;
             }
             if(keptAxis == Direction.z){
-                newTargetOffset.z = targetOffset.z;
+                newTargetOffset.z = offset;
             }
+        }
+        else{
+            Debug.Log("No direction");
         }
         targetOffset = newTargetOffset;
         mirror.syncOffset();
-        Debug.Log("Reset the offset, master is "+ (isMaster? gameObject.name:mirror.name));
-    }
+        }
 
     public void syncOffset(){
         targetOffset = -mirror.targetOffset;

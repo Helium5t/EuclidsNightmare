@@ -103,12 +103,13 @@ public class DragObject : MonoBehaviour
                     draggedObjectRb.useGravity = false;
                 }
                 Vector3 targetPos  = Vector3.zero;
-                if(Physics.Raycast(screenPointToRay,out hit,maxPickUpDistance,LayerMask.GetMask("Portal"))){
+                if(Physics.Raycast(screenPointToRay,out hit,maxPickUpDistance*1.5f,LayerMask.GetMask("Portal"))){
                     //MeshRenderer portalScreen = hitPortal.transform.Find("Screen").GetComponent<MeshRenderer>();
                     Portal hitPortal = hit.transform.gameObject.GetComponentInParent<Portal>();
+                    Vector3 portalRayOrigin = (hit.point - hitPortal.transform.position) + hitPortal.linkedPortal.transform.position;
+                    Vector3 portalRayDirection = screenPointToRay.direction;
                     if(hit.distance < distanceFromMousePointer){
-                        Vector3 portalRayOrigin = (hit.point - hitPortal.transform.position) + hitPortal.linkedPortal.transform.position;
-                        Vector3 portalRayDirection = screenPointToRay.direction;
+                        
                         
                         Ray portalRay = new Ray(portalRayOrigin,portalRayDirection);
                         if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
@@ -117,6 +118,10 @@ public class DragObject : MonoBehaviour
                         else{
                             targetPos = hit.point + (0.5f - distanceCorrection) *screenPointToRay.direction;
                         }
+                    }
+                    else if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
+                        targetPos = portalRayOrigin - (0.5f) * portalRayDirection;
+                        Debug.DrawRay(draggedObj.position,portalRayOrigin - draggedObj.position,Color.red);
                     }
                     else{
                         targetPos = screenPointToRay.GetPoint(distanceFromMousePointer);
