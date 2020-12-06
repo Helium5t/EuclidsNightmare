@@ -32,6 +32,7 @@ public class ButtonClickerManager : MonoBehaviour
         if (pressedButton == _buttons[1])
         {
             Debug.Log("Clicked " + _buttons[1].name);
+            Application.OpenURL("https://forms.gle/ZkGGFC5y2kofv2ha9");
             GameManager.Instance.QuitGame();
         }
     }

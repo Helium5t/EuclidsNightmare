@@ -66,7 +66,9 @@ namespace FeedbackMenuScripts
 
         public void SendFeedback()
         {
+            InputField inputText = Feedback.transform.GetComponentInParent<InputField>();
             string feedback = Feedback.text;
+            feedback = inputText.text;
             StartCoroutine(PostFeedback(_videogames_names[(int) Videogame], feedback));
         }
 

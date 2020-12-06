@@ -52,6 +52,7 @@ public class MirrorCamera : MonoBehaviour
         if (!CameraUtility.VisibleFromCamera (mirror.GetComponent<MeshRenderer>(), trackedCamera) ) {
             return;
         }
+        mirrorCamera.fieldOfView = trackedCamera.fieldOfView;
         Vector3 objectPos = trackedCamera.transform.position;
         objectPos = mirror.position  -objectPos ;
         objectPos = mirror.position + ReflectV(ReflectV(objectPos,mirror.right),mirror.forward); 

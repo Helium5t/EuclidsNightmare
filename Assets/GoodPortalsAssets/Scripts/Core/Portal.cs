@@ -93,6 +93,7 @@ public class Portal : MonoBehaviour {
 
         int startIndex = 0;
         portalCam.projectionMatrix = playerCam.projectionMatrix;
+        portalCam.fieldOfView = playerCam.fieldOfView;
         for (int i = 0; i < recursionLimit; i++) {
             if (i > 0) {
                 // No need for recursive rendering if linked portal is not visible through this portal

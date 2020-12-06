@@ -85,6 +85,8 @@ public class FPSController : PortalTraveller
         yaw = rawYaw;
         pitch = rawPitch;
         timeToNextStep = stepCycle/walkFrequency;
+        QualitySettings.vSyncCount = 1;
+        QualitySettings.antiAliasing = 2;
     }
 
     private void Update()
