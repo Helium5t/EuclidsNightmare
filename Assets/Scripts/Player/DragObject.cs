@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /*
  * mouseFollowSpeed = speed factor which controls how fast the rigidbody will follow the mouse pointer.
@@ -33,7 +34,7 @@ public class DragObject : MonoBehaviour
 
     private Rigidbody draggedObjectRb;
 
-    private void OnValidate() {
+    /*private void OnValidate() {
         if(!pickupClip){
             disableAudio = true;
             Debug.LogError("No audio clips set for "+ gameObject.name + ", disabling audio");
@@ -44,7 +45,7 @@ public class DragObject : MonoBehaviour
             audioSource.loop  =false;
             audioSource.playOnAwake = false;
         }
-    }
+    }*/
     
     private void Start() {
         audioSource = GetComponent<AudioSource>();
@@ -80,7 +81,9 @@ public class DragObject : MonoBehaviour
                     distanceCorrection = ComputeDistanceCorrection(draggedObj,screenPointToRay);
                     distanceFromMousePointer = Mathf.Max(hit.distance + distanceCorrection ,minHoldingDistance);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
+                    // FMOD Event HERE
                     PlayPickupClip();
+                    
                     notifyDraggedObject();
                     
                 }
@@ -197,14 +200,13 @@ public class DragObject : MonoBehaviour
         }
     }
 
-    public void expandPickUpDistance(float factor){
-        maxPickUpDistance = maxPickUpDistance * factor;
-    }
+    public void expandPickUpDistance(float factor) => maxPickUpDistance *= factor;
 
     private void PlayPickupClip(){
-        if(disableAudio) return;
+        throw new NotImplementedException("FMOD Event needed here: PickupClip");
+        /*if(disableAudio) return;
         
         audioSource.clip = pickupClip;
-        audioSource.Play();
+        audioSource.Play();*/
     }
 }

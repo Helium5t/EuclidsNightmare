@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class FmodPlayer : MonoBehaviour
 {
-    private readonly float _rayCastLength = 0.1f;
+    private const float _rayCastLength = 0.1f;
     private float _material;
 
     private void FixedUpdate()
@@ -17,7 +17,8 @@ public class FmodPlayer : MonoBehaviour
 
     private void GroundTypeCheck()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, _rayCastLength, 1 << 31))
+        const int layerMask = 1 << 31;
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, _rayCastLength, layerMask))
         {
             switch (hitInfo.collider.tag)
             {
@@ -41,4 +42,6 @@ public class FmodPlayer : MonoBehaviour
         footstepsInstance.start();
         footstepsInstance.release();
     }
+    
+    
 }

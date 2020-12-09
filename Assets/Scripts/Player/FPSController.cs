@@ -55,6 +55,7 @@ public class FPSController : PortalTraveller
     [SerializeField] [Range(1f, 16f)] private float runFrequency = 4f;
     float timeToNextStep; // Countdown time to playing next step sound
 
+    [Header("Audio clips")]
     [SerializeField]
     private AudioClip[] footstepSounds; // an array of footstep sounds that will be randomly selected from.
 
@@ -62,7 +63,7 @@ public class FPSController : PortalTraveller
     [SerializeField] private AudioClip landSound; // the sound played when character touches back on ground.
 
 
-    private FmodPlayer _fmodPlayer;
+    private FmodPlayer _fmodPlayer; //ref to the fmodPlayer script, the one allows us to play sounds via FMOD
 
     private void OnValidate()
     {
