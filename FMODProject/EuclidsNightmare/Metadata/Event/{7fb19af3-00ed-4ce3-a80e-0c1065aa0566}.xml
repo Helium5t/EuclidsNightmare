@@ -126,7 +126,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>16</value>
+			<value>23</value>
 		</property>
 	</object>
 	<object class="RandomizerModulator" id="{bb20688c-8947-4712-909a-4533d7b1a54a}">

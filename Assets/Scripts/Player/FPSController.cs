@@ -229,16 +229,21 @@ public class FPSController : PortalTraveller
 
     private void PlayJumpSound()
     {
-        if (disableAudio) return;
+        _fmodPlayer.PlayJumpSound(GameSoundPaths.PlayerJumpSoundPath);
+
+        /*if (disableAudio) return;
         audioSource.clip = jumpSound;
-        audioSource.Play();
+        audioSource.Play();*/
     }
 
     private void PlayLandingSound()
     {
-        if (disableAudio) return;
+        /*
+         * if (disableAudio) return;
         audioSource.clip = landSound;
         audioSource.Play();
+         */
+        _fmodPlayer.PlayLandingSound(GameSoundPaths.PlayerLandSoundPath);
         timeToNextStep = stepCycle / walkFrequency;
     }
 
