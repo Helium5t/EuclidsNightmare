@@ -42,6 +42,14 @@ public class FmodPlayer : MonoBehaviour
         footstepsInstance.start();
         footstepsInstance.release();
     }
-    
-    
+
+    public void PlayJumpSound(string jumpEventPath)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(jumpEventPath, transform.position);
+    }
+
+    public void PlayLandingSound(string landEventPath)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(landEventPath, transform.position);
+    }
 }

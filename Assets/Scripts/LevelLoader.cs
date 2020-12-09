@@ -18,14 +18,12 @@ public class LevelLoader : MonoBehaviour
     private static readonly int SceneTransitionTrigger = Animator.StringToHash("Start");
     private static readonly int LevelNameTransitionTrigger = Animator.StringToHash("NameFadeStart");
 
-    private static Text _levelNameText;
-    private static string _sceneName;
-    private static int _sceneBuildIndex;
+    private Text _levelNameText;
+    private string _sceneName;
 
     private void Awake()
     {
         _sceneName = SceneManager.GetActiveScene().name;
-        _sceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
         _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
     }
 
@@ -58,6 +56,5 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(sceneTransitionTime);
         SceneManager.LoadScene(levelBuildIndex);
         yield return null;
-        
     }
 }
