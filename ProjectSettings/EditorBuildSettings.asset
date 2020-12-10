@@ -6,11 +6,41 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/UpdatedScenes/MainMenu.unity
+    path: Assets/Scenes/FinishedScenes/MainMenu.unity
     guid: 0266d6e13301920439f5c7bcb047d9e0
   - enabled: 1
-    path: Assets/Scenes/UpdatedScenes/Level0.unity
+    path: Assets/Scenes/FinishedScenes/Level0.unity
     guid: aad6b28e144b74d40b077fe51e05029f
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/GlassLabyrinth.unity
+    guid: 3346dc69a5efa2b499489aa002abaf3f
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/BinTheCube.unity
+    guid: 79e8eb63a37f43e48a9353145caa8c6f
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/ParallelObjects.unity
+    guid: bdbd8d261ff932b45bf6956ffc371668
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/GrowingApart.unity
+    guid: 1c9557b8d49ef874db9f78d446b5c60c
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/ReverseMirror.unity
+    guid: 9b79fca631eebd24ba93d4b3dec83f8c
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/UpIsDown.unity
+    guid: 5de85c3700d65694f9c71fdff04ddff6
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/Lasers.unity
+    guid: dbd181ac9430fa84c8c9b4bea68ef1b8
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/LinkedMirrors.unity
+    guid: 64da675a2d183c94ab0f9d7a31ee258a
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/CatchTheKey.unity
+    guid: 8e6b09564338a0644a406e7771a615f8
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/FeedbackMenu.unity
+    guid: fc92b164cb7f18a40977d66e9ce74da7
   - enabled: 0
     path: Assets/Scenes/UpdatedScenes/GlassLabyrinth.unity
     guid: 3346dc69a5efa2b499489aa002abaf3f

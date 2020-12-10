@@ -83,3 +83,7 @@ Assets/Plugins/GitHub/
 
 #Custom Ignore for Elio's Local Testing
 Assets/Shaders/CustomShaders/TestingShader/
+
+#Avoiding Git LFS errors
+Assets/ArtAssets/Textures/Floor Textures/WhiteFloor/thjlehzcw_8K_Displacement.exr
+Assets/ArtAssets/Textures/Floor Textures/WhiteFloor/thjlehzcw_8K_Displacement.exr.meta

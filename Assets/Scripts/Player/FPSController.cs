@@ -92,7 +92,9 @@ public class FPSController : PortalTraveller
         rawPitch = playerCamera.transform.localEulerAngles.x;
         yaw = rawYaw;
         pitch = rawPitch;
-        timeToNextStep = stepCycle / walkFrequency;
+        timeToNextStep = stepCycle/walkFrequency;
+        QualitySettings.vSyncCount = 1;
+        QualitySettings.antiAliasing = 2;
     }
 
     private void Update()
@@ -151,10 +153,7 @@ public class FPSController : PortalTraveller
             {
                 PlayLandingSound();
             }
-            else if (Mathf.Abs(velocity.x) > stopStepCycleThreshould || Mathf.Abs(velocity.z) > stopStepCycleThreshould)
-            {
-                Debug.Log(velocity.x);
-                Debug.Log(velocity.z);
+            else if(Mathf.Abs(velocity.x)>stopStepCycleThreshould || Mathf.Abs(velocity.z)>stopStepCycleThreshould){
                 timeToNextStep -= Time.deltaTime;
                 if (timeToNextStep <= 0f)
                 {

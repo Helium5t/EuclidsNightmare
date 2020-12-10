@@ -57,22 +57,22 @@ public class Laser : MonoBehaviour
 
     void Update()
         {
-        //TODO understand why movement checks don't work
-        /*if (oldTransform == null) { Debug.Log("a = false"); }
-        else
-            {
-            Debug.Log(
-         "b = " + ((transform.position - oldTransform.position).sqrMagnitude > float.Epsilon) +
-         "\nc = " + (Quaternion.Angle(transform.rotation, oldTransform.rotation) > float.Epsilon));
-            }*/
+        //TODO fix movement
+                        /*
+                        if (oldTransform == null) { Debug.Log("a = false"); }
+                        else
+                            {
+                            Debug.Log(
+                        "b = " + ((transform.position - oldTransform.position).sqrMagnitude > float.Epsilon) +
+                        "\nc = " + (Quaternion.Angle(transform.rotation, oldTransform.rotation) > float.Epsilon));
+                            }*/
 
-        /*if (oldTransform == null || 
-            ((transform.position - oldTransform.position).sqrMagnitude > float.Epsilon) ||
-            (Quaternion.Angle(transform.rotation, oldTransform.rotation) > float.Epsilon))*/
-            {
+                        /*if (oldTransform == null || 
+                            ((transform.position - oldTransform.position).sqrMagnitude > float.Epsilon) ||
+                            (Quaternion.Angle(transform.rotation, oldTransform.rotation) > float.Epsilon))
+                        */
             castRay(transform.position, transform.forward); 
             oldTransform = transform; 
-            }
         }
 
 
