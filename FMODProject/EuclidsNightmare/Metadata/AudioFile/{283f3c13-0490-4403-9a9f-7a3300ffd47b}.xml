@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{283f3c13-0490-4403-9a9f-7a3300ffd47b}">
+		<property name="assetPath">
+			<value>Audio/Classic Footstep SFX/Ground/Ground_Step3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.5</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3a72284e-fac6-4d31-ba9a-1897a6cde7d1}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{a566f9b1-989d-4a14-b6a2-12ec18aec4ee}">
+		<property name="assetPath">
+			<value>Audio/Classic Footstep SFX/Rocky_ground/Rocky_ground_walking_loop.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3a72284e-fac6-4d31-ba9a-1897a6cde7d1}</destination>
+		</relationship>
+	</object>
+</objects>

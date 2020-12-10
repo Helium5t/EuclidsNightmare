@@ -3,15 +3,11 @@ using UnityEngine.UI;
 
 public class UIUpdater : MonoBehaviour
 {
-
     [SerializeField] private Text hintTextArea;
-    
+    [TextArea] [SerializeField] private string hintText;
+
     private GameObject levelLoaderGameObject;
 
-    [TextArea]
-    [SerializeField] private string hintText;
-    
-    
     private void Awake()
     {
         UpdateUI();
