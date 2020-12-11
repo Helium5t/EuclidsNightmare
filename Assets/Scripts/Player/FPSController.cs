@@ -115,6 +115,18 @@ public class FPSController : PortalTraveller
         velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
         var flags = controller.Move(velocity * Time.deltaTime);
+    
+
+        // Jumping
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
+            if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < 0.15f))
+            {
+                jumping = true;
+                verticalVelocity = jumpForce;
+            }
+        }
 
         float mX = Input.GetAxisRaw("Mouse X");
         float mY = Input.GetAxisRaw("Mouse Y");

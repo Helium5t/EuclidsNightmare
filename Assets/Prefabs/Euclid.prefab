@@ -514,16 +514,6 @@ MonoBehaviour:
   maxFallSpeed: 1.5
   rawYaw: 0
   rawPitch: 0
-  disableAudio: 1
-  stepCycle: 1
-  stopStepCycleThreshould: 0.01
-  walkFrequency: 2
-  runFrequency: 4
-  footstepSounds:
-  - {fileID: 8300000, guid: 620acead0314c154880bee102825d3ad, type: 3}
-  - {fileID: 8300000, guid: 957fa5678293f8342be8e2b68b162c2f, type: 3}
-  jumpSound: {fileID: 8300000, guid: 5d57b0d6218c938479df33497848ade4, type: 3}
-  landSound: {fileID: 8300000, guid: 415f7c10187155a4d906611b53fa720e, type: 3}
 --- !u!143 &7166369394848896169
 CharacterController:
   m_ObjectHideFlags: 0
@@ -559,8 +549,6 @@ MonoBehaviour:
   minHoldingDistance: 2.5
   ignoredObstacleMaximumSize: 0.01
   slowdownThreshold: 0.1
-  pickupClip: {fileID: 0}
-  disableAudio: 1
 --- !u!82 &3625801120937994416
 AudioSource:
   m_ObjectHideFlags: 0
@@ -671,10 +659,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FootstepsEventPath: event:/Sounds/Player/Locomotion/Footstep/Footstep
   JumpingEventPath: event:/Sounds/Player/Locomotion/JumpLand/JumpLand
-  MaterialParameterName: 
-  SpeedParameterName: 
-  JumpOrLandParameterName: 
-  StepDistance: 2
+  MaterialParameterName: Material
+  SpeedParameterName: SpeedSwitch
+  JumpOrLandParameterName: JumpOrLand
+  StepDistance: 1.5
   RayDistance: 1.2
   StartRunningTime: 0.3
   JumpInputName: Jump

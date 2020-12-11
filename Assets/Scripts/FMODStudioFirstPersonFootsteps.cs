@@ -21,7 +21,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     [SerializeField] private string JumpOrLandParameterName; // Use this in the Editor to write the name of the parameter that controls whether or not a jumping or a landing sound needs to be heard.
     
     [Header("Playback Settings")]
-    [SerializeField] private float StepDistance = 2.0f; // Select how far the player must travel before they hear a footstep. This will then remain a constant and will not change.
+    [SerializeField] private float StepDistance = 1.5f; // Select how far the player must travel before they hear a footstep. This will then remain a constant and will not change.
     [SerializeField] private float RayDistance = 1.2f; // Select how far the raycast will travel down to when checking for a floor. This will then remain a constant and will not change.
     [SerializeField] private float StartRunningTime = 0.3f; // Set a time. If the time between each step the player takes is less than this value, the player will start to hear running footsteps. This will then remain a constant and will not change.
     [SerializeField] private string JumpInputName; // In Unity, go Edit -> Project Settings -> Input Manager. Then find the name of the input that controls which key/button the player must press in order to jump (it's proably called "Jump"). Then once you know it's name, write it into this variable in the Inspector tab. This will then remain a constant and will not change.
@@ -53,7 +53,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     private float TimeTakenSinceStep; // We'll use this as a timer, to track the time it takes between each step.
     private int FmodPlayerRunning; // We'll use to set the value of our FMOD Switch Speed Parameter.
 
-    private Transform _transform;
+    private Transform _transform; //Transform component caching
 
     #endregion
     
