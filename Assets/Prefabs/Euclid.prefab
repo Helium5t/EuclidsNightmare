@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 7166369394848896169}
   - component: {fileID: 7351225737228979885}
   - component: {fileID: 3625801120937994416}
-  - component: {fileID: 1997978462}
+  - component: {fileID: 1014204934}
   m_Layer: 0
   m_Name: Euclid
   m_TagString: Player
@@ -514,7 +514,7 @@ MonoBehaviour:
   maxFallSpeed: 1.5
   rawYaw: 0
   rawPitch: 0
-  disableAudio: 0
+  disableAudio: 1
   stepCycle: 1
   stopStepCycleThreshould: 0.01
   walkFrequency: 2
@@ -657,7 +657,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1997978462
+--- !u!114 &1014204934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -666,9 +666,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 7166369394848896148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f4460670cca434593c9eecd37a7bd1, type: 3}
+  m_Script: {fileID: 11500000, guid: c0028668d1a60394ea305c8154a467f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FootstepsEventPath: event:/Sounds/Player/Locomotion/Footstep/Footstep
+  JumpingEventPath: event:/Sounds/Player/Locomotion/JumpLand/JumpLand
+  MaterialParameterName: 
+  SpeedParameterName: 
+  JumpOrLandParameterName: 
+  StepDistance: 2
+  RayDistance: 1.2
+  StartRunningTime: 0.3
+  JumpInputName: Jump
+  MaterialTypes:
+  - Floor
+  - Stone
+  DefulatMaterialValue: 0
 --- !u!1 &7166369395430997816
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +779,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a42331d6ec5746d4960a877e58cfb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3336067354738233469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166369395430997816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &7685814858127989845
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,20 +871,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: press esc for a hint
---- !u!114 &3336067354738233469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166369395430997816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
-  ListenerNumber: -1
 --- !u!1001 &7052272767426826173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -869,6 +882,24 @@ PrefabInstance:
       propertyPath: hintTextArea
       value: 
       objectReference: {fileID: 1600348552860953074}
+    - target: {fileID: 558477986, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: hintText
+      value: '<: HINT :>
+
+        Welcome to Euclid''s Nightmare!
+
+        WASD :
+        MOVEMENT
+
+        SPACEBAR : JUMP
+
+        LEFT SHIFT : RUN
+
+        LEFT
+        CLICK : PICK UP
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -616.3

@@ -81,6 +81,7 @@ public class DragObject : MonoBehaviour
                     distanceCorrection = ComputeDistanceCorrection(draggedObj,screenPointToRay);
                     distanceFromMousePointer = Mathf.Max(hit.distance + distanceCorrection ,minHoldingDistance);
                     draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
+                    
                     // FMOD Event HERE
                     PlayPickupClip();
                     
@@ -208,7 +209,6 @@ public class DragObject : MonoBehaviour
     public void expandPickUpDistance(float factor) => maxPickUpDistance *= factor;
 
     private void PlayPickupClip(){
-        throw new NotImplementedException("FMOD Event needed here: PickupClip");
         /*if(disableAudio) return;
         
         audioSource.clip = pickupClip;

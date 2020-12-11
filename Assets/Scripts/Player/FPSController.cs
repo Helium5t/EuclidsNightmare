@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(AudioSource))]
 public class FPSController : PortalTraveller
 {
-    
     [Header("Main Settings")] public float walkSpeed = 3;
     public float runSpeed = 6;
     public float smoothMoveTime = 0.1f;
@@ -55,15 +54,13 @@ public class FPSController : PortalTraveller
     [SerializeField] [Range(1f, 16f)] private float runFrequency = 4f;
     float timeToNextStep; // Countdown time to playing next step sound
 
-    [Header("Audio clips")]
-    [SerializeField]
+    [Header("Audio clips")] [SerializeField]
     private AudioClip[] footstepSounds; // an array of footstep sounds that will be randomly selected from.
 
     [SerializeField] private AudioClip jumpSound; // the sound played when character leaves the ground.
     [SerializeField] private AudioClip landSound; // the sound played when character touches back on ground.
 
 
-    private FmodPlayer _fmodPlayer; //ref to the fmodPlayer script, the one allows us to play sounds via FMOD
 
     private void OnValidate()
     {
@@ -74,7 +71,6 @@ public class FPSController : PortalTraveller
         }
     }
 
-    private void Awake() => _fmodPlayer = GetComponent<FmodPlayer>();
 
     private void Start()
     {
@@ -92,7 +88,7 @@ public class FPSController : PortalTraveller
         rawPitch = playerCamera.transform.localEulerAngles.x;
         yaw = rawYaw;
         pitch = rawPitch;
-        timeToNextStep = stepCycle/walkFrequency;
+        timeToNextStep = stepCycle / walkFrequency;
         QualitySettings.vSyncCount = 1;
         QualitySettings.antiAliasing = 2;
     }
@@ -153,7 +149,8 @@ public class FPSController : PortalTraveller
             {
                 PlayLandingSound();
             }
-            else if(Mathf.Abs(velocity.x)>stopStepCycleThreshould || Mathf.Abs(velocity.z)>stopStepCycleThreshould){
+            else if (Mathf.Abs(velocity.x) > stopStepCycleThreshould || Mathf.Abs(velocity.z) > stopStepCycleThreshould)
+            {
                 timeToNextStep -= Time.deltaTime;
                 if (timeToNextStep <= 0f)
                 {
@@ -228,7 +225,7 @@ public class FPSController : PortalTraveller
 
     private void PlayJumpSound()
     {
-        _fmodPlayer.PlayJumpSound(GameSoundPaths.PlayerJumpSoundPath);
+        //_fmodPlayer.PlayJumpSound(GameSoundPaths.PlayerJumpLandSoundPath);
 
         /*if (disableAudio) return;
         audioSource.clip = jumpSound;
@@ -242,13 +239,13 @@ public class FPSController : PortalTraveller
         audioSource.clip = landSound;
         audioSource.Play();
          */
-        _fmodPlayer.PlayLandingSound(GameSoundPaths.PlayerLandSoundPath);
+        //_fmodPlayer.PlayLandingSound(GameSoundPaths.PlayerJumpLandSoundPath);
         timeToNextStep = stepCycle / walkFrequency;
     }
 
     private void PlayStepSound()
     {
-        _fmodPlayer.PlayFootstepsSound(GameSoundPaths.FootstepsEventPath);
+        //_fmodPlayer.PlayFootstepsSound(GameSoundPaths.FootstepsEventPath);
 
         // if (disableAudio) return;
         // timeToNextStep = stepCycle*getStepFrequency();
