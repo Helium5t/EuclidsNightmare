@@ -117,7 +117,7 @@ public class FPSController : PortalTraveller
         var flags = controller.Move(velocity * Time.deltaTime);
     
 
-        // Jumping
+        // Jumping Physical Movement
         if (Input.GetKeyDown(KeyCode.Space))
         {
             float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
