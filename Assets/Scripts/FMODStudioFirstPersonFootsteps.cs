@@ -13,6 +13,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     #region ExposedVariables
 
     [Header("FMOD Settings")]
+    //TODO: we have GameSoundsPaths static class so we could remove the following two vars... :)
     [SerializeField] [EventRef] private string FootstepsEventPath; // Use this in the Editor to select our Footsteps Event.
     [SerializeField] [EventRef] private string JumpingEventPath; // Use this in the Editor to select our Jumping Event.
     [SerializeField] private string MaterialParameterName;  // Use this in the Editor to write the name of the parameter that controls which material the player is currently walking on.
@@ -116,7 +117,8 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
 /// </summary>
 private void MaterialCheck() 
     {
-        if (Physics.Raycast(_transform.position, Vector3.down, out hit, RayDistance)) // A raycast is fired down, from the position that the player is curenntly standing at, traveling as far as we decide to set the 'RayDistance' variable to. Infomration about the object it comes into contact with will then be stored inside the 'hit' variable for us to access.
+        
+        if (Physics.Raycast(_transform.position, Vector3.down, out hit, RayDistance)) 
         {   
             /*
              * Can be substituted with:
@@ -124,12 +126,12 @@ private void MaterialCheck()
              * ? hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>().MaterialValue : DefaultMaterial;
              */
 
-            if (hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>()) // Using the 'hit' varibale, we check to see if the raycast has hit a collider attached to a gameobject, that also has the 'FMODStudioMaterialSetter' script attached to it as a component...
+            if (hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>()) // Using the 'hit' variable, we check to see if the raycast has hit a collider attached to a gameobject, that also has the 'FMODStudioMaterialSetter' script attached to it as a component...
             {
-                FmodMaterialValue = hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>().MaterialValue; // ...and if it did, we then set our 'F_MaterialValue' varibale to match whatever value the 'MaterialValue' variable (which is inside the 'F_MaterialValue' varibale) is currently set to.
+                FmodMaterialValue = hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>().MaterialValue; // ...and if it did, we then set our 'FmodMaterialValue' variable to match whatever value the 'MaterialValue' variable (which is inside the 'F_MaterialValue' varibale) is currently set to.
             }
             else  // Else if however, the player is standing on an object that doesn't have a 'FMODStudioMaterialSetter' script component for our raycast to find...
-                FmodMaterialValue = DefaultMaterialValue;  // ...we then set 'F_MaterialValue' to match the value of 'DefaultMaterialValue'. 'DefaultMaterialValue' is given a value by the 'FMODStudioFootstepsEditor' script. This value represents whatever material we have selected as our 'DefulatMaterial' in the Unity Inspector tab.
+                FmodMaterialValue = DefaultMaterialValue;  // ...we then set 'FmodMaterialValue' to match the value of 'DefaultMaterialValue'. 'DefaultMaterialValue' is given a value by the 'FMODStudioFootstepsEditor' script. This value represents whatever material we have selected as our 'DefulatMaterial' in the Unity Inspector tab.
         }
         else // Else if however, the raycast can't find a collider attached to the object at all...
             FmodMaterialValue = DefaultMaterialValue; // Then again, we set 'FmodMaterialValue' to match the value of 'DefaultMaterialValue'.

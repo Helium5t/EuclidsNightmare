@@ -681,7 +681,7 @@ MonoBehaviour:
   MaterialTypes:
   - Floor
   - Stone
-  DefulatMaterialValue: 0
+  DefaultMaterialValue: 0
 --- !u!1 &7166369395430997816
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,19 +886,8 @@ PrefabInstance:
       propertyPath: hintText
       value: '<: HINT :>
 
-        Welcome to Euclid''s Nightmare!
-
-        WASD :
-        MOVEMENT
-
-        SPACEBAR : JUMP
-
-        LEFT SHIFT : RUN
-
-        LEFT
-        CLICK : PICK UP
-
-'
+        Just go through the tunnels! But watch out they''re
+        bigger on the inside.... or was it smaller?'
       objectReference: {fileID: 0}
     - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: m_AnchoredPosition.x

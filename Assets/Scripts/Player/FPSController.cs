@@ -42,39 +42,12 @@ public class FPSController : PortalTraveller
     bool jumping;
     float lastGroundedTime;
     bool disabled;
-
-    [Header("Audio Settings")] [SerializeField]
-    private bool disableAudio;
-
-    [SerializeField] [Range(0.3f, 3f)] private float stepCycle = 0.6f; // How long it takes to play two step sounds
-    private AudioSource audioSource;
-
-    [SerializeField] [Range(0.001f, 0.1f)] private float stopStepCycleThreshould = 0.01f;
-    [SerializeField] [Range(1f, 8f)] private float walkFrequency = 2f;
-    [SerializeField] [Range(1f, 16f)] private float runFrequency = 4f;
-    float timeToNextStep; // Countdown time to playing next step sound
-
-    [Header("Audio clips")] [SerializeField]
-    private AudioClip[] footstepSounds; // an array of footstep sounds that will be randomly selected from.
-
-    [SerializeField] private AudioClip jumpSound; // the sound played when character leaves the ground.
-    [SerializeField] private AudioClip landSound; // the sound played when character touches back on ground.
-
-
-
-    private void OnValidate()
-    {
-        if (!disableAudio && footstepSounds.Length == 0 || !jumpSound || !landSound)
-        {
-            Debug.LogError("No audio clips are set for " + gameObject.name + ", disabling audio");
-            disableAudio = true;
-        }
-    }
+    
 
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+       
         playerCamera = Camera.main;
         if (lockCursor)
         {
@@ -88,7 +61,6 @@ public class FPSController : PortalTraveller
         rawPitch = playerCamera.transform.localEulerAngles.x;
         yaw = rawYaw;
         pitch = rawPitch;
-        timeToNextStep = stepCycle / walkFrequency;
         QualitySettings.vSyncCount = 1;
         QualitySettings.antiAliasing = 2;
     }
@@ -143,41 +115,6 @@ public class FPSController : PortalTraveller
         velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
         var flags = controller.Move(velocity * Time.deltaTime);
-        if (flags == CollisionFlags.Below)
-        {
-            if (jumping)
-            {
-                PlayLandingSound();
-            }
-            else if (Mathf.Abs(velocity.x) > stopStepCycleThreshould || Mathf.Abs(velocity.z) > stopStepCycleThreshould)
-            {
-                timeToNextStep -= Time.deltaTime;
-                if (timeToNextStep <= 0f)
-                {
-                    PlayStepSound();
-                }
-            }
-            else
-            {
-                timeToNextStep = stepCycle * getStepFrequency();
-            }
-
-            jumping = false;
-            lastGroundedTime = Time.time;
-            verticalVelocity = 0;
-        }
-
-        // Jumping
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
-            if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < 0.15f))
-            {
-                jumping = true;
-                verticalVelocity = jumpForce;
-                PlayJumpSound();
-            }
-        }
 
         float mX = Input.GetAxisRaw("Mouse X");
         float mY = Input.GetAxisRaw("Mouse Y");
@@ -223,49 +160,6 @@ public class FPSController : PortalTraveller
         Physics.SyncTransforms();
     }
 
-    private void PlayJumpSound()
-    {
-        //_fmodPlayer.PlayJumpSound(GameSoundPaths.PlayerJumpLandSoundPath);
 
-        /*if (disableAudio) return;
-        audioSource.clip = jumpSound;
-        audioSource.Play();*/
-    }
 
-    private void PlayLandingSound()
-    {
-        /*
-         * if (disableAudio) return;
-        audioSource.clip = landSound;
-        audioSource.Play();
-         */
-        //_fmodPlayer.PlayLandingSound(GameSoundPaths.PlayerJumpLandSoundPath);
-        timeToNextStep = stepCycle / walkFrequency;
-    }
-
-    private void PlayStepSound()
-    {
-        //_fmodPlayer.PlayFootstepsSound(GameSoundPaths.FootstepsEventPath);
-
-        // if (disableAudio) return;
-        // timeToNextStep = stepCycle*getStepFrequency();
-        // // pick & play a random footstep sound from the array,
-        // // excluding sound at index 0
-        //
-        // int n = Random.Range(1, footstepSounds.Length);
-        // audioSource.clip = footstepSounds[n];
-        // audioSource.PlayOneShot(audioSource.clip);
-        // // move picked sound to index 0 so it's not picked next time
-        // footstepSounds[n] = footstepSounds[0];
-        // footstepSounds[0] = audioSource.clip;
-    }
-
-    public float getStepFrequency()
-    {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            return 1 / runFrequency;
-        }
-        else return 1 / walkFrequency;
-    }
 }

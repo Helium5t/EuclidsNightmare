@@ -56,7 +56,7 @@ public class FMODStudioFootstepsEditorTwo : Editor
         var FPF = target as FMODStudioFirstPersonFootsteps; 
         /*
          * We then create another dropdown menu using 'EditorGUILayout.Popup'. This time we call it "Set Default Material As",
-         * we chose the 'DefaultMaterialValue' as the int we want to be see as selected and set the options to the same array of strings, 'MaterialTypes'.
+         * we chose the 'DefaultMaterialValue' as the int we want to be seen as selected and set the options to the same array of strings, 'MaterialTypes'.
          * We then set the result of our dropdown menu to the 'DefaultMaterialValue' int for the 'FirstPersonFootsteps' script to use.
         */
         FPF.DefaultMaterialValue = EditorGUILayout.Popup("Set Default Material As", FPF.DefaultMaterialValue, FPF.MaterialTypes);     
