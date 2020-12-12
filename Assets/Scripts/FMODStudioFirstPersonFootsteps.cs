@@ -155,7 +155,7 @@ private void SpeedCheck()
 /// </summary>
 private void GroundedCheck()
 {
-    Physics.Raycast(_transform.position, Vector3.down, out hit, RayDistance);    // First, a raycast is fired from the location of the player, downwards towards the ground. It travels for as far as we set the 'RayDistance' variable to in UNity's Inspector and then stores information about whatever it comes into contact with inside the 'hit' variable. 
+    Physics.Raycast(_transform.position, Vector3.down, out hit, RayDistance); // First, a raycast is fired from the location of the player, downwards towards the ground. It travels for as far as we set the 'RayDistance' variable to in UNity's Inspector and then stores information about whatever it comes into contact with inside the 'hit' variable. 
     isPlayerTouchingGround = hit.collider;
 }
 
