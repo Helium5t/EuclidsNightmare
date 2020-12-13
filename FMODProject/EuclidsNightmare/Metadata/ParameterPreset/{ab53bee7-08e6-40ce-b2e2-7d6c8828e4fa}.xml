@@ -12,14 +12,21 @@
 		</relationship>
 	</object>
 	<object class="GameParameter" id="{aa59a09b-f8fd-450f-814a-91d1fb9ca760}">
-		<property name="minimum">
-			<value>1</value>
+		<property name="parameterType">
+			<value>2</value>
 		</property>
 		<property name="maximum">
 			<value>2</value>
 		</property>
+		<property name="enumerationLabels">
+			<value>Floor</value>
+			<value>Stone</value>
+		</property>
+		<property name="isHeld">
+			<value>true</value>
+		</property>
 		<property name="initialValue">
-			<value>1</value>
+			<value>0</value>
 		</property>
 	</object>
 </objects>

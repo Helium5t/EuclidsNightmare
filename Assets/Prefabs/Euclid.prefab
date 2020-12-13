@@ -382,10 +382,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7166369394848896150}
   - component: {fileID: 7166369394848896151}
-  - component: {fileID: 7351225737228979885}
-  - component: {fileID: 1997978462}
   - component: {fileID: 7166369394848896169}
+  - component: {fileID: 7351225737228979885}
   - component: {fileID: 3625801120937994416}
+  - component: {fileID: 1014204934}
   - component: {fileID: 9084385711982661696}
   - component: {fileID: 7896148613088232223}
   m_Layer: 0
@@ -436,47 +436,6 @@ MonoBehaviour:
   maxFallSpeed: 1.5
   rawYaw: 0
   rawPitch: 0
-  disableAudio: 0
-  stepCycle: 1
-  stopStepCycleThreshould: 0.01
-  walkFrequency: 2
-  runFrequency: 4
-  footstepSounds:
-  - {fileID: 8300000, guid: 620acead0314c154880bee102825d3ad, type: 3}
-  - {fileID: 8300000, guid: 957fa5678293f8342be8e2b68b162c2f, type: 3}
-  jumpSound: {fileID: 8300000, guid: 5d57b0d6218c938479df33497848ade4, type: 3}
-  landSound: {fileID: 8300000, guid: 415f7c10187155a4d906611b53fa720e, type: 3}
---- !u!114 &7351225737228979885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166369394848896148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5d0dcfc32ad70541adb37d6fe300713, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseFollowSpeed: 8.5
-  maxPickUpDistance: 5
-  minHoldingDistance: 2.5
-  ignoredObstacleMaximumSize: 0.01
-  slowdownThreshold: 0.1
-  pickupClip: {fileID: 0}
-  disableAudio: 1
---- !u!114 &1997978462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166369394848896148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f4460670cca434593c9eecd37a7bd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &7166369394848896169
 CharacterController:
   m_ObjectHideFlags: 0
@@ -495,6 +454,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7351225737228979885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166369394848896148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d0dcfc32ad70541adb37d6fe300713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseFollowSpeed: 8.5
+  maxPickUpDistance: 5
+  minHoldingDistance: 2.5
+  ignoredObstacleMaximumSize: 0.01
+  slowdownThreshold: 0.1
 --- !u!82 &3625801120937994416
 AudioSource:
   m_ObjectHideFlags: 0
@@ -591,6 +567,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1014204934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166369394848896148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0028668d1a60394ea305c8154a467f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FootstepsEventPath: event:/Sounds/Player/Locomotion/Footstep/Footstep
+  JumpingEventPath: event:/Sounds/Player/Locomotion/JumpLand/JumpLand
+  MaterialParameterName: Material
+  SpeedParameterName: SpeedSwitch
+  JumpOrLandParameterName: JumpOrLand
+  StepDistance: 1.5
+  RayDistance: 1.2
+  StartRunningTime: 0.3
+  JumpInputName: Jump
+  MaterialTypes:
+  - Floor
+  - Stone
+  DefaultMaterialValue: 0
 --- !u!33 &9084385711982661696
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -735,20 +736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a42331d6ec5746d4960a877e58cfb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3336067354738233469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166369395430997816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
-  ListenerNumber: -1
 --- !u!1 &7685814858127989845
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +814,20 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: press esc for a hint
+--- !u!114 &3336067354738233469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166369395430997816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1001 &7052272767426826173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,6 +839,13 @@ PrefabInstance:
       propertyPath: hintTextArea
       value: 
       objectReference: {fileID: 1600348552860953074}
+    - target: {fileID: 558477986, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: hintText
+      value: '<: HINT :>
+
+        Just go through the tunnels! But watch out they''re bigger on the inside....
+        or was it smaller?'
+      objectReference: {fileID: 0}
     - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -616.3
