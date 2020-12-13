@@ -74,7 +74,11 @@ public class FPSController : PortalTraveller
         }
     }
 
-    private void Awake() => _fmodPlayer = GetComponent<FmodPlayer>();
+    protected override void Awake(){
+        base.Awake();
+        _fmodPlayer = GetComponent<FmodPlayer>();
+    }
+
 
     private void Start()
     {

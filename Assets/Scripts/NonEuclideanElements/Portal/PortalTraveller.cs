@@ -48,6 +48,27 @@ public class PortalTraveller : MonoBehaviour {
         }
     }
 
+    protected virtual void Awake(){
+        if(!TryGetComponent<MeshRenderer>(out MeshRenderer renderedmesh)){
+            renderedmesh = GetComponentInChildren<MeshRenderer>();
+        }
+        if(renderedmesh.material.shader != Shader.Find("Custom/Slice")){
+            renderedmesh.material = new Material(Shader.Find("Custom/Slice"));
+        }
+        if(!graphicsObject){
+            GameObject selfGraphics =  new GameObject(gameObject.name + " (Graphics)");
+            selfGraphics.AddComponent<MeshFilter>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
+            selfGraphics.AddComponent<MeshRenderer>();
+            selfGraphics.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
+            selfGraphics.transform.localScale = gameObject.transform.localScale;
+            selfGraphics.transform.parent = transform;
+            selfGraphics.transform.localPosition = Vector3.zero;
+            selfGraphics.transform.localRotation = Quaternion.Euler(0f,0f,0f);
+            selfGraphics.SetActive(false);
+            graphicsObject = selfGraphics;
+        }
+    }
+
     Material[] GetMaterials (GameObject g) {
         var renderers = g.GetComponentsInChildren<MeshRenderer> ();
         var matList = new List<Material> ();
