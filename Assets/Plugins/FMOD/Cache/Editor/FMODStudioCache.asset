@@ -40,8 +40,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -3301372121304329441}
-  - {fileID: -43539448078158805}
+  - {fileID: 6430113246288789713}
+  - {fileID: -2346747162802869524}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMODProject/EuclidsNightmare/Build/Desktop/Master.bank
   Name: Master
-  lastModified: 637435468017429472
+  lastModified: 637435618329107516
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -123,6 +123,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-2346747162802869524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footstep/Material
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2228556556414667739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +167,26 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 600
+--- !u!114 &-2060279664946659558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/JumpLand/Material
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-819757611416503438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,8 +207,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 4631933965640815994}
-  - {fileID: 4024239413637069878}
+  - {fileID: -2060279664946659558}
+  - {fileID: 4316169127038170935}
   MinDistance: 0
   MaxDistance: 0
   Length: 400
@@ -216,7 +256,7 @@ MonoBehaviour:
   - {fileID: -4137326856156580624}
   StringsBanks:
   - {fileID: 7104546579583842140}
-  stringsBankWriteTime: 637435468017529492
+  stringsBankWriteTime: 637435618329117498
   cacheVersion: 5
 --- !u!114 &881308520334916416
 MonoBehaviour:
@@ -364,6 +404,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &4316169127038170935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/JumpLand/JumpOrLand
+  m_EditorClassIdentifier: 
+  Name: JumpOrLand
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &4631933965640815994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +437,26 @@ MonoBehaviour:
   m_Name: parameter:/JumpLand/Material
   m_EditorClassIdentifier: 
   Name: Material
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &6430113246288789713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footstep/SpeedSwitch
+  m_EditorClassIdentifier: 
+  Name: SpeedSwitch
   Min: 0
   Max: 1
   Default: 0
@@ -398,7 +478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMODProject/EuclidsNightmare/Build/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637435468017529492
+  lastModified: 637435618329117498
   LoadResult: 0
   FileSizes:
   - Name: Desktop
