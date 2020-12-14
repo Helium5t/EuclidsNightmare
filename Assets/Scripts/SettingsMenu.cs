@@ -38,7 +38,6 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void setVolume(float volumeVal) => audioMixer.SetFloat("MasterVolume", volumeVal);
     public void setVsync(bool isVsyncActive) => QualitySettings.vSyncCount = isVsyncActive ? 1 : 0;
 
     public void setFullScreen(bool isFullScreen) => Screen.fullScreen = isFullScreen;
