@@ -579,8 +579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0028668d1a60394ea305c8154a467f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FootstepsEventPath: event:/Sounds/Player/Locomotion/Footstep/Footstep
-  JumpingEventPath: event:/Sounds/Player/Locomotion/JumpLand/JumpLand
+  FootstepsEventPath: 
+  JumpingEventPath: 
   MaterialParameterName: Material
   SpeedParameterName: SpeedSwitch
   JumpOrLandParameterName: JumpOrLand
@@ -736,6 +736,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a42331d6ec5746d4960a877e58cfb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3336067354738233469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166369395430997816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &7685814858127989845
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +815,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 77cddc07086aec74bac73f7d1d23bc66, type: 3}
+    m_Font: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -814,20 +828,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: press esc for a hint
---- !u!114 &3336067354738233469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166369395430997816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
-  ListenerNumber: -1
 --- !u!1001 &7052272767426826173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -843,18 +843,29 @@ PrefabInstance:
       propertyPath: hintText
       value: '<: HINT :>
 
-        Just go through the tunnels! But watch out they''re bigger on the inside....
-        or was it smaller?'
+        Just go through the tunnels! But watch out they''re
+        bigger on the inside.... or was it smaller?'
       objectReference: {fileID: 0}
     - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -616.3
       objectReference: {fileID: 0}
+    - target: {fileID: 890371955, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0,
+        type: 3}
     - target: {fileID: 2354277481935092344, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 514.4
       objectReference: {fileID: 0}
+    - target: {fileID: 2724678219000676712, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0,
+        type: 3}
     - target: {fileID: 3437397898938538962, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -865,6 +876,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -615.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7052272766863435546, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0,
+        type: 3}
+    - target: {fileID: 7052272766987301165, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0,
+        type: 3}
     - target: {fileID: 7052272767812726645, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -995,6 +1018,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -616.3
       objectReference: {fileID: 0}
+    - target: {fileID: 7052272768557891284, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0,
+        type: 3}
     - target: {fileID: 7052272768689503545, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
