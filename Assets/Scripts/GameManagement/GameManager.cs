@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
 
@@ -7,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     public static bool GameIsPaused;
     public int targetFPS = 60;
+    
     private GameObject pauseMenuUI;
 
     private void Start() => Application.targetFrameRate = targetFPS;
