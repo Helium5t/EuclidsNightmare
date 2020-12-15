@@ -1,40 +1,58 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-[RequireComponent(typeof(Executor))]
-public class Target : MonoBehaviour
-{
+
+public abstract class Target : MonoBehaviour
+    {
     [SerializeField] public uint require = 1;
+    [SerializeField] private float timer_seconds = 0;
+    [SerializeField] private bool ignoreTimerIfActive = true;
+    [Header("Prefab only fields - do not change outside of prefab editor")]
+    [SerializeField] private MeshRenderer debug_mesh = null;
+    [SerializeField] private Material debugMaterial = null;
 
-    private Executor executor = null;
-
-    private bool on = false;
+    public bool isActive { get; private set; }
     private uint count = 0;
+
     private void Awake()
-    {
-        //gameObject.GetComponent<Renderer>().material.color = Color.red;
-        executor = GetComponent<Executor>();
-    }
+        {
+        if (Debug.isDebugBuild)
+            {
+            debug_mesh.material = new Material(debugMaterial);
+            debug_mesh.material.color = Color.red;
+            }
+        }
 
-
-    public void activate()
-    {
+    protected abstract void activate();
+    public void _activate()
+        {
         count++;
-        if (count >= require && !on)
-        {
-            on = true;
-            //gameObject.GetComponent<Renderer>().material.color = Color.green;
-            executor.activate();
+        if (count >= require && !isActive)
+            {
+            if (Debug.isDebugBuild) { debug_mesh.material.color = Color.green; }
+            isActive = true;
+            if (timer_seconds != 0) { StartCoroutine(deactivateTimer()); }
+            activate();
+            }
         }
-    }
 
-    public void deactivate()
-    {
-        count--;
-        if (count < require && on)
+    protected abstract void deactivate();
+    public void _deactivate()
         {
-            on = false;
-            //gameObject.GetComponent<Renderer>().material.color = Color.red;
-            executor.deactivate();
+        count--;
+        if (count < require && isActive) { __deactivate(); }
+        }
+
+    private void __deactivate()
+        {
+        if (Debug.isDebugBuild) { debug_mesh.material.color = Color.red; }
+        isActive = false;
+        deactivate();
+        }
+
+    private IEnumerator deactivateTimer()
+        {
+        yield return new WaitForSeconds(timer_seconds);
+        if (!ignoreTimerIfActive && isActive) { __deactivate(); }
         }
     }
-}

@@ -2,7 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlate : Trigger
+[RequireComponent(typeof(Trigger))]
+public class PressurePlate : MonoBehaviour
+    {
+    private Trigger trigger;
+    private static readonly int pressed = Animator.StringToHash("pressed");
+
+    private void Awake()
+        {
+        trigger = GetComponent<Trigger>();
+        }
+
+    [SerializeField] private bool ignorePlayer = false;
+    [SerializeField] private bool useRigidbody = false;
+    [SerializeField] private float triggerWeight = 2f; //TODO
+    [Header("Prefab only fields - do not change outside of prefab editor")]
+    [SerializeField] private Animator animator = null;
+
+    private void OnTriggerEnter(Collider other)
+        {
+        if (ignorePlayer && other.CompareTag("Player")) { return; }
+        if (trigger.entered == 0) { SetAnimationBool(true); }
+        trigger.enter();
+        }
+
+    private void OnTriggerExit(Collider other)
+        {
+
+        if (ignorePlayer && other.CompareTag("Player")) { return; }
+        trigger.leave();
+        if (trigger.entered == 0) { SetAnimationBool(false); }
+        }
+
+    private void SetAnimationBool(bool value) => animator.SetBool(pressed, value);
+    }
+
+/*
+public class OldPressurePlate : Trigger
 {
     [SerializeField] private bool ignorePlayer = false;
     [SerializeField] private bool useRigidbody = false;
@@ -127,15 +163,4 @@ public class PressurePlate : Trigger
 
         return 1;
     }
-
-
-    public override void firstEnter()
-    {
-        return;
-    }
-
-    public override void lastLeave()
-    {
-        return;
-    }
-}
+}*/
