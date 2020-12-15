@@ -1,14 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
 
 public class GameManager : Singleton<GameManager>
 {
     public static bool GameIsPaused;
+    public int targetFPS = 60;
     private GameObject pauseMenuUI;
+
+    private void Start() => Application.targetFrameRate = targetFPS;
 
     private void Update()
     {
+        // Might be an over kill but it'll work!
+        if (Application.targetFrameRate != targetFPS) Application.targetFrameRate = targetFPS;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused) ResumeGame();
