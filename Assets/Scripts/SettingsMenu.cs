@@ -44,7 +44,7 @@ public class SettingsMenu : MonoBehaviour
         UpdateResolutionsDropdown();
     }
 
-    public void setDisableAudio(bool isAudioDisabled) => throw new NotImplementedException("SetDisable audio is not implemented, yet :=)");
+    public void setDisableAudio(bool isAudioDisabled) => masterBus.setMute(isAudioDisabled);
 
     public void setMasterVolume(float newMasterVolume) => MasterVolume = newMasterVolume;
 
