@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using FMOD.Studio;
@@ -40,7 +39,6 @@ public class SettingsMenu : MonoBehaviour
     private void Start()
     {
         graphicsQualities.GetComponent<Dropdown>().value = QualitySettings.GetQualityLevel();
-
         UpdateResolutionsDropdown();
     }
 
