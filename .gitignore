@@ -101,7 +101,8 @@ Assets/ArtAssets/Textures/Floor Textures/WhiteFloor/thjlehzcw_8K_Displacement.ex
 /[Aa]ssets/**/FMODStudioCache.asset.meta
 /[Aa]ssets/Plugins/FMOD/Cache.meta
 /[Aa]ssets/Plugins/FMOD/Cache/Editor.meta
-
+/[Aa]ssets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
+/[Aa]ssets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset.meta
 # Log-files
 fmod.log
 fmod_editor.log
