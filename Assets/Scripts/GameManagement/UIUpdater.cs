@@ -21,6 +21,8 @@ public class UIUpdater : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void PauseGame() => Time.timeScale = 0f;
+
     public void ResumeGame() => GameManager.Instance.ResumeGame();
 
     public void QuitGame() => GameManager.Instance.QuitGame();
