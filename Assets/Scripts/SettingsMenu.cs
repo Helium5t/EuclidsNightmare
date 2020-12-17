@@ -6,8 +6,14 @@ using Utility;
 
 public class SettingsMenu : MonoBehaviour
 {
+    #region ExposedVariables
+
     public Dropdown resolutions;
     public Dropdown graphicsQualities;
+
+    #endregion
+
+    #region PrivateVariables
 
     private Resolution[] _possibleResolutions;
 
@@ -20,6 +26,8 @@ public class SettingsMenu : MonoBehaviour
     private float _masterVolume = 1f;
     private float _musicVolume = 0.5f;
     private float _sfxVolume = 0.5f;
+
+    #endregion
 
     private void Awake()
     {
@@ -42,7 +50,7 @@ public class SettingsMenu : MonoBehaviour
         UpdateResolutionsDropdown();
     }
 
-    public void ChangeFovValue(float fovValue) => Camera.main.fieldOfView = fovValue;
+    public void SetFovValue(float fovValue) => Camera.main.fieldOfView = fovValue;
 
     public void SetDisableAudio(bool isAudioDisabled) => _masterBus.setMute(isAudioDisabled);
 
@@ -75,13 +83,15 @@ public class SettingsMenu : MonoBehaviour
     {
         _possibleResolutions = Screen.resolutions;
 
+        #region CreateResolutionsStringList
+
         List<string> resolutionsStringList = new List<string>();
         int currentResolutionIndex = 0;
         for (int i = 0; i < _possibleResolutions.Length; i++)
         {
-            resolutionsStringList.Add(_possibleResolutions[i].width + " x " + _possibleResolutions[i].width + " @" +
-                                      _possibleResolutions[i].refreshRate);
-
+            string resolution = _possibleResolutions[i].width + " x " + _possibleResolutions[i].width + " @" +
+                                _possibleResolutions[i].refreshRate;
+            resolutionsStringList.Add(resolution);
             if (_possibleResolutions[i].width == Screen.currentResolution.width &&
                 _possibleResolutions[i].height == Screen.currentResolution.height)
             {
@@ -89,8 +99,14 @@ public class SettingsMenu : MonoBehaviour
             }
         }
 
+        #endregion
+
+        #region AddingResolutionStringListToDropDownAndRefreshing
+
         resolutions.AddOptions(resolutionsStringList);
         resolutions.value = currentResolutionIndex;
         resolutions.RefreshShownValue();
+
+        #endregion
     }
 }
