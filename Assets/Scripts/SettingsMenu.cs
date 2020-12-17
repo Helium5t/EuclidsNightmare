@@ -42,6 +42,8 @@ public class SettingsMenu : MonoBehaviour
         UpdateResolutionsDropdown();
     }
 
+    public void ChangeFovValue(float fovValue) => Camera.main.fieldOfView = fovValue;
+
     public void setDisableAudio(bool isAudioDisabled) => masterBus.setMute(isAudioDisabled);
 
     public void setMasterVolume(float newMasterVolume) => MasterVolume = newMasterVolume;
