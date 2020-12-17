@@ -514,8 +514,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 703337685}
-  m_RootOrder: 11
+  m_Father: {fileID: 1503288131}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -745,7 +745,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: SetSfxVolume
+        m_MethodName: SetSfxBusVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: setMusicBusVolume
+        m_MethodName: SetMusicBusVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1811,8 +1811,8 @@ RectTransform:
   - {fileID: 1419479276}
   - {fileID: 2063527912}
   - {fileID: 445023861}
-  m_Father: {fileID: 703337685}
-  m_RootOrder: 9
+  m_Father: {fileID: 1503288131}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2040,12 +2040,8 @@ RectTransform:
   - {fileID: 1912973082}
   - {fileID: 205083420}
   - {fileID: 898128428}
-  - {fileID: 1387786393}
-  - {fileID: 649870266}
-  - {fileID: 1665892751}
-  - {fileID: 168080922}
   m_Father: {fileID: 1718261569}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2435,7 +2431,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: setDisableAudio
+        m_MethodName: SetDisableAudio
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2556,7 +2552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -412, y: -361}
+  m_AnchoredPosition: {x: 19, y: -361}
   m_SizeDelta: {x: 334.10907, y: 57.571663}
   m_Pivot: {x: 0.49999997, y: 0.49999997}
 --- !u!114 &919506224
@@ -2751,7 +2747,7 @@ GameObject:
   - component: {fileID: 919787455}
   - component: {fileID: 919787454}
   m_Layer: 5
-  m_Name: MusicSliderText
+  m_Name: MusicSliderLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3287,7 +3283,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: setMasterVolume
+        m_MethodName: SetMasterVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4013,7 +4009,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: setResolution
+        m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4446,7 +4442,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: setFullScreen
+        m_MethodName: SetFullScreen
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4875,8 +4871,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 703337685}
-  m_RootOrder: 8
+  m_Father: {fileID: 1503288131}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5268,6 +5264,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499003517}
   m_CullTransparentMesh: 0
+--- !u!1 &1503288130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503288131}
+  m_Layer: 5
+  m_Name: FOV
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1503288131
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503288130}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1387786393}
+  - {fileID: 649870266}
+  - {fileID: 1665892751}
+  - {fileID: 168080922}
+  m_Father: {fileID: 1718261569}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -122.00001, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1516144450
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,8 +6039,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 703337685}
-  m_RootOrder: 10
+  m_Father: {fileID: 1503288131}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6588,6 +6623,7 @@ RectTransform:
   - {fileID: 2025966577}
   - {fileID: 1765112082}
   - {fileID: 1240589446}
+  - {fileID: 1503288131}
   - {fileID: 703337685}
   m_Father: {fileID: 1630070136}
   m_RootOrder: 2
@@ -6794,7 +6830,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: changeGraphicsQuality
+        m_MethodName: ChangeGraphicsQuality
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6928,7 +6964,7 @@ GameObject:
   - component: {fileID: 1912973084}
   - component: {fileID: 1912973083}
   m_Layer: 5
-  m_Name: SFXSliderText
+  m_Name: SFXSliderLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7343,7 +7379,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718261570}
-        m_MethodName: setVsync
+        m_MethodName: SetVsync
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7477,7 +7513,7 @@ GameObject:
   - component: {fileID: 2069555877}
   - component: {fileID: 2069555876}
   m_Layer: 5
-  m_Name: MasterSliderText
+  m_Name: MasterSliderLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
