@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameManagement
@@ -10,7 +11,7 @@ namespace GameManagement
 
         private GameObject levelLoaderGameObject;
         private GameObject settingsMenu;
-        private static readonly int PauseMenuFadeOut = Animator.StringToHash("PauseMenuFadeOut");
+        //private static readonly int PauseMenuFadeOut = Animator.StringToHash("PauseMenuFadeOut");
 
         private void Awake()
         {
@@ -36,11 +37,6 @@ namespace GameManagement
         public void RestartCurrentLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().RestartCurrentLevel();
 
         public void LoadNextLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().LoadNextLevel();
-
-        public void PlayPauseMenuAnimation(bool fadeInOrOut)
-        {
-            GetComponent<Animator>().SetBool(PauseMenuFadeOut, fadeInOrOut);
-
-        }
+        //public void PlayPauseMenuAnimation(bool fadeInOrOut) => GetComponent<Animator>().SetBool(PauseMenuFadeOut, fadeInOrOut);
     }
 }
