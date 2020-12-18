@@ -9,11 +9,15 @@ namespace GameManagement
         [TextArea] [SerializeField] private string hintText;
 
         private GameObject levelLoaderGameObject;
+        private GameObject settingsMenu;
+        private static readonly int PauseMenuFadeOut = Animator.StringToHash("PauseMenuFadeOut");
 
         private void Awake()
         {
             UpdateUI();
             levelLoaderGameObject = GameObject.FindGameObjectWithTag("LevelLoader");
+            settingsMenu = GameObject.FindGameObjectWithTag("SettingsMenu");
+            settingsMenu.SetActive(false);
         }
 
         private void UpdateUI()
@@ -22,8 +26,6 @@ namespace GameManagement
             hintTextArea.text = hintText;
             gameObject.SetActive(false);
         }
-
-        public void PauseGame() => Time.timeScale = 0f;
 
         public void ResumeGame() => GameManager.Instance.ResumeGame();
 
@@ -34,5 +36,11 @@ namespace GameManagement
         public void RestartCurrentLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().RestartCurrentLevel();
 
         public void LoadNextLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().LoadNextLevel();
+
+        public void PlayPauseMenuAnimation(bool fadeInOrOut)
+        {
+            GetComponent<Animator>().SetBool(PauseMenuFadeOut, fadeInOrOut);
+
+        }
     }
 }

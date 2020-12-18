@@ -280,17 +280,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 825821632}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &291525584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +642,12 @@ PrefabInstance:
     - target: {fileID: 751066613694413279, guid: 4a904369d5f7ff9408a90d91fd7be567,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751066613694413279, guid: 4a904369d5f7ff9408a90d91fd7be567,
+        type: 3}
+      propertyPath: m_TagString
+      value: SettingsMenu
       objectReference: {fileID: 0}
     - target: {fileID: 751066614106403073, guid: 4a904369d5f7ff9408a90d91fd7be567,
         type: 3}
@@ -1426,6 +1420,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 825821632}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1839690939}
         m_MethodName: SetActive
         m_Mode: 6
@@ -1437,27 +1442,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 825821632}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 7052272767920865697}
+        m_MethodName: Play
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7052272767079544004}
-        m_MethodName: PauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_StringArgument: PauseMenuFadeOut
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1552403088
 MonoBehaviour:
@@ -1776,13 +1770,26 @@ GameObject:
   - component: {fileID: 1839690937}
   - component: {fileID: 7052272767920865697}
   - component: {fileID: 7052272767079544004}
+  - component: {fileID: 1839690940}
   m_Layer: 5
   m_Name: PauseMenu
-  m_TagString: Untagged
+  m_TagString: PauseMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!225 &1839690940
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839690939}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1861576575
 PrefabInstance:
   m_ObjectHideFlags: 0

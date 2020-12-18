@@ -10,6 +10,7 @@ namespace GameManagement
         public int targetFPS = 60;
     
         private GameObject pauseMenuUI;
+        private GameObject settingsMenuUI;
 
         private void Start() => Application.targetFrameRate = targetFPS;
 
@@ -39,6 +40,7 @@ namespace GameManagement
             Time.timeScale = 1f;
             GameIsPaused = false;
             pauseMenuUI.SetActive(false);
+            settingsMenuUI.SetActive(false);
         }
 
         // TODO: this could be modified with a LevelLoader.loadLevel(0) call...
@@ -52,12 +54,15 @@ namespace GameManagement
         {
             Debug.Log("UpdateUI triggered with param: " + newUI.name);
             pauseMenuUI = newUI;
+            settingsMenuUI = GameObject.FindGameObjectWithTag("SettingsMenu");
         }
+        
 
         public void UpdateUI()
         {
             Debug.Log("UpdateUI triggered without param");
-            pauseMenuUI = GameObject.FindGameObjectWithTag("Player").transform.Find("pauseMenuUI").gameObject;
+            pauseMenuUI = GameObject.FindGameObjectWithTag("PauseMenu");
+            settingsMenuUI = GameObject.FindGameObjectWithTag("SettingsMenu");
         }
     }
 }
