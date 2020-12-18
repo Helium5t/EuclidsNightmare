@@ -72,7 +72,7 @@ public class FPSController : PortalTraveller
 
     private void Update()
     {
-        if (GameManager.GameIsPaused)
+        if (PauseMenu.GameIsPaused)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
