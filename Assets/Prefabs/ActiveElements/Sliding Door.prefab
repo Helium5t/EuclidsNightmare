@@ -515,7 +515,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5465048474234290260}
-  - component: {fileID: 1483107346069906967}
   - component: {fileID: 5869584908561905673}
   - component: {fileID: 9095619888425205503}
   - component: {fileID: 8882414597602450567}
@@ -543,19 +542,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1483107346069906967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4655613763917372142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6aed0ff7a698a648a6854ffb618f687, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  require: 1
 --- !u!114 &5869584908561905673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,13 +554,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2dfbe362c66d143ad5d18f6a534fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeAutomatically: 1
-  timeToWait: 4
+  toggle: 0
+  require: 1
+  hasTimer: 0
+  timerSeconds: 0
+  ignoreTimerIfActive: 1
+  debugMesh: {fileID: 4235726167186407538}
+  debugMaterial: {fileID: 2100000, guid: c7193cb454415664681c504fb5cff049, type: 2}
   startOpen: 0
-  stayOpen: 0
-  openDoorClip: {fileID: 0}
-  closeDoorClip: {fileID: 0}
-  disableAudio: 0
 --- !u!95 &9095619888425205503
 Animator:
   serializedVersion: 3

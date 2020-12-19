@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExampleDoor : Executor
+public class ExampleDoor : Target
     {
     [SerializeField]
     private string id = "A";
 
     private bool open = false;
 
-	public override void activate() { open = true; }
-    public override void deactivate() { open = false; }
+	protected override void activate() { open = true; }
+    protected override void deactivate() { open = false; }
     }

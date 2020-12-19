@@ -2,52 +2,47 @@
 using UnityEngine.SceneManagement;
 using Utility;
 
-public class GameManager : Singleton<GameManager>
+namespace GameManagement
 {
-    public static bool GameIsPaused;
-    private GameObject pauseMenuUI;
-
-    private void Update()
+    public class GameManager : Singleton<GameManager>
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        public int targetFPS = 60;
+
+        private GameObject pauseMenuUI;
+        private GameObject settingsMenuUI;
+
+        private void Start() => Application.targetFrameRate = targetFPS;
+
+        private void Update()
         {
-            if (GameIsPaused) ResumeGame();
-            else PauseGame();
+            // Might be an over kill but it'll work!
+            if (Application.targetFrameRate != targetFPS) Application.targetFrameRate = targetFPS;
         }
-    }
 
-    public void QuitGame() => Application.Quit();
+        public void QuitGame() => Application.Quit();
 
-    public void PauseGame()
-    {
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        pauseMenuUI.SetActive(true);
-    }
+        // TODO: this could be modified with a LevelLoader.loadLevel(0) call...
+        public void LoadMainMenu()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("MainMenu");
+        }
 
-    public void ResumeGame()
-    {
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-        pauseMenuUI.SetActive(false);
-    }
+        public void UpdateUI(GameObject newUI)
+        {
+            Debug.Log("UpdateUI triggered with param: " + newUI.name);
+            pauseMenuUI = newUI;
+            Debug.Log("Finding settingsMenu...");
+            settingsMenuUI = GameObject.FindGameObjectWithTag("SettingsMenu");
+            Debug.Log("Found settingsMenu: " + settingsMenuUI.name);
+        }
 
-    // TODO: this could be modified with a LevelLoader.loadLevel(0) call...
-    public void LoadMainMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
-    }
 
-    public void UpdateUI(GameObject newUI)
-    {
-        Debug.Log("UpdateUI triggered with param: " + newUI.name);
-        pauseMenuUI = newUI;
-    }
-
-    public void UpdateUI()
-    {
-        Debug.Log("UpdateUI triggered without param");
-        pauseMenuUI = GameObject.FindGameObjectWithTag("Player").transform.Find("pauseMenuUI").gameObject;
+        public void UpdateUI()
+        {
+            Debug.Log("UpdateUI triggered without any parameter");
+            pauseMenuUI = GameObject.FindGameObjectWithTag("PauseMenu");
+            settingsMenuUI = GameObject.FindGameObjectWithTag("SettingsMenu");
+        }
     }
 }

@@ -14,7 +14,8 @@ TagManager:
   - LevelLoader
   - LevelNameText
   - Material:Floor
-  - Material:Stone
+  - PauseMenu
+  - SettingsMenu
   layers:
   - Default
   - TransparentFX
