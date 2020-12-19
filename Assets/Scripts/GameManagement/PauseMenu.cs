@@ -67,6 +67,5 @@ namespace GameManagement
         public void RestartCurrentLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().RestartCurrentLevel();
 
         public void LoadNextLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().LoadNextLevel();
-        //public void PlayPauseMenuAnimation(bool fadeInOrOut) => GetComponent<Animator>().SetBool(PauseMenuFadeOut, fadeInOrOut);
     }
 }
