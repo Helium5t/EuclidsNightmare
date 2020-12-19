@@ -6,15 +6,22 @@ namespace GameManagement
 {
     public class PauseMenu : MonoBehaviour
     {
+        #region PrivateVariables
+
         [SerializeField] private Text hintTextArea;
         [TextArea] [SerializeField] private string hintText;
+        [SerializeField] private GameObject settingsMenu;
+        [SerializeField] private GameObject pauseButtons;
 
         private GameObject levelLoaderGameObject;
+        private Animator pauseMenuAnimator;
+
+        #endregion
 
         public static bool GameIsPaused;
-        private GameObject settingsMenu;
-        
-        //private static readonly int PauseMenuFadeOut = Animator.StringToHash("PauseMenuFadeOut");
+
+        private static readonly int PauseMenuAnimationOn = Animator.StringToHash("PauseMenuAnim");
+        private static readonly int PauseMenuAnimationOff = Animator.StringToHash("PauseMenuIdle");
 
         private void Update()
         {
@@ -27,34 +34,32 @@ namespace GameManagement
 
         private void Awake()
         {
-            UpdateUI();
             levelLoaderGameObject = GameObject.FindGameObjectWithTag("LevelLoader");
-            settingsMenu = GameObject.FindGameObjectWithTag("SettingsMenu");
-            settingsMenu.SetActive(false);
-        }
+            pauseMenuAnimator = GetComponent<Animator>();
 
-        private void UpdateUI()
-        {
-            GameManager.Instance.UpdateUI(gameObject);
+            settingsMenu.SetActive(false);
+            pauseButtons.SetActive(false);
+
             hintTextArea.text = hintText;
-            gameObject.SetActive(false);
         }
 
         public void ResumeGame()
         {
             Time.timeScale = 1f;
             GameIsPaused = false;
-            gameObject.SetActive(false);
+            pauseMenuAnimator.Play(PauseMenuAnimationOff);
+            pauseButtons.SetActive(false);
             settingsMenu.SetActive(false);
         }
-        
+
         public void PauseGame()
         {
             Time.timeScale = 0f;
             GameIsPaused = true;
-            gameObject.SetActive(true);
+            pauseButtons.SetActive(true);
+            pauseMenuAnimator.Play(PauseMenuAnimationOn);
         }
-        
+
         public void QuitGame() => GameManager.Instance.QuitGame();
 
         public void LoadMainMenu() => GameManager.Instance.LoadMainMenu();
