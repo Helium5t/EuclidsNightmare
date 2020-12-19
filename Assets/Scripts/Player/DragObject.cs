@@ -8,6 +8,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(FPSController))]
 [RequireComponent(typeof(AudioSource))]
+[System.Obsolete("This script is now integrated inside FPS Controller, to be deleted")]
 public class DragObject : MonoBehaviour
 {
     [SerializeField] private float mouseFollowSpeed = 5.0f;
