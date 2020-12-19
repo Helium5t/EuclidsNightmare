@@ -4,11 +4,13 @@ using UnityEngine;
 
 public abstract class Target : MonoBehaviour
     {
+    [SerializeField] private bool toggle = false;
     [SerializeField] public uint require = 1;
-    [SerializeField] private float timer_seconds = 0;
+    [SerializeField] private bool hasTimer = false;
+    [SerializeField] private float timerSeconds = 0;
     [SerializeField] private bool ignoreTimerIfActive = true;
     [Header("Prefab only fields - do not change outside of prefab editor")]
-    [SerializeField] private MeshRenderer debug_mesh = null;
+    [SerializeField] private MeshRenderer debugMesh = null;
     [SerializeField] private Material debugMaterial = null;
 
     public bool isActive { get; private set; }
@@ -18,8 +20,8 @@ public abstract class Target : MonoBehaviour
         {
         if (Debug.isDebugBuild)
             {
-            debug_mesh.material = new Material(debugMaterial);
-            debug_mesh.material.color = Color.red;
+            debugMesh.material = new Material(debugMaterial);
+            debugMesh.material.color = Color.red;
             }
         }
 
@@ -27,13 +29,25 @@ public abstract class Target : MonoBehaviour
     public void _activate()
         {
         count++;
-        if (count >= require && !isActive)
+        Debug.Log(count);
+
+        if (count >= require)
             {
-            if (Debug.isDebugBuild) { debug_mesh.material.color = Color.green; }
-            isActive = true;
-            if (timer_seconds != 0) { StartCoroutine(deactivateTimer()); }
-            activate();
-            }
+            if (!isActive)
+                {
+                if (Debug.isDebugBuild) { debugMesh.material.color = Color.green; }
+                isActive = true;
+                if (hasTimer && timerSeconds != 0) { StartCoroutine(deactivateTimer()); }
+                activate();
+                }
+            else if (toggle)
+                {
+                if (Debug.isDebugBuild) { debugMesh.material.color = Color.red; }
+                isActive = false;
+                deactivate(); 
+                }
+            } 
+            
         }
 
     protected abstract void deactivate();
@@ -45,14 +59,17 @@ public abstract class Target : MonoBehaviour
 
     private void __deactivate()
         {
-        if (Debug.isDebugBuild) { debug_mesh.material.color = Color.red; }
-        isActive = false;
-        deactivate();
+        if (!toggle)
+            {
+            if (Debug.isDebugBuild) { debugMesh.material.color = Color.red; }
+            isActive = false;
+            deactivate();
+            }
         }
 
     private IEnumerator deactivateTimer()
         {
-        yield return new WaitForSeconds(timer_seconds);
+        yield return new WaitForSeconds(timerSeconds);
         if (!ignoreTimerIfActive && isActive) { __deactivate(); }
         }
     }

@@ -554,10 +554,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2dfbe362c66d143ad5d18f6a534fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: 0
   require: 1
-  timer_seconds: 0
+  hasTimer: 0
+  timerSeconds: 0
   ignoreTimerIfActive: 1
-  debug_mesh: {fileID: 4235726167186407538}
+  debugMesh: {fileID: 4235726167186407538}
   debugMaterial: {fileID: 2100000, guid: c7193cb454415664681c504fb5cff049, type: 2}
   startOpen: 0
 --- !u!95 &9095619888425205503
