@@ -2,59 +2,64 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Utility;
 
-public class LevelLoader : MonoBehaviour
+namespace GameManagement
 {
-    [Header("Exposed Parameters")] [SerializeField]
-    private float sceneTransitionTime;
-
-    [SerializeField] private float levelNameTransitionTime = 1f;
-
-    [Space] [Header("Animators")] public Animator SceneAnimator;
-    public Animator LevelNameAnimator;
-
-    private static readonly int SceneTransitionTrigger = Animator.StringToHash("Start");
-    private static readonly int LevelNameTransitionTrigger = Animator.StringToHash("NameFadeStart");
-
-    private Text _levelNameText;
-    private string _sceneName;
-
-    private void Awake()
+    public class LevelLoader : MonoBehaviour
     {
-        _sceneName = SceneManager.GetActiveScene().name;
-        _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
-    }
+        [Header("Exposed Parameters")] [SerializeField]
+        private float sceneTransitionTime;
 
-    public void LoadLevel(int levelBuildIndex) => StartCoroutine(LoadLevelRoutine(levelBuildIndex));
+        [SerializeField] private float levelNameTransitionTime = 1f;
 
-    public void LoadNextLevel() => StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex + 1));
+        [Space] [Header("Animators")] public Animator SceneAnimator;
+        public Animator LevelNameAnimator;
 
-    public void RestartCurrentLevel() => StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex));
+        private static readonly int SceneTransitionTrigger = Animator.StringToHash("Start");
+        private static readonly int LevelNameTransitionTrigger = Animator.StringToHash("NameFadeStart");
 
-    public void DisplayLevelName()
-    {
-        if (_sceneName == Levels.MainMenu.ToString() || _sceneName == Levels.FeedbackMenu.ToString()) return;
-        //_levelNameText.text = _sceneBuildIndex + ") " + _sceneName;
-        _levelNameText.text = "<: " + _sceneName + " :>";
-        StartCoroutine(LevelNameFade());
-    }
+        private Text _levelNameText;
+        private string _sceneName;
 
-    private IEnumerator LevelNameFade()
-    {
-        LevelNameAnimator.SetTrigger(LevelNameTransitionTrigger);
-        yield return new WaitForSeconds(levelNameTransitionTime);
-        LevelNameAnimator.SetTrigger(LevelNameTransitionTrigger);
-        yield return null;
-    }
+        private void Awake()
+        {
+            _sceneName = SceneManager.GetActiveScene().name;
+            _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
+        }
 
-    private IEnumerator LoadLevelRoutine(int levelBuildIndex)
-    {
-        Time.timeScale = 1f; //Just to be sure that everything is flowing as it should be
-        SceneAnimator.SetTrigger(SceneTransitionTrigger);
-        yield return new WaitForSeconds(sceneTransitionTime);
-        SceneManager.LoadScene(levelBuildIndex);
-        yield return null;
+        public void LoadLevel(int levelBuildIndex) => StartCoroutine(LoadLevelRoutine(levelBuildIndex));
+
+        public void LoadNextLevel() => StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex + 1));
+
+        public void RestartCurrentLevel() => StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex));
+
+        public void DisplayLevelName()
+        {
+            if (_sceneName == Levels.MainMenu.ToString() || _sceneName == Levels.FeedbackMenu.ToString()) return;
+            //_levelNameText.text = _sceneBuildIndex + ") " + _sceneName;
+            _levelNameText.text = SetLevelNameText("<:", ":>");
+            StartCoroutine(LevelNameFade());
+        }
+
+        private IEnumerator LevelNameFade()
+        {
+            LevelNameAnimator.SetTrigger(LevelNameTransitionTrigger);
+            yield return new WaitForSeconds(levelNameTransitionTime);
+            LevelNameAnimator.SetTrigger(LevelNameTransitionTrigger);
+            yield return null;
+        }
+
+        private IEnumerator LoadLevelRoutine(int levelBuildIndex)
+        {
+            Time.timeScale = 1f; //Just to be sure that everything is flowing as it should be
+            SceneAnimator.SetTrigger(SceneTransitionTrigger);
+            yield return new WaitForSeconds(sceneTransitionTime);
+            SceneManager.LoadScene(levelBuildIndex);
+            yield return null;
+        }
+
+        private string SetLevelNameText(string startDecoratorString, string endDecoratorString) =>
+            startDecoratorString + " " + _sceneName + " " + endDecoratorString;
     }
 }

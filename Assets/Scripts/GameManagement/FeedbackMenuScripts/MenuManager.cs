@@ -1,9 +1,10 @@
-﻿using GameManagement;
+﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility;
 using Debug = UnityEngine.Debug;
 
-namespace FeedbackMenuScripts
+namespace GameManagement.FeedbackMenuScripts
 {
     public class MenuManager : Singleton<MenuManager>
     {
@@ -81,6 +82,10 @@ namespace FeedbackMenuScripts
             SetMenu(Menu.Thanks);
         }
 
-        public void ReturnToMainMenu() => GameManager.Instance.LoadMainMenu();
+        public void ReturnToMainMenu()
+        {
+            Time.timeScale = 1.0f;
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

@@ -19,7 +19,6 @@ namespace GameManagement
 
         public void QuitGame() => Application.Quit();
 
-        // TODO: this could be modified with a LevelLoader.loadLevel(0) call...
         public void LoadMainMenu()
         {
             Time.timeScale = 1f;
