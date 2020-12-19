@@ -87,3 +87,7 @@ Assets/Shaders/CustomShaders/TestingShader/
 #Avoiding Git LFS errors
 Assets/ArtAssets/Textures/Floor Textures/WhiteFloor/thjlehzcw_8K_Displacement.exr
 Assets/ArtAssets/Textures/Floor Textures/WhiteFloor/thjlehzcw_8K_Displacement.exr.meta
+
+#FMOD ignores
+fmod_editor.log
+Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset

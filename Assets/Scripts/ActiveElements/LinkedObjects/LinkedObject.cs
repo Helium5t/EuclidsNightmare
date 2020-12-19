@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,9 @@ public class LinkedObject : MonoBehaviour
     [SerializeField][Range(0.0001f,0.9f)] private float stillnessThreshold = 0.5f;
     [SerializeField][Range(0.000f,0.5f)] private float keepAngleThreshold = 0.5f;
 
-    [SerializeField][Range(1f,20f)] private float recoverySpeed = 10f;
+    [SerializeField][Range(1f,30f)] private float recoverySpeed = 10f;
+
+    private float onCollisionMaxSpeed = 10f;
 
     private void Awake() {
         if(!mirror){
@@ -46,22 +48,19 @@ public class LinkedObject : MonoBehaviour
         //collisionImpulses = new List<Vector3>();
         movementScale = 1f;
         mirrorPhysics = mirror.gameObject.GetComponent<Rigidbody>();
-        masterBid = Random.Range(0f,10f);
+        while (masterBid == mirror.masterBid){
+            masterBid = Random.Range(0f,10f);
+        }
     }
 
     private void Update() {
-        if(masterBid == mirror.masterBid){
-            masterBid = Random.Range(0f,10f);
-        }
         if(isDragged){
             isMaster = true;
             mirror.isMaster = false;
         }
-        else{
-            if(isMaster){
+        else if(isMaster){
                 isMaster = masterBid > mirror.masterBid;
                 mirror.isMaster = mirror.masterBid > masterBid;
-            }
         }
     } 
     private void FixedUpdate() {
@@ -69,39 +68,18 @@ public class LinkedObject : MonoBehaviour
         if(!isMaster){
             if(mirror.isMaster){
                 myRb.useGravity = false;
-                if(movementScale != 1f){
-                    Vector3 nextTargetPosition = transform.position + mirrorPhysics.velocity*movementScale;
-                    nextTargetPosition.y = mirror.transform.position.y + targetOffset.y;
-                    if(isMaster)  Debug.Log( Vector3.Distance(transform.position,nextTargetPosition));
-                    if(Vector3.Distance(transform.position,nextTargetPosition)>stillnessThreshold){
-                        Debug.DrawRay(transform.position,mirror.transform.position + targetOffset-transform.position,Color.red,0.1f);
-                        myRb.velocity = Vector3.ClampMagnitude(mirror.transform.position + targetOffset - transform.position ,1f) * recoverySpeed;
+                Vector3 nextTargetPosition = getTargetPosition();
+                if(Vector3.Distance(transform.position,nextTargetPosition)>stillnessThreshold){
+                    Vector3 recoveryVelocity = Vector3.ClampMagnitude(nextTargetPosition - transform.position ,1f) * recoverySpeed;
+                    if(Physics.Raycast(transform.position,nextTargetPosition-transform.position,3f,~LayerMask.GetMask("Trigger"))){
+                        recoveryVelocity = Vector3.ClampMagnitude(recoveryVelocity,onCollisionMaxSpeed);
                     }
-                    else{
-                        myRb.AddForce(new Vector3(mirrorPhysics.velocity.x,0f,mirrorPhysics.velocity.z),ForceMode.VelocityChange);
-                    }                 
+                    myRb.velocity = recoveryVelocity;
                 }
                 else{
-                    if(Vector3.Distance(transform.position,mirror.transform.position + targetOffset)>stillnessThreshold){
-                        Debug.DrawRay(transform.position,mirror.transform.position + targetOffset-transform.position,Color.red,0.1f);
-                        myRb.velocity = Vector3.ClampMagnitude(mirror.transform.position + targetOffset - transform.position ,1f) * recoverySpeed;
-                    }
-                    else{
-                        /*
-                        Old script for adding collisions but seems to be okay once moved to fixedUpdate
-                        foreach(Vector3 i in collisionImpulses){
-                            Debug.Log("Adding Impulse");
-                            myRb.AddForce(i,ForceMode.Impulse);
-                        }
-                        collisionImpulses = new List<Vector3>();
-                        */
-                        //Debug.Log("Master Velocity is "+ mirrorPhysics.velocity);
-                        //Debug.Log("My Velocity is "+ myRb.velocity);
-                        Vector3 finalVelocity =myRb.velocity+  mirrorPhysics.velocity;
-                        myRb.velocity = finalVelocity;
-                    }
+                    Vector3 finalVelocity =myRb.velocity+  mirrorPhysics.velocity*movementScale;
+                    myRb.velocity = finalVelocity;
                 }
-                //transform.rotation = Quaternion.Lerp(transform.rotation,mirror.transform.rotation,Time.deltaTime*10f);
                 transform.rotation = mirror.transform.rotation;
             }
             else{
@@ -117,41 +95,11 @@ public class LinkedObject : MonoBehaviour
 
     public void startDrag(){
         isDragged =  true;
+        masterBid = mirror.masterBid + 0.1f;
     }
     public void stopDrag(){
         isDragged =  false;
     }
-
-/*
-    private void OnCollisionEnter(Collision other) {
-        if(isMaster){
-            mirror.addCollisionImpulse(other.impulse);
-        }
-    }
-*/
-    [System.Obsolete("Not used anymore")]
-    private void addCollisionImpulse(Vector3 impulse){
-        if(!isMaster){
-            collisionImpulses.Add(impulse);
-        }
-
-    }
-
-
-    // Update is called once per frame
-    /*void LateUpdate()
-    {
-        if(IsStill()){
-            Debug.DrawRay(transform.position,Vector3.forward*10f,Color.red); 
-            isMaster = false;
-        }
-        if(!OffsetIsKept() && isMaster){
-            isMaster = false;
-            mirror.isMaster = true;
-            GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity + (mirror.transform.position+offset - transform.position)*5f;
-        }
-
-    }*/
 
     // OnValidate is called anytime a value is changed in the unity editor
     void OnValidate () {
@@ -224,6 +172,20 @@ public class LinkedObject : MonoBehaviour
         return 0f;
     }
 
+    private Vector3 getTargetPosition(){
+        if(movementScale!=1f){
+        Vector3 targetPos = transform.position + mirrorPhysics.velocity*movementScale;
+        targetPos.y = mirror.transform.position.y + targetOffset.y;
+            return targetPos;
+        }
+        else{
+            return mirror.transform.position + targetOffset;
+
+        }
+    }
+
+    #region Old Code Soon To Be Deleted
+
     /*
     bool OffsetIsKept(){
         return transform.position == mirror.transform.position + offset;
@@ -236,4 +198,37 @@ public class LinkedObject : MonoBehaviour
         previousPos = transform.position;
         previousRot = transform.rotation;
     }*/
+
+    
+/*
+    private void OnCollisionEnter(Collision other) {
+        if(isMaster){
+            mirror.addCollisionImpulse(other.impulse);
+        }
+    }
+*/
+    [System.Obsolete("Not used anymore")]
+    private void addCollisionImpulse(Vector3 impulse){
+        if(!isMaster){
+            collisionImpulses.Add(impulse);
+        }
+
+    }
+
+
+    // Update is called once per frame
+    /*void LateUpdate()
+    {
+        if(IsStill()){
+            Debug.DrawRay(transform.position,Vector3.forward*10f,Color.red); 
+            isMaster = false;
+        }
+        if(!OffsetIsKept() && isMaster){
+            isMaster = false;
+            mirror.isMaster = true;
+            GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity + (mirror.transform.position+offset - transform.position)*5f;
+        }
+
+    }*/
+    #endregion
 }
