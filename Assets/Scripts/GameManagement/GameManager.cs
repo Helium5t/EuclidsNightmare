@@ -8,8 +8,6 @@ namespace GameManagement
     {
         public int targetFPS = 60;
 
-        private GameObject pauseMenuUI;
-        private GameObject settingsMenuUI;
 
         private void Start() => Application.targetFrameRate = targetFPS;
 
@@ -26,23 +24,6 @@ namespace GameManagement
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene("MainMenu");
-        }
-
-        public void UpdateUI(GameObject newUI)
-        {
-            Debug.Log("UpdateUI triggered with param: " + newUI.name);
-            pauseMenuUI = newUI;
-            Debug.Log("Finding settingsMenu...");
-            settingsMenuUI = GameObject.FindGameObjectWithTag("SettingsMenu");
-            Debug.Log("Found settingsMenu: " + settingsMenuUI.name);
-        }
-
-
-        public void UpdateUI()
-        {
-            Debug.Log("UpdateUI triggered without any parameter");
-            pauseMenuUI = GameObject.FindGameObjectWithTag("PauseMenu");
-            settingsMenuUI = GameObject.FindGameObjectWithTag("SettingsMenu");
         }
     }
 }
