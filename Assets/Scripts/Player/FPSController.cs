@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameManagement;
 using UnityEngine;
 using Utility;
 using Random = UnityEngine.Random;
@@ -71,7 +72,7 @@ public class FPSController : PortalTraveller
 
     private void Update()
     {
-        if (transform.Find("Canvas").Find("PauseMenu").gameObject.activeSelf)
+        if (PauseMenu.GameIsPaused)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
