@@ -25,8 +25,10 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     [SerializeField] private float RayDistance = 1.2f; // Select how far the raycast will travel down to when checking for a floor. This will then remain a constant and will not change.
     [SerializeField] private float StartRunningTime = 0.3f; // Set a time. If the time between each step the player takes is less than this value, the player will start to hear running footsteps. This will then remain a constant and will not change.
     [SerializeField] private string JumpInputName; // In Unity, go Edit -> Project Settings -> Input Manager. Then find the name of the input that controls which key/button the player must press in order to jump (it's proably called "Jump"). Then once you know it's name, write it into this variable in the Inspector tab. This will then remain a constant and will not change.
-    public string[] MaterialTypes; // This is an array of strings. In the inspector we can decide how many Material types we have in FMOD by setting the size of this array. Depending on the size, the array will then create a certain amount of strings for us to fill in with the name of each of our footstep materials for our scripts to use. This will then remain a constant and will not change.
     
+    [Space]
+    [Header("Walking material settings")]
+    public string[] MaterialTypes; // This is an array of strings. In the inspector we can decide how many Material types we have in FMOD by setting the size of this array. Depending on the size, the array will then create a certain amount of strings for us to fill in with the name of each of our footstep materials for our scripts to use. This will then remain a constant and will not change.
     #endregion
     
     // This will be told by the 'FMODStudioFootstepsEditor' script which Material has been set as the default.
