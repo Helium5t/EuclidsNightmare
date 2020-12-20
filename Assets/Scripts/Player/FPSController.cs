@@ -96,7 +96,6 @@ public class FPSController : PortalTraveller
         rawPitch = playerCamera.transform.localEulerAngles.x;
         yaw = rawYaw;
         pitch = rawPitch;
-        QualitySettings.vSyncCount = 1;
         QualitySettings.antiAliasing = 2;
     }
     #endregion
@@ -112,17 +111,6 @@ public class FPSController : PortalTraveller
                 cursorLock();
                 disabled = false;
             }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            cursorUnlock();
-            Debug.Break();
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            cursorUnlock();
-            disabled = !disabled;
-        }
 
         if (disabled) return;
 
