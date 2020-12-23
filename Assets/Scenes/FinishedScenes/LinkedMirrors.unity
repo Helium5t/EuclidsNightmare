@@ -3782,7 +3782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 2015117788}
   movementScale: 1
-  masterBid: 1.6807234
+  masterBid: 3.3652763
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -20532,7 +20532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 310815538}
   movementScale: 1
-  masterBid: 8.312783
+  masterBid: 3.5439177
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -22047,6 +22047,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 738125338141556244, guid: 19dbadf8687fb2c428440ff08b086283,
+        type: 3}
+      propertyPath: targetObject
+      value: 
+      objectReference: {fileID: 570463835}
     - target: {fileID: 4518443876271096932, guid: 19dbadf8687fb2c428440ff08b086283,
         type: 3}
       propertyPath: targetObject
