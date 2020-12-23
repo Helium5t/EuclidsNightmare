@@ -109,6 +109,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
 
     private Transform _transform; //Transform component caching
     private EventInstance _breathingEventInstance;
+    private float _breathingEventValue;
 
     #endregion
 
@@ -119,15 +120,15 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         _stepRandom = Random.Range(0f, 0.3f);
         // 'PrevPos' now holds the location that the player is starting at as co-ordinates (x, y, z).
         _prevPos = _transform.position;
-        PlayBreathingSound();
+        _breathingEventInstance = RuntimeManager.CreateInstance(GameSoundPaths.BreathingEventPath);
+        SetBreathingSoundParameter();
+        _breathingEventInstance.start();
     }
 
-    private void PlayBreathingSound()
+    private void SetBreathingSoundParameter()
     {
-        _breathingEventInstance = RuntimeManager.CreateInstance(GameSoundPaths.BreathingEventPath);
-        RuntimeManager.AttachInstanceToGameObject(_breathingEventInstance, _transform, GetComponent<Rigidbody>());
-        _breathingEventInstance.setParameterByName(SpeedParameterName, _fmodPlayerRunning);
-        _breathingEventInstance.start();
+        _breathingEventValue = _fmodPlayerRunning == 1 ? 1f : 0f;
+        _breathingEventInstance.setParameterByName("BreathingFade", _breathingEventValue);
     }
 
 
@@ -182,7 +183,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
          * thus playing the footstep event in FMOD.
          */
 
-        #region PlaySound
+        #region PlaySounds
 
         // Essentially turning 'TimeTakenToStep' into a running timer that starts at 0 seconds.
         // Remember that 'Time.deltaTime' counts how long in seconds the last frame lasted for.
@@ -204,6 +205,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
             // this step and the last tot hen update the 'F_PlayerRunning' variable with
             // for our 'PlayFootstep()' method to use.
             SpeedCheck();
+            SetBreathingSoundParameter();
             PlayFootstep();
             // Now that our footstep has been played, this will reset 'StepRandom' and give it a new random value
             // between 0 and 0.3, in order to make the distance the player has to travel to hear a footstep
