@@ -103,7 +103,7 @@ Assets/ArtAssets/Textures/Floor Textures/WhiteFloor/thjlehzcw_8K_Displacement.ex
 /[Aa]ssets/Plugins/FMOD/Cache/Editor.meta
 /[Aa]ssets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
 /[Aa]ssets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset.meta
-/FMODProject/EuclidsNightmare/.cache
+/FMODProject/EuclidsNightmare/.*/
 
 # Log-files
 fmod.log
