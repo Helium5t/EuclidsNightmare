@@ -1,5 +1,7 @@
-﻿using GameManagement;
+﻿using FMOD.Studio;
+using GameManagement;
 using UnityEngine;
+using Utility;
 
 namespace Player
 {
@@ -314,6 +316,7 @@ namespace Player
         private void startDragging(Ray dragRay){
             if (Physics.Raycast(dragRay, out hit,maxPickUpDistance) && hit.rigidbody)
             {
+                PlayPickUpSound();
                 if(!hit.transform.TryGetComponent<Portal>(out Portal portal)){
                     draggedObj = hit.transform;
                 }
@@ -324,6 +327,12 @@ namespace Player
                     
             }
         }
+
+        private void PlayPickUpSound()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(GameSoundPaths.PickUpEventPath, transform.position);
+        }
+
 
         private void dragObject(Ray dragRay){
             if(draggedObjectRb.useGravity){
