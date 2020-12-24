@@ -13,7 +13,6 @@ namespace Sensors
         private void Start()
         {
             if (!animator && !TryGetComponent<Animator>(out animator)) animator = GetComponentInChildren<Animator>();
-            Debug.Log(animator.name);
             SetAnimationBool(startOpen);
         }
 

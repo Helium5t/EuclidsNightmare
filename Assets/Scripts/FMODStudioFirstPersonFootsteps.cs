@@ -303,6 +303,12 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         jumpLandEvent.setParameterByName(MaterialParameterName, _fmodMaterialValue);
         jumpLandEvent.setParameterByName(JumpOrLandParameterName, fmodJumpOrLand ? 0f : 1f);
         jumpLandEvent.start();
+        if (fmodJumpOrLand) PlayJumpGroanSound();
         jumpLandEvent.release();
+    }
+
+    private void PlayJumpGroanSound()
+    {
+        RuntimeManager.PlayOneShot("event:/Sounds/Player/Locomotion/JumpGroan/Groan");
     }
 }
