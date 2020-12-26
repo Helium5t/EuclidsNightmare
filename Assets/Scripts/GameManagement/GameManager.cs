@@ -13,7 +13,6 @@ namespace GameManagement
 
         private void Update()
         {
-            // Might be an over kill but it'll work!
             if (Application.targetFrameRate != targetFPS) Application.targetFrameRate = targetFPS;
         }
 
