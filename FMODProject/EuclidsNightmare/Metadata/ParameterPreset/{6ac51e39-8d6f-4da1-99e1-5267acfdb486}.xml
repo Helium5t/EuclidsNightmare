@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{6ac51e39-8d6f-4da1-99e1-5267acfdb486}">
+		<property name="name">
+			<value>BreathingFade</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5f29a55d-88e7-4430-991c-e4ed6a364fff}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{465b09dc-846f-41b4-ad21-693245c5eafa}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{465b09dc-846f-41b4-ad21-693245c5eafa}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.60000002384185791</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
