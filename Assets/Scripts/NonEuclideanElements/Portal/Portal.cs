@@ -12,12 +12,16 @@ public class Portal : MonoBehaviour {
     public MeshRenderer screen;
     public int recursionLimit = 5;
 
+    [SerializeField] private bool allowAlternateCameras = true;
+    List<Camera> altCams;
+
     [Header ("Advanced Settings")]
     public float nearClipOffset = 0.05f;
     public float nearClipLimit = 0.2f;
 
     // Private variables
     RenderTexture viewTexture;
+    Camera trackedCam;
     Camera portalCam;
     Camera playerCam;
     Material firstRecursionMat;
@@ -25,12 +29,14 @@ public class Portal : MonoBehaviour {
     MeshFilter screenMeshFilter;
 
     void Awake () {
+        altCams = new List<Camera>();
         playerCam = Camera.main;
         portalCam = GetComponentInChildren<Camera> ();
         portalCam.enabled = false;
         trackedTravellers = new List<PortalTraveller> ();
         screenMeshFilter = screen.GetComponent<MeshFilter> ();
         screen.material.SetInt ("displayMask", 1);
+        trackedCam = playerCam;
     }
 
     void LateUpdate () {
@@ -76,24 +82,25 @@ public class Portal : MonoBehaviour {
     // Manually render the camera attached to this portal
     // Called after PrePortalRender, and before PostPortalRender
     public void Render () {
-
+        /*if(trackedCam!=playerCam){
+            Debug.Log(gameObject.name + " is using "+ trackedCam.transform.parent.name + " camera");
+        }*/
         // Skip rendering the view from this portal if player is not looking at the linked portal
-        if (!CameraUtility.VisibleFromCamera (linkedPortal.screen, playerCam)) {
-            linkedPortal.screen.material.SetInt ("displayMask", 0);
-            return;
+        if (!checkActive()) {
+                return;
         }
         if(Time.timeScale == 0f){
             return;
         }
         CreateViewTexture ();
 
-        var localToWorldMatrix = playerCam.transform.localToWorldMatrix;
+        var localToWorldMatrix = trackedCam.transform.localToWorldMatrix;
         var renderPositions = new Vector3[recursionLimit];
         var renderRotations = new Quaternion[recursionLimit];
 
         int startIndex = 0;
-        portalCam.projectionMatrix = playerCam.projectionMatrix;
-        portalCam.fieldOfView = playerCam.fieldOfView;
+        portalCam.projectionMatrix = trackedCam.projectionMatrix;
+        portalCam.fieldOfView = trackedCam.fieldOfView;
         for (int i = 0; i < recursionLimit; i++) {
             if (i > 0) {
                 // No need for recursive rendering if linked portal is not visible through this portal
@@ -188,8 +195,10 @@ public class Portal : MonoBehaviour {
         foreach (var traveller in trackedTravellers) {
             UpdateSliceParams (traveller);
         }
-        ProtectScreenFromClipping (playerCam.transform.position);
+        ProtectScreenFromClipping (trackedCam.transform.position);
     }
+
+
     void CreateViewTexture () {
         if (viewTexture == null || viewTexture.width != Screen.width || viewTexture.height != Screen.height) {
             if (viewTexture != null) {
@@ -232,11 +241,11 @@ public class Portal : MonoBehaviour {
         float cloneSliceOffsetDst = 0;
         float screenThickness = screen.transform.localScale.z;
 
-        bool playerSameSideAsTraveller = SameSideOfPortal (playerCam.transform.position, traveller.transform.position);
+        bool playerSameSideAsTraveller = SameSideOfPortal (trackedCam.transform.position, traveller.transform.position);
         if (!playerSameSideAsTraveller) {
             sliceOffsetDst = -screenThickness;
         }
-        bool playerSameSideAsCloneAppearing = side != linkedPortal.SideOfPortal (playerCam.transform.position);
+        bool playerSameSideAsCloneAppearing = side != linkedPortal.SideOfPortal (trackedCam.transform.position);
         if (!playerSameSideAsCloneAppearing) {
             cloneSliceOffsetDst = -screenThickness;
         }
@@ -273,9 +282,9 @@ public class Portal : MonoBehaviour {
 
             // Update projection based on new clip plane
             // Calculate matrix with player cam so that player camera settings (fov, etc) are used
-            portalCam.projectionMatrix = playerCam.CalculateObliqueMatrix (clipPlaneCameraSpace);
+            portalCam.projectionMatrix = trackedCam.CalculateObliqueMatrix (clipPlaneCameraSpace);
         } else {
-            portalCam.projectionMatrix = playerCam.projectionMatrix;
+            portalCam.projectionMatrix = trackedCam.projectionMatrix;
         }
     }
 
@@ -328,5 +337,53 @@ public class Portal : MonoBehaviour {
 
     bool checkSide(int oldSide, int newSide){
         return !(teleportingSide==Side.ReceiveOnly) &&  (teleportingSide == Side.Either && oldSide!=newSide) || (teleportingSide == Side.Negative && oldSide!=newSide && oldSide < 0) || (teleportingSide == Side.Positive && oldSide!=newSide && oldSide >0);
+    }
+
+    bool checkActive(){
+        if(trackedCam == playerCam){
+            Debug.LogError(name + " is using playerCam");
+        }
+        if(CameraUtility.VisibleFromCamera(linkedPortal.screen, trackedCam)){
+            return true;
+        }
+        else{
+            /*if(playerCam!=trackedCam){
+                Debug.LogError(trackedCam.transform.parent.name + " can't see " + name);
+            }*/
+            return false;
+        }
+        /*
+        Obsolete keeping this just in case i need it later, but to be deleted
+        else{
+            float closestDist = Vector3.SqrMagnitude(playerCam.transform.position - portalCam.transform.position);
+            Camera trackedCandidate = playerCam;
+            foreach(Camera c in altCams){
+                if(!CameraUtility.VisibleFromCamera(linkedPortal.screen,c)){
+                    continue;
+                }
+                float candidateDistance = Vector3.SqrMagnitude(c.transform.position - portalCam.transform.position);
+                if( candidateDistance < closestDist){
+                    trackedCandidate = c;
+                    closestDist = candidateDistance;
+                }
+            }
+            trackedCam = trackedCandidate;
+            return CameraUtility.VisibleFromCamera(linkedPortal.screen,trackedCam);
+        }*/
+    }
+
+    public void addAlternateCamera(Camera cam){
+        if(allowAlternateCameras){
+            altCams.Add(cam);
+        }
+    }
+
+    public void setActiveCam(int index){
+        if(index == -1){
+            trackedCam = playerCam;
+        }
+        else{
+            trackedCam = altCams[index];
+        }
     }
 }

@@ -16,6 +16,7 @@ TagManager:
   - Material:Floor
   - PauseMenu
   - SettingsMenu
+  - ForcedPerspective
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - MirrorOnly
   - Wall
   - Glass
-  - 
+  - ForcedPerspectiveHeld
   - 
   - 
   - 

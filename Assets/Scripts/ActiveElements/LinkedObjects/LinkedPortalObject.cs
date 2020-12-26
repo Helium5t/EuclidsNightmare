@@ -46,8 +46,8 @@ public class LinkedPortalObject : PortalPhysicsObject {
 */
     public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
         base.Teleport (fromPortal, toPortal, pos, rot);
-        if(fromPortal.GetComponentInParent<NonEuclideanTunnels>()!=null){
-            NonEuclideanTunnels deformedSpace = fromPortal.GetComponentInParent<NonEuclideanTunnels>();
+        if(fromPortal.GetComponentInParent<NonEuclideanTunnel>()!=null){
+            NonEuclideanTunnel deformedSpace = fromPortal.GetComponentInParent<NonEuclideanTunnel>();
             if(fromPortal.CompareTag("Expanded Space")){
                 spaceState = deformSpace(SpaceState.Expanded);
                 if(spaceState == SpaceState.Normal){

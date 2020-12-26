@@ -943,6 +943,8 @@ MonoBehaviour:
   teleportingSide: 0
   screen: {fileID: 9100382832504409872}
   recursionLimit: 10
+  allowAlternateCameras: 1
+  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7065966937874638410
@@ -1075,7 +1077,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7065966938806997473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6.77}
+  m_LocalPosition: {x: 0, y: 0, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3957354768301404209}
@@ -1099,6 +1101,8 @@ MonoBehaviour:
   teleportingSide: 2
   screen: {fileID: 9100382831572416702}
   recursionLimit: 10
+  allowAlternateCameras: 1
+  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7065966938806997476
@@ -1112,7 +1116,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.04, y: 2.69, z: 1.55}
+  m_Size: {x: 4.04, y: 2.69, z: 0.74}
   m_Center: {x: 0, y: 1.38, z: 0}
 --- !u!54 &7065966938806997475
 Rigidbody:
@@ -1157,7 +1161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7828039918069500717}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6.28}
+  m_LocalPosition: {x: 0, y: 0, z: -0.03000021}
   m_LocalScale: {x: 1, y: 1, z: 6.6}
   m_Children: []
   m_Father: {fileID: 5018997349500718830}
@@ -1488,6 +1492,8 @@ MonoBehaviour:
   teleportingSide: 2
   screen: {fileID: 8276390644921312164}
   recursionLimit: 10
+  allowAlternateCameras: 1
+  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7971358106329778942
@@ -1620,7 +1626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7971358107544943957}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5.75}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5600004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4214227654302637189}
@@ -1644,6 +1650,8 @@ MonoBehaviour:
   teleportingSide: 0
   screen: {fileID: 8276390643705861130}
   recursionLimit: 10
+  allowAlternateCameras: 1
+  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7971358107544943952
@@ -1657,7 +1665,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.04, y: 2.69, z: 1.55}
+  m_Size: {x: 4.04, y: 2.69, z: 0.74}
   m_Center: {x: 0, y: 1.38, z: 0}
 --- !u!54 &7971358107544943959
 Rigidbody:
