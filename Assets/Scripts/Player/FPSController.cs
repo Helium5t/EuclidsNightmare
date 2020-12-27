@@ -258,6 +258,7 @@ namespace Player
     #region Non Euclidean
         public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
         {
+            bool wasGrounded = controller.isGrounded;
             if(fromPortal.GetComponentInParent<NonEuclideanTunnel>()!= null){
                 inTunnel = !inTunnel;
                 NonEuclideanTunnel net = fromPortal.GetComponentInParent<NonEuclideanTunnel>();
@@ -275,7 +276,7 @@ namespace Player
             pitch = rawPitch;
             roll = cameraRotation.eulerAngles.z;
             transform.eulerAngles = Vector3.up * yaw;
-            velocity.y = (controller.isGrounded)? 0f : velocity.y;
+            velocity.y = (wasGrounded)? 0f : velocity.y;
             velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
             verticalVelocity = velocity.y;
             Physics.SyncTransforms();
