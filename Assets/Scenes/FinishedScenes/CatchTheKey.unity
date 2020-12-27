@@ -13483,7 +13483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077b384ecd0bb404fa4474697c382cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaser: {fileID: 0}
+  chaser: {fileID: 1252081210}
   checkpoints:
   - {fileID: 1671837694}
   - {fileID: 2001725064}
@@ -17104,6 +17104,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1906457952, guid: db15773cf0d2d2c44bef662fe2842eef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3179786320158496312, guid: db15773cf0d2d2c44bef662fe2842eef,
         type: 3}
       propertyPath: m_Name
@@ -17263,6 +17267,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db15773cf0d2d2c44bef662fe2842eef, type: 3}
@@ -18698,6 +18712,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 737224715009574719, guid: 6e4f2ffe28b65c94c854c9feb9184aa1,
     type: 3}
   m_PrefabInstance: {fileID: 2024352550}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1252081210 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1099437060}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1252397303 stripped
 Transform:

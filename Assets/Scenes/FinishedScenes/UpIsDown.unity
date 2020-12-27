@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691b6f5038cb7be4f8c71f4364fdf87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1191044828}
   portal:
   - {fileID: 8022877158335439502}
   - {fileID: 6371473537658080481}
@@ -11693,6 +11693,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bf92b1f6a8add145b06c34f3b54ac07, type: 3}
+--- !u!1 &1191044828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7166369394848896148, guid: db15773cf0d2d2c44bef662fe2842eef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1544293328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1193568304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15002,6 +15008,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1528129689, guid: db15773cf0d2d2c44bef662fe2842eef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3179786320158496312, guid: db15773cf0d2d2c44bef662fe2842eef,
         type: 3}
       propertyPath: m_Name
@@ -15161,6 +15171,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 30.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.487
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db15773cf0d2d2c44bef662fe2842eef, type: 3}
@@ -22632,6 +22657,7 @@ MonoBehaviour:
   teleportingSide: 2
   screen: {fileID: 4911267661602263572}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!1 &6371473537045651781
@@ -22737,6 +22763,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 4911267660386821562}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!1 &6371473537658080485
@@ -23037,6 +23064,7 @@ MonoBehaviour:
   teleportingSide: 2
   screen: {fileID: 8291877618286644181}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &8022877158335439503
@@ -23142,6 +23170,7 @@ MonoBehaviour:
   teleportingSide: 0
   screen: {fileID: 8291877617337777275}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &8022877159284479265

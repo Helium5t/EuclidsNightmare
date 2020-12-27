@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public class RunAwayManager : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class RunAwayManager : MonoBehaviour
         if(!runner){
             runner = GetComponentInChildren<RunnerObject>();
         }
+        if(!chaser){
+            chaser = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         runner.targetCheckpoint = checkpoints[getClosestCheckpoint(runner.transform)].transform;
     }
 
@@ -59,7 +63,7 @@ public class RunAwayManager : MonoBehaviour
         timeElapsed += Time.deltaTime;
         if(timeElapsed > 10f){
             timeElapsed = 0f;
-            FindObjectOfType<DragObject>().expandPickUpDistance(makeEasierFactor);
+            FindObjectOfType<FPSController>().expandPickUpDistance(makeEasierFactor);
             runner.runSpeed -= runnerSlowdownFactor;
             runner.runSpeed = Mathf.Max(8.5f,runner.runSpeed);
         }

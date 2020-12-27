@@ -7,6 +7,11 @@ public class PortalTrigger : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Portal []portal;
 
+    private void Start() {
+        if(!player){
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
     void OnTriggerEnter(Collider col)
     {
         Debug.Log(transform.position);
@@ -24,6 +29,7 @@ public class PortalTrigger : MonoBehaviour
         Transform tran;
         if (col.tag == "Player")
         {       
+            
             tran = player.transform;
             if(tran.position.x - transform.position.x < 0.0000f)
             {

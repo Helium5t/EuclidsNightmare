@@ -18438,6 +18438,36 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 21.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db15773cf0d2d2c44bef662fe2842eef, type: 3}
 --- !u!1001 &1851014576
@@ -21672,6 +21702,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 4099968308251473408}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!54 &4099968307669800457
@@ -21738,6 +21769,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 4099968308332500679}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!4 &4099968307691029184
@@ -22778,6 +22810,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 7752751044481736028}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!1 &8634275120050712077
@@ -22883,6 +22916,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 7752751043549440754}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!1 &8634275120377791405

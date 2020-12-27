@@ -2,14 +2,6 @@
 using GameManagement;
 using UnityEngine;
 using Utility;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using GameManagement;
-using UnityEngine;
-using Utility;
-using Random = UnityEngine.Random;
-
 namespace Player
 {
     [RequireComponent(typeof(AudioSource))]
