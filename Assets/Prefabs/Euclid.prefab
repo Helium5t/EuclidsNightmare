@@ -725,7 +725,7 @@ MonoBehaviour:
   mouseSensitivity: 3
   pitchBounds: {x: -90, y: 90}
   rotationSmoothTime: 0
-  jumpForce: 6
+  jumpForce: 10
   gravity: 18
   inputAccelerationFactor: 6
   maxAirSpeed: 6
