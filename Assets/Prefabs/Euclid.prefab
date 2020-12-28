@@ -743,7 +743,7 @@ MonoBehaviour:
   slowdownThreshold: 0.15
   maxMarchDistance: 100
   marchingStep: 0.1
-  minMarchDistance: 3
+  minMarchDistance: 0.5
 --- !u!143 &7166369394848896169
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1135,7 +1135,8 @@ PrefabInstance:
       propertyPath: hintText
       value: '<: HINT :>
 
-        This is just a sample scene where UI things are tested'
+        This is just a sample scene where UI things are
+        tested'
       objectReference: {fileID: 0}
     - target: {fileID: 558477986, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: settingsMenu
@@ -1385,7 +1386,7 @@ PrefabInstance:
     - target: {fileID: 7052272767812726645, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7052272768204747484, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
@@ -1526,7 +1527,7 @@ PrefabInstance:
     - target: {fileID: 7052272768689503545, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8734985034391832592, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
