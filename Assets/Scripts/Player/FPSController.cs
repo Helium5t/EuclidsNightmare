@@ -51,8 +51,7 @@ namespace Player
 
 
 
-        #region  Internal Dragging Values
-        // Internal Dragging values
+#region  Internal Dragging Values
         private Transform draggedObj;
         private RaycastHit hit;
         private float distanceFromMousePointer;
@@ -61,6 +60,7 @@ namespace Player
         private float timeSinceLastSeen;
         Ray screenPointToRay;
         float holdingDistance;
+        Vector3 draggingVelocity;
 #endregion
 
 #region  Internal Values
@@ -124,6 +124,7 @@ namespace Player
             yaw = rawYaw;
             pitch = rawPitch;
             QualitySettings.antiAliasing = 2;
+            draggingVelocity = Vector3.zero;
         }
 #endregion
 
@@ -230,13 +231,13 @@ namespace Player
             }
         }
 
+
         private void FixedUpdate() {
             if(draggedObj){
-                Ray downwardRay = new Ray(transform.position,Vector3.down);
-                if(Physics.Raycast(downwardRay,out RaycastHit downHit,4f) && downHit.rigidbody){
-                    if(downHit.rigidbody == draggedObjectRb){
-                        draggedObjectRb.velocity = draggedObjectRb.velocity + Vector3.down*GetComponent<FPSController>().gravity;
-                    }
+                //draggedObjectRb.velocity = Vector3.Lerp(draggedObjectRb.velocity,draggingVelocity,Time.deltaTime);
+                draggedObjectRb.velocity = draggingVelocity;
+                if(Physics.Raycast(transform.position,Vector3.down,out RaycastHit downHit,4f) && downHit.rigidbody == draggedObjectRb && verticalVelocity < 0f){
+                    draggedObjectRb.velocity = draggedObjectRb.velocity + Vector3.down*verticalVelocity;
                 }
             }
         }
@@ -526,6 +527,7 @@ namespace Player
             }
             notifyStopDragObject();
             draggedObj = null;
+            draggingVelocity = Vector3.zero;
             draggedObjectRb = null;
             distanceCorrection = 0f;
         }
@@ -559,16 +561,19 @@ namespace Player
                 Vector3 portalRayOrigin = hitPortal.linkedPortal.transform.TransformPoint(hitPortal.transform.InverseTransformPoint(hit.point));
                 Vector3 portalRayDirection = hitPortal.linkedPortal.transform.TransformDirection(hitPortal.transform.InverseTransformDirection(screenPointToRay.direction));
                 if(hit.distance < distanceFromMousePointer){
-                    //Debug.LogError("hit distance is shorter than holding distance");
+                    Debug.LogError("Hit distance < holding distance");
                     Ray portalRay = new Ray(portalRayOrigin,portalRayDirection);
                     if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
+                        Debug.LogError("Object is teleported");
                         targetPos = portalRay.GetPoint(distanceFromMousePointer - hit.distance);
                     }
                     else{
+                        Debug.LogError("Object is not teleported");
                         targetPos = hit.point + (0.5f) *screenPointToRay.direction;
                     }
                 }
-                else if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
+                else if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position) && (draggedObj.position - transform.position).sqrMagnitude > (hitPortal.transform.position - transform.position).sqrMagnitude ){
+                    Debug.LogError("Object is closer to other portal");   
                     targetPos = portalRayOrigin - (0.5f) * portalRayDirection;
                     //Debug.DrawRay(draggedObj.position,portalRayOrigin - draggedObj.position,Color.red);
                 }
@@ -590,13 +595,11 @@ namespace Player
             draggedObj.transform.rotation = nextRotation;
             //draggedObj.transform.rotation.eulerAngles = Vector3.Lerp(draggedObj.transform.rotation.eulerAngles,Vector3.zero,Time.fixedDeltaTime);
             Vector3 movementToTarget = targetPos - draggedObj.position;
-            Vector3 vel;
             if(movementToTarget.sqrMagnitude < Mathf.Pow(slowdownThreshold,2)){
-                vel = movementToTarget;
+                draggingVelocity = movementToTarget;
             }
-            else { vel =movementToTarget * mouseFollowSpeed; }
-            if (vel.magnitude > maxObjectSpeed) vel = Vector3.Normalize(vel)*maxObjectSpeed;
-            draggedObjectRb.velocity = vel;
+            else {  draggingVelocity = movementToTarget * mouseFollowSpeed; }
+            draggingVelocity = Vector3.ClampMagnitude(draggingVelocity,maxObjectSpeed);
             checkLineOfSight();
         }
 
