@@ -340,9 +340,6 @@ public class Portal : MonoBehaviour {
     }
 
     bool checkActive(){
-        if(trackedCam == playerCam){
-            Debug.LogError(name + " is using playerCam");
-        }
         if(CameraUtility.VisibleFromCamera(linkedPortal.screen, trackedCam)){
             return true;
         }

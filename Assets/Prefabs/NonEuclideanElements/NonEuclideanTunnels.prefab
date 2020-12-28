@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 671217004296951450}
   - component: {fileID: 671217004296951451}
   - component: {fileID: 671217004296951452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PortalLongIn
   m_TagString: Compressed Space
   m_Icon: {fileID: 0}
@@ -125,6 +125,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 1519105921203273665}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &671217004296951451
@@ -242,7 +243,7 @@ GameObject:
   - component: {fileID: 671217005512139060}
   - component: {fileID: 671217005512139061}
   - component: {fileID: 671217005512139058}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PortalShortIn
   m_TagString: Expanded Space
   m_Icon: {fileID: 0}
@@ -281,6 +282,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 1519105919987845231}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &671217005512139061
@@ -990,7 +992,7 @@ GameObject:
   - component: {fileID: 5072667550933211020}
   - component: {fileID: 5072667550933211021}
   - component: {fileID: 5072667550933211122}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PortalShortOut
   m_TagString: Expanded Space
   m_Icon: {fileID: 0}
@@ -1029,6 +1031,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 5072667550576952308}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &5072667550933211021
@@ -1072,7 +1075,7 @@ GameObject:
   - component: {fileID: 5072667550954439483}
   - component: {fileID: 5072667550954439477}
   - component: {fileID: 5072667550954439482}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PortalLongOut
   m_TagString: Compressed Space
   m_Icon: {fileID: 0}
@@ -1111,6 +1114,7 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 5072667550395851571}
   recursionLimit: 10
+  allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &5072667550954439477

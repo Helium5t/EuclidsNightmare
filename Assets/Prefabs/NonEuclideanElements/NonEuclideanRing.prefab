@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 7065966937874638411}
   - component: {fileID: 7065966937874638410}
   - component: {fileID: 7065966937874638413}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DestinationOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -944,7 +944,6 @@ MonoBehaviour:
   screen: {fileID: 9100382832504409872}
   recursionLimit: 10
   allowAlternateCameras: 1
-  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7065966937874638410
@@ -1062,7 +1061,7 @@ GameObject:
   - component: {fileID: 7065966938806997477}
   - component: {fileID: 7065966938806997476}
   - component: {fileID: 7065966938806997475}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RingOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1102,7 +1101,6 @@ MonoBehaviour:
   screen: {fileID: 9100382831572416702}
   recursionLimit: 10
   allowAlternateCameras: 1
-  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7065966938806997476
@@ -1453,7 +1451,7 @@ GameObject:
   - component: {fileID: 7971358106329778943}
   - component: {fileID: 7971358106329778942}
   - component: {fileID: 7971358106329778937}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DestinationIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1493,7 +1491,6 @@ MonoBehaviour:
   screen: {fileID: 8276390644921312164}
   recursionLimit: 10
   allowAlternateCameras: 1
-  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7971358106329778942
@@ -1611,7 +1608,7 @@ GameObject:
   - component: {fileID: 7971358107544943953}
   - component: {fileID: 7971358107544943952}
   - component: {fileID: 7971358107544943959}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RingIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1651,7 +1648,6 @@ MonoBehaviour:
   screen: {fileID: 8276390643705861130}
   recursionLimit: 10
   allowAlternateCameras: 1
-  altCams: []
   nearClipOffset: 0.05
   nearClipLimit: 0.2
 --- !u!65 &7971358107544943952

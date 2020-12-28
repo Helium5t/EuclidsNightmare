@@ -21,9 +21,9 @@ namespace Player
         public float jumpForce = 8;
         public float gravity = 18;
         [SerializeField] private float inputAccelerationFactor = 6f;
-        [SerializeField] [Range(0.1f, 5f)] private float maxAirSpeed = 6f;
+        [SerializeField] [Range(0.1f, 5f)] private float maxAirSpeed = 15f;
         [SerializeField] private float airDrag = 0.1f; 
-        [SerializeField] [Range(0.1f, 5f)] private float maxFallSpeed = 1.5f;
+        [SerializeField] [Range(20f, 50f)] private float maxFallSpeed = 30f;
         CharacterController controller;
         Camera playerCamera;
 
@@ -42,7 +42,7 @@ namespace Player
         [SerializeField][Range(0.001f,0.6f)] private float ignoredObstacleMaximumSize = 0.01f;
     
         // Distance at which the object sl ows down towards its target (when its close enough to where it should be)
-        [SerializeField][Range(0.001f,1f)] private float slowdownThreshold = 0.5f;
+        [SerializeField][Range(0.001f,0.4f)] private float slowdownThreshold = 0.15f;
     
         [Header("Forced Perspective Settings")]
         [SerializeField] private float maxMarchDistance = 100f;
@@ -192,7 +192,7 @@ namespace Player
                 //Debug.DrawRay(screenPointToRay.origin,screenPointToRay.direction * maxPickUpDistance,Color.red);
                 if (!draggedObj)
                 {
-                    if (Physics.Raycast(screenPointToRay, out hit,maxPickUpDistance) && hit.rigidbody){
+                    if (Physics.Raycast(screenPointToRay, out hit,maxPickUpDistance,~LayerMask.GetMask("Trigger")) && hit.rigidbody){
                         if(!hit.transform.TryGetComponent<Portal>(out Portal portal)){
                             draggedObj = hit.transform;
                             forcedPerspectiveAvailable = checkForcedPerspective();
@@ -216,8 +216,7 @@ namespace Player
                     }
                 }*/ 
                     if(!forcedPerspectiveMode){
-                    checkLineOfSight();
-                    dragObject();
+                        dragObject();
                     }
                     else{
                         forcedPerspective();
@@ -227,18 +226,7 @@ namespace Player
             }
             else
             {
-                if(draggedObj){
-                    if(forcedPerspectiveMode){
-                        endForcedPerspective();
-                    }
-                    else{
-                        stopDragging();
-                    }
-                    notifyStopDragObject();
-                    draggedObj = null;
-                    draggedObjectRb = null;
-                    distanceCorrection = 0f;
-                    }
+                detachObject();
             }
         }
 
@@ -453,20 +441,21 @@ namespace Player
             Vector3 worldInputDir = transform.TransformDirection(inputDir);
             float maxSpeed = maxAirSpeed;
             if(controller.isGrounded){
+                verticalVelocity = Mathf.Max(0f,verticalVelocity);
                 maxSpeed = ( (run) ? runSpeed : walkSpeed);
                 if(movementInput.x == 0f && movementInput.y == 0f){
                     maxSpeed = 0f;
                 }
             }
-            Vector3 horizontalAcceleration = worldInputDir * inputAccelerationFactor;
-            Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
-            Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
-            velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
             verticalVelocity -= gravity * Time.deltaTime;
             if (verticalVelocity < 0f)
             {
                 verticalVelocity = Mathf.Max(verticalVelocity, -maxFallSpeed);
             }
+            Vector3 horizontalAcceleration = worldInputDir * inputAccelerationFactor;
+            Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
+            Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
+            velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
             velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
             var flags = controller.Move(velocity * Time.deltaTime);
@@ -493,17 +482,52 @@ namespace Player
             }
         }
         private void checkLineOfSight(){
+            bool visible = false;
             if(CameraUtility.VisibleFromCamera(draggedObj.GetComponent<MeshRenderer>(),playerCamera)){
+                visible = true;
                 Vector3 cameraToObject = draggedObj.transform.position - playerCamera.transform.position;
                 Ray sightRay = new Ray(playerCamera.transform.position,cameraToObject);
                 if(Physics.Raycast(sightRay,out RaycastHit sightHit,cameraToObject.magnitude*1.5f,~LayerMask.GetMask("Trigger"))){
                     if(sightHit.transform != draggedObj){
-                        Debug.DrawRay(sightRay.origin,cameraToObject,Color.red);
-                    }else{
-                        Debug.DrawRay(sightRay.origin,cameraToObject,Color.green);
+                        visible = false;
+                        if(Physics.Raycast(screenPointToRay,out RaycastHit portalHit,distanceFromMousePointer,LayerMask.GetMask("Portal"))){
+                            Portal hitPortal = portalHit.transform.gameObject.GetComponentInParent<Portal>();
+                            Vector3 portalPoint = hitPortal.linkedPortal.transform.TransformPoint(hitPortal.transform.InverseTransformPoint(portalHit.point));
+                            Debug.DrawRay(portalPoint,Vector3.up*5f,Color.red,2f);
+                            Vector3 portalToObject = draggedObj.position - portalPoint;
+                            Debug.DrawRay(portalPoint,portalToObject,Color.blue);
+                            if(Physics.Raycast(portalPoint,portalToObject,out RaycastHit checkHit,portalToObject.magnitude*1.5f,~LayerMask.GetMask("Trigger","Portal")) && checkHit.transform==draggedObj && (portalToObject.magnitude + portalHit.distance <= distanceFromMousePointer*1.3f)){
+                                visible = true;
+                            }
+                            else{
+                                if(checkHit.transform){
+                                    Debug.Log(checkHit.transform.name);
+                                }
+                            }
+                        }
                     }
                 }
             }
+            timeSinceLastSeen = (visible)? 0f:timeSinceLastSeen+Time.deltaTime;
+            if(timeSinceLastSeen>leniencyTime){
+                timeSinceLastSeen = 0f;
+                detachObject();
+            }
+        }
+
+        public void detachObject(){
+            if(!draggedObj) return;
+            
+            if(forcedPerspectiveMode){
+                endForcedPerspective();
+            }
+            else{
+                stopDragging();
+            }
+            notifyStopDragObject();
+            draggedObj = null;
+            draggedObjectRb = null;
+            distanceCorrection = 0f;
         }
         private void startDragging(float dragDist){
             distanceCorrection = ComputeDistanceCorrection(draggedObj,screenPointToRay);
@@ -520,8 +544,6 @@ namespace Player
         {
             FMODUnity.RuntimeManager.PlayOneShot(GameSoundPaths.PickUpEventPath, transform.position);
         }
-
-
         private void dragObject(){
             if(forcedPerspectiveMode){
                 return;
@@ -533,16 +555,17 @@ namespace Player
             if(Physics.Raycast(screenPointToRay,out hit,maxPickUpDistance*1.5f,LayerMask.GetMask("Portal"))){
                 //MeshRenderer portalScreen = hitPortal.transform.Find("Screen").GetComponent<MeshRenderer>();
                 Portal hitPortal = hit.transform.gameObject.GetComponentInParent<Portal>();
-                Vector3 portalRayOrigin = (hit.point - hitPortal.transform.position) + hitPortal.linkedPortal.transform.position;
-                Vector3 portalRayDirection = screenPointToRay.direction;
+                //Vector3 portalRayOrigin = (hit.point - hitPortal.transform.position) + hitPortal.linkedPortal.transform.position;
+                Vector3 portalRayOrigin = hitPortal.linkedPortal.transform.TransformPoint(hitPortal.transform.InverseTransformPoint(hit.point));
+                Vector3 portalRayDirection = hitPortal.linkedPortal.transform.TransformDirection(hitPortal.transform.InverseTransformDirection(screenPointToRay.direction));
                 if(hit.distance < distanceFromMousePointer){
-                    Debug.LogError("hit distance is shorter than holding distance");
+                    //Debug.LogError("hit distance is shorter than holding distance");
                     Ray portalRay = new Ray(portalRayOrigin,portalRayDirection);
                     if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
                         targetPos = portalRay.GetPoint(distanceFromMousePointer - hit.distance);
                     }
                     else{
-                        targetPos = hit.point + (0.5f - distanceCorrection) *screenPointToRay.direction;
+                        targetPos = hit.point + (0.5f) *screenPointToRay.direction;
                     }
                 }
                 else if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
@@ -574,6 +597,7 @@ namespace Player
             else { vel =movementToTarget * mouseFollowSpeed; }
             if (vel.magnitude > maxObjectSpeed) vel = Vector3.Normalize(vel)*maxObjectSpeed;
             draggedObjectRb.velocity = vel;
+            checkLineOfSight();
         }
 
 
