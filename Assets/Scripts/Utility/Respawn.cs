@@ -15,6 +15,12 @@ public class Respawn : MonoBehaviour
     [SerializeField]
     private float fadeTime = 3;
 
+    [SerializeField]
+    private Color fogColor;
+
+    [SerializeField]
+    private Material skyboxFogMaterial;
+
     private Vector3 landingPoint; //used in editory only
 
 	private void OnDrawGizmosSelected()
@@ -38,21 +44,22 @@ public class Respawn : MonoBehaviour
             if (Physics.Raycast(respawnPoint, -Vector3.up, out hit)) { landingPoint = hit.point; }
             else { landingPoint = respawnPoint; }
             }
+        RenderSettings.fogColor = fogColor;
 		}
 
-    private void Start() { cc = GetComponent<CharacterController>(); }
+    private void Start() { cc = GetComponent<CharacterController>(); setFog(0f); }
 
     private CharacterController cc;
-    private enum Phase { fade_out, fade_in, none  }
+    private enum Phase { fadeOut, fadeIn, none  }
 	private Phase respawning = Phase.none;
-    private float fade_out  = 0f;
-    private float fade_in   = 0f;
+    private float fadeOut  = 0f;
+    private float fadeIn   = 0f;
 
     void Update()
         {
         Debug.Log("Respawning: " + respawning);
-        Debug.Log("OUT: " + fade_out);
-        Debug.Log("IN:  " + fade_in);
+        Debug.Log("OUT: " + fadeOut);
+        Debug.Log("IN:  " + fadeIn);
         Debug.Log("FOG: " + RenderSettings.fogDensity);
         Debug.Log("___________________");
 
@@ -62,36 +69,41 @@ public class Respawn : MonoBehaviour
                 if (transform.position.y < deathY)
                     {
                     //TODO lock controls
-                    respawning = Phase.fade_out;
-                    fade_out = 0;
+                    respawning = Phase.fadeOut;
+                    fadeOut = 0;
                     }
                 break;
 
-            case Phase.fade_out:
-                fade_out += Time.deltaTime;
-                if (fade_out < fadeTime) { RenderSettings.fogDensity = Mathf.Pow(fade_out / fadeTime, 3); }
+            case Phase.fadeOut:
+                fadeOut += Time.deltaTime;
+                if (fadeOut < fadeTime) { setFog(fadeOut / fadeTime); }
                 else
                     {
                     cc.enabled = false;
                     cc.Move(Vector3.zero);
                     transform.position = respawnPoint;
                     cc.enabled = true;
-                    respawning = Phase.fade_in; 
-                    RenderSettings.fogDensity = 1f; 
-                    fade_in = fadeTime;
+                    respawning = Phase.fadeIn;
+                    setFog(1f);
+                    fadeIn = fadeTime;
                     }
                 break;
 
-            case Phase.fade_in:
-                fade_in -= Time.deltaTime;
-                if (fade_in > 0) { RenderSettings.fogDensity = Mathf.Pow(fade_in / fadeTime, 3); }
+            case Phase.fadeIn:
+                fadeIn -= Time.deltaTime;
+                if (fadeIn > 0) { setFog(fadeIn / fadeTime); }
                 else
                     {
                     respawning = Phase.none;
-                    RenderSettings.fogDensity = 0f;
+                    setFog(0f);
                     }
                 break;
             }
         }
 
+    private void setFog(float alpha)
+        {
+        RenderSettings.fogDensity = Mathf.Pow(alpha, 3f);
+        skyboxFogMaterial.color = new Color(skyboxFogMaterial.color.r, skyboxFogMaterial.color.g, skyboxFogMaterial.color.b, alpha);
+        }
     }
