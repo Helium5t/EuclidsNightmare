@@ -7,10 +7,7 @@ public class LinkedObject : MonoBehaviour
 {
 
     public enum Direction{x,y,z,None}
-
     [SerializeField] public LinkedObject mirror;
-
-
     private Vector3 offset;
     private Rigidbody mirrorPhysics;
 
@@ -33,6 +30,8 @@ public class LinkedObject : MonoBehaviour
 
     private float onCollisionMaxSpeed = 10f;
 
+    private Vector3 updatedVelocity;
+
     private void Awake() {
         if(!mirror){
             Debug.LogError(gameObject.name + " has no mirror set for it, disabling component.");
@@ -41,6 +40,7 @@ public class LinkedObject : MonoBehaviour
         else{
             targetOffset = transform.position - mirror.transform.position;
         }
+        updatedVelocity = Vector3.zero;
     }
     // Start is called before the first frame update
     void Start()
@@ -62,8 +62,8 @@ public class LinkedObject : MonoBehaviour
                 isMaster = masterBid > mirror.masterBid;
                 mirror.isMaster = mirror.masterBid > masterBid;
         }
-    } 
-    private void FixedUpdate() {
+    }
+    private void LateUpdate() {
         Rigidbody myRb = GetComponent<Rigidbody>();
         if(!isMaster){
             if(mirror.isMaster){
@@ -74,11 +74,11 @@ public class LinkedObject : MonoBehaviour
                     if(Physics.Raycast(transform.position,nextTargetPosition-transform.position,3f,~LayerMask.GetMask("Trigger"))){
                         recoveryVelocity = Vector3.ClampMagnitude(recoveryVelocity,onCollisionMaxSpeed);
                     }
-                    myRb.velocity = recoveryVelocity;
+                    updatedVelocity = recoveryVelocity;
                 }
                 else{
-                    Vector3 finalVelocity =myRb.velocity+  mirrorPhysics.velocity*movementScale;
-                    myRb.velocity = finalVelocity;
+                    Vector3 finalVelocity =myRb.velocity+  mirrorPhysics.velocity;//*movementScale;
+                    updatedVelocity = finalVelocity;
                 }
                 transform.rotation = mirror.transform.rotation;
             }
@@ -90,6 +90,12 @@ public class LinkedObject : MonoBehaviour
             Debug.DrawRay(transform.position,Vector3.up*5f,Color.blue);
             myRb.useGravity = true;
             //collisionImpulses = new List<Vector3>();
+        }
+    }
+    private void FixedUpdate() {
+        Rigidbody myRb = GetComponent<Rigidbody>();
+        if(mirror.isMaster && !isMaster){
+            myRb.velocity = updatedVelocity;
         }
     }
 
@@ -117,9 +123,6 @@ public class LinkedObject : MonoBehaviour
         }
     }
 
-    public LinkedObject getMirror(){
-        return mirror;
-    }
     public void resetOffset(){
         Vector3 newTargetOffset = transform.position - mirror.transform.position;
         targetOffset = newTargetOffset;
@@ -174,7 +177,7 @@ public class LinkedObject : MonoBehaviour
 
     private Vector3 getTargetPosition(){
         if(movementScale!=1f){
-        Vector3 targetPos = transform.position + mirrorPhysics.velocity*movementScale;
+        Vector3 targetPos = transform.position + mirrorPhysics.velocity;//*movementScale;
         targetPos.y = mirror.transform.position.y + targetOffset.y;
             return targetPos;
         }
