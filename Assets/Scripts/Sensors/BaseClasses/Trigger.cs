@@ -64,12 +64,14 @@ public class Trigger : MonoBehaviour
 
     public void enter()
         {
+            if(!targetObject) return;
         if (entered == 0) { firstEnter(); }
         entered++;
         }
 
     public void leave()
         {
+            if(!targetObject) return;
         Debug.Log("Trigger: left, count: " + entered);
         if (entered == 1) { lastLeave(); }
         if (entered != 0) { entered--; }

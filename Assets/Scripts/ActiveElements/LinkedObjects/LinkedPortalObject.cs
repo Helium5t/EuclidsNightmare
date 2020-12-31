@@ -56,8 +56,10 @@ public class LinkedPortalObject : PortalPhysicsObject {
                 else{
                         objectLink.resetOffset();
                 }
-                objectLink.movementScale = deformedSpace.expandLength(objectLink.movementScale);
-                objectLink.mirror.movementScale = deformedSpace.collapseLength(objectLink.mirror.movementScale);
+                /*
+                //objectLink.movementScale = deformedSpace.expandLength(objectLink.movementScale);
+                //objectLink.mirror.movementScale = deformedSpace.collapseLength(objectLink.mirror.movementScale);
+                */
             }
             else{
                 if(fromPortal.CompareTag("Compressed Space")){
@@ -68,8 +70,10 @@ public class LinkedPortalObject : PortalPhysicsObject {
                     else{
                         objectLink.resetOffset();
                     }
-                    objectLink.movementScale = deformedSpace.collapseLength(objectLink.movementScale);
-                    objectLink.mirror.movementScale = deformedSpace.expandLength(objectLink.mirror.movementScale);
+                    /*
+                    //objectLink.movementScale = deformedSpace.collapseLength(objectLink.movementScale);
+                    //objectLink.mirror.movementScale = deformedSpace.expandLength(objectLink.mirror.movementScale);
+                    */
                 }
             }
         }

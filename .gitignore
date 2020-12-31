@@ -85,6 +85,14 @@ Assets/Plugins/GitHub/
 Assets/Shaders/CustomShaders/TestingShader/
 Assets/Scenes/DevelopmentScenes/CustomTesting.unity
 Assets/Scenes/DevelopmentScenes/CustomTesting.unity.meta
+Assets/Scenes/DevelopmentScenes/PrefabMaker/LightingData.asset
+Assets/Scenes/DevelopmentScenes/PrefabMaker/LightingData.asset.meta
+Assets/Scenes/DevelopmentScenes/PrefabMaker/Lightmap-0_comp_dir.png
+Assets/Scenes/DevelopmentScenes/PrefabMaker/Lightmap-0_comp_dir.png.meta
+Assets/Scenes/DevelopmentScenes/PrefabMaker/Lightmap-0_comp_light.exr
+Assets/Scenes/DevelopmentScenes/PrefabMaker/Lightmap-0_comp_light.exr.meta
+Assets/Scenes/DevelopmentScenes/PrefabMaker/ReflectionProbe-0.exr
+Assets/Scenes/DevelopmentScenes/PrefabMaker/ReflectionProbe-0.exr.meta
 
 
 #Avoiding Git LFS errors

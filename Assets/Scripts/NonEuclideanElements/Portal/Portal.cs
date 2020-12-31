@@ -22,7 +22,7 @@ public class Portal : MonoBehaviour {
     // Private variables
     RenderTexture viewTexture;
     Camera trackedCam;
-    Camera portalCam;
+    public Camera portalCam{get; private set;}
     Camera playerCam;
     Material firstRecursionMat;
     List<PortalTraveller> trackedTravellers;
@@ -255,7 +255,7 @@ public class Portal : MonoBehaviour {
             traveller.originalMaterials[i].SetVector ("sliceCentre", slicePos);
             traveller.originalMaterials[i].SetVector ("sliceNormal", sliceNormal);
             traveller.originalMaterials[i].SetFloat ("sliceOffsetDst", sliceOffsetDst);
-
+            
             traveller.cloneMaterials[i].SetVector ("sliceCentre", cloneSlicePos);
             traveller.cloneMaterials[i].SetVector ("sliceNormal", cloneSliceNormal);
             traveller.cloneMaterials[i].SetFloat ("sliceOffsetDst", cloneSliceOffsetDst);

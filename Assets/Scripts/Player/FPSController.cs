@@ -175,9 +175,8 @@ namespace Player
             #endregion
                     
             // forced perspective mode handling
-            forcedPerspectiveMode =  (forcedPerspectiveAvailable)? forcedPerspectiveMode:false;
+            //forcedPerspectiveMode =  (forcedPerspectiveAvailable)? forcedPerspectiveMode:false;
             if (Input.GetKeyDown(KeyCode.F) && forcedPerspectiveAvailable && draggedObj){
-                Debug.Log("Switching mode");
                 toggleMode();
             }
             else if(Input.GetKeyDown(KeyCode.F)){
@@ -215,7 +214,7 @@ namespace Player
                             return;
                         }
                     }
-                }*/ 
+                }*/
                     if(!forcedPerspectiveMode){
                         dragObject();
                     }
@@ -287,7 +286,6 @@ namespace Player
             meshCenterCorrection = draggedObj.transform.position - meshBox.bounds.center;
             meshBox.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             meshBox.receiveShadows = false;
-
             // starting measurements for object
             baseSphereRadius = meshBox.bounds.extents.magnitude;
             startDistance = Vector3.Distance(playerCamera.transform.position,draggedObj.transform.position);
@@ -307,12 +305,17 @@ namespace Player
             foreach(Collider c in draggedObj.GetComponents<Collider>()){
                 c.isTrigger = true;
             }
-
             // Changing object layer
             draggedObj.gameObject.layer = LayerMask.NameToLayer("ForcedPerspectiveHeld");
             foreach(Transform child in draggedObj.GetComponentsInChildren<Transform>()){
-                child.GetComponent<Rigidbody>().isKinematic = true;
-                child.GetComponent<Collider>().isTrigger = true;
+                if(child.TryGetComponent<Rigidbody>(out Rigidbody rb)){
+                    rb.isKinematic = true;
+                }
+                if(child.TryGetComponent<Collider>(out Collider c)){
+                    foreach(Collider coll in child.GetComponentsInChildren<Collider>()){
+                        coll.isTrigger = true;
+                    }
+                }
                 child.gameObject.layer = LayerMask.NameToLayer("ForcedPerspectiveHeld");
             }
             forcedPerspectiveMode = true;
@@ -345,10 +348,12 @@ namespace Player
                 float scalingFactor = currentRadius / startRadius;
                 draggedObj.transform.rotation = Quaternion.Lerp(draggedObj.transform.rotation,Quaternion.AngleAxis(startYRotation+ playerCamera.transform.eulerAngles.y,Vector3.up),Time.deltaTime*10);
                 if( currentMarchedDistance < destinationDistance && currentMarchedDistance != minMarchDistance){
+                    //Debug.Log(Vector3.Angle(transform.forward,screenPointToRay.direction));
                     targetPerspectivePosition = screenPointToRay.GetPoint(finalDistance) + (meshCenterCorrection*scalingFactor);
                     draggedObj.transform.localScale = baseScale * scalingFactor ;
                 }
-                else if(screenPointToRay.GetPoint(minMarchDistance).y < transform.position.y - 1f){
+                else if(Vector3.Angle(transform.forward,screenPointToRay.direction) > 30f && screenPointToRay.direction.y < 0){
+                    //Debug.Log("Locking Y");
                     Vector3 horizontalDir = new Vector3(screenPointToRay.direction.x,0f,screenPointToRay.direction.z);
                     Vector3 nextPos = new Ray(transform.position,horizontalDir).GetPoint(minMarchDistance) + (meshCenterCorrection*scalingFactor);
                     targetPerspectivePosition.x = nextPos.x;
@@ -357,6 +362,9 @@ namespace Player
                 draggedObj.transform.position = Vector3.Lerp(draggedObj.transform.position, targetPerspectivePosition,Time.deltaTime* 100);
                 Debug.DrawLine(playerCamera.transform.position,screenPointToRay.GetPoint(finalDistance),Color.green);
                 Debug.DrawLine(playerCamera .transform.position,screenPointToRay.GetPoint(currentMarchedDistance),Color.blue);
+            }
+            else{
+                Debug.LogError("Infinite range!");
             }
         }
         
@@ -373,8 +381,14 @@ namespace Player
             }
             draggedObj.gameObject.layer = LayerMask.NameToLayer("Default");
             foreach(Transform child in draggedObj.GetComponentsInChildren<Transform>()){
-                child.GetComponent<Rigidbody>().isKinematic =false;
-                child.GetComponent<Collider>().isTrigger =false;
+                if(child.TryGetComponent<Rigidbody>(out Rigidbody rb)){
+                    rb.isKinematic = false;
+                }
+                if(child.TryGetComponent<Collider>(out Collider c)){
+                    foreach(Collider coll in child.GetComponentsInChildren<Collider>()){
+                        coll.isTrigger = false;
+                    }
+                }
                 child.gameObject.layer = LayerMask.NameToLayer("Default");
             }
             forcedPerspectiveMode = false;
@@ -473,6 +487,9 @@ namespace Player
     #endregion
     #region Object Dragging
         private void toggleMode(){
+            if(!forcedPerspectiveAvailable) {
+                return;
+            }
             if(!forcedPerspectiveMode){
                 stopDragging();
                 initForcedPerspective();
@@ -484,27 +501,29 @@ namespace Player
         }
         private void checkLineOfSight(){
             bool visible = false;
-            if(CameraUtility.VisibleFromCamera(draggedObj.GetComponent<MeshRenderer>(),playerCamera)){
+            if(CameraUtility.VisibleFromCamera(draggedObj.GetComponentInChildren<MeshRenderer>(),playerCamera)){
                 visible = true;
                 Vector3 cameraToObject = draggedObj.transform.position - playerCamera.transform.position;
                 Ray sightRay = new Ray(playerCamera.transform.position,cameraToObject);
                 if(Physics.Raycast(sightRay,out RaycastHit sightHit,cameraToObject.magnitude*1.5f,~LayerMask.GetMask("Trigger"))){
                     if(sightHit.transform != draggedObj){
                         visible = false;
-                        if(Physics.Raycast(screenPointToRay,out RaycastHit portalHit,distanceFromMousePointer,LayerMask.GetMask("Portal"))){
-                            Portal hitPortal = portalHit.transform.gameObject.GetComponentInParent<Portal>();
-                            Vector3 portalPoint = hitPortal.linkedPortal.transform.TransformPoint(hitPortal.transform.InverseTransformPoint(portalHit.point));
-                            Debug.DrawRay(portalPoint,Vector3.up*5f,Color.red,2f);
-                            Vector3 portalToObject = draggedObj.position - portalPoint;
-                            Debug.DrawRay(portalPoint,portalToObject,Color.blue);
-                            if(Physics.Raycast(portalPoint,portalToObject,out RaycastHit checkHit,portalToObject.magnitude*1.5f,~LayerMask.GetMask("Trigger","Portal")) && checkHit.transform==draggedObj && (portalToObject.magnitude + portalHit.distance <= distanceFromMousePointer*1.3f)){
-                                visible = true;
-                            }
-                            else{
-                                if(checkHit.transform){
-                                    Debug.Log(checkHit.transform.name);
-                                }
-                            }
+                    }
+                }
+            }
+            if(!visible && Physics.Raycast(screenPointToRay,out RaycastHit portalHit,distanceFromMousePointer,LayerMask.GetMask("Portal"))){
+                Portal hitPortal = portalHit.transform.gameObject.GetComponentInParent<Portal>();
+                if(CameraUtility.VisibleFromCamera(draggedObj.GetComponentInChildren<MeshRenderer>(),hitPortal.linkedPortal.portalCam)){
+                    Vector3 portalPoint = hitPortal.linkedPortal.transform.TransformPoint(hitPortal.transform.InverseTransformPoint(portalHit.point));
+                    Debug.DrawRay(portalPoint,Vector3.up*5f,Color.red,2f);
+                    Vector3 portalToObject = draggedObj.position - portalPoint;
+                    Debug.DrawRay(portalPoint,portalToObject,Color.blue);
+                    if(Physics.Raycast(portalPoint,portalToObject,out RaycastHit checkHit,portalToObject.magnitude*1.5f,~LayerMask.GetMask("Trigger","Portal")) && checkHit.transform==draggedObj && (portalToObject.magnitude + portalHit.distance <= distanceFromMousePointer*1.3f)){
+                        visible = true;
+                    }
+                    else{
+                        if(checkHit.transform){
+                            Debug.Log(checkHit.transform.name);
                         }
                     }
                 }
@@ -561,19 +580,15 @@ namespace Player
                 Vector3 portalRayOrigin = hitPortal.linkedPortal.transform.TransformPoint(hitPortal.transform.InverseTransformPoint(hit.point));
                 Vector3 portalRayDirection = hitPortal.linkedPortal.transform.TransformDirection(hitPortal.transform.InverseTransformDirection(screenPointToRay.direction));
                 if(hit.distance < distanceFromMousePointer){
-                    Debug.LogError("Hit distance < holding distance");
                     Ray portalRay = new Ray(portalRayOrigin,portalRayDirection);
                     if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position)){
-                        Debug.LogError("Object is teleported");
                         targetPos = portalRay.GetPoint(distanceFromMousePointer - hit.distance);
                     }
                     else{
-                        Debug.LogError("Object is not teleported");
                         targetPos = hit.point + (0.5f) *screenPointToRay.direction;
                     }
                 }
-                else if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position) && (draggedObj.position - transform.position).sqrMagnitude > (hitPortal.transform.position - transform.position).sqrMagnitude ){
-                    Debug.LogError("Object is closer to other portal");   
+                else if(Vector3.Distance(draggedObj.position,hitPortal.transform.position) > Vector3.Distance(draggedObj.position,hitPortal.linkedPortal.transform.position) && (draggedObj.position - transform.position).sqrMagnitude > (hitPortal.transform.position - transform.position).sqrMagnitude ){ 
                     targetPos = portalRayOrigin - (0.5f) * portalRayDirection;
                     //Debug.DrawRay(draggedObj.position,portalRayOrigin - draggedObj.position,Color.red);
                 }
@@ -636,11 +651,17 @@ namespace Player
             if(draggedObj.TryGetComponent<RunnerObject>(out RunnerObject runner)){
                 runner.isCaught = true;
             }
+            if(draggedObj.TryGetComponent<Key>(out Key key)){
+                key.startDragging();
+            }
         }
             
         void notifyStopDragObject(){
             if(draggedObj.TryGetComponent<LinkedObject>(out LinkedObject linkedObject)){
                 linkedObject.stopDrag();
+            }
+            if(draggedObj.TryGetComponent<Key>(out Key key)){
+                key.stopDragging();
             }
         }
 
