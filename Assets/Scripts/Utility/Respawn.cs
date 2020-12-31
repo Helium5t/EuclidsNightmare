@@ -15,11 +15,13 @@ public class Respawn : MonoBehaviour
     [SerializeField]
     private float fadeTime = 3;
 
-    [Header("Prefab only fields - do not change outside of prefab editor")]
     [SerializeField]
-    private Image image;
+    private Color fogColor;
 
-    private Vector3 landingPoint;
+    [SerializeField]
+    private Material skyboxFogMaterial;
+
+    private Vector3 landingPoint; //used in editory only
 
 	private void OnDrawGizmosSelected()
         {
@@ -42,43 +44,66 @@ public class Respawn : MonoBehaviour
             if (Physics.Raycast(respawnPoint, -Vector3.up, out hit)) { landingPoint = hit.point; }
             else { landingPoint = respawnPoint; }
             }
+        RenderSettings.fogColor = fogColor;
 		}
 
-    CharacterController cc;
-	private void Start()
-		{
-        image.canvasRenderer.SetAlpha(0);
-        cc = GetComponent<CharacterController>();
-        }
+    private void Start() { cc = GetComponent<CharacterController>(); setFog(0f); }
 
-	private bool respawning = false;
+    private CharacterController cc;
+    private enum Phase { fadeOut, fadeIn, none  }
+	private Phase respawning = Phase.none;
+    private float fadeOut  = 0f;
+    private float fadeIn   = 0f;
 
     void Update()
         {
-        if (!respawning && transform.position.y < deathY)
+        Debug.Log("Respawning: " + respawning);
+        Debug.Log("OUT: " + fadeOut);
+        Debug.Log("IN:  " + fadeIn);
+        Debug.Log("FOG: " + RenderSettings.fogDensity);
+        Debug.Log("___________________");
+
+        switch (respawning)
             {
-            respawning = true;
-            image.CrossFadeAlpha(1, fadeTime, true);
-            StartCoroutine(respawn());
+            case Phase.none:
+                if (transform.position.y < deathY)
+                    {
+                    //TODO lock controls
+                    respawning = Phase.fadeOut;
+                    fadeOut = 0;
+                    }
+                break;
+
+            case Phase.fadeOut:
+                fadeOut += Time.deltaTime;
+                if (fadeOut < fadeTime) { setFog(fadeOut / fadeTime); }
+                else
+                    {
+                    cc.enabled = false;
+                    cc.Move(Vector3.zero);
+                    transform.position = respawnPoint;
+                    cc.enabled = true;
+                    respawning = Phase.fadeIn;
+                    setFog(1f);
+                    fadeIn = fadeTime;
+                    }
+                break;
+
+            case Phase.fadeIn:
+                fadeIn -= Time.deltaTime;
+                if (fadeIn > 0) { setFog(fadeIn / fadeTime); }
+                else
+                    {
+                    respawning = Phase.none;
+                    setFog(0f);
+                    }
+                break;
             }
         }
 
-    private IEnumerator respawn()
+    private void setFog(float alpha)
         {
-        yield return new WaitForSeconds(fadeTime);
-        transform.position = respawnPoint;
-        StartCoroutine(wait());
-        }
-
-    private IEnumerator wait()
-        {
-        image.CrossFadeAlpha(0, fadeTime, true);
-        yield return new WaitForSeconds(fadeTime);
-        StartCoroutine(finish());
-        }
-    private IEnumerator finish()
-        {
-        yield return new WaitForSeconds(fadeTime / 2);
-        respawning = false;
+        RenderSettings.fogDensity = Mathf.Pow(alpha, 3f);
+        skyboxFogMaterial.color = new Color(skyboxFogMaterial.color.r, skyboxFogMaterial.color.g, skyboxFogMaterial.color.b, alpha);
         }
     }
