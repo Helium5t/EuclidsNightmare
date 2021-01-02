@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 namespace GameManagement
 {
-    [RequireComponent(typeof(AudioSource))]
     public class EndLevel : MonoBehaviour
     {
         [SerializeField] private GameObject levelLoader;
-
+        
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
