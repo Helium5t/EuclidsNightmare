@@ -11,5 +11,6 @@
         public const string SfxVolumeTestPath = "event:/SFXVolumeTest/SFXVolumeTest";
         public const string BreathingEventPath = "event:/Sounds/Player/Breathing/Breathing";
         public const string PickUpEventPath = "event:/Sounds/PickUp/PickUp";
+        public const string EndGameSoundPath = "event:/Sounds/EndLevelSound/EndLevelSound";
     }
 }

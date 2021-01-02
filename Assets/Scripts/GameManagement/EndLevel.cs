@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility;
 
 namespace GameManagement
 {
     public class EndLevel : MonoBehaviour
     {
         [SerializeField] private GameObject levelLoader;
-        
-        
+
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -21,8 +22,7 @@ namespace GameManagement
 
         private void PlayEndLevelClip()
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Sounds/EndLevelSound/EndLevelSound",
-                gameObject.transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot(GameSoundPaths.EndGameSoundPath, gameObject.transform.position);
         }
     }
 }
