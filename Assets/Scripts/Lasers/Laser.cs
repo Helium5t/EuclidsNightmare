@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Laser : MonoBehaviour
     {
@@ -21,6 +22,7 @@ public class Laser : MonoBehaviour
 
     private GameObject lrObject = null;
     private LineRenderer lr = null;
+
     private void Awake()
         {
         lrObject = new GameObject();
@@ -49,8 +51,10 @@ public class Laser : MonoBehaviour
         alphaKeys[1].time = 1f;
         lr.material.color = Color.red;
         lr.colorGradient.SetKeys(colorKeys, alphaKeys);
+        
         }
-    private void OnDestroy() { GameObject.Destroy(lrObject); }
+
+    private void OnDestroy() => GameObject.Destroy(lrObject);
 
     //In case someone needs to know the objects that have been hit from outside the class.
     public List<GameObject> objectsHit = new List<GameObject>();
@@ -127,5 +131,4 @@ public class Laser : MonoBehaviour
         lr.positionCount = points.Count;
         for (int i = 0; i < points.Count; i++) { lr.SetPosition(i, points[i]); }
         }
-
     }

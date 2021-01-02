@@ -2510,6 +2510,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1528129689, guid: db15773cf0d2d2c44bef662fe2842eef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: db15773cf0d2d2c44bef662fe2842eef,
         type: 3}
       propertyPath: m_Name
@@ -2553,7 +2557,7 @@ PrefabInstance:
     - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896150, guid: db15773cf0d2d2c44bef662fe2842eef,
         type: 3}
@@ -5832,6 +5836,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1649116934}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &734707053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1928910390260646476, guid: dfbfb70baed5f564a9b3fb71b33657a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1100027380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &734707054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734707053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Sounds/Laser/LaserBeam
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &746741290
 GameObject:
   m_ObjectHideFlags: 0
@@ -8317,7 +8350,7 @@ PrefabInstance:
     - target: {fileID: 1928910390561847946, guid: dfbfb70baed5f564a9b3fb71b33657a5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1928910390561847946, guid: dfbfb70baed5f564a9b3fb71b33657a5,
         type: 3}
@@ -9134,7 +9167,7 @@ Transform:
   - {fileID: 1580667423}
   - {fileID: 451680766}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1276761843 stripped
 Transform:
@@ -14174,7 +14207,7 @@ Transform:
   - {fileID: 410519582}
   - {fileID: 1838567690}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2027196252
 PrefabInstance:
@@ -14780,7 +14813,7 @@ PrefabInstance:
     - target: {fileID: 3577998035653490112, guid: d53c41225bfed874fa94f640972d2e21,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3577998035653490112, guid: d53c41225bfed874fa94f640972d2e21,
         type: 3}
