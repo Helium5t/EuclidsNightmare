@@ -551,6 +551,7 @@ namespace Player
             distanceCorrection = 0f;
         }
         private void startDragging(float dragDist){
+            PlayPickUpSound();
             distanceCorrection = ComputeDistanceCorrection(draggedObj,screenPointToRay);
             distanceFromMousePointer = Mathf.Max(dragDist + distanceCorrection ,minHoldingDistance);
             draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
