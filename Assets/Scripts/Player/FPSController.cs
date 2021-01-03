@@ -450,6 +450,9 @@ namespace Player
         }
     #endregion
     #region Movement
+        [HideInInspector]
+        public bool acceptMovementInput = true;
+
         private void computeMovement(Vector2 movementInput, bool run){
 
             Vector3 inputDir = new Vector3(movementInput.x, 0, movementInput.y).normalized;
@@ -467,7 +470,7 @@ namespace Player
             {
                 verticalVelocity = Mathf.Max(verticalVelocity, -maxFallSpeed);
             }
-            Vector3 horizontalAcceleration = worldInputDir * inputAccelerationFactor;
+            Vector3 horizontalAcceleration = acceptMovementInput ? worldInputDir * inputAccelerationFactor : Vector3.zero;
             Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
             Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
             velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
