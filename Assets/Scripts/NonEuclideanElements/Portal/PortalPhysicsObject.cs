@@ -11,7 +11,6 @@ public class PortalPhysicsObject : PortalTraveller {
     protected override void Awake () {
         base.Awake();
         rigidbody = GetComponent<Rigidbody> ();
-        
     }
 
     public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {

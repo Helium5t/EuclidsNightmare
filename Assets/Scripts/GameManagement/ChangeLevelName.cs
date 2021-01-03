@@ -1,11 +1,13 @@
-﻿using GameManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ChangeLevelName : MonoBehaviour
+namespace GameManagement
 {
-    private LevelLoader levelLoader;
+    public class ChangeLevelName : MonoBehaviour
+    {
+        private LevelLoader levelLoader;
 
-    private void Awake() => levelLoader = GetComponentInParent<LevelLoader>();
+        private void Awake() => levelLoader = GetComponentInParent<LevelLoader>();
 
-    public void ChangeName() => levelLoader.DisplayLevelName();
+        public void ChangeName() => levelLoader.DisplayLevelName();
+    }
 }

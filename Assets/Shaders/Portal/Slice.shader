@@ -6,6 +6,8 @@
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
+        [ToggleOff] _Emission("Emission",Float) = 1.0
+        _EmissionColor("Emission Color",Color) = (0,0,0,0)
 
         sliceNormal("normal", Vector) = (0,0,0,0)
         sliceCentre ("centre", Vector) = (0,0,0,0)
@@ -32,6 +34,8 @@
 
         half _Glossiness;
         half _Metallic;
+        half _Emission;
+        fixed4 _EmissionColor;
         fixed4 _Color;
 
         // World space normal of slice, anything along this direction from centre will be invisible
@@ -49,12 +53,12 @@
             
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-            o.Albedo = c.rgb;
-
+            o.Albedo = (c.rgb)*(1-_Emission) + _EmissionColor*_Emission;
+            o.Emission = _EmissionColor*_Emission;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
-            o.Alpha = c.a;
+            o.Alpha = (c.a);
         }
         ENDCG
     }

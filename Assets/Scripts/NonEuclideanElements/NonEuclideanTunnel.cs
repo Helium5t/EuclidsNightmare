@@ -41,7 +41,6 @@ public class NonEuclideanTunnel : MonoBehaviour
 
     public void updateTrackedCamera(){
         if(player.GetComponent<FPSController>().inTunnel){
-            Debug.Log("In Tunnel");
             shortEntry.GetComponentInChildren<Portal>().setActiveCam(-1);
             longEntry.GetComponentInChildren<Portal>().setActiveCam(-1);
             shortExit.GetComponentInChildren<Portal>().setActiveCam(-1);
