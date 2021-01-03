@@ -14,19 +14,23 @@ public class Portal : MonoBehaviour {
 
     [SerializeField] private bool allowAlternateCameras = true;
     List<Camera> altCams;
-
+   
     [Header ("Advanced Settings")]
     public float nearClipOffset = 0.05f;
     public float nearClipLimit = 0.2f;
 
+    [Space][Header("Additive Loading Settings")]
+    public bool keepActive = false;
     // Private variables
     RenderTexture viewTexture;
     Camera trackedCam;
     public Camera portalCam{get; private set;}
+    
     Camera playerCam;
     Material firstRecursionMat;
     List<PortalTraveller> trackedTravellers;
     MeshFilter screenMeshFilter;
+
 
     void Awake () {
         altCams = new List<Camera>();
@@ -37,6 +41,12 @@ public class Portal : MonoBehaviour {
         screenMeshFilter = screen.GetComponent<MeshFilter> ();
         screen.material.SetInt ("displayMask", 1);
         trackedCam = playerCam;
+        if(transform.localScale != Vector3.one){
+            Vector3 screenScale = transform.localScale;
+            transform.localScale = Vector3.one;
+            Transform screen = transform.Find("Screen");
+            screen.localScale = new Vector3(screenScale.x,screenScale.y,screen.localScale.z);
+        }
     }
 
     void LateUpdate () {
@@ -217,7 +227,7 @@ public class Portal : MonoBehaviour {
         float halfHeight = playerCam.nearClipPlane * Mathf.Tan (playerCam.fieldOfView * 0.5f * Mathf.Deg2Rad);
         float halfWidth = halfHeight * playerCam.aspect;
         float dstToNearClipPlaneCorner = new Vector3 (halfWidth, halfHeight, playerCam.nearClipPlane).magnitude;
-        float screenThickness = dstToNearClipPlaneCorner;
+        float screenThickness = dstToNearClipPlaneCorner*1.2f;
 
         Transform screenT = screen.transform;
         bool camFacingSameDirAsPortal = Vector3.Dot (transform.forward, transform.position - viewPoint) > 0;
@@ -382,5 +392,9 @@ public class Portal : MonoBehaviour {
         else{
             trackedCam = altCams[index];
         }
+    }
+
+    public void reinitPlayerCam(Camera newCam){
+        playerCam = Camera.main;
     }
 }

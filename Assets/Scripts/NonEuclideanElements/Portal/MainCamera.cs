@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+using System.Collections;
+using UnityEditor;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class MainCamera : MonoBehaviour {
 
@@ -6,7 +10,15 @@ public class MainCamera : MonoBehaviour {
     NonEuclideanTunnel[] nets;
 
     void Awake () {
-        portals = FindObjectsOfType<Portal> ();
+        
+        List<Portal> allPortals = new List<Portal>(FindObjectsOfType<Portal>());
+        List<Portal> culledPortals = new List<Portal>();
+        foreach(Portal p in allPortals){
+            if(p.keepActive || p.gameObject.scene.name == SceneManager.GetActiveScene().name){
+                culledPortals.Add(p);
+            }
+        }
+        portals = culledPortals.ToArray();
         nets = FindObjectsOfType<NonEuclideanTunnel>();
     }
 
@@ -25,6 +37,10 @@ public class MainCamera : MonoBehaviour {
             portals[i].PostPortalRender ();
         }
 
+    }
+
+    public void resetCamera(){
+        Awake();
     }
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Player;
 
 [ExecuteAlways]
 public class Respawn : MonoBehaviour
@@ -22,6 +23,8 @@ public class Respawn : MonoBehaviour
     private Material skyboxFogMaterial;
 
     private Vector3 landingPoint; //used in editory only
+
+    [SerializeField] private bool activeLogging = false;
 
 	private void OnDrawGizmosSelected()
         {
@@ -57,11 +60,13 @@ public class Respawn : MonoBehaviour
 
     void Update()
         {
-        Debug.Log("Respawning: " + respawning);
-        Debug.Log("OUT: " + fadeOut);
-        Debug.Log("IN:  " + fadeIn);
-        Debug.Log("FOG: " + RenderSettings.fogDensity);
-        Debug.Log("___________________");
+        if(activeLogging){
+            Debug.Log("Respawning: " + respawning);
+            Debug.Log("OUT: " + fadeOut);
+            Debug.Log("IN:  " + fadeIn);
+            Debug.Log("FOG: " + RenderSettings.fogDensity);
+            Debug.Log("___________________");
+        }
 
         switch (respawning)
             {
@@ -82,6 +87,7 @@ public class Respawn : MonoBehaviour
                     cc.enabled = false;
                     cc.Move(Vector3.zero);
                     transform.position = respawnPoint;
+                    GetComponentInChildren<FPSController>().lockUntilGround = true;
                     cc.enabled = true;
                     respawning = Phase.fadeIn;
                     setFog(1f);
@@ -106,4 +112,7 @@ public class Respawn : MonoBehaviour
         RenderSettings.fogDensity = Mathf.Pow(alpha, 3f);
         skyboxFogMaterial.color = new Color(skyboxFogMaterial.color.r, skyboxFogMaterial.color.g, skyboxFogMaterial.color.b, alpha);
         }
+    
+
     }
+    

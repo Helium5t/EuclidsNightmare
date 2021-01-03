@@ -41,4 +41,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/EndDemoRoom.unity
     guid: 2ed721df99f69b3419880aaa514bd2a9
+  - enabled: 1
+    path: Assets/Scenes/DevelopmentScenes/CurrentLevelTest.unity
+    guid: 5429ab3289d5c8a4b9d85ab39050d1af
+  - enabled: 1
+    path: Assets/Scenes/DevelopmentScenes/NextLevelTest.unity
+    guid: 7e78d82ac21f56a4ba36ba3604363b78
+  - enabled: 1
+    path: Assets/Scenes/Platforming23.unity
+    guid: 2a60c6b5819cbb448b4a3ec80d982590
+  - enabled: 1
+    path: Assets/Scenes/Platforming12.unity
+    guid: 6ff40e68831da5b42a96fddba5e65e0b
+  - enabled: 1
+    path: Assets/Scenes/Platforming01.unity
+    guid: 7625e8e3467f7184b8292813d4e89f68
+  - enabled: 1
+    path: Assets/Scenes/NewGlassLabyrinth.unity
+    guid: a3ee30654fb181147a21d44a5a0dcace
   m_configObjects: {}
