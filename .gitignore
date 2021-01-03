@@ -93,6 +93,13 @@ Assets/Scenes/DevelopmentScenes/PrefabMaker/Lightmap-0_comp_light.exr
 Assets/Scenes/DevelopmentScenes/PrefabMaker/Lightmap-0_comp_light.exr.meta
 Assets/Scenes/DevelopmentScenes/PrefabMaker/ReflectionProbe-0.exr
 Assets/Scenes/DevelopmentScenes/PrefabMaker/ReflectionProbe-0.exr.meta
+Assets/Scenes/DevelopmentScenes/MeasureObjects.unity
+Assets/Scenes/DevelopmentScenes/NextLevelTest.unity
+Assets/Scenes/DevelopmentScenes/NextLevelTest.unity.meta
+Assets/Scenes/DevelopmentScenes/PrefabMaker.unity
+Assets/Scenes/DevelopmentScenes/PrefabMaker.meta
+Assets/Scenes/DevelopmentScenes/CurrentLevelTest.unity
+Assets/Scenes/DevelopmentScenes/CurrentLevelTest.unity.meta
 
 
 #Avoiding Git LFS errors
