@@ -7,6 +7,7 @@ public class Trigger : MonoBehaviour
     [Header("Prefab only fields - do not change outside of prefab editor")]
     [SerializeField] private MeshRenderer debugMesh = null;
     [SerializeField] private Material debugMaterial = null;
+    [SerializeField] private uint triggerCap = 1;
     private Target target = null;
 
     public uint entered { get; private set; }
@@ -32,6 +33,10 @@ public class Trigger : MonoBehaviour
             }
         changeTarget(targetObject);
         }
+    
+    private void Update() {
+        if(entered > triggerCap) entered = triggerCap;
+    }
 
     private void activate()
         {
