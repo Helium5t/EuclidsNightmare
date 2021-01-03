@@ -37,7 +37,7 @@ public abstract class Target : MonoBehaviour
                 {
                 if (Debug.isDebugBuild) { debugMesh.material.color = Color.green; }
                 isActive = true;
-                if (hasTimer && timerSeconds != 0) { StartCoroutine(deactivateTimer()); }
+                if (hasTimer && timerSeconds != 0) { Debug.Log("timer started"); StartCoroutine(deactivateTimer()); }
                 activate();
                 }
             else if (toggle)
@@ -59,6 +59,7 @@ public abstract class Target : MonoBehaviour
 
     private void __deactivate()
         {
+        Debug.Log("timer ended");
         if (!toggle)
             {
             if (Debug.isDebugBuild) { debugMesh.material.color = Color.red; }
