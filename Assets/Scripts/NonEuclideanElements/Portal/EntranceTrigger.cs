@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class EntranceTrigger : MonoBehaviour
 {
-    [SerializeField] Portal []portalToDisable;
+    [SerializeField] Portal[] portalToDisable;
     [SerializeField] Portal portalToEnable;
-    
+
+    PortalTrigger portalTrigger;
+
+    private void Awake() {
+        if(!portalTrigger){
+            portalTrigger = GameObject.FindObjectOfType<PortalTrigger>();
+        }
+    }
     private void Start() {
         portalToDisable[0].gameObject.SetActive(false);
         portalToDisable[1].gameObject.SetActive(false);
@@ -16,6 +23,9 @@ public class EntranceTrigger : MonoBehaviour
     {
         if (col.tag == "Player")
         {
+            if(portalTrigger.player != col.gameObject){
+                portalTrigger.player = col.gameObject;
+            }
             portalToDisable[0].gameObject.SetActive(false);
             portalToDisable[1].gameObject.SetActive(false);
             portalToEnable.gameObject.SetActive(true);

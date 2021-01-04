@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PortalTrigger : MonoBehaviour
 {
-    [SerializeField] GameObject player;
-    [SerializeField] Portal []portal;
+    public GameObject player;
+    [SerializeField] Portal[] portal;
 
     private void Start() {
         if(!player){
@@ -14,7 +14,6 @@ public class PortalTrigger : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(transform.position);
         if (col.tag == "Player")
         {
             for (int i=0; i<2; i++)

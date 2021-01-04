@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using Player;
 
-[ExecuteAlways]
+/*[ExecuteAlways]*/
 public class Respawn : MonoBehaviour
 	{
 	[DraggablePoint]

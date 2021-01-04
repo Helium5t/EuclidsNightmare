@@ -23,13 +23,14 @@ public class Portal : MonoBehaviour {
     public bool keepActive = false;
     // Private variables
     RenderTexture viewTexture;
-    Camera trackedCam;
+    [SerializeField] Camera trackedCam;
     public Camera portalCam{get; private set;}
     
     Camera playerCam;
     Material firstRecursionMat;
     List<PortalTraveller> trackedTravellers;
     MeshFilter screenMeshFilter;
+
 
 
     void Awake () {
@@ -41,12 +42,12 @@ public class Portal : MonoBehaviour {
         screenMeshFilter = screen.GetComponent<MeshFilter> ();
         screen.material.SetInt ("displayMask", 1);
         trackedCam = playerCam;
-        if(transform.localScale != Vector3.one){
+        /*if(transform.localScale != Vector3.one){
             Vector3 screenScale = transform.localScale;
             transform.localScale = Vector3.one;
             Transform screen = transform.Find("Screen");
             screen.localScale = new Vector3(screenScale.x,screenScale.y,screen.localScale.z);
-        }
+        }*/
     }
 
     void LateUpdate () {
@@ -68,14 +69,15 @@ public class Portal : MonoBehaviour {
                 var positionOld = travellerT.position;
                 var rotOld = travellerT.rotation;
                 traveller.Teleport (transform, linkedPortal.transform, m.GetColumn (3), m.rotation);
-                traveller.graphicsClone.transform.SetPositionAndRotation (positionOld, rotOld);
+                traveller.graphicsClone.transform.SetPositionAndRotation (positionOld + traveller.graphicalOffset, rotOld);
                 // Can't rely on OnTriggerEnter/Exit to be called next frame since it depends on when FixedUpdate runs
                 linkedPortal.OnTravellerEnterPortal (traveller);
                 trackedTravellers.RemoveAt (i);
                 i--;
 
             } else {
-                traveller.graphicsClone.transform.SetPositionAndRotation (m.GetColumn (3), m.rotation);
+                Vector4 graphicalOffset4 = new Vector4(traveller.graphicalOffset.x,traveller.graphicalOffset.y,traveller.graphicalOffset.z,1);
+                traveller.graphicsClone.transform.SetPositionAndRotation (m.GetColumn(3) + graphicalOffset4, m.rotation);
                 //UpdateSliceParams (traveller);
                 traveller.previousOffsetFromPortal = offsetFromPortal;
             }
@@ -92,9 +94,6 @@ public class Portal : MonoBehaviour {
     // Manually render the camera attached to this portal
     // Called after PrePortalRender, and before PostPortalRender
     public void Render () {
-        /*if(trackedCam!=playerCam){
-            Debug.Log(gameObject.name + " is using "+ trackedCam.transform.parent.name + " camera");
-        }*/
         // Skip rendering the view from this portal if player is not looking at the linked portal
         if (!checkActive()) {
                 return;
@@ -350,15 +349,7 @@ public class Portal : MonoBehaviour {
     }
 
     bool checkActive(){
-        if(CameraUtility.VisibleFromCamera(linkedPortal.screen, trackedCam)){
-            return true;
-        }
-        else{
-            /*if(playerCam!=trackedCam){
-                Debug.LogError(trackedCam.transform.parent.name + " can't see " + name);
-            }*/
-            return false;
-        }
+         return CameraUtility.VisibleFromCamera(linkedPortal.screen, trackedCam);
         /*
         Obsolete keeping this just in case i need it later, but to be deleted
         else{
@@ -395,6 +386,15 @@ public class Portal : MonoBehaviour {
     }
 
     public void reinitPlayerCam(Camera newCam){
+        if(trackedCam == playerCam){
+            trackedCam = newCam;
+        }
+        playerCam = newCam;
+    }
+    public void reinitPlayerCam(){
+        if(trackedCam == playerCam){
+            trackedCam = Camera.main;
+        }
         playerCam = Camera.main;
     }
 }

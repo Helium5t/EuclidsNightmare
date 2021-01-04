@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3e8bc5155c4c9ed46a63ac64c06408f3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1545,7 +1545,7 @@ PrefabInstance:
     - target: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
       propertyPath: nextSceneName
-      value: UpIsDown
+      value: Platforming23
       objectReference: {fileID: 0}
     - target: {fileID: 6827642985279684401, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
@@ -1609,6 +1609,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 350cd45b28c4a904e877552cdd5c19d3, type: 3}
+--- !u!114 &510424301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 510424300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73037ebcca7be3045b038f2953db3a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &545266753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3577998035653490112, guid: bb8107b935534f043bf5aee38ea1a8c3,
@@ -6944,12 +6956,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209fcd550b4190b4c8266cddb370e01b, type: 3}
---- !u!1 &346961041752728742 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 346961041017989572, guid: 209fcd550b4190b4c8266cddb370e01b,
-    type: 3}
-  m_PrefabInstance: {fileID: 346961041752728741}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &873883465013350834
 GameObject:
   m_ObjectHideFlags: 0
@@ -7369,7 +7375,7 @@ PrefabInstance:
     - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.08
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
@@ -7416,6 +7422,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.84744006
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.84744006
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.84744006
+      objectReference: {fileID: 0}
     - target: {fileID: 5869584908561905673, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: timeToWait
@@ -7440,7 +7461,12 @@ PrefabInstance:
         type: 3}
       propertyPath: levelLoader
       value: 
-      objectReference: {fileID: 346961041752728742}
+      objectReference: {fileID: 510424301}
+    - target: {fileID: 6404236765693691783, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cd0707ebc9e4144abf56c10f7f28cf, type: 3}
 --- !u!33 &5125367981408153145
@@ -7525,6 +7551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8837440608706590756, guid: 84a7735457c218043a54143d40cbb666,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84a7735457c218043a54143d40cbb666, type: 3}
@@ -7723,6 +7754,7 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
 --- !u!4 &7065966938431206600
 Transform:
   m_ObjectHideFlags: 0
@@ -7829,6 +7861,7 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
 --- !u!1 &7065966938900098757
 GameObject:
   m_ObjectHideFlags: 0
@@ -8358,6 +8391,7 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
 --- !u!4 &7971358106523416028
 Transform:
   m_ObjectHideFlags: 0
@@ -8566,6 +8600,7 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
 --- !u!33 &8055842736914039669
 MeshFilter:
   m_ObjectHideFlags: 0

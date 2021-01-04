@@ -68,6 +68,10 @@ public class NonEuclideanTunnel : MonoBehaviour
         }
     }
 
+    public void reinitPlayer(GameObject newPlayer){
+        player = newPlayer.transform;
+    }
+
     public float expandLength(float scaledValue){
         return scaledValue * lengthScalingFactor;
     }

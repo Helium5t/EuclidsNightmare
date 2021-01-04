@@ -6093,6 +6093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: levelLoader
       value: 
+      objectReference: {fileID: 1340325929}
+    - target: {fileID: 6404236765693691783, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7898132508668131187, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
@@ -16038,7 +16043,7 @@ PrefabInstance:
     - target: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
       propertyPath: nextSceneName
-      value: ParallelObjects
+      value: Platforming34
       objectReference: {fileID: 0}
     - target: {fileID: 6827642985279684401, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
@@ -21474,6 +21479,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1528129689, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859761412, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
@@ -27417,6 +27426,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!65 &1852474972210864663
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27524,6 +27534,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!65 &1852474973411399097
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28267,10 +28278,11 @@ MonoBehaviour:
   teleportingSide: 2
   screen: {fileID: 4911267661602263572}
   recursionLimit: 10
-  allowAlternateCameras: 1
+  allowAlternateCameras: 0
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!1 &6371473537045651781
 GameObject:
   m_ObjectHideFlags: 0
@@ -28374,10 +28386,11 @@ MonoBehaviour:
   teleportingSide: 1
   screen: {fileID: 4911267660386821562}
   recursionLimit: 10
-  allowAlternateCameras: 1
+  allowAlternateCameras: 0
   nearClipOffset: 0.05
   nearClipLimit: 0.2
-  keepActive: 0
+  keepActive: 1
+  trackedCam: {fileID: 0}
 --- !u!1 &6371473537658080485
 GameObject:
   m_ObjectHideFlags: 0
@@ -28808,10 +28821,11 @@ MonoBehaviour:
   teleportingSide: 2
   screen: {fileID: 8291877618286644181}
   recursionLimit: 10
-  allowAlternateCameras: 1
+  allowAlternateCameras: 0
   nearClipOffset: 0.05
   nearClipLimit: 0.2
-  keepActive: 0
+  keepActive: 1
+  trackedCam: {fileID: 0}
 --- !u!65 &8022877158335439503
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28915,10 +28929,11 @@ MonoBehaviour:
   teleportingSide: 0
   screen: {fileID: 8291877617337777275}
   recursionLimit: 10
-  allowAlternateCameras: 1
+  allowAlternateCameras: 0
   nearClipOffset: 0.05
   nearClipLimit: 0.2
-  keepActive: 0
+  keepActive: 1
+  trackedCam: {fileID: 0}
 --- !u!65 &8022877159284479265
 BoxCollider:
   m_ObjectHideFlags: 0

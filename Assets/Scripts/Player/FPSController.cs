@@ -249,6 +249,7 @@ namespace Player
     #region Non Euclidean
         public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
         {
+            controller.enabled = false;
             bool wasGrounded = controller.isGrounded;
             if(fromPortal.GetComponentInParent<NonEuclideanTunnel>()!= null){
                 inTunnel = !inTunnel;
@@ -271,6 +272,7 @@ namespace Player
             velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
             verticalVelocity = velocity.y;
             Physics.SyncTransforms();
+            controller.enabled = true;
             Debug.DrawRay(pos,cameraDirection*20f,Color.red,15f);
             Debug.DrawRay(pos,playerCamera.transform.forward*30f,Color.blue,5f);
         }
@@ -336,6 +338,7 @@ namespace Player
                     currentRadius = viewAngleTan * currentMarchedDistance;
                 }
                 #region Debug Prints
+                /*
                 if(currentMarchedDistance > destinationDistance){
                     Debug.Log("Hit Wall at "+ currentMarchedDistance);
                 }
@@ -343,6 +346,7 @@ namespace Player
                     Debug.DrawRay(screenPointToRay.GetPoint(currentMarchedDistance),Vector3.up*currentRadius,Color.red);
                     Debug.DrawRay(screenPointToRay.GetPoint(currentMarchedDistance),Vector3.up*-currentRadius,Color.blue);
                 }
+                */
                 #endregion
                 float marchedDistance = Mathf.Min(currentMarchedDistance,destinationDistance);
                 float distanceCorrection = viewAngleTan*marchedDistance;
@@ -453,9 +457,6 @@ namespace Player
         }
     #endregion
     #region Movement
-        [HideInInspector]
-        public bool acceptMovementInput = true;
-
         private void computeMovement(Vector2 movementInput, bool run){
 
             Vector3 inputDir = new Vector3(movementInput.x, 0, movementInput.y).normalized;
@@ -477,7 +478,7 @@ namespace Player
             {
                 verticalVelocity = Mathf.Max(verticalVelocity, -maxFallSpeed);
             }
-            Vector3 horizontalAcceleration = acceptMovementInput ? worldInputDir * inputAccelerationFactor : Vector3.zero;
+            Vector3 horizontalAcceleration = worldInputDir * inputAccelerationFactor;
             Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
             Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
             velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
@@ -539,11 +540,7 @@ namespace Player
                     if(Physics.Raycast(portalPoint,portalToObject,out RaycastHit checkHit,portalToObject.magnitude*1.5f,~LayerMask.GetMask("Trigger","Portal")) && checkHit.transform==draggedObj && (portalToObject.magnitude + portalHit.distance <= distanceFromMousePointer*1.3f)){
                         visible = true;
                     }
-                    else{
-                        if(checkHit.transform){
-                            Debug.Log(checkHit.transform.name);
-                        }
-                    }
+                     // else if(checkHit.transform) Debug.Log(checkHit.transform.name);
                 }
             }
             timeSinceLastSeen = (visible)? 0f:timeSinceLastSeen+Time.deltaTime;

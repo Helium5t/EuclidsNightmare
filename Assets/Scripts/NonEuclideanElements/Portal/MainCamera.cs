@@ -10,16 +10,7 @@ public class MainCamera : MonoBehaviour {
     NonEuclideanTunnel[] nets;
 
     void Awake () {
-        
-        List<Portal> allPortals = new List<Portal>(FindObjectsOfType<Portal>());
-        List<Portal> culledPortals = new List<Portal>();
-        foreach(Portal p in allPortals){
-            if(p.keepActive || p.gameObject.scene.name == SceneManager.GetActiveScene().name){
-                culledPortals.Add(p);
-            }
-        }
-        portals = culledPortals.ToArray();
-        nets = FindObjectsOfType<NonEuclideanTunnel>();
+        initializeTrackedElements();
     }
 
     void OnPreCull () {
@@ -39,8 +30,21 @@ public class MainCamera : MonoBehaviour {
 
     }
 
-    public void resetCamera(){
-        Awake();
+    private void initializeTrackedElements(){
+        List<Portal> allPortals = PortalUtility.findPortalsInScenes();
+        List<Portal> culledPortals = new List<Portal>();
+        foreach(Portal p in allPortals){
+            if(p.keepActive || p.gameObject.scene.name == SceneManager.GetActiveScene().name){
+                culledPortals.Add(p);
+            }
+        }
+        portals = culledPortals.ToArray();
+        nets = FindObjectsOfType<NonEuclideanTunnel>();
     }
+
+    public void resetCamera(){
+        initializeTrackedElements();
+    }
+
 
 }

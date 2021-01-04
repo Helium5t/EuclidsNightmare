@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -51,7 +52,7 @@ namespace GameManagement
         private void Awake()
         {
             currentLevel = false;
-            _sceneName = SceneManager.GetActiveScene().name;
+            _sceneName = gameObject.scene.name;
             _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
             if(gameObject.scene == SceneManager.GetActiveScene()){
                 currentLevel = true;
@@ -141,6 +142,7 @@ namespace GameManagement
                 nextSceneName = nextSceneToLoad.name;
             }   
             else{
+                if(nextSceneName.Length == 0) { useAdditiveLoading = false; return;}
                 loadingStatus = SceneManager.LoadSceneAsync(nextSceneName,LoadSceneMode.Additive);
             }
             #region loading completed routine
@@ -194,21 +196,26 @@ namespace GameManagement
                         };
                     }
                 }
-                //additiveLoadNextLevel();
+                additiveLoadNextLevel();
             }
             currentLevel = true;
             reinitActiveObjects(player);
         }
 
         private void reinitActiveObjects(GameObject player){
-            player.GetComponentInChildren<MainCamera>().resetCamera();
-            Debug.Log("Active scene is "+SceneManager.GetActiveScene().name);
-            if(GameObject.FindObjectsOfType<Portal>().Length == 0){
+            List<Portal> refreshedPortals = PortalUtility.findPortalsInScenes();
+            if(refreshedPortals.Count == 0){
                 Debug.Log("No portals found");
             }
-            foreach(Portal p in GameObject.FindObjectsOfType<Portal>()){
-                p.reinitPlayerCam(player.GetComponentInChildren<Camera>());
+            else{
+                foreach(Portal p in refreshedPortals){
+                    p.reinitPlayerCam(player.GetComponentInChildren<Camera>());
+                }
             }
+            foreach(NonEuclideanTunnel net in PortalUtility.findNETSInScenes()){
+                net.reinitPlayer(player);
+            }
+            player.GetComponentInChildren<MainCamera>().resetCamera();
         }
 
         public void startNextLevel(){
@@ -245,6 +252,7 @@ namespace GameManagement
         }
 
         public void forceStartLevel(){
+            Debug.LogError(gameObject.scene.name + " is forcing level transition");
             LevelLoader activeLoader = null;
             foreach(GameObject g in SceneManager.GetActiveScene().GetRootGameObjects()){
                 if(g.TryGetComponent<LevelLoader>(out activeLoader)){

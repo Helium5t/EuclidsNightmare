@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using Utility;
 
 namespace GameManagement
 {
-    [RequireComponent(typeof(AudioSource))]
     public class LevelTrigger : MonoBehaviour
     {
         private enum TriggerMode{Start=-1,End=1,Neither = 0};
@@ -44,12 +44,8 @@ namespace GameManagement
 
         private void PlayEndLevelClip()
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Sounds/EndLevelSound/EndLevelSound",
-                gameObject.transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot(GameSoundPaths.EndGameSoundPath, gameObject.transform.position);
         }
 
-        private void endLevel(){
-            
-        }
     }
 }
