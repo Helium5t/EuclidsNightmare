@@ -67,19 +67,19 @@ public class KeyLock : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(lockedKey!=null) return;
         if(other.TryGetComponent<Key>(out Key key)){
-            Debug.Log("locking key");
-            trigger.enter();
-            key.lockIn(this);
             lockedKey = key;
+            //Debug.Log("locking key");
+            Debug.Log("trigger enter");
+            key.lockIn(this);
             foreach(Rigidbody rb in lockedKey.GetComponentsInChildren<Rigidbody>()){
                 rb.isKinematic = true;
             }
+            trigger.enter();
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if(other.TryGetComponent<Key>(out Key key) && key == lockedKey && Vector3.Distance(other.transform.position,transform.position)>2.5f){
-            
+        if(other.TryGetComponent<Key>(out Key key) && key == lockedKey && Vector3.Distance(other.transform.position,transform.position)>GetComponent<SphereCollider>().radius*1.3f){
             lockedKey = null;
             lockedInKey = false;
             reachedTop = false;

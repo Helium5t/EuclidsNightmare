@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
+using Player;
 
 [ExecuteAlways]
 public class Respawn : MonoBehaviour
@@ -28,6 +29,8 @@ public class Respawn : MonoBehaviour
 	private MeshFilter skyboxCoverMeshFilter;
 
 	private Vector3 landingPoint; //used in editory only
+
+    [SerializeField] private bool activeLogging = false;
 
 	private void OnDrawGizmosSelected()
 		{
@@ -94,7 +97,7 @@ public class Respawn : MonoBehaviour
 					respawning = Phase.wait;
 					setFog(1f);
 					wait = waitTime;
-					fpsc.acceptMovementInput = false;
+                    fpsc.lockUntilGround = true;
 					}
 				break;
 
@@ -115,7 +118,7 @@ public class Respawn : MonoBehaviour
 				break;
 
 			case Phase.landing:
-				if (cc.isGrounded) { fpsc.acceptMovementInput = true; respawning = Phase.none; }
+				if (cc.isGrounded) { respawning = Phase.none; }
 				break;
 			}
 		}
@@ -128,9 +131,6 @@ public class Respawn : MonoBehaviour
 
 	private void tpToRespawnPoint()
 		{
-		cc.enabled = false;
-		cc.Move(Vector3.zero);
 		transform.position = respawnPoint;
-		cc.enabled = true;
 		}
 	}

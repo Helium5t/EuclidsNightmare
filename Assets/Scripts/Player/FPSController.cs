@@ -21,9 +21,10 @@ namespace Player
         public float jumpForce = 8;
         public float gravity = 18;
         [SerializeField] private float inputAccelerationFactor = 6f;
-        [SerializeField] [Range(0.1f, 5f)] private float maxAirSpeed = 15f;
+        [SerializeField] [Range(1f, 50f)] private float maxAirSpeed = 15f;
         [SerializeField] private float airDrag = 0.1f; 
         [SerializeField] [Range(20f, 50f)] private float maxFallSpeed = 30f;
+        [SerializeField] [Range(0f,0.2f)] private float jumpLeniencyTime = 0.1f;
         CharacterController controller;
         Camera playerCamera;
 
@@ -49,7 +50,9 @@ namespace Player
         [SerializeField][Range(0.001f,10f)] private float marchingStep = 0.1f;
         [SerializeField] private float minMarchDistance = 1f;
 
-
+#region Exposed Variables
+        public bool lockUntilGround = false;
+#endregion
 
 #region  Internal Dragging Values
         private Transform draggedObj;
@@ -457,13 +460,17 @@ namespace Player
 
             Vector3 inputDir = new Vector3(movementInput.x, 0, movementInput.y).normalized;
             Vector3 worldInputDir = transform.TransformDirection(inputDir);
+            
             float maxSpeed = maxAirSpeed;
             if(controller.isGrounded){
+                lastGroundedTime = 0f;
                 verticalVelocity = Mathf.Max(0f,verticalVelocity);
                 maxSpeed = ( (run) ? runSpeed : walkSpeed);
                 if(movementInput.x == 0f && movementInput.y == 0f){
                     maxSpeed = 0f;
                 }
+            }else{
+                lastGroundedTime += Time.deltaTime;
             }
             verticalVelocity -= gravity * Time.deltaTime;
             if (verticalVelocity < 0f)
@@ -474,14 +481,22 @@ namespace Player
             Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
             Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
             velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
+            if(lockUntilGround){
+                velocity = Vector3.zero;
+                lockUntilGround = !controller.isGrounded;
+            }
             velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
-            var flags = controller.Move(velocity * Time.deltaTime);
+            CollisionFlags flags = controller.Move(velocity * Time.deltaTime);
+            if((flags & CollisionFlags.Above )!=0 && verticalVelocity >0){
+                verticalVelocity = 0f;
+                verticalVelocity -= gravity*Time.deltaTime;
+            }
         }
 
         private void Jump(){
             float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
-            if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < jumpFrequency))
+            if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < jumpFrequency) || (!jumping && lastGroundedTime < jumpLeniencyTime))
             {
                 jumping = true;
                 verticalVelocity = jumpForce;

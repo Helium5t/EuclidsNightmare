@@ -259,6 +259,12 @@ MonoBehaviour:
   levelNameTransitionTime: 2.5
   SceneAnimator: {fileID: 346961042895664975}
   LevelNameAnimator: {fileID: 762394577}
+  useAdditiveLoading: 0
+  levelType: 1
+  useBuildIndex: 0
+  nextSceneToLoad:
+    m_Handle: 0
+  nextSceneName: 
 --- !u!1 &346961042260404228
 GameObject:
   m_ObjectHideFlags: 0

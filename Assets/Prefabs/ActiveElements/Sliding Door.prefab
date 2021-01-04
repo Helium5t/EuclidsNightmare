@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelLoader: {fileID: 0}
+  mode: 0
 --- !u!82 &5676862324390858093
 AudioSource:
   m_ObjectHideFlags: 0
@@ -532,7 +533,7 @@ Transform:
   m_GameObject: {fileID: 4655613763917372142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 8428200236209651218}
   - {fileID: 182460751949195142}
