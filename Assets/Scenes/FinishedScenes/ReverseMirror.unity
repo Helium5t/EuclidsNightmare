@@ -5499,7 +5499,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelLoader: {fileID: 0}
-  mode: 0
 --- !u!65 &2034500731
 BoxCollider:
   m_ObjectHideFlags: 0
