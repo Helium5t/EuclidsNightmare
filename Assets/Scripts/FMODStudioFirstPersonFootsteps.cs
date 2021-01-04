@@ -18,7 +18,10 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     #region ExposedVariables
 
     [Header("FMOD Settings")]
-    //TODO: we have GameSoundsPaths static class so we could remove the following two vars... :)
+    /*
+     * TODO: we have GameSoundsPaths static class so we could remove the following two vars... :)
+     * These two refs are handy though!
+     */
     [SerializeField]
     [EventRef]
     private string FootstepsEventPath;
