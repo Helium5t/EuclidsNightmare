@@ -199,22 +199,27 @@ namespace GameManagement
                 additiveLoadNextLevel();
             }
             currentLevel = true;
-            reinitActiveObjects(player);
+            StartCoroutine("reinitActiveObjects",player);
         }
 
-        private void reinitActiveObjects(GameObject player){
+        private IEnumerator reinitActiveObjects(GameObject player){
+            yield return null;
             List<Portal> refreshedPortals = PortalUtility.findPortalsInScenes();
+            yield return null;
             if(refreshedPortals.Count == 0){
                 Debug.Log("No portals found");
             }
             else{
                 foreach(Portal p in refreshedPortals){
                     p.reinitPlayerCam(player.GetComponentInChildren<Camera>());
+                    yield return null;
                 }
             }
             foreach(NonEuclideanTunnel net in PortalUtility.findNETSInScenes()){
                 net.reinitPlayer(player);
+                yield return null;
             }
+            yield return null;
             player.GetComponentInChildren<MainCamera>().resetCamera();
         }
 
