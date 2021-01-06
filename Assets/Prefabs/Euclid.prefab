@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 9084385711982661696}
   - component: {fileID: 7896148613088232223}
   - component: {fileID: 1859761412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Euclid
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1276,7 +1276,7 @@ PrefabInstance:
     - target: {fileID: 2293901777794335084, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354277481935092344, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
@@ -1502,6 +1502,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641035700767385167, guid: f2283ddb218ec0a45b5346745b7a8cf0,
+        type: 3}
+      propertyPath: m_Text
+      value: '<: HINT :>
+
+        This is just a sample scene where UI things are
+        tested'
       objectReference: {fileID: 0}
     - target: {fileID: 8734985034391832592, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
