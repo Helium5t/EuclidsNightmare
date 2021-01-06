@@ -100,7 +100,7 @@ namespace Player
         private float currentRadius = 0f;
         private LayerMask ignoreHeldMask;
         private Vector3 targetPerspectivePosition;
-
+        private int previousLayer;
 #endregion
 
 #region Start Up
@@ -311,6 +311,7 @@ namespace Player
                 c.isTrigger = true;
             }
             // Changing object layer
+            previousLayer = draggedObj.gameObject.layer;
             draggedObj.gameObject.layer = LayerMask.NameToLayer("ForcedPerspectiveHeld");
             foreach(Transform child in draggedObj.GetComponentsInChildren<Transform>()){
                 if(child.TryGetComponent<Rigidbody>(out Rigidbody rb)){
@@ -386,7 +387,7 @@ namespace Player
                 meshBox.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
                 meshBox.receiveShadows = true;
             }
-            draggedObj.gameObject.layer = LayerMask.NameToLayer("Default");
+            draggedObj.gameObject.layer = previousLayer;
             foreach(Transform child in draggedObj.GetComponentsInChildren<Transform>()){
                 if(child.TryGetComponent<Rigidbody>(out Rigidbody rb)){
                     rb.isKinematic = false;
