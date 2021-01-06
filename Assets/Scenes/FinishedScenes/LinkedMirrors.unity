@@ -3814,7 +3814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 2015117788}
   movementScale: 1
-  masterBid: 0.40243268
+  masterBid: 3.1226773
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -18044,6 +18044,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 19058361}
     m_Modifications:
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 1156086334}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -20602,7 +20612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 310815538}
   movementScale: 1
-  masterBid: 1.8316281
+  masterBid: 2.928111
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -21823,6 +21833,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 19058361}
     m_Modifications:
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 1156086334}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name

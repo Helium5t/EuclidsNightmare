@@ -7362,6 +7362,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 510424301}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -7755,6 +7765,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!4 &7065966938431206600
 Transform:
   m_ObjectHideFlags: 0
@@ -7862,6 +7873,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!1 &7065966938900098757
 GameObject:
   m_ObjectHideFlags: 0
@@ -8392,6 +8404,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!4 &7971358106523416028
 Transform:
   m_ObjectHideFlags: 0
@@ -8601,6 +8614,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!33 &8055842736914039669
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -136,6 +136,7 @@ namespace GameManagement
         private string SetLevelNameText(string startDecoratorString, string endDecoratorString) =>
             startDecoratorString + " " + _sceneName + " " + endDecoratorString;
 #endregion
+#region Additive Level Loading
         private void additiveLoadNextLevel(){
             if(useBuildIndex){
                 loadingStatus = SceneManager.LoadSceneAsync(nextSceneToLoad.buildIndex,LoadSceneMode.Additive);
@@ -268,4 +269,5 @@ namespace GameManagement
         }
 
     }
+#endregion
 }

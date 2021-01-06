@@ -2495,6 +2495,16 @@ PrefabInstance:
       propertyPath: require
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 166559655}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -19939,6 +19949,16 @@ PrefabInstance:
       propertyPath: require
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 166559655}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -21978,6 +21998,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!54 &4099968307669800457
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22046,6 +22067,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!4 &4099968307691029184
 Transform:
   m_ObjectHideFlags: 0
@@ -23088,6 +23110,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!1 &8634275120050712077
 GameObject:
   m_ObjectHideFlags: 0
@@ -23195,6 +23218,7 @@ MonoBehaviour:
   nearClipOffset: 0.05
   nearClipLimit: 0.2
   keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!1 &8634275120377791405
 GameObject:
   m_ObjectHideFlags: 0

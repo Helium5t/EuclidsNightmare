@@ -45574,6 +45574,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865278978}
     m_Modifications:
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 2142302491}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -70194,6 +70204,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865278978}
     m_Modifications:
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 2142302491}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -83149,6 +83169,8 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!4 &2826141000838865920
 Transform:
   m_ObjectHideFlags: 0
@@ -83255,6 +83277,8 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!1 &2826141001443786253
 GameObject:
   m_ObjectHideFlags: 0
@@ -83861,6 +83885,8 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!4 &7497754824066023264
 Transform:
   m_ObjectHideFlags: 0
@@ -83960,6 +83986,8 @@ MonoBehaviour:
   allowAlternateCameras: 1
   nearClipOffset: 0.05
   nearClipLimit: 0.2
+  keepActive: 0
+  trackedCam: {fileID: 0}
 --- !u!54 &7497754824077814697
 Rigidbody:
   m_ObjectHideFlags: 0

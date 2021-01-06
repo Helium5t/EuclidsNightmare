@@ -89,8 +89,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7898132508668131187}
   - component: {fileID: 5018468452038536420}
-  - component: {fileID: 6404236765693691783}
   - component: {fileID: 5676862324390858093}
+  - component: {fileID: 3892852013190158344}
   m_Layer: 9
   m_Name: EndLevelCollider
   m_TagString: Door
@@ -125,20 +125,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.366152, y: 4.0702896, z: 2.089922}
   m_Center: {x: 0.014321685, y: 1.5351448, z: -0.544961}
---- !u!114 &6404236765693691783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776805835753663904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081a854c34b19e649a0b8536b3e0748a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelLoader: {fileID: 0}
-  mode: 0
 --- !u!82 &5676862324390858093
 AudioSource:
   m_ObjectHideFlags: 0
@@ -235,6 +221,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3892852013190158344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776805835753663904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a257506f2288845b2c1b3a7fb90b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelLoader: {fileID: 0}
+  mode: 0
 --- !u!1 &3741969998857443569
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8965804394750b4ab18c461c7e0e046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorAnimator: {fileID: 9095619888425205503}
 --- !u!1 &7744497476019522782
 GameObject:
   m_ObjectHideFlags: 0
