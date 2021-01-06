@@ -41,6 +41,7 @@ namespace GameManagement
         bool loaded = false;
         private AsyncOperation loadingStatus;
         public bool currentLevel{get;private set;}
+        private bool started = false;
         private int ownSceneIndex= 0;
         private LevelLoader nextLevelLoader;
 
@@ -188,19 +189,23 @@ namespace GameManagement
             SceneManager.MoveGameObjectToScene(player,SceneManager.GetSceneAt(ownSceneIndex));
             Debug.Log("Setting "+SceneManager.GetSceneAt(ownSceneIndex).name + " as active");
             SceneManager.SetActiveScene(SceneManager.GetSceneAt(ownSceneIndex));
-            if((int)levelType == 1){
-                for(int i = ownSceneIndex-1; i>=0; i--){
+            currentLevel = true;
+            StartCoroutine("reinitActiveObjects",player);
+        }
+
+        private IEnumerator unloadPreviousScenes(){
+            yield return null;
+            for(int i = ownSceneIndex-1; i>=0; i--){
                     if(SceneManager.GetSceneAt(i).name !="DontDestroyOnLoad"){
                         SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i).buildIndex).completed += (AsyncOperation o) =>{
                             ownSceneIndex -=1;
                             Resources.UnloadUnusedAssets();
                         };
                     }
+                    yield return null;
                 }
-                additiveLoadNextLevel();
-            }
-            currentLevel = true;
-            StartCoroutine("reinitActiveObjects",player);
+            yield return null;
+            additiveLoadNextLevel();
         }
 
         private IEnumerator reinitActiveObjects(GameObject player){
@@ -222,6 +227,14 @@ namespace GameManagement
             }
             yield return null;
             player.GetComponentInChildren<MainCamera>().resetCamera();
+        }
+
+        public void startLevel(){
+            if(started) return;
+            started = true;
+            if((int)levelType == 1){
+                StartCoroutine("unloadPreviousScenes");
+            }
         }
 
         public void startNextLevel(){

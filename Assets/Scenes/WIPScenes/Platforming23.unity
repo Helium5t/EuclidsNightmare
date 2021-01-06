@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0, g: 0.025345126, b: 0.24528301, a: 1}
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0
   m_LinearFogStart: 0
@@ -982,6 +982,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1859761412, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
+      propertyPath: fogColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859761412, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
+      propertyPath: fogColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859761412, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
+      propertyPath: fogColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_Name

@@ -10,6 +10,7 @@ namespace GameManagement
         private enum TriggerMode{Start=-1,End=1,Neither = 0};
         [SerializeField] private LevelLoader levelLoader;
         [SerializeField] private TriggerMode mode = 0;
+        
 
         private void Awake() {
             if(!levelLoader){
@@ -37,6 +38,7 @@ namespace GameManagement
                     else{
                         Debug.Log("not closing door in "+gameObject.scene);
                     }
+                    levelLoader.startLevel();
                 }
             }
             //else Debug.Log(SceneManager.GetActiveScene().name + " NOT completed");

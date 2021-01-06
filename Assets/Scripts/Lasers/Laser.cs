@@ -25,7 +25,8 @@ public class Laser : MonoBehaviour
 
     private void Awake()
         {
-        lrObject = new GameObject();
+        lrObject = new GameObject("Laser Graphics");
+        lrObject.transform.parent = transform;
         lrObject.AddComponent<LineRenderer>();
 
         lr = lrObject.GetComponent<LineRenderer>();

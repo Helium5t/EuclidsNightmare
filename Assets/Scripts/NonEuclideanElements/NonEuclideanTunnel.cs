@@ -40,6 +40,11 @@ public class NonEuclideanTunnel : MonoBehaviour
     }
 
     public void updateTrackedCamera(){
+        StartCoroutine("updateRoutine");
+    }
+
+    private IEnumerator updateRoutine(){
+        yield return null;
         if(player.GetComponent<FPSController>().inTunnel){
             shortEntry.GetComponentInChildren<Portal>().setActiveCam(-1);
             longEntry.GetComponentInChildren<Portal>().setActiveCam(-1);
@@ -66,6 +71,7 @@ public class NonEuclideanTunnel : MonoBehaviour
                 longExit.GetComponentInChildren<Portal>().setActiveCam(0);
             }
         }
+        yield return null;
     }
 
     public void reinitPlayer(GameObject newPlayer){

@@ -504,6 +504,13 @@ namespace Player
                 verticalVelocity = jumpForce;
             }
         }
+
+        public void Respawn(Vector3 newPos){
+            controller.enabled =false;
+            transform.position = newPos;
+            controller.enabled = true;
+        }
+
     #endregion
     #region Object Dragging
         private void toggleMode(){
