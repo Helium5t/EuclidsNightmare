@@ -58,6 +58,7 @@ public class KeyLock : MonoBehaviour
             if(reachedTop){
                 if(!lockedInKey && Vector3.Distance(lockedKey.transform.position,lockedInPosition)<0.001f){
                     lockedInKey = true;
+                    trigger.enter();
                 }
             }
         }
@@ -68,13 +69,10 @@ public class KeyLock : MonoBehaviour
         if(lockedKey!=null) return;
         if(other.TryGetComponent<Key>(out Key key)){
             lockedKey = key;
-            //Debug.Log("locking key");
-            Debug.Log("trigger enter");
             key.lockIn(this);
             foreach(Rigidbody rb in lockedKey.GetComponentsInChildren<Rigidbody>()){
                 rb.isKinematic = true;
             }
-            trigger.enter();
         }
     }
 

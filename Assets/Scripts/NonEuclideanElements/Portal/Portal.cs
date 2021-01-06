@@ -339,6 +339,7 @@ public class Portal : MonoBehaviour {
     }
 
     void OnValidate () {
+        return;
         if (linkedPortal != null) {
             linkedPortal.linkedPortal = this;
         }
@@ -349,7 +350,12 @@ public class Portal : MonoBehaviour {
     }
 
     bool checkActive(){
+        if(transform.localScale.x > 0f && linkedPortal.transform.localScale.x>0f){
          return CameraUtility.VisibleFromCamera(linkedPortal.screen, trackedCam);
+        }
+        else{
+            return false;
+        }
         /*
         Obsolete keeping this just in case i need it later, but to be deleted
         else{
