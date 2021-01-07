@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83597ec8df2b0d449b1a9afb5ac40924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnHeightGain: 100
+  respawnHeightGain: 50
   transitionTime: 1
   coverImage: {fileID: 8097440131864437746}
   deathHeight: -1000

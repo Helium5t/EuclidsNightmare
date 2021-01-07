@@ -99,11 +99,11 @@ public class Respawner : MonoBehaviour
 
     public void changeLandingPoint(Vector3 newPos){
         landingPoint = newPos;
-        respawnPoint = landingPoint + Vector3.up*respawnHeightGain;
+        recomputeRespawnPoint();
     }
 
     private void recomputeRespawnPoint(){
-        Physics.Raycast(landingObject.position,Vector3.up,out RaycastHit respHit,respawnHeightGain);
+        Physics.Raycast(landingPoint,Vector3.up,out RaycastHit respHit,respawnHeightGain);
         if(respHit.point!=Vector3.zero){
             respawnPoint = respHit.point;
         }

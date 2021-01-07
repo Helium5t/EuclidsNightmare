@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 40255084}
   - component: {fileID: 40255086}
   - component: {fileID: 40255085}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 217411214}
   - component: {fileID: 217411216}
   - component: {fileID: 217411215}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 226208918}
   - component: {fileID: 226208920}
   - component: {fileID: 226208919}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 367289303}
   - component: {fileID: 367289305}
   - component: {fileID: 367289304}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 554345309}
   - component: {fileID: 554345311}
   - component: {fileID: 554345310}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1143,7 +1143,7 @@ GameObject:
   - component: {fileID: 666684819}
   - component: {fileID: 666684821}
   - component: {fileID: 666684820}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 708385354}
   - component: {fileID: 708385356}
   - component: {fileID: 708385355}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1386,7 +1386,7 @@ GameObject:
   - component: {fileID: 882894654}
   - component: {fileID: 882894656}
   - component: {fileID: 882894655}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1444,7 @@ GameObject:
   - component: {fileID: 967460157}
   - component: {fileID: 967460159}
   - component: {fileID: 967460158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1977,7 +1977,7 @@ GameObject:
   - component: {fileID: 1519530609}
   - component: {fileID: 1519530611}
   - component: {fileID: 1519530610}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 158659220}
   - component: {fileID: 158659222}
   - component: {fileID: 158659221}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 846525142}
   - component: {fileID: 846525144}
   - component: {fileID: 846525143}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +918,7 @@ GameObject:
   - component: {fileID: 1113708831}
   - component: {fileID: 1113708833}
   - component: {fileID: 1113708832}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1183,7 +1183,7 @@ GameObject:
   - component: {fileID: 1251665891}
   - component: {fileID: 1251665893}
   - component: {fileID: 1251665892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1391,7 +1391,7 @@ GameObject:
   - component: {fileID: 1920122781}
   - component: {fileID: 1920122783}
   - component: {fileID: 1920122782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1609,7 +1609,7 @@ GameObject:
   - component: {fileID: 2119650407}
   - component: {fileID: 2119650409}
   - component: {fileID: 2119650408}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1667,7 +1667,7 @@ GameObject:
   - component: {fileID: 2142751062}
   - component: {fileID: 2142751064}
   - component: {fileID: 2142751063}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7279982297315092999}
   - component: {fileID: 7279982297315092998}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 7279982299093517953}
   - component: {fileID: 7279982299093517959}
   - component: {fileID: 7279982299093517958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,3 +101,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c5a7cf19758b408183e98f8077cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathHeightFromHere: -100

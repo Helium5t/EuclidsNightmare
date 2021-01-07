@@ -9,7 +9,7 @@ public class CheckPoint : MonoBehaviour
     public float deathHeightFromHere = -100f;
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position - deathHeightFromHere*Vector3.up,new Vector3(50,0,50));
+        Gizmos.DrawWireCube(transform.position + deathHeightFromHere*Vector3.up,new Vector3(50,0,50));
     }
     private void Awake() {
         GetComponent<SphereCollider>().isTrigger = true;

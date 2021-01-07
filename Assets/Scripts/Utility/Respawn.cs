@@ -6,6 +6,7 @@ using UnityEngine;
 using Player;
 
 /*[ExecuteAlways]*/
+[System.Obsolete("This does not integrate well with the FPScontroller, use Respawner")]
 public class Respawn : MonoBehaviour
 	{
 	[DraggablePoint]

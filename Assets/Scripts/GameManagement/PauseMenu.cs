@@ -66,6 +66,6 @@ namespace GameManagement
 
         public void RestartCurrentLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().RestartCurrentLevel();
 
-        public void LoadNextLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().LoadNextLevel();
+        public void LoadNextLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().SkipLevel();
     }
 }

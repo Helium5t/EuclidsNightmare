@@ -61,7 +61,7 @@ namespace GameManagement
                 currentLevel = true;
                 firstLevel = true;
             }
-            if(useAdditiveLoading){
+            if(useAdditiveLoading && !firstLevel){
                 SceneAnimator.gameObject.SetActive(false);
             }
 
@@ -105,6 +105,11 @@ namespace GameManagement
         public void LoadNextLevel(){ 
             if(!useAdditiveLoading) StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex + 1));
             else startNextLevel();
+        }
+
+        public void SkipLevel(){
+            if(!useAdditiveLoading) StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex + 1));
+            else StartCoroutine(LoadLevelRoutine(findNextPuzzle().gameObject.scene.buildIndex));
         }
 
         public void RestartCurrentLevel() => StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex));
@@ -285,6 +290,14 @@ namespace GameManagement
             }
         }
 
+        private LevelLoader findNextPuzzle(){
+            if(nextLevelLoader.levelType==levelTag.Puzzle){
+                return nextLevelLoader;
+            }
+            else{
+                return nextLevelLoader.findNextPuzzle();
+            }
+        }
     }
 #endregion
 }
