@@ -6,7 +6,8 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     private CheckPointManager checkPointManager;
-    public float deathHeightFromHere = -100f;
+    public float deathHeightFromHere = -50f;
+
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position + deathHeightFromHere*Vector3.up,new Vector3(50,0,50));

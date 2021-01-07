@@ -2542,7 +2542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c5a7cf19758b408183e98f8077cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathHeightFromHere: -100
+  deathHeightFromHere: -50
 --- !u!135 &346198609
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5512,7 +5512,7 @@ Transform:
   - {fileID: 958305941}
   - {fileID: 512291355}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &761018854 stripped
 Transform:

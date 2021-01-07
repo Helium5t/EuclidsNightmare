@@ -3814,7 +3814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 2015117788}
   movementScale: 1
-  masterBid: 9.455393
+  masterBid: 7.565504
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -16898,7 +16898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c5a7cf19758b408183e98f8077cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathHeightFromHere: -100
+  deathHeightFromHere: -50
 --- !u!135 &1694530395
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20750,7 +20750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 310815538}
   movementScale: 1
-  masterBid: 3.7387295
+  masterBid: 8.996892
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5

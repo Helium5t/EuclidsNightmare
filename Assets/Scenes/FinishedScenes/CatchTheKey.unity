@@ -10583,7 +10583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c5a7cf19758b408183e98f8077cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathHeightFromHere: -100
+  deathHeightFromHere: -50
 --- !u!135 &676183831
 SphereCollider:
   m_ObjectHideFlags: 0
