@@ -1,29 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Player;
 
 public class Respawner : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float respawnHeight = 100f;
+    [SerializeField] private float respawnHeightGain = 100f;
     [SerializeField] private float transitionTime = 1f;
-    private Transform respawnPoint;
+    [SerializeField] private Transform coverImage;
+    public float deathHeight = -1000f;
+    private Transform landingObject;
+    private Vector3 respawnPoint;
     private Animator fadeAnimator;
     private static readonly int fadeTrigger = Animator.StringToHash("FadeTrigger");
     private Vector3 landingPoint;
-    public float deathHeight;
     private FPSController player;
 
+    private float cubeSize = 0.5f;
+
     private bool respawning = false;
+
+    // Debug
+    private bool playing = false;
+
+#region Editor Mode Functions
     private void OnDrawGizmos() {
+        if(playing) return;
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(respawnPoint.position,Vector3.one);
+        Gizmos.DrawCube(landingObject.position,Vector3.one *cubeSize);
+        recomputeRespawnPoint();
         Gizmos.color = Color.cyan;
-        Gizmos.DrawCube(landingPoint,Vector3.one);
-        recomputeLandingPoint();
+        Gizmos.DrawCube(respawnPoint,Vector3.one *cubeSize);
+        if(landingPoint!=landingObject.position){
+            landingPoint = landingObject.position;
+        }
     }
     private void OnDrawGizmosSelected() {
+        if(playing) return;
         Color gColor = Color.blue;
         gColor.a = 0.6f;
         Gizmos.color = gColor;
@@ -32,28 +47,34 @@ public class Respawner : MonoBehaviour
     }
 
     private void OnValidate() {
-        if(!respawnPoint){
-            respawnPoint = transform.Find("respawnPoint");
-        }
-        if(!respawnPoint){
-            GameObject respawnCube = new GameObject("respawnPoint");
+        if(playing) return;
+        landingObject = transform.Find("landingObject");
+        if(!landingObject){
+            GameObject respawnCube = new GameObject("landingObject");
             respawnCube.transform.parent = transform;
-            respawnPoint = respawnCube.transform;
-            respawnPoint.localPosition = Vector3.zero;
-            respawnPoint.localScale = Vector3.one;
-            respawnPoint.localRotation = Quaternion.Euler(0f,0f,0f);
+            landingObject = respawnCube.transform;
+            landingObject.localPosition = Vector3.zero;
+            landingObject.localScale = Vector3.one;
+            landingObject.localRotation = Quaternion.Euler(0f,0f,0f);
         }
-        recomputeLandingPoint();
+        recomputeRespawnPoint();
+        
     }
-
-    private void recomputeLandingPoint(){
-        Physics.Raycast(respawnPoint.position,Vector3.down,out RaycastHit landHit,500f);
-        landingPoint = landHit.point;
-    }
+#endregion
+    
 
     private void Awake() {
-        fadeAnimator = GetComponentInChildren<Animator>();
+        playing = true;
+        landingPoint = landingObject.position;
+        Debug.Log(landingPoint);
+        respawnPoint = transform.TransformPoint(landingObject.localPosition) + respawnHeightGain*Vector3.up;
         player = GetComponentInParent<FPSController>();
+        if(!coverImage){
+            fadeAnimator = transform.Find("RespawnCover").GetComponent<Animator>();
+        }
+        else{
+            fadeAnimator = coverImage.GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
@@ -68,7 +89,8 @@ public class Respawner : MonoBehaviour
     private IEnumerator respawnGraphicRoutine(){
         fadeAnimator.SetTrigger(fadeTrigger);
         yield return new WaitForSeconds(transitionTime);
-        player.Respawn(respawnPoint.position);
+        Debug.Log(respawnPoint);
+        player.Respawn(respawnPoint);
         fadeAnimator.SetTrigger(fadeTrigger);
         yield return new WaitForSeconds(transitionTime);
         respawning = false;
@@ -77,6 +99,16 @@ public class Respawner : MonoBehaviour
 
     public void changeLandingPoint(Vector3 newPos){
         landingPoint = newPos;
-        respawnPoint.position = landingPoint + Vector3.up*respawnHeight;
+        respawnPoint = landingPoint + Vector3.up*respawnHeightGain;
+    }
+
+    private void recomputeRespawnPoint(){
+        Physics.Raycast(landingObject.position,Vector3.up,out RaycastHit respHit,respawnHeightGain);
+        if(respHit.point!=Vector3.zero){
+            respawnPoint = respHit.point;
+        }
+        else{
+            respawnPoint = landingPoint + Vector3.up*respawnHeightGain;
+        }
     }
 }
