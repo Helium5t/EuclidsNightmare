@@ -12,10 +12,10 @@ public class KeyLock : MonoBehaviour
     private Quaternion topRotation;
     [HideInInspector] public bool lockedInKey;
     [SerializeField] private float transitionSpeed=5f;
+    [SerializeField][Range(1f,2f)] private float sizeTimesThreshold = 1.5f;
     private Vector3 lockedInPosition;
     private Vector3 baseCenterPosition;
     private float baseToCubeRatio = 0.80f;
-
     private KeyLockGraphics graphics;
     
 
@@ -26,7 +26,7 @@ public class KeyLock : MonoBehaviour
     }*/
     
     private void Awake() {
-         MeshRenderer mesh = GetComponentInChildren<MeshRenderer>();
+        MeshRenderer mesh = GetComponentInChildren<MeshRenderer>();
         Quaternion originalRotation = transform.rotation;
         transform.rotation = Quaternion.Euler(0f,0f,0f);
         float baseOffset = mesh.bounds.extents.y;
@@ -64,10 +64,43 @@ public class KeyLock : MonoBehaviour
         }
     }
     
+    private bool checkSize(Key key){
+        if(!key) return false;
+        else{
+            float keySize = key.transform.localScale.x;
+            keySize *= key.GetComponentInChildren<KeyGraphics>().transform.localScale.x;
+            float ownSize = transform.localScale.x * graphics.transform.localScale.x;
+            float sizeTimes = Mathf.Max(ownSize/keySize,keySize/ownSize);
+            return sizeTimes <= sizeTimesThreshold;
+        }
+    }
+    private bool checkSizeExact(Key key){
+        if(!key) return false;
+        else{
+            float keySize = key.transform.localScale.x;
+            keySize *= key.GetComponentInChildren<KeyGraphics>().transform.localScale.x;
+            float ownSize = transform.localScale.x * graphics.transform.localScale.x;
+            return Mathf.Approximately(keySize,ownSize);
+        }
+    }
+
+    private void resizeToFit(Key key){
+        if(!key) return;
+        Transform keyTransform = key.transform;
+        Transform keyGraphics = key.GetComponentInChildren<KeyGraphics>().transform;
+        if(keyGraphics.localScale!=Vector3.one*50f){
+            keyGraphics.localScale = Vector3.one*50f;
+        }
+        float ownSize = transform.localScale.x * graphics.transform.localScale.x;
+        keyTransform.localScale = Vector3.one * (ownSize / 50f);
+    }
 
     private void OnTriggerEnter(Collider other) {
         if(lockedKey!=null) return;
-        if(other.TryGetComponent<Key>(out Key key)){
+        if(other.TryGetComponent<Key>(out Key key) && checkSize(key)){
+            if(!checkSizeExact(key)){
+                resizeToFit(key);
+            }
             lockedKey = key;
             key.lockIn(this);
             foreach(Rigidbody rb in lockedKey.GetComponentsInChildren<Rigidbody>()){
