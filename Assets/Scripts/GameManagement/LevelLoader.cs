@@ -41,9 +41,11 @@ namespace GameManagement
         bool loaded = false;
         private AsyncOperation loadingStatus;
         public bool currentLevel{get;private set;}
+        private bool firstLevel = false;
         private bool started = false;
         private int ownSceneIndex= 0;
         private LevelLoader nextLevelLoader;
+
 
 
         #endregion
@@ -57,6 +59,7 @@ namespace GameManagement
             _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
             if(gameObject.scene == SceneManager.GetActiveScene()){
                 currentLevel = true;
+                firstLevel = true;
             }
             if(useAdditiveLoading){
                 SceneAnimator.gameObject.SetActive(false);
@@ -194,6 +197,7 @@ namespace GameManagement
         }
 
         private IEnumerator unloadPreviousScenes(){
+            if(firstLevel) yield break;
             yield return null;
             for(int i = ownSceneIndex-1; i>=0; i--){
                     if(SceneManager.GetSceneAt(i).name !="DontDestroyOnLoad"){
