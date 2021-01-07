@@ -8,7 +8,6 @@ namespace GameManagement
     {
         public int targetFPS = 60;
 
-
         private void Start() => Application.targetFrameRate = targetFPS;
 
         private void Update()
