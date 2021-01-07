@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Utility;
 
 public class Laser : MonoBehaviour
     {
@@ -53,14 +56,18 @@ public class Laser : MonoBehaviour
         lr.material.color = Color.red;
         lr.colorGradient.SetKeys(colorKeys, alphaKeys);
         
+        
+        
         }
+
+    private void Start() => PlayLaserSound();
 
     private void OnDestroy() => GameObject.Destroy(lrObject);
 
     //In case someone needs to know the objects that have been hit from outside the class.
     public List<GameObject> objectsHit = new List<GameObject>();
 
-    void Update()
+    private void Update()
         {
         //TODO fix movement
                         /*
@@ -132,4 +139,12 @@ public class Laser : MonoBehaviour
         lr.positionCount = points.Count;
         for (int i = 0; i < points.Count; i++) { lr.SetPosition(i, points[i]); }
         }
+
+    private void PlayLaserSound()
+    {
+        EventInstance laserEventInstance = FMODUnity.RuntimeManager.CreateInstance(GameSoundPaths.LaserBeamSoundPath);
+        laserEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+        laserEventInstance.start();
+        laserEventInstance.release();
+    }
     }

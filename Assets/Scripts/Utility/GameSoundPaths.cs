@@ -14,5 +14,7 @@
         public const string EndGameSoundPath = "event:/Sounds/EndLevelSound/EndLevelSound";
         public const string ButtonPressedSoundPath = "event:/Sounds/UI/ButtonPressed";
         public const string ButtonSelectedSoundPath = "event:/Sounds/UI/ButtonSelected";
+        public const string GameMusicSoundPath = "event:/Sounds/Music/GameMusic";
+        public const string LaserBeamSoundPath = "event:/Sounds/Laser/LaserBeam";
     }
 }
