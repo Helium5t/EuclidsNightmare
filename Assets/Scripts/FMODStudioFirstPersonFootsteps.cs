@@ -1,5 +1,6 @@
 ﻿using FMOD.Studio;
 using FMODUnity;
+using GameManagement;
 using UnityEngine;
 using Utility;
 using Random = UnityEngine.Random;
@@ -137,6 +138,13 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            _breathingEventInstance.setPaused(true);
+            return;
+        }
+
+        _breathingEventInstance.setPaused(false);
         Debug.DrawRay(_transform.position, Vector3.down * RayDistance, Color.blue);
 
         /*
@@ -282,7 +290,8 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         {
             // If they are, we create an FMOD event instance.
             // We use the event path inside the 'FootstepsEventPath' variable to find the event we want to play.
-            EventInstance footstepEventInstance = RuntimeManager.CreateInstance(GameSoundPaths.PlayerFootstepsEventPath);
+            EventInstance footstepEventInstance =
+                RuntimeManager.CreateInstance(GameSoundPaths.PlayerFootstepsEventPath);
             RuntimeManager.AttachInstanceToGameObject(footstepEventInstance, _transform, GetComponent<Rigidbody>());
             footstepEventInstance.setParameterByName(MaterialParameterName, _fmodMaterialValue);
             footstepEventInstance.setParameterByName(SpeedParameterName, _fmodPlayerRunning);
