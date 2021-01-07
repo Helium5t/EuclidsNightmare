@@ -12,5 +12,7 @@
         public const string BreathingEventPath = "event:/Sounds/Player/Breathing/Breathing";
         public const string PickUpEventPath = "event:/Sounds/PickUp/PickUp";
         public const string EndGameSoundPath = "event:/Sounds/EndLevelSound/EndLevelSound";
+        public const string ButtonPressedSoundPath = "event:/Sounds/UI/ButtonPressed";
+        public const string ButtonSelectedSoundPath = "event:/Sounds/UI/ButtonSelected";
     }
 }
