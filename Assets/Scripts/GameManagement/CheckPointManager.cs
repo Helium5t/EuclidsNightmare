@@ -7,15 +7,24 @@ public class CheckPointManager : MonoBehaviour
 
     private CheckPoint[] checkPoints;
     private CheckPoint activeCheckpoint;
+    private Transform player;
     // Start is called before the first frame update
     void Start()
     {
         checkPoints = GetComponentsInChildren<CheckPoint>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public void activateCheckpoint(CheckPoint c){
         activeCheckpoint = c;
-        GetComponent<Respawn>().respawnPoint = c.transform.position;
+        player.GetComponentInChildren<Respawner>().changeLandingPoint(c.transform.position);
+    }
+
+    public void resetPlayerReference(){
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+    public void resetPlayerReference(GameObject newPlayer){
+        player = newPlayer.transform;
     }
     
 }

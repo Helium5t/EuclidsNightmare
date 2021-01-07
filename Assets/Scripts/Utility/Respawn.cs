@@ -55,7 +55,9 @@ public class Respawn : MonoBehaviour
 			}
 		RenderSettings.fogColor = fogColor;
 		}
-
+	private void Awake() {
+		this.enabled = false;
+	}
 	private void Start()
 		{
 		cc = GetComponent<CharacterController>(); setFog(0f);
@@ -86,14 +88,13 @@ public class Respawn : MonoBehaviour
 			case Phase.none:
 				if (transform.position.y < deathY) { respawning = Phase.fadeOut; fadeOut = 0f; }
 				break;
-
+			// Activates fog
 			case Phase.fadeOut:
 				fadeOut += Time.deltaTime;
 				if (fadeOut < fadeTime) { setFog(fadeOut / fadeTime); }
 				else
 					{
-					tpToRespawnPoint();
-
+					fpsc.Respawn(respawnPoint);
 					respawning = Phase.wait;
 					setFog(1f);
 					wait = waitTime;
@@ -111,6 +112,7 @@ public class Respawn : MonoBehaviour
 					}
 				break;
 
+			// Disables fog
 			case Phase.fadeIn:
 				fadeIn -= Time.deltaTime;
 				if (fadeIn > 0f) { setFog(fadeIn / fadeTime); }
@@ -129,8 +131,4 @@ public class Respawn : MonoBehaviour
 		skyboxFogMaterial.color = new Color(skyboxFogMaterial.color.r, skyboxFogMaterial.color.g, skyboxFogMaterial.color.b, 1f - Mathf.Pow(alpha - 1f, 6f));
 		}
 
-	private void tpToRespawnPoint()
-		{
-		transform.position = respawnPoint;
-		}
 	}

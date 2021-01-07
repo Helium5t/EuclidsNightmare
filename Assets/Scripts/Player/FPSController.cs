@@ -479,14 +479,14 @@ namespace Player
             {
                 verticalVelocity = Mathf.Max(verticalVelocity, -maxFallSpeed);
             }
-            Vector3 horizontalAcceleration = worldInputDir * inputAccelerationFactor;
+            Vector3 horizontalAcceleration =  worldInputDir * inputAccelerationFactor;
+            if(lockUntilGround){
+                horizontalAcceleration = Vector3.zero;
+                lockUntilGround = !controller.isGrounded;
+            }
             Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
             Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
             velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
-            if(lockUntilGround){
-                velocity = Vector3.zero;
-                lockUntilGround = !controller.isGrounded;
-            }
             velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
             CollisionFlags flags = controller.Move(velocity * Time.deltaTime);
@@ -508,6 +508,8 @@ namespace Player
         public void Respawn(Vector3 newPos){
             controller.enabled =false;
             transform.position = newPos;
+            velocity = Vector3.zero;
+            lockUntilGround = true;
             controller.enabled = true;
         }
 
