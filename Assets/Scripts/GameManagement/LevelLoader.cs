@@ -57,6 +57,9 @@ namespace GameManagement
             currentLevel = false;
             _sceneName = gameObject.scene.name;
             _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
+            if(useBuildIndex){
+                nextSceneName = nextSceneToLoad.name;
+            }
             if(gameObject.scene == SceneManager.GetActiveScene()){
                 currentLevel = true;
                 firstLevel = true;
@@ -147,9 +150,11 @@ namespace GameManagement
 #endregion
 #region Additive Level Loading
         private void additiveLoadNextLevel(){
+            if(nextSceneName.Contains("EndDemoRoom")){
+                return;
+            }
             if(useBuildIndex){
                 loadingStatus = SceneManager.LoadSceneAsync(nextSceneToLoad.buildIndex,LoadSceneMode.Additive);
-                nextSceneName = nextSceneToLoad.name;
             }   
             else{
                 if(nextSceneName.Length == 0) { useAdditiveLoading = false; return;}
@@ -247,6 +252,11 @@ namespace GameManagement
         }
 
         public void startNextLevel(){
+            if(nextSceneName == "EndDemoRoom"){
+                useAdditiveLoading = false;
+                LoadNextLevel();
+                return;
+            }
             Debug.Log("I am "+ gameObject.scene.name + " and am starting "+ nextLevelLoader.gameObject.scene.name);
             GameObject dirLight = null;
             foreach( Light l in GameObject.FindObjectsOfType<Light>()){

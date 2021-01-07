@@ -5286,7 +5286,7 @@ PrefabInstance:
     - target: {fileID: 1852474971715936676, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
       propertyPath: recursionLimit
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1852474971715936676, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
@@ -5296,7 +5296,7 @@ PrefabInstance:
     - target: {fileID: 1852474972933248522, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
       propertyPath: recursionLimit
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1852474972933248522, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
@@ -9548,6 +9548,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 1571427652}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -22591,6 +22601,11 @@ PrefabInstance:
       propertyPath: useAdditiveLoading
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
+        type: 3}
+      propertyPath: nextSceneName
+      value: EndDemoRoom
+      objectReference: {fileID: 0}
     - target: {fileID: 6827642985279684401, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22653,6 +22668,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 350cd45b28c4a904e877552cdd5c19d3, type: 3}
+--- !u!114 &1571427652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1571427651}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73037ebcca7be3045b038f2953db3a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1572419843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5082673830112780857, guid: 96239865eeb6c5e44b859493398569b2,
@@ -25954,8 +25981,18 @@ PrefabInstance:
     - target: {fileID: 1776805835753663904, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: mode
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 1571427652}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
@@ -26035,6 +26072,11 @@ PrefabInstance:
         type: 3}
       propertyPath: startOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898132508668131187, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.57
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cd0707ebc9e4144abf56c10f7f28cf, type: 3}
@@ -27304,7 +27346,7 @@ PrefabInstance:
     - target: {fileID: 1852474971715936676, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
       propertyPath: recursionLimit
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1852474971715936676, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
@@ -27314,7 +27356,7 @@ PrefabInstance:
     - target: {fileID: 1852474972933248522, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
       propertyPath: recursionLimit
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1852474972933248522, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
@@ -27488,7 +27530,7 @@ PrefabInstance:
     - target: {fileID: 1852474971715936676, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
       propertyPath: recursionLimit
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1852474971715936676, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
@@ -27498,7 +27540,7 @@ PrefabInstance:
     - target: {fileID: 1852474972933248522, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}
       propertyPath: recursionLimit
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1852474972933248522, guid: 030ae6c96de1c5b4a9bfe88ee2887421,
         type: 3}

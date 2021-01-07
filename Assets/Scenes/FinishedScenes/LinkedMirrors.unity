@@ -3814,7 +3814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 2015117788}
   movementScale: 1
-  masterBid: 7.565504
+  masterBid: 5.910992
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
@@ -7335,7 +7335,7 @@ PrefabInstance:
     - target: {fileID: 346961041017989575, guid: 209fcd550b4190b4c8266cddb370e01b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 346961041017989575, guid: 209fcd550b4190b4c8266cddb370e01b,
         type: 3}
@@ -10825,6 +10825,11 @@ PrefabInstance:
         type: 3}
       propertyPath: nextSceneName
       value: ReverseMirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
+        type: 3}
+      propertyPath: levelType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6827642985279684401, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
@@ -20750,7 +20755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 310815538}
   movementScale: 1
-  masterBid: 8.996892
+  masterBid: 5.6001444
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.01
   keepAngleThreshold: 0.5
