@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using Utility;
 
 namespace GameManagement
 {
@@ -9,9 +10,9 @@ namespace GameManagement
 
         public void OnPointerDown(PointerEventData eventData) => PlayPressedSound();
 
-        public void PlayPressedSound() => FMODUnity.RuntimeManager.PlayOneShot("event:/Sounds/UI/ButtonPressed");
+        public void PlayPressedSound() => FMODUnity.RuntimeManager.PlayOneShot(GameSoundPaths.ButtonPressedSoundPath);
 
         public void PlaySelectedButtonSound() =>
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Sounds/UI/ButtonSelected");
+            FMODUnity.RuntimeManager.PlayOneShot(GameSoundPaths.ButtonSelectedSoundPath);
     }
 }
