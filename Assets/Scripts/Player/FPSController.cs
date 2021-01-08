@@ -114,12 +114,9 @@ namespace Player
 
         private void Start()
         {
-       
             playerCamera = Camera.main;
-            if (lockCursor)
-            {
-                cursorLock();
-            }
+            
+            if (lockCursor) CursorUtility.LockCursor();
 
             controller = GetComponent<CharacterController>();
 
@@ -136,17 +133,17 @@ namespace Player
         private void Update(){
             if (PauseMenu.GameIsPaused)
             {
-                cursorUnlock();
+                CursorUtility.UnlockCursor();
                 disabled = true;
             }
             else if (disabled){
-                cursorLock();
+                CursorUtility.LockCursor();
                 disabled = false;
             }
         #region Debug Pause
             if (Input.GetKeyDown(KeyCode.P))
             {
-                cursorUnlock();
+                CursorUtility.UnlockCursor();
                 Debug.Break();
             }
         #endregion
@@ -159,10 +156,7 @@ namespace Player
             computeMovement(input,isRunning);
 
             // Jumping Physical Movement
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Jump();
-            }
+            if (Input.GetKey(KeyCode.Space)) Jump();
 
             float mX = Input.GetAxisRaw("Mouse X");
             float mY = Input.GetAxisRaw("Mouse Y");
@@ -447,16 +441,7 @@ namespace Player
             }
 
         }
-
-        private void cursorLock(){
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
-        private void cursorUnlock(){
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+        
     #endregion
     #region Movement
         private void computeMovement(Vector2 movementInput, bool run){
