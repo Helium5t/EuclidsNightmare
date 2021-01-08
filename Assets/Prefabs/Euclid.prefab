@@ -653,6 +653,7 @@ MonoBehaviour:
   airDrag: 0.1
   maxFallSpeed: 35
   jumpLeniencyTime: 0.1
+  groundedLeniency: 0.05
   rawYaw: 0
   rawPitch: 0
   jumpFrequency: 0.15
@@ -799,7 +800,7 @@ MonoBehaviour:
   SpeedParameterName: SpeedSwitch
   JumpOrLandParameterName: JumpOrLand
   StepDistance: 1.5
-  RayDistance: 1.3
+  RayDistance: 1.6
   StartRunningTime: 0.3
   JumpInputName: Jump
   MaterialTypes:
