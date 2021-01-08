@@ -407,4 +407,9 @@ public class Portal : MonoBehaviour {
         }
         playerCam = Camera.main;
     }
+
+    private void OnDestroy() {
+        keepActive = false;
+    }
+
 }

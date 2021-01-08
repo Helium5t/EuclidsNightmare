@@ -17,6 +17,8 @@ public class KeyLock : MonoBehaviour
     private Vector3 baseCenterPosition;
     private float baseToCubeRatio = 0.80f;
     private KeyLockGraphics graphics;
+    private float baseWidth;
+    private float baseThickness;
     
 
     /*private void OnDrawGizmos() {
@@ -29,18 +31,23 @@ public class KeyLock : MonoBehaviour
         MeshRenderer mesh = GetComponentInChildren<MeshRenderer>();
         Quaternion originalRotation = transform.rotation;
         transform.rotation = Quaternion.Euler(0f,0f,0f);
-        float baseOffset = mesh.bounds.extents.y;
+        baseThickness = mesh.bounds.extents.y;
+        baseWidth = mesh.bounds.extents.x;
         transform.rotation = originalRotation;
         lockedInKey = false;
         reachedTop = false;
         trigger = GetComponent<Trigger>();
-        Debug.Log(mesh.bounds.extents.y*transform.up);
-        baseCenterPosition = transform.position + baseOffset*transform.up;
+        graphics = GetComponentInChildren<KeyLockGraphics>();
+        
+        
+    }
+
+    private void Start() {
+        baseCenterPosition = transform.position + baseThickness*transform.up;
         //topPosition = baseCenterPosition + 0.85f * mesh.bounds.size.x*transform.up;
         topRotation = transform.rotation*Quaternion.Euler(90,0,0);
-        topPosition = transform.up*GetComponent<SphereCollider>().radius*0.5f + baseCenterPosition +baseToCubeRatio*mesh.bounds.extents.x*transform.up ;
-        lockedInPosition = baseCenterPosition + baseToCubeRatio*mesh.bounds.extents.x*transform.up;
-        graphics = GetComponentInChildren<KeyLockGraphics>();
+        topPosition = transform.up*GetComponent<SphereCollider>().radius*0.5f + baseCenterPosition +baseToCubeRatio*baseWidth*transform.up ;
+        lockedInPosition = baseCenterPosition + baseToCubeRatio*baseWidth*transform.up;
     }
 
     private void Update() {

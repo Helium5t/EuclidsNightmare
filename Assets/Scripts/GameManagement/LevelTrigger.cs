@@ -12,8 +12,15 @@ namespace GameManagement
         [SerializeField] public TriggerMode mode = 0;
         
 
+        private void OnValidate() {
+            if(!levelLoader){
+                Debug.LogError(transform.parent.name+":No levelloader reference, making my own");
+                levelLoader = GameObject.FindObjectOfType<LevelLoader>();
+            }
+        }
         private void Awake() {
             if(!levelLoader){
+                Debug.LogError(gameObject.scene.name+"No levelloader reference, making my own");
                 levelLoader = GameObject.FindObjectOfType<LevelLoader>();
             }
         }
@@ -27,8 +34,9 @@ namespace GameManagement
                     levelLoader.LoadNextLevel();
                 }
                 else if((int)mode == -1){
-                    if(!levelLoader.currentLevel){
-                        Debug.Log("Forcing to set "+gameObject.scene.name+" as active");
+                    if(!levelLoader.currentLevel && gameObject.scene.name != SceneManager.GetActiveScene().name){
+                        Debug.LogError("LevelLoader.currentLevel is "+levelLoader.currentLevel);
+                        Debug.LogError("Forcing to set "+gameObject.scene.name+" as active");
                         levelLoader.forceStartLevel();
                     }
                     if(GetComponentInParent<Animator>()!= null  && GetComponentInParent<Animator>().GetBool("open")){

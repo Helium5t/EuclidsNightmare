@@ -17,17 +17,37 @@ public class MainCamera : MonoBehaviour {
 
     void OnPreCull () {
         for(int i =0; i<nets.Length;i++){
+            try{
             nets[i].updateTrackedCamera();
+            }
+            catch(MissingReferenceException e){
+                Debug.Log("Dead Tunnel at "+i);
+            }
         }
         for (int i = 0; i < portals.Length; i++) {
+            try{
             portals[i].PrePortalRender ();
+            }
+            catch(MissingReferenceException e){
+                Debug.Log("Dead Portal at " + i);
+            }
         }
         for (int i = 0; i < portals.Length; i++) {
+            try{
             portals[i].Render ();
+            }
+            catch(MissingReferenceException e){
+                Debug.Log("Dead Portal at " + i);
+            }
         }
 
         for (int i = 0; i < portals.Length; i++) {
+            try{
             portals[i].PostPortalRender ();
+            }
+            catch(MissingReferenceException e){
+                Debug.Log("Dead Portal at " + i);
+            }
         }
 
     }

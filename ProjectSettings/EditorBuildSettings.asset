@@ -60,6 +60,21 @@ EditorBuildSettings:
     path: Assets/Scenes/FinishedScenes/CatchTheKey.unity
     guid: 8e6b09564338a0644a406e7771a615f8
   - enabled: 1
+    path: Assets/Scenes/WIPScenes/Platforming78.unity
+    guid: 3b99e8eef2583b748891a0934326aaef
+  - enabled: 1
+    path: Assets/Scenes/WIPScenes/ForcedPerspectiveIntro.unity
+    guid: a4404b5ca43b59049aea7800503f4746
+  - enabled: 1
+    path: Assets/Scenes/WIPScenes/Platforming89.unity
+    guid: 8b781d412f7ae5241a8d235ebaa17af5
+  - enabled: 1
+    path: Assets/Scenes/WIPScenes/HoleRoom.unity
+    guid: 3383bc308dd227b46b8ff7a669668096
+  - enabled: 1
+    path: Assets/Scenes/WIPScenes/PartingWays.unity
+    guid: 2af20f3789cc1194a90cf9fbd1ccdac0
+  - enabled: 1
     path: Assets/Scenes/FinishedScenes/EndDemoRoom.unity
     guid: 2ed721df99f69b3419880aaa514bd2a9
   m_configObjects: {}

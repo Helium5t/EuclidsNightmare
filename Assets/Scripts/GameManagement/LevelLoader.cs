@@ -67,15 +67,15 @@ namespace GameManagement
             if(gameObject.scene == SceneManager.GetActiveScene()){
                 currentLevel = true;
                 firstLevel = true;
+                
+            }
+            if(!firstLevel){
                 foreach(DoorTrigger dt in GameObject.FindObjectsOfType<DoorTrigger>()){
-                    if((int)dt.GetComponentInChildren<LevelTrigger>().mode == -1) dt.startOpen = false;
+                    if((int)dt.GetComponentInChildren<LevelTrigger>().mode == -1) dt.startOpen = true;
                 }
+                SceneAnimator.gameObject.SetActive(!useAdditiveLoading);
             }
-
-            if (useAdditiveLoading && !firstLevel)
-            {
-                SceneAnimator.gameObject.SetActive(false);
-            }
+            
         }
 
         private void Start()
@@ -185,7 +185,7 @@ namespace GameManagement
                 if(nextSceneName.Length == 0) { useAdditiveLoading = false; return;}
                 loadingStatus = SceneManager.LoadSceneAsync(nextSceneName,LoadSceneMode.Additive);
             }
-
+            Debug.LogError(gameObject.scene.name + " loading next Scene");
             #region loading completed routine
 
             loadingStatus.completed += (AsyncOperation o) =>
@@ -246,6 +246,8 @@ namespace GameManagement
             SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneAt(ownSceneIndex));
             Debug.Log("Setting " + SceneManager.GetSceneAt(ownSceneIndex).name + " as active");
             SceneManager.SetActiveScene(SceneManager.GetSceneAt(ownSceneIndex));
+            Debug.LogError(SceneManager.GetSceneAt(ownSceneIndex).name + " is now active");
+            Debug.LogError(SceneManager.GetActiveScene().name + " double check");
             currentLevel = true;
             StartCoroutine("reinitActiveObjects", player);
         }
@@ -256,6 +258,8 @@ namespace GameManagement
                 yield break;
             }
             yield return null;
+            
+            Debug.LogError(gameObject.scene.name + " deleting previous scenes");
             for (int i = ownSceneIndex - 1; i >= 0; i--)
             {
                 if (SceneManager.GetSceneAt(i).name != "DontDestroyOnLoad")
@@ -270,7 +274,6 @@ namespace GameManagement
 
                 yield return null;
             }
-
             yield return null;
             additiveLoadNextLevel();
         }
