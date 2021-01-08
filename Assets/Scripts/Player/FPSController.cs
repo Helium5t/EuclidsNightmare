@@ -25,7 +25,7 @@ namespace Player
         [SerializeField] private float airDrag = 0.1f; 
         [SerializeField] [Range(20f, 50f)] private float maxFallSpeed = 30f;
         [SerializeField] [Range(0f,0.2f)] private float jumpLeniencyTime = 0.1f;
-        [SerializeField] [Range(0f,0.2f)] private float groundedLeniency = 0.05f;
+        [SerializeField] [Range(0f,0.5f)] private float groundedLeniency = 0.05f;
         CharacterController controller;
         Camera playerCamera;
 
@@ -448,11 +448,12 @@ namespace Player
 
             Vector3 inputDir = new Vector3(movementInput.x, 0, movementInput.y).normalized;
             Vector3 worldInputDir = transform.TransformDirection(inputDir);
-            
+            float gravityIncrement = gravity*Time.deltaTime;
             float maxSpeed = maxAirSpeed;
             if(isGrounded()){
+                jumping = !controller.isGrounded;
                 lastGroundedTime = 0f;
-                verticalVelocity = Mathf.Max(0f,verticalVelocity);
+                verticalVelocity = Mathf.Max(-gravityIncrement,verticalVelocity);
                 maxSpeed = ( (run) ? runSpeed : walkSpeed);
                 if(movementInput.x == 0f && movementInput.y == 0f){
                     maxSpeed = 0f;
@@ -460,7 +461,7 @@ namespace Player
             }else{
                 lastGroundedTime += Time.deltaTime;
             }
-            verticalVelocity -= gravity * Time.deltaTime;
+            verticalVelocity -= gravityIncrement;
             if (verticalVelocity < 0f)
             {
                 verticalVelocity = Mathf.Max(verticalVelocity, -maxFallSpeed);
@@ -478,7 +479,7 @@ namespace Player
             CollisionFlags flags = controller.Move(velocity * Time.deltaTime);
             if((flags & CollisionFlags.Above )!=0 && verticalVelocity >0){
                 verticalVelocity = 0f;
-                verticalVelocity -= gravity*Time.deltaTime;
+                verticalVelocity -= gravityIncrement;
             }
         }
 

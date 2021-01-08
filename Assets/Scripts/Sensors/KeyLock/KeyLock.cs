@@ -37,7 +37,7 @@ public class KeyLock : MonoBehaviour
         Debug.Log(mesh.bounds.extents.y*transform.up);
         baseCenterPosition = transform.position + baseOffset*transform.up;
         //topPosition = baseCenterPosition + 0.85f * mesh.bounds.size.x*transform.up;
-        topRotation = Quaternion.Euler(90,0,0)*transform.rotation;
+        topRotation = transform.rotation*Quaternion.Euler(90,0,0);
         topPosition = transform.up*GetComponent<SphereCollider>().radius*0.5f + baseCenterPosition +baseToCubeRatio*mesh.bounds.extents.x*transform.up ;
         lockedInPosition = baseCenterPosition + baseToCubeRatio*mesh.bounds.extents.x*transform.up;
         graphics = GetComponentInChildren<KeyLockGraphics>();

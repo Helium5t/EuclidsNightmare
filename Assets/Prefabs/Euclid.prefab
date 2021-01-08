@@ -653,6 +653,7 @@ MonoBehaviour:
   airDrag: 0.1
   maxFallSpeed: 35
   jumpLeniencyTime: 0.1
+  groundedLeniency: 0.4
   rawYaw: 0
   rawPitch: 0
   jumpFrequency: 0.15
