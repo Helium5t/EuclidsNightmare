@@ -19,50 +19,41 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     #region ExposedVariables
 
     [Header("FMOD Settings")]
-    /*
-     * TODO: we have GameSoundsPaths static class so we could remove the following two vars... :)
-     * These two refs are handy though!
-     */
-    [SerializeField]
-    [EventRef]
-    private string FootstepsEventPath;
-
-    [SerializeField] [EventRef] private string JumpingEventPath;
 
     /* Use this in the Editor to write the name of the parameter that controls
      which material the player is currently walking on.*/
-    [SerializeField] private string MaterialParameterName;
+    [SerializeField] private string _materialParameterName;
 
     /*
      * Use this in the Editor to write the name of the parameter that controls which footstep speed needs to be heard.
      */
-    [SerializeField] private string SpeedParameterName;
+    [SerializeField] private string _speedParameterName;
 
     /*
      * Use this in the Editor to write the name of the parameter that controls
      * whether or not a jumping or a landing sound needs to be heard.
      */
-    [SerializeField] private string JumpOrLandParameterName;
+    [SerializeField] private string _jumpOrLandParameterName;
 
     [Header("Playback Settings")]
     // Select how far the player must travel before they hear a footstep.
     [SerializeField]
-    private float StepDistance = 1.5f;
+    private float _stepDistance = 1.5f;
 
     // Select how far the raycast will travel down to when checking for a floor.
-    [SerializeField] private float RayDistance = 1.2f;
+    [SerializeField] private float _rayDistance = 1.2f;
 
     /* Set a time.
      * If the time between each step the player takes is less than this value,
      * the player will start to hear running footsteps.
      */
-    [SerializeField] private float StartRunningTime = 0.3f;
+    [SerializeField] private float _startRunningTime = 0.3f;
 
     /* In Unity, go Edit -> Project Settings -> Input Manager.
      * Then find the name of the input that controls which key/button the player must press in order to jump
      * (it's probably called "Jump").
      * Then once you know it's name, write it into this variable in the Inspector tab. */
-    [SerializeField] private string JumpInputName;
+    [SerializeField] private string _jumpInputName;
 
     [Space] [Header("Walking material settings")]
     /*
@@ -145,7 +136,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         }
 
         _breathingEventInstance.setPaused(false);
-        Debug.DrawRay(_transform.position, Vector3.down * RayDistance, Color.blue);
+        Debug.DrawRay(_transform.position, Vector3.down * _rayDistance, Color.blue);
 
         /*
          * This section checks to see if the player is touching the ground or not,
@@ -159,7 +150,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         GroundedCheck();
         // If the player is touching the ground AND the player presses the button to jump at the same time,
         // we know that the player character is about to jump, therefore we perform our method to play a sound.
-        if (_isPlayerTouchingGround && Input.GetButtonDown(JumpInputName))
+        if (_isPlayerTouchingGround && Input.GetButtonDown(_jumpInputName))
         {
             // Before we play a jumping sound, we need to know what material the player has jumped off of.
             MaterialCheck();
@@ -209,7 +200,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         // If the distance the player has travelled is greater than or equal to the StepDistance plus the StepRandom,
 
         // then we can perform our methods.
-        if (_distanceTravelled >= StepDistance + _stepRandom)
+        if (_distanceTravelled >= _stepDistance + _stepRandom)
         {
             MaterialCheck();
             // The SpeedCheck method is performed. This checks for the time it took between
@@ -244,7 +235,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     /// </summary>
     private void MaterialCheck()
     {
-        if (Physics.Raycast(_transform.position, Vector3.down, out _hit, RayDistance))
+        if (Physics.Raycast(_transform.position, Vector3.down, out _hit, _rayDistance))
         {
             _fmodMaterialValue = _hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>()
                 ? _hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>().MaterialValue
@@ -263,9 +254,9 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         // Remember that 'TimeTakenToStep' is a running timer.
         // This method will only be performed as the player takes a step.
         // So if this time is less than the value set to the 'StartRunningTime' variable,
-        // we can assume the player is moving fast enough to warrent a heavy running footstep to be played.
+        // we can assume the player is moving fast enough to warrant a heavy running footstep to be played.
         // aSo therefore..
-        _fmodPlayerRunning = _timeTakenSinceStep < StartRunningTime ? 1 : 0;
+        _fmodPlayerRunning = _timeTakenSinceStep < _startRunningTime ? 1 : 0;
         // Finally, now that the player has taken the correct step, we reset our timer 'TimeTakenToStep' back to 0.
         // Now th timer is tracking how much time has passed since the player took that last step. 
         _timeTakenSinceStep = 0f;
@@ -277,7 +268,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     /// </summary>
     private void GroundedCheck()
     {
-        Physics.Raycast(_transform.position, Vector3.down, out _hit, RayDistance);
+        Physics.Raycast(_transform.position, Vector3.down, out _hit, _rayDistance);
         _isPlayerTouchingGround = _hit.collider;
     }
 
@@ -293,8 +284,8 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
             EventInstance footstepEventInstance =
                 RuntimeManager.CreateInstance(GameSoundPaths.PlayerFootstepsEventPath);
             RuntimeManager.AttachInstanceToGameObject(footstepEventInstance, _transform, GetComponent<Rigidbody>());
-            footstepEventInstance.setParameterByName(MaterialParameterName, _fmodMaterialValue);
-            footstepEventInstance.setParameterByName(SpeedParameterName, _fmodPlayerRunning);
+            footstepEventInstance.setParameterByName(_materialParameterName, _fmodMaterialValue);
+            footstepEventInstance.setParameterByName(_speedParameterName, _fmodPlayerRunning);
             footstepEventInstance.start();
             // We also set our event instance to release straight after we tell it to play,
             // so that the instance is released once the event had finished playing.
@@ -312,8 +303,8 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     {
         EventInstance jumpLandEvent = RuntimeManager.CreateInstance(GameSoundPaths.PlayerJumpLandSoundPath);
         RuntimeManager.AttachInstanceToGameObject(jumpLandEvent, _transform, GetComponent<Rigidbody>());
-        jumpLandEvent.setParameterByName(MaterialParameterName, _fmodMaterialValue);
-        jumpLandEvent.setParameterByName(JumpOrLandParameterName, fmodJumpOrLand ? 0f : 1f);
+        jumpLandEvent.setParameterByName(_materialParameterName, _fmodMaterialValue);
+        jumpLandEvent.setParameterByName(_jumpOrLandParameterName, fmodJumpOrLand ? 0f : 1f);
         jumpLandEvent.start();
         if (fmodJumpOrLand) PlayJumpGroanSound();
         jumpLandEvent.release();
