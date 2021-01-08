@@ -13811,7 +13811,7 @@ PrefabInstance:
     - target: {fileID: 7279982297315092999, guid: 8347b063a72e37941954d6251d06deb2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7279982297315092999, guid: 8347b063a72e37941954d6251d06deb2,
         type: 3}
@@ -15103,19 +15103,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1528129689, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_Name
       value: Euclid
-      objectReference: {fileID: 0}
-    - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896150, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
