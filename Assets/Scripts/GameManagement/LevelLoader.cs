@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utility;
+using Sensors.Door;
 
 namespace GameManagement
 {
@@ -63,6 +64,9 @@ namespace GameManagement
             if(gameObject.scene == SceneManager.GetActiveScene()){
                 currentLevel = true;
                 firstLevel = true;
+                foreach(DoorTrigger dt in GameObject.FindObjectsOfType<DoorTrigger>()){
+                    if((int)dt.GetComponentInChildren<LevelTrigger>().mode == -1) dt.startOpen = false;
+                }
             }
             if(useAdditiveLoading && !firstLevel){
                 SceneAnimator.gameObject.SetActive(false);
@@ -175,7 +179,9 @@ namespace GameManagement
                         loadedLevelStartingPoint = g.GetComponentInChildren<LevelStartingPoint>().transform.position;
                         break;
                     }
-                    
+                }
+                if(!nextLevelLoader){
+                    Debug.LogError("Could not find next Level Loader");
                 }
                 foreach(GameObject g in loadedScene.GetRootGameObjects()){
                     if(g.TryGetComponent<Light>(out Light l)){
@@ -207,7 +213,10 @@ namespace GameManagement
         }
 
         private IEnumerator unloadPreviousScenes(){
-            if(firstLevel) yield break;
+            if(firstLevel){ 
+                Debug.Log(gameObject.scene.name + "is the first level, not unloading");
+                yield break;
+            }
             yield return null;
             for(int i = ownSceneIndex-1; i>=0; i--){
                     if(SceneManager.GetSceneAt(i).name !="DontDestroyOnLoad"){
@@ -224,6 +233,7 @@ namespace GameManagement
 
         private IEnumerator reinitActiveObjects(GameObject player){
             yield return null;
+            player.GetComponentInChildren<PauseMenu>().updateLoaderReference(this);
             List<Portal> refreshedPortals = PortalUtility.findPortalsInScenes();
             yield return null;
             if(refreshedPortals.Count == 0){
@@ -244,20 +254,30 @@ namespace GameManagement
         }
 
         public void startLevel(){
-            if(started) return;
+            if(started) {
+                Debug.Log("Level has already started");
+                return;
+            }
             started = true;
             if((int)levelType == 1){
+                Debug.Log(gameObject.scene.name+ ":Unloading scenes");
                 StartCoroutine("unloadPreviousScenes");
             }
         }
 
         public void startNextLevel(){
             if(nextSceneName == "EndDemoRoom"){
+                SceneAnimator.gameObject.SetActive(true);
                 useAdditiveLoading = false;
                 LoadNextLevel();
                 return;
             }
-            Debug.Log("I am "+ gameObject.scene.name + " and am starting "+ nextLevelLoader.gameObject.scene.name);
+            try{            
+                Debug.LogError(gameObject.scene.name + ":starting "+ nextLevelLoader.gameObject.scene.name);
+                }
+            catch(MissingReferenceException e){
+                Debug.LogError("Cannot start next level, next loader not found");
+            }
             GameObject dirLight = null;
             foreach( Light l in GameObject.FindObjectsOfType<Light>()){
                 if(l.type == LightType.Directional){

@@ -65,9 +65,13 @@ public class Respawner : MonoBehaviour
 
     private void Awake() {
         playing = true;
-        landingPoint = landingObject.position;
-        Debug.Log(landingPoint);
-        respawnPoint = transform.TransformPoint(landingObject.localPosition) + respawnHeightGain*Vector3.up;
+        if(landingObject){
+            landingPoint = landingObject.position;
+        }
+        else{
+            landingPoint = transform.position;
+        }
+        recomputeRespawnPoint();
         player = GetComponentInParent<FPSController>();
         if(!coverImage){
             fadeAnimator = transform.Find("RespawnCover").GetComponent<Animator>();

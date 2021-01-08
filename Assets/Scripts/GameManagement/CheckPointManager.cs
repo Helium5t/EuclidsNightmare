@@ -20,7 +20,7 @@ public class CheckPointManager : MonoBehaviour
         player.GetComponentInChildren<Respawner>().changeLandingPoint(c.transform.position);
         player.GetComponentInChildren<Respawner>().deathHeight = c.transform.position.y + c.deathHeightFromHere;
         //Debug.Log("Death Height");
-        Debug.Log(player.GetComponentInChildren<Respawner>().deathHeight);
+        //Debug.Log(player.GetComponentInChildren<Respawner>().deathHeight);
     }
 
     public void resetPlayerReference(){

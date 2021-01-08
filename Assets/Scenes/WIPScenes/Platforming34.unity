@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c5a7cf19758b408183e98f8077cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathHeightFromHere: -50
+  deathHeightFromHere: -100
 --- !u!135 &183611080
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c5a7cf19758b408183e98f8077cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathHeightFromHere: -50
+  deathHeightFromHere: -100
 --- !u!135 &832727750
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c5a7cf19758b408183e98f8077cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathHeightFromHere: -50
+  deathHeightFromHere: -100
 --- !u!135 &1106195817
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1813,6 +1813,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279982299093517958, guid: 8347b063a72e37941954d6251d06deb2,
+        type: 3}
+      propertyPath: deathHeightFromHere
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 7279982299093517959, guid: 8347b063a72e37941954d6251d06deb2,
         type: 3}

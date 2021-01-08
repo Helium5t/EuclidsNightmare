@@ -25,6 +25,7 @@ namespace Player
         [SerializeField] private float airDrag = 0.1f; 
         [SerializeField] [Range(20f, 50f)] private float maxFallSpeed = 30f;
         [SerializeField] [Range(0f,0.2f)] private float jumpLeniencyTime = 0.1f;
+        [SerializeField] [Range(0f,0.2f)] private float groundedLeniency = 0.05f;
         CharacterController controller;
         Camera playerCamera;
 
@@ -182,7 +183,7 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.F) && forcedPerspectiveAvailable && draggedObj){
                 toggleMode();
             }
-            else if(Input.GetKeyDown(KeyCode.F)){
+            else if(Input.GetKeyDown(KeyCode.F) && draggedObj){
                 Debug.LogError("Cannot switch.");
                 Debug.LogError("Object:" + draggedObj.name);
                 Debug.LogError("FPA: "+ forcedPerspectiveAvailable.ToString());
@@ -464,7 +465,7 @@ namespace Player
             Vector3 worldInputDir = transform.TransformDirection(inputDir);
             
             float maxSpeed = maxAirSpeed;
-            if(controller.isGrounded){
+            if(isGrounded()){
                 lastGroundedTime = 0f;
                 verticalVelocity = Mathf.Max(0f,verticalVelocity);
                 maxSpeed = ( (run) ? runSpeed : walkSpeed);
@@ -482,7 +483,7 @@ namespace Player
             Vector3 horizontalAcceleration =  worldInputDir * inputAccelerationFactor;
             if(lockUntilGround){
                 horizontalAcceleration = Vector3.zero;
-                lockUntilGround = !controller.isGrounded;
+                lockUntilGround = !isGrounded();
             }
             Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
             Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
@@ -493,6 +494,16 @@ namespace Player
             if((flags & CollisionFlags.Above )!=0 && verticalVelocity >0){
                 verticalVelocity = 0f;
                 verticalVelocity -= gravity*Time.deltaTime;
+            }
+        }
+
+        private bool isGrounded(){
+            if(controller.isGrounded) return true;
+            else{
+                if(Physics.Raycast(transform.position,Vector3.down,out RaycastHit groundHit,(0.5f+groundedLeniency),~LayerMask.GetMask("Trigger","Portal","Player")) && groundHit.transform.CompareTag("Floor")){
+                    return jumping;
+                }
+                return false;
             }
         }
 
