@@ -195,7 +195,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 77cddc07086aec74bac73f7d1d23bc66, type: 3}
+    m_Font: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -363,7 +363,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '<: PLACEHOLDERHINTTEXT :>'
+  m_Text: '<: HINT :>
+
+    This is just a sample scene where UI things are tested'
 --- !u!1 &2293901777794335084
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,7 +836,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 77cddc07086aec74bac73f7d1d23bc66, type: 3}
+    m_Font: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0, type: 3}
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
@@ -1157,7 +1159,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 77cddc07086aec74bac73f7d1d23bc66, type: 3}
+    m_Font: {fileID: 12800000, guid: 827e889b0db982d418af58c18751d1a0, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
