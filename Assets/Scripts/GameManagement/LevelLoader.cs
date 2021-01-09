@@ -53,21 +53,31 @@ namespace GameManagement
         private int ownSceneIndex = 0;
         private LevelLoader nextLevelLoader;
 
+        private string[] lastLevels ={"EndDemoRoom","FeedbackMenu"};
+        private bool nextIsLast;
+
         #endregion
 
 
         private void Awake()
         {
+            nextIsLast = false;
             currentLevel = false;
             _sceneName = gameObject.scene.name;
             _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
             if(useBuildIndex){
                 nextSceneName = nextSceneToLoad.name;
+                
+            }
+            foreach(string last in lastLevels){
+                if(nextSceneName.Contains(last)){
+                    nextIsLast = true;
+                }
             }
             if(gameObject.scene == SceneManager.GetActiveScene()){
                 currentLevel = true;
                 firstLevel = true;
-                
+                Debug.LogError(gameObject.scene.name + " is first scene");
             }
             if(!firstLevel){
                 foreach(DoorTrigger dt in GameObject.FindObjectsOfType<DoorTrigger>()){
@@ -175,9 +185,7 @@ namespace GameManagement
 #endregion
 #region Additive Level Loading
         private void additiveLoadNextLevel(){
-            if(nextSceneName.Contains("EndDemoRoom")){
-                return;
-            }
+            if(nextIsLast) return;
             if(useBuildIndex){
                 loadingStatus = SceneManager.LoadSceneAsync(nextSceneToLoad.buildIndex,LoadSceneMode.Additive);
             }   
@@ -320,7 +328,7 @@ namespace GameManagement
         }
 
         public void startNextLevel(){
-            if(nextSceneName == "EndDemoRoom"){
+            if(nextIsLast){
                 SceneAnimator.gameObject.SetActive(true);
                 useAdditiveLoading = false;
                 LoadNextLevel();

@@ -1121,6 +1121,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014204934, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
+      propertyPath: _jumpInputName
+      value: Jump
+      objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_Name
@@ -3521,7 +3525,7 @@ PrefabInstance:
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
-      value: Sliding Door
+      value: Sliding Door Mid
       objectReference: {fileID: 0}
     - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
@@ -3984,10 +3988,15 @@ PrefabInstance:
       propertyPath: mode
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 3892852013190158344, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 22486108}
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
-      value: Sliding Door
+      value: Sliding Door Start
       objectReference: {fileID: 0}
     - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
@@ -6608,7 +6617,7 @@ PrefabInstance:
     - target: {fileID: 4655613763917372142, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}
       propertyPath: m_Name
-      value: Sliding Door
+      value: Sliding Door End
       objectReference: {fileID: 0}
     - target: {fileID: 5465048474234290260, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
         type: 3}

@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using System;
 using Utility;
+using UnityEditor;
 
 namespace GameManagement
 {
@@ -12,18 +13,6 @@ namespace GameManagement
         [SerializeField] public TriggerMode mode = 0;
         
 
-        private void OnValidate() {
-            if(!levelLoader){
-                Debug.LogError(transform.parent.name+":No levelloader reference, making my own");
-                levelLoader = GameObject.FindObjectOfType<LevelLoader>();
-            }
-        }
-        private void Awake() {
-            if(!levelLoader){
-                Debug.LogError(gameObject.scene.name+"No levelloader reference, making my own");
-                levelLoader = GameObject.FindObjectOfType<LevelLoader>();
-            }
-        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -57,5 +46,30 @@ namespace GameManagement
             FMODUnity.RuntimeManager.PlayOneShot(GameSoundPaths.EndGameSoundPath, gameObject.transform.position);
         }
 
+#region Debug things, to be deleted
+        /*
+        private void OnValidate() {
+            if(levelLoader==null){
+                Debug.LogError(transform.name+":No levelloader reference on validate, making my own "+transform.position );
+                if(transform.parent) Debug.LogError(transform.parent.name+" in " + gameObject.scene.name + ":"+transform.parent.position);
+                levelLoader = GameObject.FindObjectOfType<LevelLoader>();
+            }
+        }
+        private void Start() {
+             if(levelLoader==null){
+                Debug.LogError(transform.name+":No levelloader reference on validate, making my own "+transform.position );
+                if(transform.parent) Debug.LogError(transform.parent.name+" in " + gameObject.scene.name + ":"+transform.parent.position);
+                levelLoader = findLevelLoader();
+            }
+        }
+        
+        private LevelLoader findLevelLoader(){
+            foreach(GameObject g in gameObject.scene.GetRootGameObjects()){
+                if(g.GetComponent<LevelLoader>()) return g.GetComponent<LevelLoader>();
+            }
+            Debug.LogError("LevelLoader not found in " +gameObject.scene.name);
+            return null;
+        }*/
+#endregion
     }
 }

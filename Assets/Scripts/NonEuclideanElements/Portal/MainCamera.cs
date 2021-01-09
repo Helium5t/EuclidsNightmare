@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -20,24 +21,27 @@ public class MainCamera : MonoBehaviour {
             try{
             nets[i].updateTrackedCamera();
             }
-            catch(MissingReferenceException e){
-                Debug.Log("Dead Tunnel at "+i);
+            catch(Exception e){
+                if(e is MissingReferenceException || e is NullReferenceException) Debug.Log("Dead Tunnel at "+i);
+                else Debug.LogError("Unknown exception:"+e.Message);
             }
         }
         for (int i = 0; i < portals.Length; i++) {
             try{
             portals[i].PrePortalRender ();
             }
-            catch(MissingReferenceException e){
-                Debug.Log("Dead Portal at " + i);
+            catch(Exception e){
+                if(e is MissingReferenceException || e is NullReferenceException) Debug.Log("Dead Portal at " + i);
+                else Debug.LogError("Unknown exception:"+e.Message);
             }
         }
         for (int i = 0; i < portals.Length; i++) {
             try{
             portals[i].Render ();
             }
-            catch(MissingReferenceException e){
-                Debug.Log("Dead Portal at " + i);
+            catch(Exception e){
+                if(e is MissingReferenceException || e is NullReferenceException) Debug.Log("Dead Portal at " + i);
+                else Debug.LogError("Unknown exception:"+e.Message);
             }
         }
 
@@ -45,8 +49,9 @@ public class MainCamera : MonoBehaviour {
             try{
             portals[i].PostPortalRender ();
             }
-            catch(MissingReferenceException e){
-                Debug.Log("Dead Portal at " + i);
+            catch(Exception e){
+                if(e is MissingReferenceException || e is NullReferenceException) Debug.Log("Dead Portal at " + i);
+                else Debug.LogError("Unknown exception:"+e.Message);
             }
         }
 
