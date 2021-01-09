@@ -51,7 +51,6 @@ public class Trigger : MonoBehaviour
         if (Debug.isDebugBuild && debugMesh != null) { debugMesh.material.color = Color.red; }
         isActive = false;
         target._deactivate();
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Sounds/PressurePlate/PressurePlateReversed",transform.position);
         }
 
     private void firstEnter()
