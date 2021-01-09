@@ -65,6 +65,8 @@ namespace Player
         Ray screenPointToRay;
         float holdingDistance;
         Vector3 draggingVelocity;
+        string[] ignoreDragMask = {"Trigger","Portal","Player"};
+        float collidingSphereRadius = 0f;
 #endregion
 
 #region  Internal Values
@@ -233,6 +235,7 @@ namespace Player
             if(draggedObj){
                 //draggedObjectRb.velocity = Vector3.Lerp(draggedObjectRb.velocity,draggingVelocity,Time.deltaTime);
                 draggedObjectRb.velocity = draggingVelocity;
+                if(Mathf.Abs(verticalVelocity) - Mathf.Abs(draggedObjectRb.velocity.y) > gravity*0.1) draggedObjectRb.velocity = draggingVelocity + verticalVelocity*Vector3.up;
                 if(Physics.Raycast(transform.position,Vector3.down,out RaycastHit downHit,4f) && downHit.rigidbody == draggedObjectRb && verticalVelocity < 0f){
                     draggedObjectRb.velocity = draggedObjectRb.velocity + Vector3.down*verticalVelocity;
                 }
@@ -577,6 +580,7 @@ namespace Player
             distanceCorrection = ComputeDistanceCorrection(draggedObj,screenPointToRay);
             distanceFromMousePointer = Mathf.Max(dragDist + distanceCorrection ,minHoldingDistance);
             draggedObjectRb = draggedObj.GetComponent<Rigidbody>();
+            collidingSphereRadius = draggedObj.GetComponentInChildren<Collider>().bounds.extents.magnitude;
             holdingDistance = dragDist;
         }
         private void stopDragging(){
@@ -634,9 +638,9 @@ namespace Player
             //draggedObj.transform.rotation.eulerAngles = Vector3.Lerp(draggedObj.transform.rotation.eulerAngles,Vector3.zero,Time.fixedDeltaTime);
             Vector3 movementToTarget = targetPos - draggedObj.position;
             if(movementToTarget.sqrMagnitude < Mathf.Pow(slowdownThreshold,2)){
-                draggingVelocity = movementToTarget;
+                draggingVelocity = movementToTarget/2;
             }
-            else {  draggingVelocity = movementToTarget * mouseFollowSpeed; }
+            else {  draggingVelocity = Vector3.Lerp(draggingVelocity, movementToTarget * mouseFollowSpeed,0.5f); }
             draggingVelocity = Vector3.ClampMagnitude(draggingVelocity,maxObjectSpeed);
             checkLineOfSight();
         }

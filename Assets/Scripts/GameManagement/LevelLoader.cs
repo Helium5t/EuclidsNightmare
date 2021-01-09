@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -154,7 +155,7 @@ namespace GameManagement
         public void DisplayLevelName()
         {
             if (_sceneName == Levels.MainMenu.ToString() || _sceneName == Levels.FeedbackMenu.ToString()) return;
-            _levelNameText.text = SetLevelNameText("<:", ":>");
+            _levelNameText.text = SetLevelNameText("<:", ":>",true);
             StartCoroutine(LevelNameFade());
         }
 
@@ -180,8 +181,32 @@ namespace GameManagement
             yield return null;
         }
 
-        private string SetLevelNameText(string startDecoratorString, string endDecoratorString) =>
-            startDecoratorString + " " + _sceneName + " " + endDecoratorString;
+        private string SetLevelNameText(string startDecoratorString, string endDecoratorString, bool splitOnCapital){
+            if(splitOnCapital){
+                List<string> words = new List<string>(3);
+                string newWord = "" + (_sceneName[0]);
+                for(int i =1;i<_sceneName.Length;i++){
+                    if(Char.IsUpper(_sceneName[i])){
+                        words.Add(newWord);
+                        newWord = "";
+                        newWord += _sceneName[i];
+                    }
+                    else{
+                        newWord += _sceneName[i];
+                    }
+                }
+                words.Add(newWord);
+                string returned = startDecoratorString;
+                Debug.Log(words.Count);
+                for(int i =0; i<words.Count; i++){
+                    returned += " ";
+                    returned += words[i];
+                }
+                returned += " "+ endDecoratorString;
+                return returned;
+            }
+            else return startDecoratorString + " " + _sceneName + " " + endDecoratorString;
+        }
 #endregion
 #region Additive Level Loading
         private void additiveLoadNextLevel(){
