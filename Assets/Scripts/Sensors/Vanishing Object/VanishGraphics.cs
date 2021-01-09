@@ -17,9 +17,6 @@ public class VanishGraphics : MonoBehaviour
         if(!isVisible){
             setVisibility(0f);
         }
-        else{
-            if(transform.parent.name == "IonicPillar 4") Debug.Log("IP4 should be visible");
-        }
     }
 
     // Update is called once per frame
@@ -31,7 +28,6 @@ public class VanishGraphics : MonoBehaviour
     }
     
     public void setVisibility(float visibilityFactor){
-        if(transform.parent.name == "IonicPillar 4") Debug.Log("Setting visibility to "+ visibilityFactor);
         visibility = visibilityFactor;
         foreach(MeshRenderer r in renderers){
             foreach(Material m in r.materials){

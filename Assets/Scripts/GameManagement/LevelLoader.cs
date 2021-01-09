@@ -24,6 +24,7 @@ namespace GameManagement
 
         private Text _levelNameText;
         private string _sceneName;
+        public string levelHint;
 
         [SerializeField] private bool useAdditiveLoading = true;
 
@@ -197,7 +198,6 @@ namespace GameManagement
                 }
                 words.Add(newWord);
                 string returned = startDecoratorString;
-                Debug.Log(words.Count);
                 for(int i =0; i<words.Count; i++){
                     returned += " ";
                     returned += words[i];
@@ -259,7 +259,10 @@ namespace GameManagement
                     }
 
                     g.transform.position = g.transform.position + levelEndingPoint - loadedLevelStartingPoint;
-                    if (g.CompareTag("Player")) Destroy(g); //g.SetActive(false);
+                    if (g.CompareTag("Player")){
+                        nextLevelLoader.levelHint = g.GetComponentInChildren<PauseMenu>().getHint();
+                        Destroy(g); //g.SetActive(false);
+                    }
                 }
             };
 
@@ -353,11 +356,22 @@ namespace GameManagement
         }
 
         public void startNextLevel(){
+            GameObject passedPlayer = GameObject.FindGameObjectWithTag("Player");
             if(nextIsLast){
                 SceneAnimator.gameObject.SetActive(true);
                 useAdditiveLoading = false;
                 LoadNextLevel();
                 return;
+            }
+            else{
+                try{
+                    LevelLoader nextPuzzleLoader = findNextPuzzle();
+                    passedPlayer.GetComponentInChildren<PauseMenu>().setHint(nextPuzzleLoader.levelHint);
+                }
+                catch(Exception e){
+                    Debug.LogError("Tried fetching hint but no puzzle was found");
+                    throw e;
+                }
             }
             try{            
                 Debug.LogError(gameObject.scene.name + ":starting "+ nextLevelLoader.gameObject.scene.name);
@@ -377,11 +391,11 @@ namespace GameManagement
 
             if (dirLight != null)
             {
-                nextLevelLoader.becomeActive(GameObject.FindGameObjectWithTag("Player"), dirLight);
+                nextLevelLoader.becomeActive(passedPlayer, dirLight);
             }
             else
             {
-                nextLevelLoader.becomeActive(GameObject.FindGameObjectWithTag("Player"));
+                nextLevelLoader.becomeActive(passedPlayer);
             }
 
             currentLevel = false;

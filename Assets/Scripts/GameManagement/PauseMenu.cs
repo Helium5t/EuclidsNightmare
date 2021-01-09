@@ -70,5 +70,12 @@ namespace GameManagement
         public void LoadNextLevel() => levelLoaderGameObject.GetComponent<LevelLoader>().SkipLevel();
 
         public void updateLoaderReference(LevelLoader newLoader) => levelLoaderGameObject = newLoader.gameObject;
+        public string getHint(){
+            return hintText;
+        }
+        public void setHint(string newHint){
+            hintText = newHint;
+            hintTextArea.text = hintText;
+        }
     }
 }

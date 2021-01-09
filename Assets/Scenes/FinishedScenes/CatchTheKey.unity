@@ -2181,6 +2181,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7052272766877875487, guid: b18a43dee9d0ee84c84c32dd92a472f3,
+        type: 3}
+      propertyPath: hintText
+      value: '<: HINT :>
+
+        Use the three portals to your advantage to catch
+        the key by surprise! Or you could just wait a bit and try to catch it normally.'
+      objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
       propertyPath: m_Name
@@ -23043,7 +23051,7 @@ PrefabInstance:
     - target: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
       propertyPath: nextSceneName
-      value: Platforming78
+      value: FeedbackMenu
       objectReference: {fileID: 0}
     - target: {fileID: 6827642985279684401, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}

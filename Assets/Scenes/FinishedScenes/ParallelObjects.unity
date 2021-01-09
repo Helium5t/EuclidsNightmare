@@ -10065,7 +10065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 1169269954}
   movementScale: 1
-  masterBid: 6.3384676
+  masterBid: 4.772194
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0
@@ -12245,7 +12245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 930722884}
   movementScale: 1
-  masterBid: 4.4077916
+  masterBid: 1.098032
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0
@@ -20051,6 +20051,14 @@ PrefabInstance:
     - target: {fileID: 1528129689, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052272766877875487, guid: b18a43dee9d0ee84c84c32dd92a472f3,
+        type: 3}
+      propertyPath: hintText
+      value: '<: HINT :>
+
+        Watch the other cube when you drag yours along.
+        It can help you in the next puzzle.'
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}

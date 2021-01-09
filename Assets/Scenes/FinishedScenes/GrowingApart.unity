@@ -8084,7 +8084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 1186981930}
   movementScale: 1
-  masterBid: 1.0466421
+  masterBid: 9.32987
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0
@@ -12342,7 +12342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 722888996}
   movementScale: 1
-  masterBid: 3.9891868
+  masterBid: 1.1968637
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0
@@ -20252,6 +20252,14 @@ PrefabInstance:
     - target: {fileID: 1528129689, guid: b18a43dee9d0ee84c84c32dd92a472f3, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052272766877875487, guid: b18a43dee9d0ee84c84c32dd92a472f3,
+        type: 3}
+      propertyPath: hintText
+      value: '<: HINT :>
+
+        The space inside the tunnel is way shorter, but
+        the cube outside of it doesn''t know it. '
       objectReference: {fileID: 0}
     - target: {fileID: 7166369394848896148, guid: b18a43dee9d0ee84c84c32dd92a472f3,
         type: 3}
