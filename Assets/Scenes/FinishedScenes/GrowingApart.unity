@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 1}
+  m_AmbientSkyColor: {r: 0.7688679, g: 0.845912, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.31
@@ -6196,7 +6196,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -8084,7 +8084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 1186981930}
   movementScale: 1
-  masterBid: 9.32987
+  masterBid: 1.1439204
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0
@@ -12342,7 +12342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 722888996}
   movementScale: 1
-  masterBid: 1.1968637
+  masterBid: 4.523931
   targetOffset: {x: 0, y: 0, z: 0}
   stillnessThreshold: 0.009
   keepAngleThreshold: 0

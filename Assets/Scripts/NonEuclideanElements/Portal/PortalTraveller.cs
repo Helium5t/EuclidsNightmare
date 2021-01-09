@@ -20,10 +20,6 @@ public class PortalTraveller : MonoBehaviour {
     public virtual void EnterPortalThreshold () {
         if (graphicsClone == null) {
             graphicsClone = Instantiate (graphicsObject);
-            graphicsClone.layer = LayerMask.NameToLayer("PortalClone");
-            for(int i =0; i<graphicsClone.transform.childCount; i++){
-                graphicsClone.transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("PortalClone");
-            }
             graphicsClone.transform.parent = graphicsObject.transform.parent;
             graphicsClone.transform.localScale = graphicsObject.transform.localScale;
             originalMaterials = GetMaterials (graphicsObject);

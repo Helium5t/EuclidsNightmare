@@ -20,7 +20,7 @@ namespace GameManagement
                 if((int)mode == 1){
                     Debug.Log(SceneManager.GetActiveScene().name + " COMPLETED!");
                     PlayEndLevelClip();
-                    levelLoader.LoadNextLevel();
+                    if(gameObject.scene.buildIndex == SceneManager.GetActiveScene().buildIndex)levelLoader.LoadNextLevel();
                 }
                 else if((int)mode == -1){
                     if(!levelLoader.currentLevel && gameObject.scene.name != SceneManager.GetActiveScene().name){

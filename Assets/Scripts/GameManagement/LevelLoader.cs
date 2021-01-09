@@ -24,7 +24,7 @@ namespace GameManagement
 
         private Text _levelNameText;
         private string _sceneName;
-        public string levelHint;
+        [HideInInspector]public string levelHint;
 
         [SerializeField] private bool useAdditiveLoading = true;
 
@@ -68,9 +68,9 @@ namespace GameManagement
             _sceneName = gameObject.scene.name;
             _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
             if(useBuildIndex){
-                nextSceneName = nextSceneToLoad.name;
-                
+                nextSceneName = SceneManager.GetSceneByBuildIndex(nextSceneToLoad.buildIndex).name;
             }
+            Debug.Log(nextSceneName);
             foreach(string last in lastLevels){
                 if(nextSceneName.Contains(last)){
                     nextIsLast = true;
@@ -141,7 +141,7 @@ namespace GameManagement
 
         public void LoadNextLevel()
         {
-            if (!useAdditiveLoading) StartCoroutine(LoadLevelRoutine(SceneManager.GetActiveScene().buildIndex + 1));
+            if (!useAdditiveLoading) StartCoroutine(LoadLevelRoutine(SceneManager.GetSceneByPath(nextSceneName).buildIndex));
             else startNextLevel();
         }
 
