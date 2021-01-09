@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
+using Utility;
 
-public class CursorUnlocker : MonoBehaviour
+namespace GameManagement
 {
-    private void Start() => UnlockCursor();
-
-    private void UnlockCursor()
+    public class CursorUnlocker : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        private void Start() => CursorUtility.UnlockCursor();
     }
 }
