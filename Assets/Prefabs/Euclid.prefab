@@ -794,13 +794,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0028668d1a60394ea305c8154a467f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialParameterName: 
-  _speedParameterName: 
-  _jumpOrLandParameterName: 
+  _materialParameterName: Material
+  _speedParameterName: SpeedSwitch
+  _jumpOrLandParameterName: JumpOrLand
   _stepDistance: 1.5
   _rayDistance: 1.6
   _startRunningTime: 0.3
-  _jumpInputName: 
+  _jumpInputName: Jump
   MaterialTypes:
   - Floor
   - Stone
