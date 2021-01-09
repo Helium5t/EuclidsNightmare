@@ -18,9 +18,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
 
     #region ExposedVariables
 
-    [Header("FMOD Settings")]
-    
-    [SerializeField]
+    [Header("FMOD Settings")] [SerializeField]
     /* Use this in the Editor to write the name of the FMOD parameter that controls
      which material the player is currently walking on.*/
     private string _materialParameterName;
@@ -245,7 +243,8 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     /// </summary>
     private void MaterialCheck()
     {
-        if (Physics.Raycast(_transform.position, Vector3.down, out _hit, _rayDistance))
+        if (Physics.Raycast(_transform.position, Vector3.down, out _hit, _rayDistance,
+            ~LayerMask.GetMask("Trigger", "Portal", "Player")))
         {
             _fmodMaterialValue = _hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>()
                 ? _hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>().MaterialValue
@@ -278,7 +277,8 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     /// </summary>
     private void GroundedCheck()
     {
-        Physics.Raycast(_transform.position, Vector3.down, out _hit, _rayDistance);
+        Physics.Raycast(_transform.position, Vector3.down, out _hit, _rayDistance,
+            ~LayerMask.GetMask("Trigger", "Portal", "Player"));
         _isPlayerTouchingGround = _hit.collider;
     }
 
