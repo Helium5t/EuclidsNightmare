@@ -178,7 +178,13 @@ namespace GameManagement
 
             SceneAnimator.SetTrigger(SceneTransitionTrigger);
             yield return new WaitForSeconds(sceneTransitionTime);
-            SceneManager.LoadScene(levelBuildIndex, LoadSceneMode.Single);
+            try{
+                Debug.Log(gameObject.scene.name + " loading" + nextSceneName +" in single mode");
+                SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+            }
+            catch{
+                Debug.LogError(gameObject.scene.name + " failed to load next scene");
+            }
             yield return null;
         }
 

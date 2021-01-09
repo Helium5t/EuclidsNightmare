@@ -110,7 +110,7 @@ namespace Player
         protected override void Awake(){
             base.Awake();
             inTunnel = false;
-            ignoreHeldMask = ~LayerMask.GetMask("ForcedPerspectiveHeld","Player");
+            ignoreHeldMask = ~LayerMask.GetMask("ForcedPerspectiveHeld","Player","Trigger");
         }
 
 
