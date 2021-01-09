@@ -16,5 +16,6 @@
         public const string ButtonSelectedSoundPath = "event:/Sounds/UI/ButtonSelected";
         public const string GameMusicSoundPath = "event:/Sounds/Music/GameMusic";
         public const string LaserBeamSoundPath = "event:/Sounds/Laser/LaserBeam";
+        public const string JumpGroanSoundPath = "event:/Sounds/Player/Locomotion/JumpGroan/Groan";
     }
 }
