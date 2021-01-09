@@ -19,18 +19,22 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     #region ExposedVariables
 
     [Header("FMOD Settings")]
-    /* Use this in the Editor to write the name of the parameter that controls
-     which material the player is currently walking on.*/
+    
     [SerializeField]
+    /* Use this in the Editor to write the name of the FMOD parameter that controls
+     which material the player is currently walking on.*/
     private string _materialParameterName;
 
     /*
-     * Use this in the Editor to write the name of the parameter that controls which footstep speed needs to be heard.
+     * Use this in the Editor to write the name of the FMOD parameter
+     * that controls which footstep speed needs to be heard.
      */
+
+
     [SerializeField] private string _speedParameterName;
 
     /*
-     * Use this in the Editor to write the name of the parameter that controls
+     * Use this in the Editor to write the name of the FMOD parameter that controls
      * whether or not a jumping or a landing sound needs to be heard.
      */
     [SerializeField] private string _jumpOrLandParameterName;
