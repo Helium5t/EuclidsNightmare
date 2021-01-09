@@ -244,7 +244,15 @@ namespace Player
 
         #endregion
 
-    #region Non Euclidean
+        #region Non Euclidean
+        public override void EnterPortalThreshold()
+        {
+            base.EnterPortalThreshold();
+            graphicsClone.layer = LayerMask.NameToLayer("PortalClone");
+            for(int i =0; i<graphicsClone.transform.childCount; i++){
+                graphicsClone.transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("PortalClone");
+            }
+        }
         public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
         {
             controller.enabled = false;

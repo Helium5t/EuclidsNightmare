@@ -19,6 +19,7 @@ public class KeyLock : MonoBehaviour
     private KeyLockGraphics graphics;
     private float baseWidth;
     private float baseThickness;
+    private bool keyLeaving = false;
     
 
     /*private void OnDrawGizmos() {
@@ -51,6 +52,9 @@ public class KeyLock : MonoBehaviour
     }
 
     private void Update() {
+        if(lockedKey && keyLeaving && Vector3.Distance(lockedKey.transform.position,transform.position)>GetComponent<SphereCollider>().radius*1.3f){
+            releaseKey();
+        }
         if(lockedKey){
             if(!reachedTop){
                 lockedKey.transform.position = Vector3.Lerp(lockedKey.transform.position,topPosition,Time.deltaTime*5f);
@@ -103,7 +107,7 @@ public class KeyLock : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(lockedKey!=null) return;
+        if(lockedKey!=null) {Debug.Log("Still have key"); return;}
         if(other.TryGetComponent<Key>(out Key key) && checkSize(key)){
             if(!checkSizeExact(key)){
                 resizeToFit(key);
@@ -117,12 +121,22 @@ public class KeyLock : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) {
-        if(other.TryGetComponent<Key>(out Key key) && key == lockedKey && Vector3.Distance(other.transform.position,transform.position)>GetComponent<SphereCollider>().radius*1.3f){
-            lockedKey = null;
-            lockedInKey = false;
-            reachedTop = false;
+        if( other.TryGetComponent<Key>(out Key key) && key == lockedKey){
+            if(Vector3.Distance(other.transform.position,transform.position)>GetComponent<SphereCollider>().radius*1.3f){
+                releaseKey();
+            }
+            else{
+                keyLeaving = true;
+            }
         }
     }
+
+    private void releaseKey(){
+        lockedKey = null;
+        lockedInKey = false;
+        reachedTop = false;
+    }
+
     public void detach(Key unlockedKey){
         if(unlockedKey == lockedKey){
             foreach(Rigidbody rb in lockedKey.GetComponentsInChildren<Rigidbody>()){
