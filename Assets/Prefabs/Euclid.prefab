@@ -794,15 +794,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0028668d1a60394ea305c8154a467f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FootstepsEventPath: 
-  JumpingEventPath: 
-  MaterialParameterName: Material
-  SpeedParameterName: SpeedSwitch
-  JumpOrLandParameterName: JumpOrLand
-  StepDistance: 1.5
-  RayDistance: 1.3
-  StartRunningTime: 0.3
-  JumpInputName: Jump
+  _materialParameterName: 
+  _speedParameterName: 
+  _jumpOrLandParameterName: 
+  _stepDistance: 1.5
+  _rayDistance: 1.6
+  _startRunningTime: 0.3
+  _jumpInputName: 
   MaterialTypes:
   - Floor
   - Stone
