@@ -19,10 +19,10 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     #region ExposedVariables
 
     [Header("FMOD Settings")]
-
     /* Use this in the Editor to write the name of the parameter that controls
      which material the player is currently walking on.*/
-    [SerializeField] private string _materialParameterName;
+    [SerializeField]
+    private string _materialParameterName;
 
     /*
      * Use this in the Editor to write the name of the parameter that controls which footstep speed needs to be heard.
@@ -103,12 +103,18 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     private int _fmodPlayerRunning; // We'll use to set the value of our FMOD Switch Speed Parameter.
 
     private Transform _transform; //Transform component caching
+    private Rigidbody _rigidbody; //Rigidbody component caching
+
     private EventInstance _breathingEventInstance;
     private float _breathingEventValue;
 
     #endregion
 
-    private void Awake() => _transform = GetComponent<Transform>();
+    private void Awake()
+    {
+        _transform = GetComponent<Transform>();
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     private void Start()
     {
@@ -283,7 +289,7 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
             // We use the event path inside the 'FootstepsEventPath' variable to find the event we want to play.
             EventInstance footstepEventInstance =
                 RuntimeManager.CreateInstance(GameSoundPaths.PlayerFootstepsEventPath);
-            RuntimeManager.AttachInstanceToGameObject(footstepEventInstance, _transform, GetComponent<Rigidbody>());
+            RuntimeManager.AttachInstanceToGameObject(footstepEventInstance, _transform, _rigidbody);
             footstepEventInstance.setParameterByName(_materialParameterName, _fmodMaterialValue);
             footstepEventInstance.setParameterByName(_speedParameterName, _fmodPlayerRunning);
             footstepEventInstance.start();
@@ -310,8 +316,5 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
         jumpLandEvent.release();
     }
 
-    private void PlayJumpGroanSound()
-    {
-        RuntimeManager.PlayOneShot("event:/Sounds/Player/Locomotion/JumpGroan/Groan");
-    }
+    private void PlayJumpGroanSound() => RuntimeManager.PlayOneShot(GameSoundPaths.JumpGroanSoundPath);
 }
