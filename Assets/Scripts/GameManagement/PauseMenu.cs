@@ -77,5 +77,14 @@ namespace GameManagement
             hintText = newHint;
             hintTextArea.text = hintText;
         }
+
+        public void ToMainMenu()
+        {
+            GameMusic.Instance.ChangeTransitionParameter(0);
+            GameMusic.Instance.ChangeToMainMenuParameter(1);
+        }
+        
+        
+        
     }
 }

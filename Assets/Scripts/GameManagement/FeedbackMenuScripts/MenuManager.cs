@@ -86,6 +86,8 @@ namespace GameManagement.FeedbackMenuScripts
         {
             Time.timeScale = 1.0f;
             SceneManager.LoadScene("MainMenu");
+            GameMusic.Instance.ChangeTransitionParameter(0);
+            GameMusic.Instance.ChangeToMainMenuParameter(1);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using FMOD;
-using FMOD.Studio;
+﻿using FMOD.Studio;
 using Utility;
 
 namespace GameManagement
@@ -8,11 +7,19 @@ namespace GameManagement
     {
         private EventInstance _musicEventInstance;
 
+        private const string TransitionParameter = "Transition";
+        private const string ToMainMenuParameter = "ToMainMenu";
+
         private void Start()
         {
             _musicEventInstance = FMODUnity.RuntimeManager.CreateInstance(GameSoundPaths.GameMusicSoundPath);
             _musicEventInstance.start();
-            _musicEventInstance.release();
         }
+
+        public void ChangeTransitionParameter(int value) =>
+            _musicEventInstance.setParameterByName(TransitionParameter, value);
+
+        public void ChangeToMainMenuParameter(int value) => 
+            _musicEventInstance.setParameterByName(ToMainMenuParameter, value); 
     }
 }
