@@ -1,4 +1,5 @@
-﻿using FMOD.Studio;
+﻿using System;
+using FMOD.Studio;
 using FMODUnity;
 using GameManagement;
 using UnityEngine;
@@ -321,4 +322,6 @@ public class FMODStudioFirstPersonFootsteps : MonoBehaviour
     }
 
     private void PlayJumpGroanSound() => RuntimeManager.PlayOneShot(GameSoundPaths.JumpGroanSoundPath);
+
+    private void OnDestroy() => _breathingEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 }
