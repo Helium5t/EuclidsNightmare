@@ -28,6 +28,13 @@ public class KeyLock : MonoBehaviour
         Gizmos.DrawCube(transform.position,GetComponentInChildren<MeshRenderer>().bounds.size);
     }*/
     
+
+    private void OnDrawGizmos() {
+        Color showed = Color.green;
+        showed.a = 0.2f;
+        Gizmos.color = showed;
+        Gizmos.DrawSphere(transform.position,GetComponent<SphereCollider>().bounds.extents.magnitude);
+    }
     private void Awake() {
         MeshRenderer mesh = GetComponentInChildren<MeshRenderer>();
         Quaternion originalRotation = transform.rotation;
@@ -47,22 +54,24 @@ public class KeyLock : MonoBehaviour
         baseCenterPosition = transform.position + baseThickness*transform.up;
         //topPosition = baseCenterPosition + 0.85f * mesh.bounds.size.x*transform.up;
         topRotation = transform.rotation*Quaternion.Euler(90,0,0);
-        topPosition = transform.up*GetComponent<SphereCollider>().radius*0.5f + baseCenterPosition +baseToCubeRatio*baseWidth*transform.up ;
+        topPosition = transform.up*GetComponent<SphereCollider>().bounds.extents.magnitude*baseToCubeRatio + baseCenterPosition - baseToCubeRatio*baseWidth*transform.up ;
         lockedInPosition = baseCenterPosition + baseToCubeRatio*baseWidth*transform.up;
+        Debug.DrawLine(baseCenterPosition,topPosition,Color.red,10f);
     }
 
     private void Update() {
-        if(lockedKey && keyLeaving && Vector3.Distance(lockedKey.transform.position,transform.position)>GetComponent<SphereCollider>().radius*1.3f){
+        Debug.DrawLine(baseCenterPosition,topPosition,Color.red,10f);
+        if(lockedKey && keyLeaving && Vector3.Distance(lockedKey.transform.position,transform.position)>GetComponent<SphereCollider>().bounds.extents.magnitude){
             releaseKey();
         }
         if(lockedKey){
             if(!reachedTop){
-                lockedKey.transform.position = Vector3.Lerp(lockedKey.transform.position,topPosition,Time.deltaTime*5f);
-                lockedKey.transform.rotation = Quaternion.Lerp(lockedKey.transform.rotation,topRotation,Time.deltaTime*5f);
+                lockedKey.transform.position = Vector3.Lerp(lockedKey.transform.position,topPosition,Time.deltaTime*transitionSpeed);
+                lockedKey.transform.rotation = Quaternion.Lerp(lockedKey.transform.rotation,topRotation,Time.deltaTime*transitionSpeed);
             }
             else{
                 if(!lockedInKey){
-                    lockedKey.transform.position = Vector3.Lerp(lockedKey.transform.position,lockedInPosition,Time.deltaTime*5f);
+                    lockedKey.transform.position = Vector3.Lerp(lockedKey.transform.position,lockedInPosition,Time.deltaTime*transitionSpeed);
                 }
             }
             if(!reachedTop && Vector3.Distance(lockedKey.transform.position,topPosition)<0.001f && Quaternion.Angle(lockedKey.transform.rotation,topRotation)<Mathf.Epsilon) reachedTop = true;
@@ -109,11 +118,12 @@ public class KeyLock : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(lockedKey!=null) {Debug.Log("Still have key"); return;}
         if(other.TryGetComponent<Key>(out Key key) && checkSize(key)){
+            Debug.Log("Locking");
+            key.lockIn(this);
             if(!checkSizeExact(key)){
                 resizeToFit(key);
             }
             lockedKey = key;
-            key.lockIn(this);
             foreach(Rigidbody rb in lockedKey.GetComponentsInChildren<Rigidbody>()){
                 rb.isKinematic = true;
             }
@@ -132,6 +142,7 @@ public class KeyLock : MonoBehaviour
     }
 
     private void releaseKey(){
+        Debug.Log("Releasing key");
         lockedKey = null;
         lockedInKey = false;
         reachedTop = false;

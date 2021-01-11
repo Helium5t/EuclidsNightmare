@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6474748982470198359}
   - component: {fileID: 7308214533039167947}
+  - component: {fileID: 2845581566028245078}
   m_Layer: 0
   m_Name: TunnelPiece
   m_TagString: Door
@@ -124,6 +125,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.82, y: 0.24, z: 2.3}
   m_Center: {x: 0, y: -1.26, z: 0}
+--- !u!65 &2845581566028245078
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474748982470198358}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.82, y: 0.18, z: 2.39}
+  m_Center: {x: 0, y: 1.16, z: 0}
 --- !u!1 &6972717951032737486
 GameObject:
   m_ObjectHideFlags: 0

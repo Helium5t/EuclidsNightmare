@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.21
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3e8bc5155c4c9ed46a63ac64c06408f3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -196,7 +196,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &453239926
 PrefabInstance:
@@ -595,7 +595,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 35.2, y: -399.45, z: 0}
 --- !u!1001 &1565107680
 PrefabInstance:
@@ -760,6 +760,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c7d04a386f526468ef82557f3ec239, type: 3}
+--- !u!1001 &1851781633
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4813640598957648964, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_Name
+      value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.750251
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 24.063564
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -33.564316
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813640598957648965, guid: e9f68988c85090b42ae89a7db6779440,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e9f68988c85090b42ae89a7db6779440, type: 3}
 --- !u!1001 &21218874187938239
 PrefabInstance:
   m_ObjectHideFlags: 0

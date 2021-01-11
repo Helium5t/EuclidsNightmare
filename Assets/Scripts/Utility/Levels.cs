@@ -2,14 +2,30 @@
 {
     public enum Levels
     {
-        MainMenu,
+        MainMenu = 0,
         Level0,
+        Platforming01,
+        GlassLabyrinth,
+        Platforming12,
         BinTheCube,
-        GrowingApart,
+        Platforming23,
         UpIsDown,
+        Platforming34,
+        ParallelObjects,
+        Platforming45,
+        GrowingApart,
+        Platforming56,
+        Lasers,
+        Platforming67,
+        LinkedMirrors,
         ReverseMirror,
         CatchTheKey,
-        ParallelObjects,
-        FeedbackMenu
+        Platforming78,
+        ForcedPerspectiveIntro,
+        Platforming89,
+        HoleRoom,
+        PartingWays,
+        FeedbackMenu,
+        EndDemoRoom
     }
 }

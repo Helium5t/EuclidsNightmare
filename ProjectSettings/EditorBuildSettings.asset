@@ -55,7 +55,7 @@ EditorBuildSettings:
     guid: 5087fb11ac4c91e4c93676ff0576478c
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/ReverseMirror.unity
-    guid: 9b79fca631eebd24ba93d4b3dec83f8c
+    guid: cd138e8ff59dbb14daf4f35749250172
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/CatchTheKey.unity
     guid: 8e6b09564338a0644a406e7771a615f8

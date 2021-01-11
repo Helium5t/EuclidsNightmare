@@ -77,6 +77,10 @@ public class VanishingObject : MonoBehaviour
 
     private void OnTriggerStay(Collider other) {
         if(other.CompareTag("Player")){
+            if(reachedTop){
+                transitionGraphics.setVisibility(0f);
+                return;
+            }
             float distanceFromTop = Vector3.Distance(other.transform.position,rangeDetector.bounds.center);
             if(distanceFromTop < detectRadius){
                 if(distanceFromTop > reachedThreshold){

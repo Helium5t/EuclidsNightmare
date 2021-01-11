@@ -11,8 +11,6 @@ namespace GameManagement
         public enum TriggerMode{Start=-1,End=1,Neither = 0};
         [SerializeField] private LevelLoader levelLoader;
         [SerializeField] public TriggerMode mode = 0;
-        
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))

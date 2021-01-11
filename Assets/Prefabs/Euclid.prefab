@@ -660,7 +660,7 @@ MonoBehaviour:
   mouseFollowSpeed: 5
   maxObjectSpeed: 15
   leniencyTime: 0.8
-  maxPickUpDistance: 10
+  maxPickUpDistance: 5
   minHoldingDistance: 3
   ignoredObstacleMaximumSize: 0.01
   slowdownThreshold: 0.15
@@ -1252,6 +1252,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -555.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -33.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 319.4082
+      objectReference: {fileID: 0}
+    - target: {fileID: 848151343, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 42.708687
+      objectReference: {fileID: 0}
     - target: {fileID: 890371955, guid: f2283ddb218ec0a45b5346745b7a8cf0, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
@@ -1550,7 +1566,7 @@ PrefabInstance:
     - target: {fileID: 2293901777794335084, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354277481935092344, guid: f2283ddb218ec0a45b5346745b7a8cf0,
         type: 3}

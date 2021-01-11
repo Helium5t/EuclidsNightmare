@@ -9,7 +9,7 @@ public class Key : MonoBehaviour
     private KeyGraphics graphicEffects;
     private FPSController player;
     private bool isDragged = false;
-
+    [SerializeField] private bool keepLocked = false;
     private KeyLock keyLock;
 
     private void Start() {
@@ -28,6 +28,7 @@ public class Key : MonoBehaviour
             Debug.Log("Detaching from player");
             player.detachObject();
         }
+        else Debug.Log("Not dragged");
         isLocked = true;
         keyLock = locker;
     }
@@ -41,7 +42,7 @@ public class Key : MonoBehaviour
 
     public void startDragging(){
         if(isLocked){
-            if(!keyLock.lockedInKey){
+            if(keepLocked || !keyLock.lockedInKey){
                 player.detachObject();
             }
             else{
@@ -50,6 +51,9 @@ public class Key : MonoBehaviour
                 lockOut();
                 isDragged = true;
             }
+        }
+        else{
+            isDragged = true;
         }
         
     }
