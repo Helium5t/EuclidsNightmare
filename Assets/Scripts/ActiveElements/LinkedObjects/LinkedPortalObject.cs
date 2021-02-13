@@ -107,6 +107,8 @@ public class LinkedPortalObject : PortalPhysicsObject {
 
     private void OnValidate() 
     {
+        
+        if(!gameObject.activeSelf) return;
         objectLink = GetComponent<LinkedObject>();
         if(objectLink!=null &&  !objectLink.mirror.TryGetComponent<LinkedPortalObject>(out LinkedPortalObject lpo)){
             lpo = objectLink.mirror.gameObject.AddComponent<LinkedPortalObject>();

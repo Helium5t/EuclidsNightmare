@@ -27065,7 +27065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPortal: {fileID: 5948627733201541269}
-  teleportingSide: 3
+  teleportingSide: 2
   screen: {fileID: 5677231404144920160}
   recursionLimit: 10
   allowAlternateCameras: 1
@@ -27879,7 +27879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2492489575517761890}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -55.8, y: -0.021858096, z: -116.9}
+  m_LocalPosition: {x: -36.66, y: -0, z: 3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6638401290969234272}
