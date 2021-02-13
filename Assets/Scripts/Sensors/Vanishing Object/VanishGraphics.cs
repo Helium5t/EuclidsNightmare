@@ -26,6 +26,7 @@ public class VanishGraphics : MonoBehaviour
             setVisibility(0f);
         }
     }
+
     
     public void setVisibility(float visibilityFactor){
         visibility = visibilityFactor;

@@ -32,7 +32,7 @@ namespace GameManagement
         private levelTag levelType = levelTag.Puzzle;
 
         [SerializeField] private bool useBuildIndex = false;
-        [SerializeField] private Scene nextSceneToLoad;
+        [SerializeField] private int nextSceneToLoad;
         [SerializeField] private string nextSceneName;
 
         #region Internal Values and parameters for ALL
@@ -60,7 +60,6 @@ namespace GameManagement
 
         #endregion
 
-
         private void Awake()
         {
             nextIsLast = false;
@@ -68,7 +67,10 @@ namespace GameManagement
             _sceneName = gameObject.scene.name;
             _levelNameText = GameObject.FindGameObjectWithTag("LevelNameText").gameObject.GetComponent<Text>();
             if(useBuildIndex){
-                nextSceneName = SceneManager.GetSceneByBuildIndex(nextSceneToLoad.buildIndex).name;
+                nextSceneName = SceneUtility.getSceneName(nextSceneToLoad);
+            }
+            else{
+                nextSceneToLoad = SceneUtility.getSceneBuildIndex(nextSceneName);
             }
             Debug.Log(nextSceneName);
             foreach(string last in lastLevels){
@@ -141,7 +143,7 @@ namespace GameManagement
 
         public void LoadNextLevel()
         {
-            if (!useAdditiveLoading) StartCoroutine(LoadLevelRoutine(SceneManager.GetSceneByPath(nextSceneName).buildIndex));
+            if (!useAdditiveLoading) StartCoroutine(LoadLevelRoutine(SceneUtility.getSceneBuildIndex(nextSceneName)));
             else startNextLevel();
         }
 
@@ -170,17 +172,24 @@ namespace GameManagement
 
         private IEnumerator LoadLevelRoutine(int levelBuildIndex)
         {
+            Debug.Log(levelBuildIndex);
             //Just to be sure that everything is flowing as it should be
             Time.timeScale = 1f; 
             PauseMenu.GameIsPaused = false;
-            
+            string loadedSceneName=nextSceneName;
             if (useAdditiveLoading) SceneAnimator.gameObject.SetActive(true);
-
+            if(levelType == levelTag.Platform && levelBuildIndex == gameObject.scene.buildIndex){
+                Debug.Log("Loading Previous");
+                loadedSceneName = SceneUtility.getSceneName(levelBuildIndex -1);
+            }
+            else{
+                loadedSceneName = SceneUtility.getSceneName(levelBuildIndex);
+            }
             SceneAnimator.SetTrigger(SceneTransitionTrigger);
             yield return new WaitForSeconds(sceneTransitionTime);
             try{
-                Debug.Log(gameObject.scene.name + " loading" + nextSceneName +" in single mode");
-                SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+                Debug.Log(gameObject.scene.name + " loading" + loadedSceneName +" in single mode");
+                SceneManager.LoadScene(loadedSceneName, LoadSceneMode.Single);
             }
             catch{
                 Debug.LogError(gameObject.scene.name + " failed to load next scene");
@@ -218,7 +227,7 @@ namespace GameManagement
         private void additiveLoadNextLevel(){
             if(nextIsLast) return;
             if(useBuildIndex){
-                loadingStatus = SceneManager.LoadSceneAsync(nextSceneToLoad.buildIndex,LoadSceneMode.Additive);
+                loadingStatus = SceneManager.LoadSceneAsync(nextSceneToLoad,LoadSceneMode.Additive);
             }   
             else{
                 if(nextSceneName.Length == 0) { useAdditiveLoading = false; return;}

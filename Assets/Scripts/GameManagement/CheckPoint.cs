@@ -7,6 +7,7 @@ public class CheckPoint : MonoBehaviour
 {
     private CheckPointManager checkPointManager;
     public float deathHeightFromHere = -50f;
+    private bool used = false;
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
@@ -17,7 +18,8 @@ public class CheckPoint : MonoBehaviour
         checkPointManager = GetComponentInParent<CheckPointManager>();
     }
     private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag("Player")){
+        if(other.CompareTag("Player") && !used){
+            used = true;
             checkPointManager.activateCheckpoint(this);
         }
     }

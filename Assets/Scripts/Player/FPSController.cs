@@ -235,7 +235,7 @@ namespace Player
             if(draggedObj){
                 //draggedObjectRb.velocity = Vector3.Lerp(draggedObjectRb.velocity,draggingVelocity,Time.deltaTime);
                 draggedObjectRb.velocity = draggingVelocity;
-                if(Mathf.Abs(verticalVelocity) - Mathf.Abs(draggedObjectRb.velocity.y) > gravity*0.1) draggedObjectRb.velocity = draggingVelocity + verticalVelocity*Vector3.up;
+                if( jumping || Mathf.Abs(verticalVelocity) - Mathf.Abs(draggedObjectRb.velocity.y) > 0.5f || !isGrounded()) draggedObjectRb.velocity = draggingVelocity + verticalVelocity*Vector3.up;
                 if(Physics.Raycast(transform.position,Vector3.down,out RaycastHit downHit,4f) && downHit.rigidbody == draggedObjectRb && verticalVelocity < 0f){
                     draggedObjectRb.velocity = draggedObjectRb.velocity + Vector3.down*verticalVelocity;
                 }
@@ -578,6 +578,7 @@ namespace Player
                 stopDragging();
             }
             notifyStopDragObject();
+            Debug.Log("Released");
             draggedObj = null;
             draggingVelocity = Vector3.zero;
             draggedObjectRb = null;

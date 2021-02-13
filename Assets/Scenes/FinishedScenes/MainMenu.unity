@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 3e8bc5155c4c9ed46a63ac64c06408f3, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9f69d571a9cb54943b5a80ccd6b19e96, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -330,6 +330,11 @@ PrefabInstance:
       propertyPath: nextSceneName
       value: Level0
       objectReference: {fileID: 0}
+    - target: {fileID: 346961041017989574, guid: 209fcd550b4190b4c8266cddb370e01b,
+        type: 3}
+      propertyPath: nextSceneToLoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 346961041017989575, guid: 209fcd550b4190b4c8266cddb370e01b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -476,20 +481,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 461761810}
-        m_MethodName: ChangeTransitionParameter
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 461761810}
-        m_MethodName: ChangeToMainMenuParameter
-        m_Mode: 3
+      - m_Target: {fileID: 0}
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -831,8 +825,9 @@ GameObject:
   m_Component:
   - component: {fileID: 461761811}
   - component: {fileID: 461761810}
+  - component: {fileID: 461761812}
   m_Layer: 0
-  m_Name: GameMusic
+  m_Name: BackgroundMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -847,9 +842,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 461761809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115f1837b28d2aa41a39f2d6826ff664, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Sounds/Ambient/WelcomeMusic
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!4 &461761811
 Transform:
   m_ObjectHideFlags: 0
@@ -864,6 +870,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &461761812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461761809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0bbc635c1bab440b6df483d4c11fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &830275351
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,6 +2267,16 @@ PrefabInstance:
     - target: {fileID: 751066615315438590, guid: 4a904369d5f7ff9408a90d91fd7be567,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3576407542540938119, guid: 4a904369d5f7ff9408a90d91fd7be567,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3576407544239428333, guid: 4a904369d5f7ff9408a90d91fd7be567,
+        type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
