@@ -1,6 +1,7 @@
 ﻿using FMOD.Studio;
 using GameManagement;
 using UnityEngine;
+using UnityEditor.Animations;
 using Utility;
 namespace Player
 {
@@ -11,6 +12,9 @@ namespace Player
         public float walkSpeed = 3;
         public float runSpeed = 6;
         public float smoothMoveTime = 0.1f;
+
+        public float smoothAirTime = 0.1f;
+        public float smoothGroundTime = 0f;
 
         public bool lockCursor;
         public float mouseSensitivity = 3;
@@ -50,6 +54,18 @@ namespace Player
         [SerializeField] private float maxMarchDistance = 100f;
         [SerializeField][Range(0.001f,10f)] private float marchingStep = 0.1f;
         [SerializeField] private float minMarchDistance = 1f;
+
+        [Header("Animation")]
+        [SerializeField] private Animator graphicAnimator;
+
+        static readonly int animationMovement = Animator.StringToHash("Movement");
+        static readonly int animationDirection = Animator.StringToHash("Direction");
+        static readonly int animationJump = Animator.StringToHash("Jump");
+        static readonly int animationReset = Animator.StringToHash("Reset");
+
+
+
+        
 
 #region Exposed Variables
         public bool lockUntilGround = false;
@@ -115,7 +131,10 @@ namespace Player
 
 
         private void Start()
-        {
+        {   
+            graphicAnimator.SetFloat(animationMovement,0f);
+            graphicAnimator.SetFloat(animationDirection,0.5f);
+            
             playerCamera = Camera.main;
             
             if (lockCursor) CursorUtility.LockCursor();
@@ -156,9 +175,10 @@ namespace Player
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
             computeMovement(input,isRunning);
-
             // Jumping Physical Movement
             if (Input.GetKey(KeyCode.Space)) Jump();
+
+            updateModel();
 
             float mX = Input.GetAxisRaw("Mouse X");
             float mY = Input.GetAxisRaw("Mouse Y");
@@ -241,6 +261,7 @@ namespace Player
                 }
             }
         }
+
 
         #endregion
 
@@ -484,6 +505,7 @@ namespace Player
             }
             Vector3 currentHorizontalSpeed = new Vector3(velocity.x,0f,velocity.z);
             Vector3 targetVelocity = Vector3.ClampMagnitude(currentHorizontalSpeed+horizontalAcceleration,maxSpeed);
+            smoothMoveTime = (isGrounded())? smoothGroundTime :smoothAirTime ;
             velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
             velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
@@ -492,6 +514,8 @@ namespace Player
                 verticalVelocity = 0f;
                 verticalVelocity -= gravityIncrement;
             }
+
+
         }
 
         private bool isGrounded(){
@@ -509,6 +533,7 @@ namespace Player
             if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < jumpFrequency) || (!jumping && lastGroundedTime < jumpLeniencyTime))
             {
                 jumping = true;
+                graphicAnimator.SetTrigger(animationJump);
                 verticalVelocity = jumpForce;
             }
         }
@@ -712,5 +737,58 @@ namespace Player
             }
         }
     #endregion
+    
+    #region Graphics
+        private void updateModel(){
+            float currentMovement = graphicAnimator.GetFloat(animationMovement);
+            float currentDirection = graphicAnimator.GetFloat(animationDirection);
+            float nextMovement;
+            float nextDirection;
+            if(currentMovement > 0.001f){
+                nextMovement = Mathf.Lerp(currentMovement,0f,Time.deltaTime*10f);
+                nextDirection = Mathf.Lerp(currentDirection,0.5f,Time.deltaTime*10f);
+            }
+            else{
+                nextMovement = 0f;
+                nextDirection = 0.5f;
+            }
+            graphicsObject.transform.localPosition = Vector3.zero - Vector3.up * (1.1f);
+            AnimatorStateInfo state =  graphicAnimator.GetCurrentAnimatorStateInfo(0);
+            if(!jumping){
+                if(!state.IsName("MovementTree")){
+                    graphicAnimator.SetTrigger(animationReset);
+                }
+            }
+            Vector3 movement = new Vector3(velocity.x,0f,velocity.z);
+            Vector3 bodyDirection = movement;
+            Vector3 lookDirection = playerCamera.transform.forward;
+            lookDirection.y = 0f;
+            // strafe left = 1 right = 0
+            float lookAngle = Vector3.SignedAngle(lookDirection,bodyDirection,Vector3.up);
+            bool backwards = false;
+            if(Mathf.Abs(lookAngle)>15f){
+                if(Mathf.Abs(lookAngle)>95f){
+                    backwards = true;
+                    lookAngle = (180f - Mathf.Abs(lookAngle)) * Mathf.Sign(lookAngle);
+                }
+                else{
+                    lookAngle = Mathf.Clamp(lookAngle,-90f,90f);
+                }
+                lookAngle = 0.50f - lookAngle/180f;
+                nextDirection = Mathf.Lerp(currentDirection,lookAngle,Time.deltaTime*10f);
+            }
+            if(movement.magnitude > 0.001f){
+                float movementAmount = 0f;
+                movementAmount = ((backwards)? -1f:1f)* movement.magnitude/runSpeed;
+                nextMovement = Mathf.Lerp(currentMovement,movementAmount,Time.deltaTime*10f);
+            }
+            graphicAnimator.SetFloat(animationMovement,nextMovement);
+            graphicAnimator.SetFloat(animationDirection,nextDirection);
+            
+
+        }
+    #endregion
+    
     }
+
 }

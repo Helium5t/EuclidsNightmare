@@ -12,43 +12,43 @@ EditorBuildSettings:
     path: Assets/Scenes/FinishedScenes/Level0.unity
     guid: aad6b28e144b74d40b077fe51e05029f
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming01.unity
+    path: Assets/Scenes/FinishedScenes/Platforming01.unity
     guid: 7625e8e3467f7184b8292813d4e89f68
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/GlassLabyrinth.unity
+    path: Assets/Scenes/FinishedScenes/GlassLabyrinth.unity
     guid: a3ee30654fb181147a21d44a5a0dcace
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming12.unity
+    path: Assets/Scenes/FinishedScenes/Platforming12.unity
     guid: 6ff40e68831da5b42a96fddba5e65e0b
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/BinTheCube.unity
+    path: Assets/Scenes/FinishedScenes/BinTheCube.unity
     guid: 0f1c95a759fa615428a8fa711a66ef20
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming23.unity
+    path: Assets/Scenes/FinishedScenes/Platforming23.unity
     guid: 2a60c6b5819cbb448b4a3ec80d982590
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/UpIsDown.unity
     guid: 5de85c3700d65694f9c71fdff04ddff6
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming34.unity
+    path: Assets/Scenes/FinishedScenes/Platforming34.unity
     guid: be44660a0a577d048a5bd4fb1b07943c
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/ParallelObjects.unity
     guid: bdbd8d261ff932b45bf6956ffc371668
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming45.unity
+    path: Assets/Scenes/FinishedScenes/Platforming45.unity
     guid: fdf3ecf8349b8644aa21310ece67ca3f
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/GrowingApart.unity
     guid: 1c9557b8d49ef874db9f78d446b5c60c
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming56.unity
+    path: Assets/Scenes/FinishedScenes/Platforming56.unity
     guid: b555d8a2dd6d7ae4ca89a9e334547cff
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/Lasers.unity
     guid: dbd181ac9430fa84c8c9b4bea68ef1b8
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming67.unity
+    path: Assets/Scenes/FinishedScenes/Platforming67.unity
     guid: 68d3eb90c619348449be432a0b0b47c4
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/LinkedMirrors.unity
@@ -60,19 +60,19 @@ EditorBuildSettings:
     path: Assets/Scenes/FinishedScenes/CatchTheKey.unity
     guid: 8e6b09564338a0644a406e7771a615f8
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming78.unity
+    path: Assets/Scenes/FinishedScenes/Platforming78.unity
     guid: 3b99e8eef2583b748891a0934326aaef
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/ForcedPerspectiveIntro.unity
+    path: Assets/Scenes/FinishedScenes/ForcedPerspectiveIntro.unity
     guid: a4404b5ca43b59049aea7800503f4746
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/Platforming89.unity
+    path: Assets/Scenes/FinishedScenes/Platforming89.unity
     guid: 8b781d412f7ae5241a8d235ebaa17af5
   - enabled: 1
     path: Assets/Scenes/WIPScenes/HoleRoom.unity
     guid: 3383bc308dd227b46b8ff7a669668096
   - enabled: 1
-    path: Assets/Scenes/WIPScenes/PartingWays.unity
+    path: Assets/Scenes/FinishedScenes/PartingWays.unity
     guid: 2af20f3789cc1194a90cf9fbd1ccdac0
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/FeedbackMenu.unity
