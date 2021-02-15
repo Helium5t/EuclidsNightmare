@@ -177,10 +177,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nicol\xF2 Buganza - Game Designer, Developer,  Sound Desing\n\nElio Sasso
-    - Game Designer & Developer\n\nDeborah Leonardi - Storyteller & game designer\n\nAndrea
-    di Lella -Game Designer & Developer\n\nMicheal  Marchesan - Developer\n\nVirginia
-    Braut - 3D Artist"
+  m_text: "Nicol\xF2 Buganza - Game Designer, Developer,  Sound Designer\n\nElio
+    Sasso - Game Designer & Developer\n\nDeborah Leonardi - Storyteller & Game Designer\n\nAndrea
+    di Lella - Game Designer & Tester\n\nMicheal  Marchesan - Developer & Tester\n\nVirginia
+    Braut - 3D Artist\n\nSpecial Thanks to:\n\nMarta Casalini - Trailer \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5d8df615d5f3f7a4985fd81a76cbc284, type: 2}
   m_sharedMaterial: {fileID: 868142257699625063, guid: 5d8df615d5f3f7a4985fd81a76cbc284,
