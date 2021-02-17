@@ -1290,6 +1290,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 467280010106264599, guid: 8e68fb734e1411c458e6fae8351178e4,
+        type: 3}
+      propertyPath: transitionSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2519915205653435947, guid: 8e68fb734e1411c458e6fae8351178e4,
         type: 3}
       propertyPath: m_Radius
@@ -17692,36 +17697,42 @@ PrefabInstance:
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[0]
-      value: 'OTTO: First of all, here are the basics'
+      value: "OTTO: You\u2019ll have to wait for more answers. Have a look a this
+        riddle and try to solve it, "
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[1]
-      value: 'OTTO: WASD is move'
+      value: 'OTTO: I will always be next to you in case you need help. '
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[2]
-      value: 'OTTO: Move mouse to look around'
+      value: 'OTTO: Here''s the basics anyway...'
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[3]
-      value: 'OTTO: Left Click on a object to drag it'
+      value: 'OTTO: WASD is move'
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[4]
-      value: 'OTTO: Try taking the red crate and put it on the red lock on the wall!'
+      value: 'OTTO: Move mouse to look around'
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[5]
+      value: 'OTTO: Left Click on a object to drag it'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
+        type: 3}
+      propertyPath: speeches.Array.data[6]
       value: 'OTTO: Try taking the red crate and put it on the red lock on the wall!'
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252891, guid: 228377de2e504ae45a1b6fc7b8beb6cb,

@@ -190,6 +190,7 @@ MonoBehaviour:
   toggle: 0
   debugMesh: {fileID: 0}
   debugMaterial: {fileID: 0}
+  triggerCap: 1
 --- !u!114 &467280010106264599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,4 +204,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockedInKey: 0
-  transitionSpeed: 5
+  transitionSpeed: 1
+  sizeTimesThreshold: 1.5

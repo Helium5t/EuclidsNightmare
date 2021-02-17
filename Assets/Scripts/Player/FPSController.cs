@@ -1,7 +1,6 @@
 ﻿using FMOD.Studio;
 using GameManagement;
 using UnityEngine;
-using UnityEditor.Animations;
 using Utility;
 namespace Player
 {

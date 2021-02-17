@@ -64,24 +64,46 @@ public class KeyLock : MonoBehaviour
         if(lockedKey && keyLeaving && Vector3.Distance(lockedKey.transform.position,transform.position)>GetComponent<SphereCollider>().bounds.extents.magnitude){
             releaseKey();
         }
-        if(lockedKey){
-            if(!reachedTop){
-                lockedKey.transform.position = Vector3.Lerp(lockedKey.transform.position,topPosition,Time.deltaTime*transitionSpeed);
-                lockedKey.transform.rotation = Quaternion.Lerp(lockedKey.transform.rotation,topRotation,Time.deltaTime*transitionSpeed);
-            }
-            else{
-                if(!lockedInKey){
-                    lockedKey.transform.position = Vector3.Lerp(lockedKey.transform.position,lockedInPosition,Time.deltaTime*transitionSpeed);
-                }
-            }
-            if(!reachedTop && Vector3.Distance(lockedKey.transform.position,topPosition)<0.001f && Quaternion.Angle(lockedKey.transform.rotation,topRotation)<Mathf.Epsilon) reachedTop = true;
-            if(reachedTop){
-                if(!lockedInKey && Vector3.Distance(lockedKey.transform.position,lockedInPosition)<0.001f){
-                    lockedInKey = true;
-                    trigger.enter();
-                }
-            }
+    }
+
+    private float timeFunction(float time){
+        float angle = Mathf.Deg2Rad*(180 - (180f*time));
+        return (1f + Mathf.Cos(angle)) /2f;
+    }
+
+    private IEnumerator lockInKey(Transform keyTransform){
+        yield return null;
+        Vector3 originalPos = keyTransform.position;
+        Quaternion originalRot = keyTransform.rotation;
+        float time = 0f;
+        #region  move to top
+        while(time <= 1f){
+            if(!lockedKey) yield break;
+            float lerpfactor = timeFunction(time);
+            lockedKey.transform.position = Vector3.Lerp(keyTransform.position,topPosition,lerpfactor);
+            lockedKey.transform.rotation = Quaternion.Lerp(originalRot,topRotation,lerpfactor);
+            if(time < 1f) time = Mathf.Min( time + (Time.deltaTime * transitionSpeed),1f);
+            else break;
+            yield return new WaitForEndOfFrame();
         }
+        yield return new WaitForSeconds(0.5f);
+        reachedTop = true;
+        #endregion
+        #region lock in
+        time = 0f;
+        while(time <= 1f){
+            if(!lockedKey) yield break;
+            float lerpfactor = timeFunction(time);
+            lockedKey.transform.position = Vector3.Lerp(topPosition,lockedInPosition,lerpfactor);
+            if(time < 1f) time = Mathf.Min( time + (Time.deltaTime * transitionSpeed),1f);
+            else break;
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds(0.2f);
+        lockedInKey = true;
+        if(!lockedKey) yield break;
+        trigger.enter();
+        #endregion
     }
     
     private bool checkSize(Key key){
@@ -127,6 +149,7 @@ public class KeyLock : MonoBehaviour
             foreach(Rigidbody rb in lockedKey.GetComponentsInChildren<Rigidbody>()){
                 rb.isKinematic = true;
             }
+            StartCoroutine("lockInKey",other.transform);
         }
     }
 
