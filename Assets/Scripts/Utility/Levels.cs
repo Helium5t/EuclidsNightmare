@@ -27,6 +27,7 @@
         PartingWays,
         FeedbackMenu,
         EndDemoRoom,
-        Prologue
+        Prologue,
+        TheEnd
     }
 }

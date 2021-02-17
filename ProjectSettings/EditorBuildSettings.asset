@@ -83,4 +83,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/Prologue.unity
     guid: f119e1521bbeb3b459d1e772a1d18ab8
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/TheEnd.unity
+    guid: 46a5f72d7cbe9de4d828af02c65e00e3
   m_configObjects: {}

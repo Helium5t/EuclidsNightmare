@@ -5,7 +5,7 @@ using Utility;
 
 public static class SceneUtility
 {
-    public static int levelsNum = 26;
+    public static int levelsNum = 27;
     public static string getSceneName(int buildIndex){
         return ((Levels) buildIndex).ToString();
     }
