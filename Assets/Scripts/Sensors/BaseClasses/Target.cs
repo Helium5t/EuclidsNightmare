@@ -10,6 +10,8 @@ public abstract class Target : MonoBehaviour
     [SerializeField] private float timerSeconds = 0;
     [SerializeField] private bool ignoreTimerIfActive = true;
     [Header("Prefab only fields - do not change outside of prefab editor")]
+
+    [SerializeField] private bool useDebugColors = false;
     [SerializeField] private MeshRenderer debugMesh = null;
     [SerializeField] private Material debugMaterial = null;
 
@@ -18,7 +20,7 @@ public abstract class Target : MonoBehaviour
 
     private void Awake()
         {
-        if (Debug.isDebugBuild)
+        if (Debug.isDebugBuild && debugMaterial!=null)
             {
             debugMesh.material = new Material(debugMaterial);
             debugMesh.material.color = Color.red;
@@ -35,14 +37,14 @@ public abstract class Target : MonoBehaviour
             {
             if (!isActive)
                 {
-                if (Debug.isDebugBuild) { debugMesh.material.color = Color.green; }
+                if (Debug.isDebugBuild && useDebugColors) { debugMesh.material.color = Color.green; }
                 isActive = true;
                 if (hasTimer && timerSeconds != 0) { Debug.Log("timer started"); StartCoroutine(deactivateTimer()); }
                 activate();
                 }
             else if (toggle)
                 {
-                if (Debug.isDebugBuild) { debugMesh.material.color = Color.red; }
+                if (Debug.isDebugBuild && useDebugColors) { debugMesh.material.color = Color.red; }
                 isActive = false;
                 deactivate(); 
                 }
@@ -62,7 +64,7 @@ public abstract class Target : MonoBehaviour
         Debug.Log("timer ended");
         if (!toggle)
             {
-            if (Debug.isDebugBuild) { debugMesh.material.color = Color.red; }
+            if (Debug.isDebugBuild && useDebugColors) { debugMesh.material.color = Color.red; }
             isActive = false;
             deactivate();
             }

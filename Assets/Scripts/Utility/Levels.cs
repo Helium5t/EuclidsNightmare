@@ -28,6 +28,7 @@
         FeedbackMenu,
         EndDemoRoom,
         Prologue,
-        TheEnd
+        TheEnd,
+        CreditsScene
     }
 }
