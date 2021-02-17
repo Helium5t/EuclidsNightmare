@@ -80,4 +80,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/EndDemoRoom.unity
     guid: 2ed721df99f69b3419880aaa514bd2a9
+  - enabled: 1
+    path: Assets/Scenes/FinishedScenes/Prologue.unity
+    guid: f119e1521bbeb3b459d1e772a1d18ab8
   m_configObjects: {}

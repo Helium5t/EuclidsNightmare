@@ -26,6 +26,7 @@
         HoleRoom,
         PartingWays,
         FeedbackMenu,
-        EndDemoRoom
+        EndDemoRoom,
+        Prologue
     }
 }

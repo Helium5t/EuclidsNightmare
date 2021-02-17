@@ -7,10 +7,12 @@ public class SpeechManager : MonoBehaviour
 {
     [SerializeField] private float wordsPerMinute = 250f;
     [SerializeField] [Range(0f, 5f)] private float timeBetweenSpeeches = 1f;
+
+    [SerializeField] private bool beginOnWake = false;
     [SerializeField] private List<string> speeches;
     [SerializeField] private string hintText;
-    private bool speaking = false;
-    private bool spoken = false;
+    [HideInInspector] public bool speaking = false;
+    [HideInInspector] public bool spoken = false;
     private bool hinting = false;
     private bool stopSpeech = false;
     private bool stoppedSpeech = false;
@@ -23,6 +25,10 @@ public class SpeechManager : MonoBehaviour
     {
         speechText = GetComponentInChildren<Text>();
         speechAnimator = GetComponentInChildren<Animator>();
+        if(beginOnWake){
+            speaking = true;
+            StartCoroutine("speech");
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +42,7 @@ public class SpeechManager : MonoBehaviour
 
     private IEnumerator getHint()
     {
-        if (hinting) yield break;
+        if (hinting || beginOnWake) yield break;
         hinting = true;
         float timeToWait = getUpTimeInSeconds(hintText);
         stopSpeech = true;
