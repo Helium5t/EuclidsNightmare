@@ -7,8 +7,12 @@ public class CubeSoundsManager : MonoBehaviour
 {
     private EventInstance cubeSoundInstance;
 
-    private void Start() =>
+    private void Start()
+    {
         cubeSoundInstance = FMODUnity.RuntimeManager.CreateInstance(GameSoundPaths.CrateFallSoundPath);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(cubeSoundInstance, gameObject.transform,
+            GetComponent<Rigidbody>());
+    }
 
     private void OnCollisionEnter(Collision other) => PlayCrateHitSound();
 
@@ -22,4 +26,5 @@ public class CubeSoundsManager : MonoBehaviour
             cubeSoundInstance.setVolume(0.5f);
         }
     }
+    private void OnDestroy() => cubeSoundInstance.release();
 }
