@@ -19,7 +19,7 @@ namespace GameManagement
 
         private void ManageMusicState(Scene scene, LoadSceneMode loadSceneMode)
         {
-            if (scene.name == "MainMenu")
+            if (scene.name == Levels.MainMenu.ToString())
             {
                 ChangeToMainMenuParameter(1);
                 ChangeTransitionParameter(0);
@@ -30,7 +30,7 @@ namespace GameManagement
             {
                 ChangeTransitionParameter(1);
                 ChangeToMainMenuParameter(0);
-                
+
                 StartCoroutine(ResetMusicParameters(_timeToResetMusicParameters));
             }
         }
