@@ -7176,6 +7176,11 @@ PrefabInstance:
       propertyPath: nextSceneName
       value: Platforming89
       objectReference: {fileID: 0}
+    - target: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
+        type: 3}
+      propertyPath: levelSpeeches
+      value: 
+      objectReference: {fileID: 1494891620}
     - target: {fileID: 6827642985279684401, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36550,12 +36555,12 @@ PrefabInstance:
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: hintText
-      value: 
+      value: You can fill that gap by enlarging the cubes, go ahead!
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[0]
-      value: 'OTTO: This is a new one! Press F while dragging a glowing object to
+      value: 'OTTO: Are you ready?Sp, press F while dragging a glowing object to
         active the majestic Forced Perspective! '
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
@@ -36676,6 +36681,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 228377de2e504ae45a1b6fc7b8beb6cb, type: 3}
+--- !u!114 &1494891620 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1494891619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5db189502d96bb4a8c785bdb0907fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1499174922
 PrefabInstance:
   m_ObjectHideFlags: 0

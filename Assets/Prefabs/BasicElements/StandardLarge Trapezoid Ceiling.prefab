@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 442205995087550566}
   - component: {fileID: 2434194823833267372}
   - component: {fileID: 8884238554688650518}
+  - component: {fileID: 2004060461492318869}
   m_Layer: 0
   m_Name: StandardLarge Trapezoid Ceiling
   m_TagString: Untagged
@@ -190,6 +191,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -462981019419857548, guid: 708e6b63b2103d948a086ff03fd2a92b, type: 3}
+--- !u!114 &2004060461492318869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4235357529355488633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c508b02a7963714c866bd8ad0074dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchScript: 0
 --- !u!1 &7809146272849730295
 GameObject:
   m_ObjectHideFlags: 0

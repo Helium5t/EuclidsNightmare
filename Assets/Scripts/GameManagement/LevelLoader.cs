@@ -35,10 +35,14 @@ namespace GameManagement
         [SerializeField] private int nextSceneToLoad;
         [SerializeField] private string nextSceneName;
 
+        [SerializeField] private SpeechManager levelSpeeches;
+        private SpeechManager nextSpeechManager;
+
         #region Internal Values and parameters for ALL
 
         public Vector3 levelStartingPoint { get; private set; }
         private Vector3 levelEndingPoint = Vector3.zero;
+
 
         private enum levelTag
         {
@@ -55,7 +59,7 @@ namespace GameManagement
         private int ownSceneIndex = 0;
         private LevelLoader nextLevelLoader;
 
-        private string[] lastLevels ={"EndDemoRoom","FeedbackMenu"};
+        private string[] lastLevels ={"EndDemoRoom","FeedbackMenu","CreditsScene"};
         private bool nextIsLast;
 
         #endregion
@@ -263,6 +267,7 @@ namespace GameManagement
 
                 foreach (GameObject g in loadedScene.GetRootGameObjects())
                 {
+                    g.TryGetComponent<SpeechManager>(out nextSpeechManager);
                     if (g.TryGetComponent<Light>(out Light l))
                     {
                         if (l.type == LightType.Directional)
@@ -386,6 +391,12 @@ namespace GameManagement
                 catch(Exception e){
                     Debug.LogError("Tried fetching hint but no puzzle was found");
                     throw e;
+                }
+                if(levelSpeeches){
+                    levelSpeeches.stopSpeaking();
+                    if(levelSpeeches.isPersistent){
+                        nextSpeechManager?.mergeFromPreviousSpeech(levelSpeeches.getUntoldSentences());
+                    }
                 }
             }
             try{            

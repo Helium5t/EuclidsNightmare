@@ -16092,7 +16092,7 @@ PrefabInstance:
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
@@ -17735,6 +17735,11 @@ PrefabInstance:
       propertyPath: speeches.Array.data[6]
       value: 'OTTO: Try taking the red crate and put it on the red lock on the wall!'
       objectReference: {fileID: 0}
+    - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
+        type: 3}
+      propertyPath: hintText
+      value: Pick up the cube and fit it into the lock beside the door.
+      objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252891, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: m_Name
@@ -18647,6 +18652,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1066520051}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1111855975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1066520051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111855973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5db189502d96bb4a8c785bdb0907fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1126121465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19130,65 +19147,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 557886590}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1149790872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1149790875}
-  - component: {fileID: 1149790874}
-  - component: {fileID: 1149790873}
-  m_Layer: 0
-  m_Name: JumpTutorial
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1149790873
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149790872}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.5608616, y: 3.1913853, z: 2.3872013}
-  m_Center: {x: -0.18613529, y: 1.1886263, z: 0.69360065}
---- !u!114 &1149790874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149790872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dabfa6289db63964bb16c93af92c7723, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sentence: 'OTTO: Now you need to jump! Press SPACE to do it!'
-  speechManagerGameObject: {fileID: 1111855973}
---- !u!4 &1149790875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149790872}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.17, y: 0.353, z: 20.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1150803550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3577998035653490112, guid: d53c41225bfed874fa94f640972d2e21,
@@ -20556,7 +20514,7 @@ Transform:
   m_Children:
   - {fileID: 1780926601}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &1248581950 stripped
 Transform:
@@ -23243,7 +23201,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1372595603
 PrefabInstance:
@@ -28459,7 +28417,7 @@ Transform:
   - {fileID: 1318819861}
   - {fileID: 26304464}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1683411974
 PrefabInstance:
@@ -30103,7 +30061,7 @@ PrefabInstance:
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
@@ -31146,7 +31104,7 @@ Transform:
   m_Children:
   - {fileID: 169580297}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &1844424469
 PrefabInstance:
@@ -31254,6 +31212,11 @@ PrefabInstance:
       propertyPath: nextSceneName
       value: Platforming01
       objectReference: {fileID: 0}
+    - target: {fileID: 6827642985279684400, guid: 350cd45b28c4a904e877552cdd5c19d3,
+        type: 3}
+      propertyPath: levelSpeeches
+      value: 
+      objectReference: {fileID: 1111855975}
     - target: {fileID: 6827642985279684401, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33517,7 +33480,7 @@ PrefabInstance:
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
@@ -35514,7 +35477,7 @@ PrefabInstance:
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5845718241849863480, guid: 10d0ae0844045d64983ddde6140626d5,
         type: 3}
