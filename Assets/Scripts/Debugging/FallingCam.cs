@@ -34,9 +34,13 @@ namespace Debugging
             postProcessVolume = GetComponent<PostProcessVolume>();
             cinemachineBrain = GetComponent<CinemachineBrain>();
 
+            #region InitLensDistortionEffect
+
             postProcessVolume.profile.TryGetSettings(out lensDistortionEffect);
             lensDistortionEffect.intensity.value = 0.0f;
             lensDistortionEffect.active = false;
+
+            #endregion
 
             StartCoroutine(nameof(ObserveDialogue));
             impactPoint = transform.position + impactPoint;
