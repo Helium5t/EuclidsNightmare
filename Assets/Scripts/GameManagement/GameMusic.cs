@@ -11,7 +11,7 @@ namespace GameManagement
     public class GameMusic : Singleton<GameMusic>
     {
         private EventInstance _musicEventInstance;
-        private const float _timeToResetMusicParameters = 0.5f;
+        private const float TimeToResetMusicParameters = 0.5f;
 
         private const string TransitionParameter = "Transition";
         private const string ToMainMenuParameter = "ToMainMenu";
@@ -39,14 +39,14 @@ namespace GameManagement
                 ChangeToMainMenuParameter(1);
                 ChangeTransitionParameter(0);
 
-                StartCoroutine(ResetMusicParameters(_timeToResetMusicParameters));
+                StartCoroutine(ResetMusicParameters(TimeToResetMusicParameters));
             }
             else
             {
                 ChangeTransitionParameter(1);
                 ChangeToMainMenuParameter(0);
 
-                StartCoroutine(ResetMusicParameters(_timeToResetMusicParameters));
+                StartCoroutine(ResetMusicParameters(TimeToResetMusicParameters));
             }
         }
 
