@@ -89,7 +89,7 @@ namespace GameManagement
             }
             if(!firstLevel){
                 foreach(DoorTrigger dt in GameObject.FindObjectsOfType<DoorTrigger>()){
-                    if((int)dt.GetComponentInChildren<LevelTrigger>().mode == -1) dt.startOpen = true;
+                    if((int)dt.GetComponentInChildren<LevelTrigger>()?.mode == -1) dt.startOpen = true;
                 }
                 SceneAnimator.gameObject.SetActive(!useAdditiveLoading);
             }

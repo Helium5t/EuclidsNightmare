@@ -19331,6 +19331,11 @@ PrefabInstance:
       propertyPath: levelLoader
       value: 
       objectReference: {fileID: 1340325929}
+    - target: {fileID: 7898132508668131187, guid: 18cd0707ebc9e4144abf56c10f7f28cf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cd0707ebc9e4144abf56c10f7f28cf, type: 3}
 --- !u!1 &1632788136
@@ -22657,7 +22662,7 @@ PrefabInstance:
     - target: {fileID: 1955003827588252901, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252901, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}

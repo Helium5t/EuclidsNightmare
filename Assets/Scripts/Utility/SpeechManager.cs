@@ -108,6 +108,9 @@ public class SpeechManager : MonoBehaviour
     private IEnumerator speech()
     {
         yield return null;
+        while(SceneManager.GetActiveScene().name != gameObject.scene.name){
+            yield return new WaitForEndOfFrame();
+        }
         for (int i = 0; i < sentences.Count; i++)
         {
             if(cutSpeech){Debug.Log("speech has been cut");break;} 
@@ -118,9 +121,8 @@ public class SpeechManager : MonoBehaviour
                 if (!stoppedSpeech) stoppedSpeech = true;
                 yield return new WaitForSeconds(timeToWait);
             }
-
             stoppedSpeech = false;
-            Debug.Log(timeToWait);
+            //Debug.Log(timeToWait);
             speechText.text = toldSpeech;
             speechAnimator.SetTrigger(fadeTrigger);
             sentences[i].tell();
@@ -135,8 +137,11 @@ public class SpeechManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Something entering "+ gameObject.name + " in " + gameObject.scene.name);
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Original number: " + speeches.Count);
+            Debug.Log("Current number: " + sentences.Count);
             if (speaking || spoken) return;
             speaking = true;
             StartCoroutine("speech");
@@ -155,6 +160,7 @@ public class SpeechManager : MonoBehaviour
     }
 
     public void mergeFromPreviousSpeech(List<Sentence> oldSentences){
+        Debug.Log("merging dialogue into "+ gameObject.scene.name);
         List<Sentence> newSentences = new List<Sentence>(oldSentences.Count + sentences.Count);
         newSentences.AddRange(oldSentences);
         newSentences.AddRange(sentences);
