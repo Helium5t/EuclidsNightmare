@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
@@ -16,6 +17,20 @@ namespace GameManagement
         private const string ToMainMenuParameter = "ToMainMenu";
 
         private void OnEnable() => SceneManager.sceneLoaded += ManageMusicState;
+
+        private void Start()
+        {
+            _musicEventInstance = RuntimeManager.CreateInstance(GameSoundPaths.GameMusicSoundPath);
+            _musicEventInstance.start();
+
+            #region InitBussesValues
+
+            RuntimeManager.GetBus(GameBussesPaths.MasterBus).setVolume(1.0f);
+            RuntimeManager.GetBus(GameBussesPaths.MusicBus).setVolume(0.5f);
+            RuntimeManager.GetBus(GameBussesPaths.SFXBus).setVolume(0.5f);
+
+            #endregion
+        }
 
         private void ManageMusicState(Scene scene, LoadSceneMode loadSceneMode)
         {
@@ -40,12 +55,6 @@ namespace GameManagement
             yield return new WaitForSeconds(time);
             ChangeTransitionParameter(0);
             ChangeToMainMenuParameter(0);
-        }
-
-        private void Start()
-        {
-            _musicEventInstance = FMODUnity.RuntimeManager.CreateInstance(GameSoundPaths.GameMusicSoundPath);
-            _musicEventInstance.start();
         }
 
         public void ChangeTransitionParameter(int value) =>
