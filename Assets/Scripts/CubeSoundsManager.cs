@@ -19,7 +19,7 @@ public class CubeSoundsManager : MonoBehaviour
     private void PlayCrateHitSound()
     {
         cubeSoundInstance.getPlaybackState(out PLAYBACK_STATE cubeState);
-
+        
         if (cubeState != PLAYBACK_STATE.PLAYING)
         {
             cubeSoundInstance.start();
