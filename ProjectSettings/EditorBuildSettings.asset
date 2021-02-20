@@ -63,7 +63,7 @@ EditorBuildSettings:
     path: Assets/Scenes/FinishedScenes/Platforming78.unity
     guid: 3b99e8eef2583b748891a0934326aaef
   - enabled: 1
-    path: Assets/Scenes/FinishedScenes/ForcedPerspectiveIntro.unity
+    path: Assets/Scenes/FinishedScenes/ThePit.unity
     guid: a4404b5ca43b59049aea7800503f4746
   - enabled: 1
     path: Assets/Scenes/FinishedScenes/Platforming89.unity

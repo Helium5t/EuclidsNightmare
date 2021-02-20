@@ -7166,6 +7166,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6489702612936176271, guid: 350cd45b28c4a904e877552cdd5c19d3,
+        type: 3}
+      propertyPath: m_Text
+      value: THE PIT
+      objectReference: {fileID: 0}
     - target: {fileID: 6827642984307769079, guid: 350cd45b28c4a904e877552cdd5c19d3,
         type: 3}
       propertyPath: m_Color.a
@@ -36560,7 +36565,7 @@ PrefabInstance:
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,
         type: 3}
       propertyPath: speeches.Array.data[0]
-      value: 'OTTO: Are you ready?Sp, press F while dragging a glowing object to
+      value: 'OTTO: Are you ready?So, press F while dragging a glowing object to
         active the majestic Forced Perspective! '
       objectReference: {fileID: 0}
     - target: {fileID: 1955003827588252890, guid: 228377de2e504ae45a1b6fc7b8beb6cb,

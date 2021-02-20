@@ -21,7 +21,7 @@
         ReverseMirror,
         CatchTheKey,
         Platforming78,
-        ForcedPerspectiveIntro,
+        ThePit,
         Platforming89,
         HoleRoom,
         PartingWays,
