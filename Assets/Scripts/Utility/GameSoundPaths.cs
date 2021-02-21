@@ -18,5 +18,6 @@
         public const string LaserBeamSoundPath = "event:/Sounds/Laser/LaserBeam";
         public const string JumpGroanSoundPath = "event:/Sounds/Player/Locomotion/JumpGroan/Groan";
         public const string CrateFallSoundPath = "event:/Sounds/Crate/Fall";
+        public const string FallNoiseSoundPath = "event:/Sounds/Prologue/FallingNoiseSound";
     }
 }
